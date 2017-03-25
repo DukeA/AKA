@@ -1,0 +1,173 @@
+
+RoungOut Game Logic
+
+- To be converted to UC, and later to game code.
+
+
+---
+#1 Start screen
+    set timeout until "demo" mode starts.
+    loop:
+        if timeout for demo:
+            #9 Demo Game mode
+        if player click "Start":
+            #2 Start Option Screen
+
+---
+#2 Start Option Screen
+    Player choose game difficulty and number of players (or AI opponent).
+    Controls set so game handler receives input from keyboard (player) or from AI method.
+    #3 Start game
+
+---
+#3 Start Game:
+    Set level 1 (or higher depending on start options)
+    Draw level
+    Play start level animation and music
+    #4 Normal game loop
+
+---
+#4 Normal game loop:
+    While game is playing:
+        #5 game iteration
+
+---
+#5 Game Iteration
+    #6 respawn ball if needed
+
+    for each ball:
+        move ball.
+        #7 check ball collision
+
+    for each player:
+        get player input (keyboard input from player, or #10 AI input)
+        move pad if input is "left" or "right".
+        if input is "attack":
+            #12 Attack
+
+    for each projectile:
+        move projectile
+        reduce range left, remove if max range reached.
+        If collision with brick:
+            #13 Remove brick
+            remove projectile            
+
+    for each alien:
+        #14 Alien
+        
+---
+#6 Respawn ball if needed:
+    if no balls:
+        pick a player (players take turns)
+        ball follows pad for 3 seconds
+        if player press "attack" key, release ball early
+
+---
+#7 Check ball collision:
+    if ball outside game area:
+
+        score to player that last hit ball.
+            remove ball
+
+        if ball hits any object:
+            #8 bounce ball and change direction
+
+            if solid wall:
+                (already bounced)
+
+            if brick:
+                #13 Remove brick
+
+            if bonus item:
+                give bonus to last player to hit ball
+                remove bonus item
+    
+            if player pad:
+                set ball to "remember" pad
+                slightly increase ball speed up to a max speed.
+
+            if ball hits alien:
+                (angry alien animation?)
+                mark alien as to "flee" the game area.
+
+---
+#8 Bounce ball and change direction:
+    calculate new ball direction based on obstacle's tangent
+    change ball's direction
+
+---
+#9 Demo game mode:
+    Pick random start options
+    Set timeout until demo ends
+    Draw level
+    Loop until timeout, or keyboard input
+        #5 game iteration
+
+---
+#10 AI input:
+    each time a ball is hit by AI controlled pad, calculate new values:
+        random error margin, added to a ball's estimated position. Harder AI, less variance
+        random reaction time in iterations. Harder AI, shorter reaction time.
+        random choice picking "wrong" ball. Harder AI, less chance of wrong choice.
+        slightly increase AI's level, making it play better over time.
+        
+    For each time AI logic is called (each game loop):
+        If AI is "thinking", do nothing. (Delay count based on AI reaction time)
+
+        If AI have a ball picked, and if ball still exists:
+            Small random chance to simulate "attack" key press,
+                otherwise simulate "left" or "right" key press to move move pad towards ball.
+
+        If AI haven't picked a ball:
+            for each ball:
+                #11 Calculate ball exit point and time
+            Pick ball with lowest iteration count and estimated exit point
+            Possibly pick "wrong" ball based on AI's level
+            Mark ball as "picked" by AI. Next iterations will start to move pad towards that ball.
+            Set a delay to react, based on AI's reaction time, causing a "thinking" time.
+
+---
+#11 Calculate ball exit point and time:
+    Iterate ball's position using normal collision methods, calculating a time until outside game area.
+    Add AI's error margin (random) at each collision point. Harder AI will be more accurate.
+    Return number of iterations until ball would leave game area.
+    (Based on any collision with bricks and pads, done using normal game collision methods)
+
+---
+#12 Attack
+    If ball attached to pad, release ball
+    
+    Otherwise:
+        if pad have attack upgrade:
+            If cooldown timer, do nothing.
+
+            Spawn projectile (with a given projectile type, direction, speed, max range)
+            Reduce projectile count. Remove attack upgrade if count reach zero
+            Set given cooldown delay, limiting time until pad can fire again
+
+---
+#13 Remove brick
+    if special brick:
+        spawn bonus item at brick position
+    remove the brick from game area
+
+---
+#14 Alien
+    Reduce alien lifespan, remove alien if zero
+    
+    If alien is "fleeing" game area:
+        If no destination set:
+            Set max speed, and a destination outside visible game area
+
+    If no destination set:
+        Small random chance to pick destination:
+            Pick position and speed (inner game area, not too close to player)
+        Small random chance to fire projectile:
+            Pick random direction, and a given "alien" projectile type, speed, max range.
+            Spawn projectile.
+    
+    If destination set:
+        Move towards destination.
+        If collision with brick, stop and clear destination.
+        If outside visible game area, remove alien from game.
+               
