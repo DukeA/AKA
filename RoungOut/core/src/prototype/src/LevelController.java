@@ -4,7 +4,9 @@ import Objects.Board;
 import Objects.IBoard;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+
 
 
 /**
@@ -12,6 +14,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
  */
 
 public class LevelController {
+    
 
     private final int WIDTH = Gdx.graphics.getWidth();
     private final int HEIGHT = Gdx.graphics.getHeight();
@@ -26,11 +29,11 @@ public class LevelController {
         TestBoard();
     }
     public void TestBoard() {
+
         IBoard board = new Board(WIDTH,HEIGHT);
         renderer = new ShapeRenderer();
         renderer.begin(ShapeRenderer.ShapeType.Line);
-        renderer.rectLine(board.getxPos(),board.getYPos(),
-                board.getxPos()+1,board.getYPos()+1,30);
+        Gdx.gl20.glLineWidth(5);
         renderer.setColor(Color.BLACK);
         renderer.circle(board.getxPos(),board.getYPos(),board.getRadius());
         renderer.end();

@@ -3,6 +3,7 @@ package prototype.src;
 import Objects.Board;
 import Objects.IBoard;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -36,11 +37,11 @@ public class LevelRenderer implements Disposable {
         renderObjects();
     }
     public void renderObjects() {
+        int LineWidth =5;
         IBoard board = new Board(WIDTH,HEIGHT);
         renderer = new ShapeRenderer();
         renderer.begin(ShapeRenderer.ShapeType.Line);
-        renderer.rectLine(board.getxPos(),board.getYPos(),
-                board.getxPos()+1,board.getYPos()+1,30);
+        Gdx.gl20.glLineWidth(LineWidth/ camera.zoom);
         renderer.setColor(Color.BLACK);
         renderer.circle(board.getxPos(),board.getYPos(),board.getRadius());
         renderer.end();
