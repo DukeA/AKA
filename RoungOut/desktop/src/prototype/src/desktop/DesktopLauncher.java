@@ -11,8 +11,11 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "ROUND OUT";
 		config.useGL30 = false;
-		config.width = 600;
-		config.height = 780;
-		new LwjglApplication(new Roungout(), config);
+		config.height = 1080;
+		config.width = 1980;
+		//config.fullscreen = true;
+		new LwjglApplication(new Roungout( 1980, 1080), config);
 	}
+
+
 }
