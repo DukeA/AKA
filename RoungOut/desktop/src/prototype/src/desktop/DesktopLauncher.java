@@ -14,7 +14,7 @@ public class DesktopLauncher {
 		config.height = 1080;
 		config.width = 1980;
 		//config.fullscreen = true;
-		new LwjglApplication(new Roungout( 1980, 1080), config);
+		new LwjglApplication(new Roungout(), config);
 	}
 
 
