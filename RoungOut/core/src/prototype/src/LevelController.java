@@ -4,6 +4,7 @@ import Objects.Board;
 import Objects.IBoard;
 import Objects.Pad;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -28,46 +29,72 @@ public class LevelController {
     private final int PADYPOS = 25;
 
 
-    private ShapeRenderer renderer;
+
+    private ShapeRenderer renderPad;
+    private ShapeRenderer renderPad2;
+    private Pad nPad;
+    private Pad nPad2;
 
     public LevelController() {
         init();
     }
 
     private void init() {
-        TestBoard();
         TestPad();
     }
 
     private void TestPad() {
-        Pad nPad = new Pad(PADHEIGHT, PADWIDTH, PADXPOS, PADYPOS);
-        renderer = new ShapeRenderer();
-        renderer.begin(ShapeRenderer.ShapeType.Filled);
-        renderer.setColor(Color.RED);
-        renderer.rect(PADXPOS, PADYPOS, PADWIDTH, PADHEIGHT);
-        renderer.end();
+        nPad = new Pad(PADHEIGHT, PADWIDTH, PADXPOS, PADYPOS);
+        renderPad = new ShapeRenderer();
+        renderPad.begin(ShapeRenderer.ShapeType.Filled);
+        renderPad.setColor(Color.RED);
+        renderPad.rect(PADXPOS, PADYPOS, PADWIDTH, PADHEIGHT);
+        renderPad.end();
 
-        Pad nPad2 = new Pad(PADHEIGHT, PADWIDTH, PADXPOS, PADYPOS);
-        renderer = new ShapeRenderer();
-        renderer.begin(ShapeRenderer.ShapeType.Filled);
-        renderer.setColor(Color.BLUE);
-        renderer.rect(PADXPOS + 20, PADYPOS + 20, PADWIDTH, PADHEIGHT);
-        renderer.end();
+        nPad2 = new Pad(PADHEIGHT, PADWIDTH, PADXPOS, PADYPOS);
+        renderPad2 = new ShapeRenderer();
+        renderPad2.begin(ShapeRenderer.ShapeType.Filled);
+        renderPad2.setColor(Color.BLUE);
+        renderPad2.rect(PADXPOS + 20, PADYPOS + 20, PADWIDTH, PADHEIGHT);
+        renderPad2.end();
 
     }
-
-    private void TestBoard() {
-
-        IBoard board = new Board(WIDTH, HEIGHT);
-        renderer = new ShapeRenderer();
-        renderer.begin(ShapeRenderer.ShapeType.Line);
-        Gdx.gl20.glLineWidth(5);
-        renderer.setColor(Color.BLACK);
-        renderer.circle(board.getxPos(), board.getYPos(), board.getRadius());
-        renderer.end();
+    public int getXPos(Pad p)  {
+        return
     }
 
     public void update(float deltatime) {
+        if(Gdx.input.isKeyPressed(Input.Keys.W)) {
+            if(nPad.getPadXPos()) {
+                renderPad.translate(0, 1,0);
+            }
+            else if() {
 
+            }
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.S)) {
+            if(nPad.getPadXPos()) {
+                renderPad.translate(0,-1,0);
+            }
+            else if() {
+
+            }
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) {
+            if(nPad2.getPadXPos()) {
+                renderPad2.translate();
+            }
+            else if() {
+
+            }
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) {
+            if(nPad2.getPadXPos()) {
+                renderPad2.translate();
+            }
+            else if() {
+
+            }
+        }
     }
 }
