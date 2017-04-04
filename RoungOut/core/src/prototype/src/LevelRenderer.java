@@ -51,7 +51,7 @@ public class LevelRenderer implements Disposable {
 
     }
 
-    
+
 
     public void renderObjects() {
         int LineWidth = 5;

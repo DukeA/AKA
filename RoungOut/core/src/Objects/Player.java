@@ -2,6 +2,8 @@ package Objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 /**
  * Created by DukeA on 2017-04-04.
@@ -12,15 +14,17 @@ public class Player {
     private final int PADWIDTH = 20;
     private final int PADXPOS = Gdx.graphics.getWidth() / 2 - 500;
     private final int PADYPOS = Gdx.graphics.getHeight() / 2;
+    private final Color MyColor;
 
     private float x,y;
     private float speed = 60;
     private int points ;
 
-    public Player() {
+    public Player(Color color) {
         x = Gdx.graphics.getWidth() / 2 - 500;
         y = Gdx.graphics.getHeight() / 2;
         points =0;
+        MyColor = color;
     }
 
     public void update(float delta) {
@@ -30,7 +34,7 @@ public class Player {
         }
         if(Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) {
             x-=speed*delta;
-            y -=speed*delta;
+            y-=speed*delta;
         }
     }
     public int getPoints() {
@@ -41,8 +45,11 @@ public class Player {
     }
 
     public void renderPad(Pad sb) {
-        sb.draw(sb,x,y);
+        sb.set(ShapeRenderer.ShapeType.Filled);
+        sb.begin();
+        sb.setColor(MyColor);
     }
+
 
 
 

@@ -1,11 +1,11 @@
 package Objects;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 /**
  * Created by Alex on 2017-04-01.
  */
-public class Pad  extends SpriteBatch{
+public class Pad  extends ShapeRenderer{
 
     //Variables for objects
     private float length;
@@ -45,8 +45,4 @@ public class Pad  extends SpriteBatch{
         this.padYPos = padYPos;
     }
 
-    public void draw(Pad sb, float x, float y) {
-
-
-    }
 }
