@@ -44,11 +44,7 @@ public class Player {
         this.points = points;
     }
 
-    public void renderPad(Pad sb) {
-        sb.set(ShapeRenderer.ShapeType.Filled);
-        sb.begin();
-        sb.setColor(MyColor);
-    }
+
 
 
 

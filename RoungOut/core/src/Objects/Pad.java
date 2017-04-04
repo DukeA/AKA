@@ -1,11 +1,10 @@
 package Objects;
 
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 /**
  * Created by Alex on 2017-04-01.
  */
-public class Pad  extends ShapeRenderer{
+public class Pad {
 
     //Variables for objects
     private float length;
