@@ -19,15 +19,13 @@ import javax.swing.*;
 
 public class LevelController {
 
-
-    private final int WIDTH = Gdx.graphics.getWidth();
-    private final int HEIGHT = Gdx.graphics.getHeight();
+    private final int WIDTH = Gdx.graphics.getWidth() / 2;
+    private final int HEIGHT = Gdx.graphics.getHeight() / 2;
 
     private final int PADHEIGHT = 15;
     private final int PADWIDTH = 15;
     private final int PADXPOS = 25;
     private final int PADYPOS = 25;
-
 
 
     private ShapeRenderer renderPad;
@@ -59,42 +57,11 @@ public class LevelController {
         renderPad2.end();
 
     }
-    public int getXPos(Pad p)  {
-        return
-    }
 
     public void update(float deltatime) {
-        if(Gdx.input.isKeyPressed(Input.Keys.W)) {
-            if(nPad.getPadXPos()) {
-                renderPad.translate(0, 1,0);
-            }
-            else if() {
 
-            }
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.S)) {
-            if(nPad.getPadXPos()) {
-                renderPad.translate(0,-1,0);
-            }
-            else if() {
-
-            }
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) {
-            if(nPad2.getPadXPos()) {
-                renderPad2.translate();
-            }
-            else if() {
-
-            }
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) {
-            if(nPad2.getPadXPos()) {
-                renderPad2.translate();
-            }
-            else if() {
-
-            }
-        }
     }
 }
+
+
+

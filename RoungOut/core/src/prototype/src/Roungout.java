@@ -47,7 +47,6 @@ public class Roungout extends ApplicationAdapter {
         Pause = true;
 
     }
-
     public void resume() {
         Pause = false;
     }

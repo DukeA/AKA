@@ -1,15 +1,18 @@
 package Objects;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 /**
  * Created by Alex on 2017-04-01.
  */
-public class Pad {
+public class Pad  extends SpriteBatch{
 
     //Variables for objects
     private float length;
     private float height;
     private float padXPos;
     private float padYPos;
+    private float padSpeed =10;
 
     //Getters
     public float getLength() {
@@ -24,7 +27,9 @@ public class Pad {
     public float getPadYPos() {
         return padYPos;
     }
-
+    public float getPadSpeed() {
+        return padSpeed;
+    }
     //Setters
     public void setPadXPos(float padXPos) {
         this.padXPos = padXPos;
@@ -38,5 +43,10 @@ public class Pad {
         this.height = height;
         this.padXPos = padXPos;
         this.padYPos = padYPos;
+    }
+
+    public void draw(Pad sb, float x, float y) {
+
+
     }
 }
