@@ -1,3 +1,5 @@
+package Objects;
+
 import javafx.geometry.Point2D;
 
 import java.awt.*;
@@ -16,7 +18,7 @@ public class Ball {
 
     // Constructor
     // Set ball's position, direction, and radius.
-    Ball(Point2D position, Point2D direction, double radius) {
+    public Ball(Point2D position, Point2D direction, double radius) {
         setPosition(position);
 
         this.position =  new Point2D(position.getX(),  position.getY());

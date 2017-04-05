@@ -1,8 +1,10 @@
-import javafx.geometry.Point2D;
-import org.junit.Assert;
-import org.junit.Test;
+package Tests;
 
-import static org.junit.Assert.*;
+import javafx.geometry.Point2D;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import Objects.Ball;
 
 /**
  * @author Ken Bäcklund
@@ -18,8 +20,8 @@ public class BallTest {
         Point2D expectedPosition = new Point2D(100,200);
         Ball ball = new Ball(expectedPosition, new Point2D(0, 0), 10.0f);
         Point2D curPosition = ball.getPosition();
-        Assert.assertEquals(curPosition.getX(), expectedPosition.getX(), 0.01);
-        Assert.assertEquals(curPosition.getY(), expectedPosition.getY(), 0.01);
+        Assertions.assertEquals(curPosition.getX(), expectedPosition.getX(), 0.01);
+        Assertions.assertEquals(curPosition.getY(), expectedPosition.getY(), 0.01);
     }
 
     @Test
@@ -32,8 +34,8 @@ public class BallTest {
         Ball ball = new Ball(new Point2D(0,0), new Point2D(0, 0), 10.0f);
         ball.setPosition(expectedPosition);
         Point2D curPosition = ball.getPosition();
-        Assert.assertEquals(curPosition.getX(), expectedPosition.getX(), 0.01);
-        Assert.assertEquals(curPosition.getY(), expectedPosition.getY(), 0.01);
+        Assertions.assertEquals(curPosition.getX(), expectedPosition.getX(), 0.01);
+        Assertions.assertEquals(curPosition.getY(), expectedPosition.getY(), 0.01);
     }
 
     @Test
@@ -45,8 +47,8 @@ public class BallTest {
         Point2D expectedDirection = new Point2D(200,100);
         Ball ball = new Ball(new Point2D(0,0), expectedDirection, 10.0f);
         Point2D curDirection = ball.getDirection();
-        Assert.assertEquals(curDirection.getX(), expectedDirection.getX(), 0.01);
-        Assert.assertEquals(curDirection.getY(), expectedDirection.getY(), 0.01);
+        Assertions.assertEquals(curDirection.getX(), expectedDirection.getX(), 0.01);
+        Assertions.assertEquals(curDirection.getY(), expectedDirection.getY(), 0.01);
     }
 
     @Test
@@ -59,8 +61,8 @@ public class BallTest {
         Ball ball = new Ball(new Point2D(0,0), new Point2D(0,0), 10.0f);
         ball.setDirection(expectedDirection);
         Point2D curDirection = ball.getDirection();
-        Assert.assertEquals(curDirection.getX(), expectedDirection.getX(), 0.01);
-        Assert.assertEquals(curDirection.getY(), expectedDirection.getY(), 0.01);
+        Assertions.assertEquals(curDirection.getX(), expectedDirection.getX(), 0.01);
+        Assertions.assertEquals(curDirection.getY(), expectedDirection.getY(), 0.01);
     }
 
     @Test
@@ -74,8 +76,8 @@ public class BallTest {
         Point2D expectedPosition = position.add(direction);
         Ball ball = new Ball(position, direction, 10.0f);
         Point2D nextPosition = ball.getNextPosition();
-        Assert.assertEquals(nextPosition.getX(), expectedPosition.getX(), 0.01);
-        Assert.assertEquals(nextPosition.getY(), expectedPosition.getY(), 0.01);
+        Assertions.assertEquals(nextPosition.getX(), expectedPosition.getX(), 0.01);
+        Assertions.assertEquals(nextPosition.getY(), expectedPosition.getY(), 0.01);
     }
 
     @Test
@@ -90,8 +92,8 @@ public class BallTest {
         Ball ball = new Ball(position, direction, 10.0f);
         ball.moveBall();
         Point2D curPosition = ball.getPosition();
-        Assert.assertEquals(curPosition.getX(), expectedPosition.getX(), 0.01);
-        Assert.assertEquals(curPosition.getY(), expectedPosition.getY(), 0.01);
+        Assertions.assertEquals(curPosition.getX(), expectedPosition.getX(), 0.01);
+        Assertions.assertEquals(curPosition.getY(), expectedPosition.getY(), 0.01);
     }
 
 

@@ -1,5 +1,8 @@
 package Tests;
 
+import Objects.Pad;
+import Objects.Player;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -7,9 +10,8 @@ import org.junit.jupiter.api.Test;
  */
 public class MovePadTest {
 
-
     @Test
-    public void moveTest{
-
+    public void moveTest() {
+        Player player = new Player();
     }
 }

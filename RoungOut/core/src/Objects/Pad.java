@@ -9,9 +9,9 @@ public class Pad {
     //Variables for objects
     private float length;
     private float height;
-    private float padXPos;
-    private float padYPos;
-    private float padSpeed =10;
+    private double padXPos;
+    private double padYPos;
+    private float padSpeed;
 
     //Getters
     public float getLength() {
@@ -20,14 +20,17 @@ public class Pad {
     public float getHeight() {
         return height;
     }
-    public float getPadXPos() {
+    public double getPadXPos() {
         return padXPos;
     }
-    public float getPadYPos() {
+    public double getPadYPos() {
         return padYPos;
     }
     public float getPadSpeed() {
         return padSpeed;
+    }
+    public void setSpeed(float speed) {
+        this.padSpeed = speed;
     }
     //Setters
     public void setPadXPos(float padXPos) {
