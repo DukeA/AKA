@@ -11,8 +11,6 @@ import java.util.ArrayList;
  * Created by DukeA on 2017-04-04.
  */
 public class Player {
-
-
     private Pad pad;
     private float PadLength = 30;
     private float PadWidth = 30;
@@ -40,6 +38,8 @@ public class Player {
          this.pad.PadMove(pad.getPadXPos()+pad.getPadSpeed(),pad.getPadYPos()+pad.getPadSpeed());
     }
 
+
+
     public int getPoints() {
         return this.points;
     }
@@ -48,5 +48,8 @@ public class Player {
         this.points = points;
     }
 
+    public void setPad(Pad pad) {
+        this.pad = pad;
+    }
 
 }

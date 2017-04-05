@@ -29,15 +29,16 @@ public class Pad {
     public float getPadSpeed() {
         return padSpeed;
     }
-    public void setSpeed(float speed) {
-        this.padSpeed = speed;
-    }
+
     //Setters
     public void setPadXPos(double padXPos) {
         this.padXPos = padXPos;
     }
     public void setPadYPos(double padYPos) {
         this.padYPos = padYPos;
+    }
+    public void setSpeed(float speed) {
+        this.padSpeed = speed;
     }
 
     public Pad(float length, float height, float padXPos, float padYPos,float padSpeed) {

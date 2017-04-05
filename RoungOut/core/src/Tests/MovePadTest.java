@@ -13,12 +13,18 @@ public class MovePadTest {
     @Test
     public void moveTest() {
         Player player = new Player();
-        Pad pad = player.getPad();
-        double X = pad.getPadXPos()+pad.getPadSpeed();
-        double Y = pad.getPadYPos()+pad.getPadSpeed();
+        // At the moment hard coded
+            // Get the next X coordinate
+        double nextX = player.getPad().getPadXPos()
+                + player.getPad().getPadSpeed();
+            //Get the next Y Coordinate
+        double nextY = player.getPad().getPadYPos()
+                + player.getPad().getPadSpeed();
+
         player.movePad();
-        Assertions.assertEquals(pad.getPadXPos() , X);
-        Assertions.assertEquals(pad.getPadYPos() , Y);
-        System.out.println("The Coordinates moved");
+
+        Assertions.assertEquals(player.getPad().getPadXPos() , nextX);
+        Assertions.assertEquals(player.getPad().getPadYPos() , nextY);
+        System.out.println("The Pad moved to the new locations moved");
     }
 }
