@@ -40,11 +40,12 @@ public class Pad {
         this.padYPos = padYPos;
     }
 
-    public Pad(float length, float height, float padXPos, float padYPos) {
+    public Pad(float length, float height, float padXPos, float padYPos,float padSpeed) {
         this.length = length;
         this.height = height;
         this.padXPos = padXPos;
         this.padYPos = padYPos;
+        this.padSpeed = padSpeed;
     }
     public void PadMove(double xPos, double yPos) {
         this.padXPos = xPos;

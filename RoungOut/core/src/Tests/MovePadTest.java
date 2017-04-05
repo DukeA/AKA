@@ -14,8 +14,8 @@ public class MovePadTest {
     public void moveTest() {
         Player player = new Player();
         Pad pad = player.getPad();
-        double X = pad.getPadXPos()+1.0;
-        double Y = pad.getPadYPos()+1.0;
+        double X = pad.getPadXPos()+pad.getPadSpeed();
+        double Y = pad.getPadYPos()+pad.getPadSpeed();
         player.movePad();
         Assertions.assertEquals(pad.getPadXPos() , X);
         Assertions.assertEquals(pad.getPadYPos() , Y);

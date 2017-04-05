@@ -42,19 +42,7 @@ public class LevelController {
     }
 
     private void TestPad() {
-        nPad = new Pad(PADHEIGHT, PADWIDTH, PADXPOS, PADYPOS);
-        renderPad = new ShapeRenderer();
-        renderPad.begin(ShapeRenderer.ShapeType.Filled);
-        renderPad.setColor(Color.RED);
-        renderPad.rect(PADXPOS, PADYPOS, PADWIDTH, PADHEIGHT);
-        renderPad.end();
 
-        nPad2 = new Pad(PADHEIGHT, PADWIDTH, PADXPOS, PADYPOS);
-        renderPad2 = new ShapeRenderer();
-        renderPad2.begin(ShapeRenderer.ShapeType.Filled);
-        renderPad2.setColor(Color.BLUE);
-        renderPad2.rect(PADXPOS + 20, PADYPOS + 20, PADWIDTH, PADHEIGHT);
-        renderPad2.end();
 
     }
 

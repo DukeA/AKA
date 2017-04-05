@@ -16,11 +16,10 @@ public class Player {
     private Pad pad;
     private float PadLength = 30;
     private float PadWidth = 30;
-    private float speed = 60;
     private int points;
 
     public Player(){
-        pad = new Pad(PadLength,PadWidth,30,30);
+        pad = new Pad(PadLength,PadWidth,30,30,30);
         points = 0;
     }
 
@@ -38,8 +37,9 @@ public class Player {
         return this.pad;
     }
     public void movePad() {
-         this.pad.PadMove(pad.getPadXPos()+1.0,pad.getPadYPos()+1.0);
+         this.pad.PadMove(pad.getPadXPos()+pad.getPadSpeed(),pad.getPadYPos()+pad.getPadSpeed());
     }
+
     public int getPoints() {
         return this.points;
     }
