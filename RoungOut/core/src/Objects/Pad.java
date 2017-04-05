@@ -33,10 +33,10 @@ public class Pad {
         this.padSpeed = speed;
     }
     //Setters
-    public void setPadXPos(float padXPos) {
+    public void setPadXPos(double padXPos) {
         this.padXPos = padXPos;
     }
-    public void setPadYPos(float padYPos) {
+    public void setPadYPos(double padYPos) {
         this.padYPos = padYPos;
     }
 
@@ -46,5 +46,10 @@ public class Pad {
         this.padXPos = padXPos;
         this.padYPos = padYPos;
     }
+    public void PadMove(double xPos, double yPos) {
+        this.padXPos = xPos;
+        this.padYPos = yPos;
+    }
+
 
 }

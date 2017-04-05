@@ -34,7 +34,12 @@ public class Player {
         coordinateList.add(1,pad.getPadYPos());
         return coordinateList;
     }
-
+    public Pad getPad() {
+        return this.pad;
+    }
+    public void movePad() {
+         this.pad.PadMove(pad.getPadXPos()+1.0,pad.getPadYPos()+1.0);
+    }
     public int getPoints() {
         return this.points;
     }
