@@ -9,7 +9,18 @@ import org.junit.jupiter.api.Nested;
 
 public class AllTests {
     @BeforeAll
-    public static void setup(){} //empty
+    public static void setup(){} //empty so we start fresh
+
+    /*
+    Every time you add a testCase you need to add the following code
+    inorder for the suit to test it:
+
+    @Nested
+    public class Extend(YOUR TEST HERE) extends (YOUR TEST HERE) {}
+
+    what it does is nesting your test with this test suit (specifically AllTests), then
+    when you run the suit your test will also be executed
+    */
 
     @Nested
     public class ExtendBallTest extends BallTest {}
