@@ -2,6 +2,7 @@ package Tests;
 
 /**
  * Created by Alex on 2017-04-07.
+ * Updated by Ken on 2017-04-12.
  */
 
 import org.junit.jupiter.api.BeforeAll;
@@ -27,5 +28,8 @@ public class AllTests {
 
     @Nested
     public class ExtendMovePadTest extends MovePadTest {}
+
+    @Nested
+    public class ExtendBrickTest extends BrickTest {}
 
 }
