@@ -25,6 +25,5 @@ public class MovePadTest {
 
         Assertions.assertEquals(player.getPad().getPadXPos() , nextX);
         Assertions.assertEquals(player.getPad().getPadYPos() , nextY);
-        System.out.println("The Pad moved to the new locations moved");
     }
 }
