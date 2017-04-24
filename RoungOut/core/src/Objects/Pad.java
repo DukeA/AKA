@@ -8,7 +8,7 @@ public class Pad {
 
     //Variables for objects
     private float length;
-    private float height;
+    private float width;
     private double padXPos;
     private double padYPos;
     private float padSpeed;
@@ -18,7 +18,7 @@ public class Pad {
         return length;
     }
     public float getHeight() {
-        return height;
+        return width;
     }
     public double getPadXPos() {
         return padXPos;
@@ -41,9 +41,9 @@ public class Pad {
         this.padSpeed = speed;
     }
 
-    public Pad(float length, float height, double padXPos, double padYPos,float padSpeed) {
+    public Pad(float length, float width, double padXPos, double padYPos,float padSpeed) {
         this.length = length;
-        this.height = height;
+        this.width = width;
         this.padXPos = padXPos;
         this.padYPos = padYPos;
         this.padSpeed = padSpeed;

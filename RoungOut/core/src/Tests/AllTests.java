@@ -29,8 +29,8 @@ public class AllTests {
     @Nested
     public class ExtendMovePadTest extends MovePadTest {}
 
-    @Nested
-    public class ExtendPadTest extends PadTest {}
+   // @Nested
+   // public class ExtendPadTest extends PadTest {}
 
     @Nested
     public class ExtendPlayerTest extends PlayerTest {}

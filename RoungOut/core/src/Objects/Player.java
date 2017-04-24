@@ -9,11 +9,12 @@ import java.util.ArrayList;
 
 /**
  * Created by DukeA on 2017-04-04.
+ * Modified by Alex on 2017-04-24
  */
 public class Player {
     private Pad pad;
-    private float PadLength = 30;
-    private float PadWidth = 20;
+    private float PadLength = 30; //default value
+    private float PadWidth = 20; //default value
     private int points;
 
     public Player(){
@@ -53,6 +54,10 @@ public class Player {
     public void setPoints(int points) {
         this.points = points;
     }
+
+    public void offsetPoints() {points = points +1;} //increment by 1
+
+    public void offsetPoints(int value) {points = points + value;} //offsets by a given value
 
     public void setPad(Pad pad) {
         this.pad = pad;
