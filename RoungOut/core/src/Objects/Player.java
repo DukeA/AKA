@@ -41,8 +41,10 @@ public class Player {
     public Pad getPad() {
         return this.pad;
     }
+
     public void movePad() {
-         this.pad.PadMove(pad.getPadXPos()+pad.getPadSpeed(),pad.getPadYPos()+pad.getPadSpeed());
+       //  this.pad.PadMove(pad.getPadXPos()+pad.getPadSpeed(),pad.getPadYPos()+pad.getPadSpeed());
+        this.pad.PadMove();
     }
 
 

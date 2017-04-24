@@ -27,10 +27,7 @@ public class AllTests {
     public class ExtendBallTest extends BallTest {}
 
     @Nested
-    public class ExtendMovePadTest extends MovePadTest {}
-
-   // @Nested
-   // public class ExtendPadTest extends PadTest {}
+    public class ExtendPadTest extends PadTest {}
 
     @Nested
     public class ExtendPlayerTest extends PlayerTest {}

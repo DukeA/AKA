@@ -17,7 +17,7 @@ public class Pad {
     public float getLength() {
         return length;
     }
-    public float getHeight() {
+    public float getWidth() {
         return width;
     }
     public double getPadXPos() {
@@ -41,6 +41,7 @@ public class Pad {
         this.padSpeed = speed;
     }
 
+    //Constructor
     public Pad(float length, float width, double padXPos, double padYPos,float padSpeed) {
         this.length = length;
         this.width = width;
@@ -48,9 +49,17 @@ public class Pad {
         this.padYPos = padYPos;
         this.padSpeed = padSpeed;
     }
+
+    //Method: Moves by incrementing the x and y pos with it's speed
+    public void PadMove(){
+        padXPos = padXPos + padSpeed;
+        padYPos = padYPos + padSpeed;
+    }
+
+    //Overloaded Method: This simply sets the X and Y pos to the given values
     public void PadMove(double xPos, double yPos) {
-        this.padXPos = xPos;
-        this.padYPos = yPos;
+        setPadXPos(xPos);
+        setPadYPos(yPos);
     }
 
 

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 /**
  * Created by Alex on 2017-04-24.
- * Generalised version of MovePadTest created by DukeA on 2017-04-04
  *
  * This is more of a player test than it is a pad test actually
  */
@@ -28,7 +27,7 @@ public class PlayerTest {
     @BeforeEach
     void setUp(){ player = new Player(PadLength,PadWidth, PadXPos,PadYPos, PadSpeed);}
 
-    @Test
+   @Test
     public void PlayerMoveTest() {
         // Get the next X coordinate
         double nextX = player.getPad().getPadXPos()
