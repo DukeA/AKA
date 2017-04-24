@@ -13,15 +13,15 @@ import java.util.ArrayList;
 public class Player {
     private Pad pad;
     private float PadLength = 30;
-    private float PadWidth = 30;
+    private float PadWidth = 20;
     private int points;
 
     public Player(){
-        pad = new Pad(PadLength,PadWidth,30,30,30);
+        pad = new Pad(PadLength,PadWidth,0,0,0);
         points = 0;
     }
 
-    //Overloaded with specific parameters
+    //Overloaded with specific parameters, points allways starts at 0
     public Player(float PadL, float PadW, double PadXPos, double PadYPos, float PadSpeed){
         pad = new Pad(PadL,PadW,PadXPos,PadYPos,PadSpeed);
         points = 0;

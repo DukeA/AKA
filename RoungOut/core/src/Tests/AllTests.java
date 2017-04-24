@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Nested;
 
 public class AllTests {
     @BeforeAll
-    public static void setup(){} //empty so we start fresh
+    public static void setup(){} //empty so we guaranteed start fresh
 
     /*
     Every time you add a testCase you need to add the following code
@@ -31,6 +31,9 @@ public class AllTests {
 
     @Nested
     public class ExtendPadTest extends PadTest {}
+
+    @Nested
+    public class ExtendPlayerTest extends PlayerTest {}
 
     @Nested
     public class ExtendBrickTest extends BrickTest {}
