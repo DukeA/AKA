@@ -21,6 +21,12 @@ public class Player {
         points = 0;
     }
 
+    //Overloaded with specific parameters
+    public Player(float PadL, float PadW, double PadXPos, double PadYPos, float PadSpeed){
+        pad = new Pad(PadL,PadW,PadXPos,PadYPos,PadSpeed);
+        points = 0;
+    }
+
     public void setPadCoordinates(float x, float y) {
       pad.setPadXPos(x);
       pad.setPadYPos(y);

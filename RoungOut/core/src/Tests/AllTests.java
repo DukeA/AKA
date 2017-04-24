@@ -30,6 +30,9 @@ public class AllTests {
     public class ExtendMovePadTest extends MovePadTest {}
 
     @Nested
+    public class ExtendPadTest extends PadTest {}
+
+    @Nested
     public class ExtendBrickTest extends BrickTest {}
 
 }

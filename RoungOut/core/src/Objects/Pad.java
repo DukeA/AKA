@@ -41,7 +41,7 @@ public class Pad {
         this.padSpeed = speed;
     }
 
-    public Pad(float length, float height, float padXPos, float padYPos,float padSpeed) {
+    public Pad(float length, float height, double padXPos, double padYPos,float padSpeed) {
         this.length = length;
         this.height = height;
         this.padXPos = padXPos;
