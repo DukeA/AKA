@@ -28,7 +28,7 @@ public class PlayerTest {
     void setUp(){ player = new Player(PadLength,PadWidth, PadXPos,PadYPos, PadSpeed);}
 
    @Test
-    public void PlayerMoveTest() {
+    public void playerMoveTest() {
         // Get the next X coordinate
         double nextX = player.getPad().getPadXPos()
                 + player.getPad().getPadSpeed();

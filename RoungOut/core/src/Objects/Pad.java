@@ -51,13 +51,13 @@ public class Pad {
     }
 
     //Method: Moves by incrementing the x and y pos with it's speed
-    public void PadMove(){
+    public void padMove(){
         padXPos = padXPos + padSpeed;
         padYPos = padYPos + padSpeed;
     }
 
     //Overloaded Method: This simply sets the X and Y pos to the given values
-    public void PadMove(double xPos, double yPos) {
+    public void padMove(double xPos, double yPos) {
         setPadXPos(xPos);
         setPadYPos(yPos);
     }

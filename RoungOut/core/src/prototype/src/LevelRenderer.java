@@ -44,10 +44,10 @@ public class LevelRenderer implements Disposable {
 
     public void render() {
         renderObjects();
-        TestPlayer();
+        testPlayer();
 
     }
-    public void TestPlayer() {
+    public void testPlayer() {
 
     }
 

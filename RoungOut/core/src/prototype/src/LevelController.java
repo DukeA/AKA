@@ -19,13 +19,13 @@ import javax.swing.*;
 
 public class LevelController {
 
-    private final int WIDTH = Gdx.graphics.getWidth() / 2;
-    private final int HEIGHT = Gdx.graphics.getHeight() / 2;
+    private static final int WIDTH = Gdx.graphics.getWidth() / 2;
+    private static final int HEIGHT = Gdx.graphics.getHeight() / 2;
 
-    private final int PADHEIGHT = 15;
-    private final int PADWIDTH = 15;
-    private final int PADXPOS = 25;
-    private final int PADYPOS = 25;
+    private static final int PADHEIGHT = 15;
+    private static final int PADWIDTH = 15;
+    private static final int PADXPOS = 25;
+    private static final int PADYPOS = 25;
 
 
     private ShapeRenderer renderPad;

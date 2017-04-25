@@ -33,9 +33,9 @@ public class PadTest {
         Assertions.assertEquals(pad.getPadSpeed(),padSpd);
     }
     @Test
-    public void PadMoveTest() {
+    public void padMoveTest() {
         //check move with parameters
-        pad.PadMove(0,0); //insert new cordinates uses setPadXPos and setPadYPos
+        pad.padMove(0,0); //insert new cordinates uses setPadXPos and setPadYPos
         Assertions.assertEquals(pad.getPadXPos() , 0);
         Assertions.assertEquals(pad.getPadYPos() , 0);
 
@@ -46,7 +46,7 @@ public class PadTest {
         double newX = pad.getPadXPos() + pad.getPadSpeed(); //Verifying the next position
         double newY = pad.getPadYPos() + pad.getPadSpeed();
 
-        pad.PadMove(); //move the pad with regards to the speed variable
+        pad.padMove(); //move the pad with regards to the speed variable
         //Check that the pad has moved
         Assertions.assertEquals(pad.getPadXPos() , newX);
         Assertions.assertEquals(pad.getPadYPos() , newY);

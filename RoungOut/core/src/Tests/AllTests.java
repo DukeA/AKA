@@ -24,15 +24,15 @@ public class AllTests {
     */
 
     @Nested
-    public class ExtendBallTest extends BallTest {}
+    public static class ExtendBallTest extends BallTest {}
 
     @Nested
-    public class ExtendPadTest extends PadTest {}
+    public  static class ExtendPadTest extends PadTest {}
 
     @Nested
-    public class ExtendPlayerTest extends PlayerTest {}
+    public static class ExtendPlayerTest extends PlayerTest {}
 
     @Nested
-    public class ExtendBrickTest extends BrickTest {}
+    public static class ExtendBrickTest extends BrickTest {}
 
 }
