@@ -5,5 +5,5 @@ package Controller;
  */
 public interface IPlayerController {
 
-    char KeyPressed(char x);
+    char keyWasPressed(char x);
 }
