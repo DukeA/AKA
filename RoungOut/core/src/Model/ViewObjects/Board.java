@@ -1,11 +1,12 @@
-package Objects;
+package Model.ViewObjects;
 
 
+import Model.ViewObjects.IBoard;
 
 /**
  * Created by Adam on 2017-03-29.
  */
-public class Board implements IBoard  {
+public class Board implements IBoard {
 
 
     private float xPos;

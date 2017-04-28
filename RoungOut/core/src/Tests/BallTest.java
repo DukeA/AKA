@@ -1,11 +1,10 @@
 package Tests;
 
-import javafx.geometry.Point2D;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import Objects.Ball;
+import Model.GameObjects.Ball;
 
 /**
  * @author Ken Bäcklund

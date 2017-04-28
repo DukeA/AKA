@@ -1,7 +1,6 @@
 package Tests;
 
-import Objects.Pad;
-import Objects.Player;
+import Model.GameObjects.Pad;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

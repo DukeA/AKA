@@ -1,4 +1,4 @@
-package Objects;
+package Model.ViewObjects;
 
 /**
  * Created by Adam on 2017-03-30.

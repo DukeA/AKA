@@ -1,9 +1,4 @@
-package Objects;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+package Model.GameObjects;
 
 import java.util.ArrayList;
 

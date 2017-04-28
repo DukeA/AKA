@@ -1,9 +1,9 @@
+package Model.Collsion;
+
 import javafx.geometry.Point2D;
 
-import java.awt.*;
-
 /**
- * ICollidable Interface
+ * Model.Collsion.ICollidable Interface
  * Interface for all things collidable
  *
  * @author Ken Bäcklund
