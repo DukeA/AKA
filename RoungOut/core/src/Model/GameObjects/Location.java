@@ -1,7 +1,5 @@
 package Model.GameObjects;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * @author Ken Bäcklund.
  */
@@ -132,7 +130,7 @@ public class Location {
         return Math.sqrt(dx*dx+dy*dy);
     }
 
-    public double distance(@NotNull Location location) {
+    public double distance(Location location) {
         return distance(location.getX(), location.getY());
     }
 

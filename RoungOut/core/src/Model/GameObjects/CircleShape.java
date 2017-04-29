@@ -1,7 +1,5 @@
 package Model.GameObjects;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * @author Ken Bäcklund
  */
@@ -13,7 +11,7 @@ public class CircleShape implements Shape {
         this.radius = Math.abs(radius);
     }
 
-    public CircleShape(@NotNull CircleShape circleShape)
+    public CircleShape(CircleShape circleShape)
     {
         this.radius = circleShape.getRadius();
     }
