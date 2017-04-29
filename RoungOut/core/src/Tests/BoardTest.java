@@ -13,9 +13,8 @@ public class BoardTest {
 
     IBoard board;
 
-    float Width = 100;
-    float Height =100;
-    float radius =;
+      float Width = 100;
+      float Height =100;
 
     @BeforeEach
     public void beforeEach(){
@@ -26,9 +25,17 @@ public class BoardTest {
     public void getters() {
         Assertions.assertEquals(board.getxPos(),Width/2);
         Assertions.assertEquals(board.getYPos(),Height/2);
+        Assertions.assertEquals(board.getRadius(),
+                (float) (Height/2 + Math.pow(Width,2)/8*Height));
     }
     @Test
     public void BoardTest(){
+        Assertions.assertEquals(board.getYPos(),Width/2);
+        Assertions.assertEquals(board.getxPos(),Height/2);
+        Width = Width+100;
+        Height = Height+100;
+        Assertions.assertNotSame(board.getxPos(),Width/2);
+        Assertions.assertNotSame(board.getYPos(),Height/2);
 
     }
 }
