@@ -29,13 +29,17 @@ public class BoardTest {
                 (float) (Height/2 + Math.pow(Width,2)/8*Height));
     }
     @Test
-    public void BoardTest(){
+    public void boardTest(){
         Assertions.assertEquals(board.getYPos(),Width/2);
         Assertions.assertEquals(board.getxPos(),Height/2);
-        Width = Width+100;
-        Height = Height+100;
-        Assertions.assertNotSame(board.getxPos(),Width/2);
-        Assertions.assertNotSame(board.getYPos(),Height/2);
-
+        IBoard nboard = new Board(Width,Height);
+        Assertions.assertNotSame(board,nboard);
+        Assertions.assertEquals(board.getxPos(),nboard.getxPos());
+        Assertions.assertEquals(board.getYPos(),nboard.getYPos());
+    }
+    @Test
+    public void radiusTest() {
+        Assertions.assertEquals(board.getRadius()< board.getxPos()/2,
+                board.getRadius()<board.getYPos()/2);
     }
 }
