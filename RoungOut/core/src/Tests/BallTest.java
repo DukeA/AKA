@@ -17,12 +17,14 @@ class BallTest {
     private final static double XPOS = 100.0f;
     private final static double YPOS = -100.0f;
     private final static double RADIUS = 10f;
+    private final static double ANGLE = 4f*Math.PI;
+    private final static double SPEED = 20.0f;
 
     private Ball ball;
 
     @BeforeEach
     void setUp() {
-        ball = new Ball(XPOS, YPOS, RADIUS);
+        ball = new Ball(XPOS, YPOS, RADIUS, ANGLE, SPEED);
     }
 
     @Test
@@ -33,6 +35,17 @@ class BallTest {
     @Test
     void getY() {
         Assertions.assertEquals(YPOS, ball.getY(), THRESHOLD);
+    }
+
+    @Test
+    void getAngle() {
+        double expectedAngle = (ANGLE + 8f*Math.PI) % (2f*Math.PI);
+        Assertions.assertEquals(expectedAngle, ball.getAngle(), THRESHOLD);
+    }
+
+    @Test
+    void getSpeed() {
+        Assertions.assertEquals(SPEED, ball.getSpeed(), THRESHOLD);
     }
 
     @Test
@@ -59,8 +72,40 @@ class BallTest {
     }
 
     @Test
+    void setAngle() {
+        double maxAngle = 4f*Math.PI;
+        double minAngle = -maxAngle;
+        for (double a = minAngle; a < maxAngle; a += maxAngle/64f) {
+            double expectedAngle = (a + 8f*Math.PI) % (2f*Math.PI);
+            ball.setAngle(a);
+            Assertions.assertEquals(expectedAngle, ball.getAngle(), THRESHOLD);
+        }
+    }
+
+    @Test
+    void setSpeed() {
+        double expectedSpeed = SPEED + 100f;
+        ball.setSpeed(expectedSpeed);
+        Assertions.assertEquals(expectedSpeed, ball.getSpeed(), THRESHOLD);
+    }
+
+    @Test
+    void setMaxSpeed() {
+        double expectedSpeed = SPEED;
+        ball.setMaxSpeed(expectedSpeed);
+        ball.setSpeed(expectedSpeed + 100f);
+        Assertions.assertEquals(expectedSpeed, ball.getSpeed(), THRESHOLD);
+    }
+
+    @Test
     void move() {
-        // TODO: Add Ball movement
+        for (double a = -2f*Math.PI; a < 2f*Math.PI; a += Math.PI/64f) {
+            double expectedX = ball.getX() + Math.cos(ANGLE) * SPEED;
+            double expectedY = ball.getY() + Math.sin(ANGLE) * SPEED;
+            ball.move();
+            Assertions.assertEquals(expectedX, ball.getX(), THRESHOLD);
+            Assertions.assertEquals(expectedY, ball.getY(), THRESHOLD);
+        }
     }
 
 }
