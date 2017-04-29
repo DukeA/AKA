@@ -34,4 +34,7 @@ public class AllTests {
     @Nested
     public class ExtendBrickTest extends Tests.BrickTest {}
 
+    @Nested
+    public static class ExtendBoardTest extends BoardTest {}
+
 }
