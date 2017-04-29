@@ -4,7 +4,6 @@ package Tests;
  * Created by Alex on 2017-04-07.
  * Updated by Ken on 2017-04-12.
  */
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
 
@@ -17,22 +16,22 @@ public class AllTests {
     inorder for the suit to test it:
 
     @Nested
-    public class Extend(YOUR TEST HERE) extends (YOUR TEST HERE) {}
+    public class Extend(YOUR TEST HERE) extends Tests.(YOUR TEST HERE) {}
 
     what it does is nesting your test with this test suit (specifically AllTests), then
     when you run the suit your test will also be executed
     */
 
     @Nested
-    public static class ExtendBallTest extends BallTest {}
+    public class ExtendBallTest extends Tests.BallTest {}
 
     @Nested
-    public  static class ExtendPadTest extends PadTest {}
+    public class ExtendPadTest extends Tests.PadTest {}
 
     @Nested
-    public static class ExtendPlayerTest extends PlayerTest {}
+    public class ExtendPlayerTest extends Tests.PlayerTest {}
 
     @Nested
-    public static class ExtendBrickTest extends BrickTest {}
+    public class ExtendBrickTest extends Tests.BrickTest {}
 
 }
