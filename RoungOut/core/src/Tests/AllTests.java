@@ -35,6 +35,15 @@ public class AllTests {
     public class ExtendBrickTest extends Tests.BrickTest {}
 
     @Nested
-    public static class ExtendBoardTest extends BoardTest {}
+    public class ExtendBoardTest extends BoardTest {}
+
+    @Nested
+    public class ExtendCircleBodyTest extends CircleBodyTest {}
+
+    @Nested
+    public class ExtendCircleShapeTest extends CircleShapeTest {}
+
+    @Nested
+    public class ExtendLocationTest extends LocationTest {}
 
 }
