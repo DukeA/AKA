@@ -1,9 +1,15 @@
 package View.ObjectView;
 
 
+import Model.GameObjects.Shape;
+import Model.ViewObjects.Board;
+import Model.ViewObjects.IBoard;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import prototype.src.desktop.Roungout;
@@ -19,32 +25,42 @@ public class BoardView implements Screen {
 
     private BallView ballView;
 
-    public BoardView( final Roungout game){
+    private IBoard board;
+    private ShapeRenderer shapeRenderer;
+    private SpriteBatch batch;
+
+    public BoardView(final Roungout game) {
         this.game = game;
-        this.stage = new com.badlogic.gdx.scenes.scene2d.Stage(new FitViewport(Roungout.WIDTH,Roungout.WIDTH,game.camera));
+        this.stage = new com.badlogic.gdx.scenes.scene2d.Stage
+                (new FitViewport(Roungout.WIDTH, Roungout.WIDTH, game.camera));
+
     }
 
     @Override
     public void show() {
+        drawBoard();
+        drawBall();
 
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1f,1f,1f,1f);
+        Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         update(delta);
+        show();
 
+        stage.act();
         stage.draw();
     }
+
     public void update(float delta) {
-            stage.act(delta);
+        stage.act(delta);
     }
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width,height,true);
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
@@ -65,5 +81,28 @@ public class BoardView implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+    }
+
+    public void drawBoard() {
+        board =new Board(Roungout.WIDTH,Roungout.HEIGHT);
+        batch = new SpriteBatch();
+        shapeRenderer = new ShapeRenderer();
+        Gdx.gl.glLineWidth(32);
+
+        batch.begin();
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(Color.BLACK);
+        shapeRenderer.ellipse(board.getxPos()-900,board.getYPos()-450,
+                board.getRadius(), board.getRadius()*Roungout.HEIGHT/Roungout.WIDTH);
+        shapeRenderer.end();
+        batch.end();
+
+    }
+    public void drawBall(){
+        ballView = new BallView();
+
+    }
+    public void drawPad() {
+
     }
 }

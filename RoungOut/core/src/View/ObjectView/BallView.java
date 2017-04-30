@@ -8,7 +8,7 @@ import com.badlogic.gdx.Screen;
 public class BallView implements Screen {
 
     public BallView() {
-        
+
     }
 
 

@@ -14,9 +14,17 @@ public class Roungout extends Game {
     public static final float VERSION =0.1f;
     public static int WIDTH =1980;
     public static int HEIGHT =1080;
+    public static boolean RESIZE = false;
 
     public OrthographicCamera camera;
     public SpriteBatch batch;
+
+    public enum Screen {
+        MainMenu,
+        InGame,
+
+    }
+    private Screen screen =Screen.InGame;
 
     @Override
     public void create() {

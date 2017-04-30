@@ -11,6 +11,7 @@ public class DesktopLauncher {
 		config.title = Roungout.TITLE + " v " + Roungout.VERSION;
 		config.width =Roungout.WIDTH;
 		config.height=Roungout.HEIGHT;
+		config.resizable = Roungout.RESIZE;
 		//config.fullscreen = true;
 		new LwjglApplication(new Roungout(), config);
 	}

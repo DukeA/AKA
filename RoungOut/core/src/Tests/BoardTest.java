@@ -13,8 +13,8 @@ public class BoardTest {
 
     IBoard board;
 
-      float Width = 100;
-      float Height =100;
+      int Width = 100;
+      int Height =100;
 
     @BeforeEach
     public void beforeEach(){
