@@ -8,11 +8,9 @@ public class DesktopLauncher {
 
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.title = "ROUND OUT";
-		config.useGL30 = false;
-		config.height = 1080;
-		config.width = 1980;
-		config.resizable = false;
+		config.title = Roungout.TITLE + " v " + Roungout.VERSION;
+		config.width =Roungout.WIDTH;
+		config.height=Roungout.HEIGHT;
 		//config.fullscreen = true;
 		new LwjglApplication(new Roungout(), config);
 	}
