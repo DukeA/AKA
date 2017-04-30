@@ -10,28 +10,44 @@ import com.badlogic.gdx.InputProcessor;
  */
 public class PlayerController implements IPlayerController, InputProcessor{
 
+    private char latestKey= ' ';
     //KeyPressed returns a char, its used in the IPlayerController to signal inputs to other parts of the program
     @Override
-    public char keyWasPressed(char x){
-        return x;
+    public char latestKeyPressed(){
+        return latestKey;
     }
 
     @Override
     public boolean keyDown(int keycode) {
+        /**
+         *  This will be called when a key is pressed down (keyboard) by libgdx's InputProcessor
+         */
         if (keycode == Input.Keys.A){
-            keyWasPressed('A');
+
+            //Interface for moving Player 1 left
+
+            latestKey= 'A';
         }
 
         if (keycode == Input.Keys.D){
-            keyWasPressed('D');
+
+            //Interface for moving Player 1 right
+
+            latestKey= 'D';
         }
 
         if (keycode == Input.Keys.DPAD_LEFT){
-            keyWasPressed('V'); //U since upp arrow char doesn't exist
+            //V since upp arrow char doesn't exist
+            //Interface for moving Player 2 left
+
+            latestKey= 'V';
         }
 
         if (keycode == Input.Keys.DPAD_RIGHT){
-            keyWasPressed('H');  //N since upp arrow char doesn't exist
+           //H since upp arrow char doesn't exist
+            //Interface for moving Player 2 right
+
+            latestKey= 'H';
         }
 
         /**
@@ -42,20 +58,18 @@ public class PlayerController implements IPlayerController, InputProcessor{
          *  It would be much simpler if the return value of the interfaced could be an int and
          *  simply import the "com.badlogic.gdx.Input" library to reach the Inputs.Keys field
          */
-
         return true;
     }
 
+    //We don't need these inputs
     @Override
     public boolean keyUp(int keycode) {
         return false;
     }
-
     @Override
     public boolean keyTyped(char character) {
         return false;
     }
-
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         return false;
@@ -77,6 +91,9 @@ public class PlayerController implements IPlayerController, InputProcessor{
         return false;
     }
 
-    boolean W = Gdx.input.isKeyPressed(Input.Keys.W);
-    boolean S = Gdx.input.isKeyPressed(Input.Keys.S);
+    public PlayerController() {
+        Gdx.input.setInputProcessor(this);
+        //Makes it so LibGdx sends calls to this controller
+        //(Adds the created PlayerController as a listener for LibGdx)
+    }
 }
