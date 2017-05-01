@@ -1,6 +1,6 @@
 package Model.Collsion;
 
-import Model.GameObjects.Body;
+import Model.GameObjects.Physics.Body;
 import Model.ViewObjects.IBoard;
 
 /**
