@@ -1,6 +1,7 @@
 package Model.GameObjects;
 
 import Model.GameObjects.IModel;
+import Model.GameObjects.Physics.*;
 
 /**
  * Created by kendu on 2017-05-01.
