@@ -45,8 +45,8 @@ public class Pad {
 
     //Constructor
     public Pad(float length, float width, double padXPos, double padYPos,float padSpeed) {
-        body =new RectangleBody(padXPos,padYPos,width,length);
-        setSpeed(padSpeed);
+        this.body =new RectangleBody(padXPos,padYPos,width,length);
+        this.setSpeed(padSpeed);
     }
 
     //Method: Moves by incrementing the x and y pos with it's speed
