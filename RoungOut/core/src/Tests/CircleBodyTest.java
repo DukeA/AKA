@@ -1,7 +1,7 @@
 package Tests;
 
-import Model.GameObjects.CircleBody;
-import Model.GameObjects.RectangleBody;
+import Model.GameObjects.Physics.CircleBody;
+import Model.GameObjects.Physics.RectangleBody;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
