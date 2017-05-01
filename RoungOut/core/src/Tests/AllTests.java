@@ -44,6 +44,15 @@ public class AllTests {
     public class ExtendCircleShapeTest extends Tests.CircleShapeTest {}
 
     @Nested
+    public class ExtendRectangleBodyTest extends Tests.RectangleBodyTest {}
+
+    @Nested
+    public class ExtendRectangleShapeTest extends Tests.RectangleShapeTest {}
+
+    @Nested
     public class ExtendLocationTest extends Tests.LocationTest {}
+
+    @Nested
+    public class ExtendCollisionTest extends Tests.CollisionTest {}
 
 }
