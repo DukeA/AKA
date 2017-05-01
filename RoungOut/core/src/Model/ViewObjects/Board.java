@@ -19,7 +19,7 @@ public class Board implements IBoard {
         radius = (float) (Height/2 + Math.pow(Width,2)/8*Height);
     }
 
-    public float getxPos() {
+    public float getXPos() {
         return this.xPos;
     }
     public float getYPos() {
