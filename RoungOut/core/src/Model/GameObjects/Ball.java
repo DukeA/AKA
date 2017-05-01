@@ -34,6 +34,10 @@ public class Ball implements IModel, Body {
         return body.getSpeed();
     }
 
+    public double getRadius() {
+        return body.getRadius();
+    }
+
     public void setX(double xPos) {
         body.setX(xPos);
     }
@@ -52,6 +56,10 @@ public class Ball implements IModel, Body {
 
     public void setSpeed(double speed) {
         body.setSpeed(speed);
+    }
+
+    public void setRadius(double radius) {
+        body.setRadius(radius);
     }
 
     public void setMaxSpeed(double maxSpeed) {
