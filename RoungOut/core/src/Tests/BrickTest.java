@@ -1,110 +1,64 @@
 package Tests;
 
-import Model.GameObjects.Brick;
+import Model.GameObjects.Physics.Brick;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * @author Ken Bäcklund
  */
-class BrickTest {
+public class BrickTest {
+
+    private static final double THRESHOLD = 0.0001f;
+
+    private static final double XPOS = 0f;
+    private static final double YPOS = 0f;
+    private static final double WIDTH = 30f;
+    private static final double HEIGHT = 20f;
+    private static final double ANGLE = Math.PI / 2f;   // =45 degrees
+    private static final double SPEED = 10f;
 
     private Brick brick;
-    private final double brickX = 100.0f;
-    private final double brickY = 200.0f;
-    private final double brickWidth = 300.0f;
-    private final double brickHeight = 400.0f;
 
-    private final double threshold = 0.0001f;
+
 
     @BeforeEach
     void setUp() {
-        brick = new Brick(brickX, brickY, brickWidth, brickHeight);
+        brick = new Brick(XPOS, YPOS, WIDTH, HEIGHT);
     }
 
     @Test
-    void testGetX() {
-        Assertions.assertEquals(brick.getX(), brickX, threshold);
+    void getX() {
+        Assertions.assertEquals(XPOS, brick.getX(), THRESHOLD);
     }
 
     @Test
-    void testSetX() {
-        brick.setX(-10.0f);
-        Assertions.assertEquals(brick.getX(), -10.0f, threshold);
+    void getY() {
+        Assertions.assertEquals(YPOS, brick.getY(), THRESHOLD);
     }
 
     @Test
-    void testGetY() {
-        Assertions.assertEquals(brick.getY(), brickY, threshold);
+    void setX() {
+        double expectedX = XPOS + 10f;
+        brick.setX(expectedX);
+        Assertions.assertEquals(expectedX, brick.getX(), THRESHOLD);
     }
 
     @Test
-    void testSetY() {
-        brick.setY(20.0f);
-        Assertions.assertEquals(brick.getY(), 20.0f, threshold);
+    void setY() {
+        double expectedY = YPOS - 10f;
+        brick.setY(expectedY);
+        Assertions.assertEquals(expectedY, brick.getY(), THRESHOLD);
     }
 
     @Test
-    void testSetPosition() {
-        brick.setPosition(-50.0f, 50.0f);
-        Assertions.assertEquals(brick.getX(), -50.0f, threshold);
-        Assertions.assertEquals(brick.getY(), 50.0f, threshold);
-    }
-
-    @Test
-    void testGetWidth() {
-        Assertions.assertEquals(brick.getWidth(), brickWidth, threshold);
-    }
-
-    @Test
-    void testSetWidth() {
-        brick.setWidth(100.0f);
-        Assertions.assertEquals(brick.getWidth(), 100.0f, threshold);
-    }
-
-    @Test
-    void testSetBadWidth() {
-        try {
-            brick.setWidth(-100.0f);
-            Assertions.fail("Didn't raise IllegalArgumentException.");
-        }
-        catch (IllegalArgumentException e) {
-            // As expected.
-        }
-        Assertions.assertEquals(brick.getWidth(), brickWidth, threshold);   // Unmodified.
-    }
-
-    @Test
-    void testGetHeight() {
-        Assertions.assertEquals(brick.getHeight(), brickHeight, threshold);
-    }
-
-    @Test
-    void testSetHeight() {
-        brick.setHeight(300.0f);
-        Assertions.assertEquals(brick.getHeight(), 300.0f, threshold);
-    }
-
-    @Test
-    void testSetBadHeight() {
-        try {
-            brick.setHeight(0.0f);
-            Assertions.fail("Didn't raise IllegalArgumentException.");
-        }
-        catch (IllegalArgumentException e) {
-            // As expected.
-        }
-        Assertions.assertEquals(brick.getHeight(), brickHeight, threshold);   // Unmodified.
-    }
-
-    @Test
-    void testSetSize() {
-        brick.setSize(0.1f, 0.2f);
-        Assertions.assertEquals(brick.getWidth(), 0.1f, threshold);
-        Assertions.assertEquals(brick.getHeight(), 0.2f, threshold);
+    void setPosition() {
+        double expectedX = XPOS + 10f;
+        double expectedY = YPOS - 10f;
+        brick.setPosition(expectedX, expectedY);
+        Assertions.assertEquals(expectedX, brick.getX(), THRESHOLD);
+        Assertions.assertEquals(expectedY, brick.getY(), THRESHOLD);
     }
 
 }
