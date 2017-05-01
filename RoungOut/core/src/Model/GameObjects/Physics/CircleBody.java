@@ -1,4 +1,4 @@
-package Model.GameObjects;
+package Model.GameObjects.Physics;
 
 /**
  * @author Ken Bäcklund
@@ -70,17 +70,6 @@ public class CircleBody implements Body {
         location.setSpeed(speed);
     }
 
-    public double distance(double xPos, double yPos) {
-        return location.distance(xPos, yPos) - getRadius();
-    }
-
-    public double distance(Body body) {
-        double dCenterPoints = location.distance(body.getX(), body.getY());
-        double dToOther = distance(body.getX(), body.getY());
-        double dFromOther = body.distance(getX(), getY());
-        return (dToOther + dFromOther)- dCenterPoints;
-    }
-
     public void setRadius(double radius) {
         shape = new CircleShape(radius);
     }
@@ -90,6 +79,17 @@ public class CircleBody implements Body {
     }
 
     // Other methods //////////////////////////////////////////////////////////
+    public double distance(double xPos, double yPos) {
+        return Math.max(0, location.distance(xPos, yPos) - getRadius());
+    }
+
+    public double distance(Body body) {
+        double dCenterPoints = location.distance(body.getX(), body.getY());
+        double dToOther = distance(body.getX(), body.getY());
+        double dFromOther = body.distance(getX(), getY());
+        return Math.max(0, (dToOther + dFromOther)- dCenterPoints);
+    }
+
     public void move() {
         location.move();
     }

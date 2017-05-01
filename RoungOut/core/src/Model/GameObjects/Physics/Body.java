@@ -1,4 +1,4 @@
-package Model.GameObjects;
+package Model.GameObjects.Physics;
 
 /**
  * @author Ken Bäcklund
@@ -15,6 +15,7 @@ public interface Body {
     void setPosition(double xPos, double yPos);
     void setAngle(double radians);
     void setSpeed(double speed);
+    void setMaxSpeed(double maxSpeed);
 
     double distance(Body body);
     double distance(double xPos, double yPos);

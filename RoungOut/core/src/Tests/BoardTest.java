@@ -23,7 +23,7 @@ public class BoardTest {
 
     @Test
     public void getters() {
-        Assertions.assertEquals(board.getxPos(),Width/2);
+        Assertions.assertEquals(board.getXPos(),Width/2);
         Assertions.assertEquals(board.getYPos(),Height/2);
         Assertions.assertEquals(board.getRadius(),
                 (float) (Height/2 + Math.pow(Width,2)/8*Height));
@@ -31,15 +31,15 @@ public class BoardTest {
     @Test
     public void boardTest(){
         Assertions.assertEquals(board.getYPos(),Width/2);
-        Assertions.assertEquals(board.getxPos(),Height/2);
+        Assertions.assertEquals(board.getXPos(),Height/2);
         IBoard nboard = new Board(Width,Height);
         Assertions.assertNotSame(board,nboard);
-        Assertions.assertEquals(board.getxPos(),nboard.getxPos());
+        Assertions.assertEquals(board.getXPos(),nboard.getXPos());
         Assertions.assertEquals(board.getYPos(),nboard.getYPos());
     }
     @Test
     public void radiusTest() {
-        Assertions.assertEquals(board.getRadius()< board.getxPos()/2,
+        Assertions.assertEquals(board.getRadius()< board.getXPos()/2,
                 board.getRadius()<board.getYPos()/2);
     }
 }

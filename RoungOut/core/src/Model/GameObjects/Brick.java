@@ -1,121 +1,72 @@
 package Model.GameObjects;
 
-import java.util.Map;
+import Model.GameObjects.IModel;
+import Model.GameObjects.Physics.*;
 
 /**
- * Class for handling Bricks
- * @author Ken Bäcklund
+ * Created by kendu on 2017-05-01.
  */
-public class Brick {
+public class Brick implements IModel, Body {
 
-    // PRIVATE VARIABLES //////////////////////////////////////////////////////
-    private double xPos;
-    private double yPos;
-    private double width;       // width > 0.
-    private double height;      // height > 0.
+    private RectangleBody body;
 
-    // CONSTRUCTOR ////////////////////////////////////////////////////////////
-
-    /**
-     * Creates a new Brick instance.
-     * @param x - the X position for the new brick.
-     * @param y - the Y position for the new brick.
-     * @param width - positive width for the new brick.
-     * @param height - positive height for the new brick.
-     */
-    public Brick(double x, double y, double width, double height) {
-        setPosition(x, y);
-        setSize(width, height);
+    public Brick(double xPos, double yPos, double width, double height, double angle, double speed) {
+        body = new RectangleBody(xPos, yPos, width, height, angle, speed);
     }
 
-    /**
-     * Get brick's X position.
-     * @return the brick's X position.
-     */
+    public Brick(double xPos, double yPos, double width, double height) {
+        body = new RectangleBody(xPos, yPos, width, height, 0f, 0f);
+    }
+
     public double getX() {
-        return xPos;
+        return body.getX();
     }
 
-    /**
-     * Set brick's X position.
-     * @param x - the new X position
-     */
-    public void setX(double x) {
-        this.xPos = x;
-    }
-
-    /**
-     * Get brick's Y position
-     * @return the brick's Y position.
-     */
     public double getY() {
-        return yPos;
+        return body.getY();
     }
 
-    /**
-     * Set brick's Y position.
-     * @param y - the new Y position.
-     */
-    public void setY(double y) {
-        this.yPos = y;
+    public double getAngle() {
+        return body.getAngle();
     }
 
-    /**
-     * Set brick's X and Y position.
-     * @param x - the X position.
-     * @param y - the Y position.
-     */
-    public void setPosition(double x, double y) {
-        setX(x);
-        setY(y);
+    public double getSpeed() {
+        return body.getSpeed();
     }
 
-    /**
-     * Get brick's width.
-     * @return the brick's width.
-     */
-    public double getWidth() {
-        return width;
+    public void setX(double xPos) {
+        body.setX(xPos);
     }
 
-    /**
-     * Set the brick's width.
-     * @param width - positive brick width.
-     */
-    public void setWidth(double width) {
-        if (width <= 0.0f) {
-            throw new IllegalArgumentException();   // Width must be a positive number.
-        }
-        this.width = width;
+    public void setY(double yPos) {
+        body.setY(yPos);
     }
 
-    /**
-     * Get brick's height.
-     * @return - the brick's height.
-     */
-    public double getHeight() {
-        return height;
+    public void setPosition(double xPos, double yPos) {
+        body.setPosition(xPos, yPos);
     }
 
-    /**
-     * Set brick's height.
-     * @param height - positive brick height.
-     */
-    public void setHeight(double height) {
-        if (height <= 0.0f) {
-            throw new IllegalArgumentException();   // Height must be a positive number.
-        }
-        this.height = height;
+    public void setAngle(double radians) {
+        body.setAngle(radians);
     }
 
-    /**
-     * Set brick's width and height.
-     * @param width - positive brick width.
-     * @param height - positive brick height.
-     */
-    public void setSize(double width, double height) {
-        setWidth(width);
-        setHeight(height);
+    public void setSpeed(double speed) {
+        body.setSpeed(speed);
     }
 
+    public void setMaxSpeed(double maxSpeed) {
+        body.setMaxSpeed(maxSpeed);
+    }
+
+    public double distance(Body otherBody) {
+        return body.distance(otherBody);
+    }
+
+    public double distance(double xPos, double yPos) {
+        return body.distance(xPos, yPos);
+    }
+
+    public void move() {
+        body.move();
+    }
 }
