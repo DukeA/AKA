@@ -1,4 +1,4 @@
-package Model.GameObjects;
+package Model.GameObjects.Physics;
 
 /**
  * @author Ken Bäcklund
