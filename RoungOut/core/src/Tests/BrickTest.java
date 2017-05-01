@@ -1,6 +1,6 @@
 package Tests;
 
-import Model.GameObjects.Physics.Brick;
+import Model.GameObjects.Brick;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
