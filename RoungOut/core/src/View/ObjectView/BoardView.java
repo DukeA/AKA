@@ -97,7 +97,7 @@ public class BoardView implements Screen {
         batch.begin();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.ellipse(board.getxPos()-900,board.getYPos()-450,
+        shapeRenderer.ellipse(board.getXPos()-900,board.getYPos()-450,
                 board.getRadius(), board.getRadius()*Roungout.HEIGHT/Roungout.WIDTH);
         shapeRenderer.end();
         batch.end();
