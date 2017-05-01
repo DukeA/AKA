@@ -6,14 +6,13 @@ import java.util.ArrayList;
  * Created by DukeA on 2017-04-04.
  * Modified by Alex on 2017-04-24
  */
-public class Player {
+public class Player implements IPlayer {
     private Pad pad;
-    private float PadLength = 30; //default value
-    private float PadWidth = 20; //default value
     private int points;
 
     public Player(){
-        pad = new Pad(PadLength,PadWidth,0,0,0);
+        //Default values for a Player's pad
+        pad = new Pad(30,20,0,0,0);
         points = 0;
     }
 
@@ -33,6 +32,12 @@ public class Player {
         coordinateList.add(1,pad.getPadYPos());
         return coordinateList;
     }
+
+    public void setPad(Pad pad) {
+        this.pad = pad;
+    }
+
+    @Override
     public Pad getPad() {
         return this.pad;
     }
@@ -42,8 +47,7 @@ public class Player {
         this.pad.padMove();
     }
 
-
-
+    @Override
     public int getPoints() {
         return this.points;
     }
@@ -55,9 +59,5 @@ public class Player {
     public void offsetPoints() {points = points +1;} //increment by 1
 
     public void offsetPoints(int value) {points = points + value;} //offsets by a given value
-
-    public void setPad(Pad pad) {
-        this.pad = pad;
-    }
 
 }
