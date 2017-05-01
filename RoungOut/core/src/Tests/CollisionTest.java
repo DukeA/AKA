@@ -3,6 +3,7 @@ package Tests;
 import Model.Collsion.Collision;
 import Model.GameObjects.Ball;
 import Model.GameObjects.Physics.RectangleBody;
+import Model.ViewObjects.Board;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +17,7 @@ class CollisionTest {
     private final static double THRESHOLD = 0.0001f;
 
     private final static double BALL_RADIUS = 10f;
+    private final static double BOARD_RADIUS = 1000f;
 
     private Collision collision;
     private RectangleBody rect;
@@ -89,4 +91,23 @@ class CollisionTest {
 
     }
 
+    @Test
+    void isBodyOutsideRange() {
+        ball = new Ball(0f, 0f, BALL_RADIUS, 0f, 0f);
+        collision = new Collision();
+        double range = BOARD_RADIUS + 100f;
+        for (double py = -range; py < range; py+= 50f) {
+            for (double px = -range; px < range; px+= 50f) {
+                ball.setPosition(px, py);
+                boolean actualResult = collision.isOutsideBoardRange(ball, BOARD_RADIUS);
+                boolean expectedResult = (Math.sqrt(px*px+py*py) - BALL_RADIUS >= BOARD_RADIUS);
+
+                if (expectedResult != actualResult) {
+                    System.out.printf("(%.0f, %.0f)   expected=%b   actual=%b\n",
+                            px, py, expectedResult, actualResult);
+                }
+                Assertions.assertTrue(expectedResult == actualResult);
+            }
+        }
+    }
 }
