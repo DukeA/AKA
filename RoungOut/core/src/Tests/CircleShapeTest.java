@@ -1,6 +1,6 @@
 package Tests;
 
-import Model.GameObjects.CircleShape;
+import Model.GameObjects.Physics.CircleShape;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
