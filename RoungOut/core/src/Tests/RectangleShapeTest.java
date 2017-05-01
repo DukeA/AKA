@@ -1,6 +1,6 @@
 package Tests;
 
-import Model.GameObjects.RectangleShape;
+import Model.GameObjects.Physics.RectangleShape;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
