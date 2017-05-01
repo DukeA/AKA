@@ -1,6 +1,7 @@
 package Tests;
 
 import Model.GameObjects.CircleBody;
+import Model.GameObjects.RectangleBody;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,6 +44,17 @@ class CircleBodyTest {
     }
 
     @Test
+    void getAngle() {
+        double expectedAngle = (ANGLE + 8f*Math.PI) % (2f*Math.PI);
+        Assertions.assertEquals(expectedAngle, body.getAngle(), THRESHOLD);
+    }
+
+    @Test
+    void getSpeed() {
+        Assertions.assertEquals(SPEED, body.getSpeed(), THRESHOLD);
+    }
+
+    @Test
     void setX() {
         double expectedX = XPOS + 10f;
         body.setX(expectedX);
@@ -66,6 +78,24 @@ class CircleBodyTest {
     }
 
     @Test
+    void setAngle() {
+        double maxAngle = 2f*Math.PI;
+        double minAngle = -maxAngle;
+        for (double a = minAngle; a < maxAngle; a += maxAngle/32f) {
+            double expectedAngle = (a + 8f*Math.PI) % (2f*Math.PI);
+            body.setAngle(a);
+            Assertions.assertEquals(expectedAngle, body.getAngle(), THRESHOLD);
+        }
+    }
+
+    @Test
+    void setSpeed() {
+        double expectedSpeed = SPEED + 100f;
+        body.setSpeed(expectedSpeed);
+        Assertions.assertEquals(expectedSpeed, body.getSpeed(), THRESHOLD);
+    }
+
+    @Test
     void setRadius() {
         double expectedRadius = RADIUS + 1f;
         body.setRadius(expectedRadius);
@@ -80,7 +110,7 @@ class CircleBodyTest {
     }
 
     @Test
-    void distanceCircleBody() {
+    void distanceTwoCircles() {
         double otherRadius = RADIUS * 2f;
         double range = 10f*RADIUS;
         double stepX = RADIUS / 3f;
@@ -94,8 +124,33 @@ class CircleBodyTest {
                 double relDx = body.getX() - someBody.getX();
                 double relDy = body.getY() - someBody.getY();
                 double centerDistance = Math.sqrt(relDx*relDx + relDy*relDy);
-                double expectedDistance = centerDistance - RADIUS - otherRadius;
+                double expectedDistance = Math.max(0, centerDistance - RADIUS - otherRadius);
                 Assertions.assertEquals(expectedDistance, body.distance(someBody));
+
+            }
+        }
+    }
+
+    @Test
+    void distanceCircleRectangle() {
+
+        double cRadius = 10f;
+        double rWidth = cRadius*2f;
+        double rHeight = cRadius*3f;
+        double range = cRadius*5f;
+
+        CircleBody    cir = new CircleBody   (0f, 0f, cRadius);
+        RectangleBody rec = new RectangleBody(0f, 0f, rWidth, rHeight);
+
+        for (double ry = -range; ry < range; ry++) {
+            for (double rx = -range; rx < range; rx++) {
+                rec.setPosition(rx, ry);
+
+                double dx = Math.max(0f, Math.abs(cir.getX() - rec.getX()) - rec.getWidth()/2f);
+                double dy = Math.max(0f, Math.abs(cir.getY() - rec.getY()) - rec.getHeight()/2f);
+                double expectedDistance = Math.max(0, Math.sqrt(dx*dx+dy*dy) - cir.getRadius());
+                Assertions.assertEquals(expectedDistance, cir.distance(rec), THRESHOLD);
+                Assertions.assertEquals(expectedDistance, rec.distance(cir), THRESHOLD);
 
             }
         }

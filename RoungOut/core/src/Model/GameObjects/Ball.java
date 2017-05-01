@@ -3,7 +3,7 @@ package Model.GameObjects;
 /**
  * @author Ken Bäcklund
  */
-public class Ball implements IModel {
+public class Ball implements IModel, Body {
 
     private CircleBody body;
 
@@ -49,6 +49,16 @@ public class Ball implements IModel {
 
     public void setMaxSpeed(double maxSpeed) {
         body.setMaxSpeed(maxSpeed);
+    }
+
+    @Override
+    public double distance(Body otherBody) {
+        return body.distance(otherBody);
+    }
+
+    @Override
+    public double distance(double xPos, double yPos) {
+        return body.distance(xPos, yPos);
     }
 
     public void move() {
