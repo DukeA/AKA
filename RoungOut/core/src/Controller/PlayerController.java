@@ -10,11 +10,24 @@ import com.badlogic.gdx.InputProcessor;
  */
 public class PlayerController implements IPlayerController, InputProcessor{
 
+    //Add list of models that want this controller as input
+    //Add list of views that want this controller as input
+
     private char latestKey= ' ';
     //KeyPressed returns a char, its used in the IPlayerController to signal inputs to other parts of the program
     @Override
     public char latestKeyPressed(){
         return latestKey;
+    }
+
+    @Override
+    public boolean addListener() {
+        return false;
+    }
+
+    @Override
+    public boolean removeListener() {
+        return false;
     }
 
     @Override

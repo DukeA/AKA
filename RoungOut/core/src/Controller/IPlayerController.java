@@ -6,4 +6,6 @@ package Controller;
 public interface IPlayerController {
 
     char latestKeyPressed();
+    boolean addListener();
+    boolean removeListener();
 }
