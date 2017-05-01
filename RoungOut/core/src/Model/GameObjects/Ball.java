@@ -1,5 +1,8 @@
 package Model.GameObjects;
 
+import Model.GameObjects.Physics.Body;
+import Model.GameObjects.Physics.CircleBody;
+
 /**
  * @author Ken Bäcklund
  */
@@ -9,6 +12,10 @@ public class Ball implements IModel, Body {
 
     public Ball(double xPos, double yPos, double radius, double angle, double speed) {
         body = new CircleBody(xPos, yPos, radius, angle, speed);
+    }
+
+    public Ball(double xPos, double yPos, double radius) {
+        body = new CircleBody(xPos, yPos, radius, 0f, 0f);
     }
 
     public double getX() {
@@ -51,12 +58,10 @@ public class Ball implements IModel, Body {
         body.setMaxSpeed(maxSpeed);
     }
 
-    @Override
     public double distance(Body otherBody) {
         return body.distance(otherBody);
     }
 
-    @Override
     public double distance(double xPos, double yPos) {
         return body.distance(xPos, yPos);
     }

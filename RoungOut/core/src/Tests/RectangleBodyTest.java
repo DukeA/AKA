@@ -1,6 +1,6 @@
 package Tests;
 
-import Model.GameObjects.RectangleBody;
+import Model.GameObjects.Physics.RectangleBody;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Created by kendu on 2017-04-30.
+ * @author Ken Bäcklund
  */
 class RectangleBodyTest {
 
