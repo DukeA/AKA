@@ -22,6 +22,7 @@ public class Roungout extends Game {
     public enum Screen {
         MainMenu,
         InGame,
+        OptionMenu;
 
     }
     private Screen screen =Screen.InGame;
@@ -30,8 +31,7 @@ public class Roungout extends Game {
     public void create() {
         camera = new OrthographicCamera();
         camera.setToOrtho(false,WIDTH,HEIGHT);
-
-        this.setScreen(new BoardView(this));
+        this.setScreen(new BoardView(Roungout.WIDTH,Roungout.WIDTH,camera));
     }
 
     public void render() {

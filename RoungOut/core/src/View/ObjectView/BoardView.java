@@ -1,13 +1,13 @@
 package View.ObjectView;
 
 
-import Model.GameObjects.Shape;
 import Model.ViewObjects.Board;
 import Model.ViewObjects.IBoard;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -20,7 +20,6 @@ import prototype.src.desktop.Roungout;
  */
 public class BoardView implements Screen {
 
-    private final Roungout game;
     private com.badlogic.gdx.scenes.scene2d.Stage stage;
 
     private BallView ballView;
@@ -28,11 +27,17 @@ public class BoardView implements Screen {
     private IBoard board;
     private ShapeRenderer shapeRenderer;
     private SpriteBatch batch;
+    private OrthographicCamera camera;
+    private final int WIDTH;
+    private final int HEIGHT;
 
-    public BoardView(final Roungout game) {
-        this.game = game;
+
+    public BoardView(int WIDTH, int HEIGHT, OrthographicCamera camera) {
+        this.WIDTH = WIDTH;
+        this.HEIGHT = HEIGHT;
+        this.camera = camera;
         this.stage = new com.badlogic.gdx.scenes.scene2d.Stage
-                (new FitViewport(Roungout.WIDTH, Roungout.WIDTH, game.camera));
+                (new FitViewport(WIDTH, HEIGHT, camera));
 
     }
 
@@ -99,7 +104,8 @@ public class BoardView implements Screen {
 
     }
     public void drawBall(){
-        ballView = new BallView();
+        ballView = new BallView(WIDTH,HEIGHT,camera);
+        ballView.show();
 
     }
     public void drawPad() {
