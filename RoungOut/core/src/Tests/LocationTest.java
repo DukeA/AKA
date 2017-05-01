@@ -1,6 +1,6 @@
 package Tests;
 
-import Model.GameObjects.Location;
+import Model.GameObjects.Physics.Location;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
