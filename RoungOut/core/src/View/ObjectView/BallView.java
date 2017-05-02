@@ -1,7 +1,8 @@
 package View.ObjectView;
 
 import Model.GameObjects.Ball;
-import Model.GameObjects.IModel;
+import Model.GameObjects.IBall;
+import Model.GameObjects.Physics.CircleBody;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -17,18 +18,18 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
  */
 public class BallView implements Screen {
 
-    private IModel model;
+    private IBall ball;
     private Stage stage;
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
     private OrthographicCamera camera;
 
-    public BallView(int WIDTH, int HEIGHT, OrthographicCamera camera) {
+    public BallView(int WIDTH, int HEIGHT) {
         this.camera = camera;
-        model = new Ball(WIDTH /    2, HEIGHT / 2, 10, 10, 10);
+        ball = new Ball(WIDTH/2,HEIGHT/2,100f,0,0);
         this.stage = new Stage(
                 new FitViewport(WIDTH / 2 + 10
-                        , HEIGHT / 2 + 10, camera));
+                        , HEIGHT / 2 + 10));
     }
 
     @Override
@@ -36,8 +37,11 @@ public class BallView implements Screen {
         shapeRenderer = new ShapeRenderer();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.RED);
-        shapeRenderer.ellipse((float) ( model.getX() - 200+model.getSpeed()), (float) (model.getY() - 450 +model.getSpeed())
-                , 100f, (float) (50f * model.getY() / model.getX()));
+        shapeRenderer.ellipse(
+                (float) ( ball.getball().getX() - 200+ball.getball().getSpeed())
+                , (float) (ball.getball().getY() - 450 +ball.getball().getSpeed())
+                , (float)((ball.getball().getRadius()*2)*ball.getball().getY()/ball.getball().getX())
+                , (float) (ball.getball().getRadius() * ball.getball().getY() / ball.getball().getX()));
         shapeRenderer.end();
     }
 
@@ -58,8 +62,8 @@ public class BallView implements Screen {
 
     public void update(float delta) {
         stage.act(delta);
-        model.setPosition(model.getX() + model.getSpeed()
-                ,model.getY()+model.getSpeed());
+        ball.getball().setPosition(ball.getball().getX() + ball.getball().getSpeed()
+                ,ball.getball().getY()+ball.getball().getSpeed());
         camera.update();
     }
 

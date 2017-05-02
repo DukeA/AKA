@@ -6,7 +6,7 @@ import Model.GameObjects.Physics.CircleBody;
 /**
  * @author Ken Bäcklund
  */
-public class Ball implements IModel, Body {
+public class Ball implements IModel, Body, IBall {
 
     private CircleBody body;
 
@@ -76,5 +76,10 @@ public class Ball implements IModel, Body {
 
     public void move() {
         body.move();
+    }
+
+    @Override
+    public Ball getball() {
+        return this;
     }
 }

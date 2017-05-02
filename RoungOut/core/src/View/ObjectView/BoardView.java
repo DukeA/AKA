@@ -10,15 +10,17 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import prototype.src.desktop.IScreen;
 import prototype.src.desktop.Roungout;
 
 
 /**
  * Created by DukeA on 2017-04-28.
  */
-public class BoardView implements Screen {
+public class BoardView implements IScreen{
 
     private com.badlogic.gdx.scenes.scene2d.Stage stage;
 
@@ -27,17 +29,15 @@ public class BoardView implements Screen {
     private IBoard board;
     private ShapeRenderer shapeRenderer;
     private SpriteBatch batch;
-    private OrthographicCamera camera;
     private final int WIDTH;
     private final int HEIGHT;
+    private IScreen screen;
 
 
-    public BoardView(int WIDTH, int HEIGHT, OrthographicCamera camera) {
-        this.WIDTH = WIDTH;
-        this.HEIGHT = HEIGHT;
-        this.camera = camera;
-        this.stage = new com.badlogic.gdx.scenes.scene2d.Stage
-                (new FitViewport(WIDTH, HEIGHT, camera));
+    public BoardView() {
+        this.WIDTH = 1980;
+        this.HEIGHT = 1080;
+        this.stage = new Stage(new FitViewport(WIDTH,HEIGHT));
 
     }
 
@@ -83,32 +83,36 @@ public class BoardView implements Screen {
 
     }
 
+
     @Override
     public void dispose() {
         stage.dispose();
     }
 
     public void drawBoard() {
-        board =new Board(Roungout.WIDTH,Roungout.HEIGHT);
+        board =new Board(WIDTH, HEIGHT);
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
-        Gdx.gl.glLineWidth(32);
+        Gdx.gl.glLineWidth(16);
 
         batch.begin();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.BLACK);
         shapeRenderer.ellipse(board.getXPos()-900,board.getYPos()-450,
-                board.getRadius(), board.getRadius()*Roungout.HEIGHT/Roungout.WIDTH);
+                board.getRadius(), board.getRadius()* WIDTH/HEIGHT);
         shapeRenderer.end();
         batch.end();
 
     }
     public void drawBall(){
-        ballView = new BallView(WIDTH,HEIGHT,camera);
+        ballView = new BallView(WIDTH,HEIGHT);
         ballView.show();
 
     }
-    public void drawPad() {
 
+
+    @Override
+    public Roungout getRoungout() {
+        return Roungout();
     }
 }

@@ -16,6 +16,7 @@ public class Roungout extends Game {
     public static int HEIGHT =1080;
     public static boolean RESIZE = false;
 
+    private IScreen iScreen;
     public OrthographicCamera camera;
     public SpriteBatch batch;
 
@@ -25,13 +26,14 @@ public class Roungout extends Game {
         OptionMenu;
 
     }
-    private Screen screen =Screen.InGame;
+
 
     @Override
     public void create() {
         camera = new OrthographicCamera();
         camera.setToOrtho(false,WIDTH,HEIGHT);
-        this.setScreen(new BoardView(Roungout.WIDTH,Roungout.WIDTH,camera));
+        iScreen =  new BoardView();
+        this.setScreen(iScreen);
     }
 
     public void render() {
