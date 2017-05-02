@@ -1,11 +1,13 @@
 package Controller;
 
+import View.IView; // The controller needs to get subs from the views
+
 /**
  * Created by Alex on 2017-04-28.
  */
 public interface IPlayerController {
 
     char latestKeyPressed();
-    boolean addListener();
-    boolean removeListener();
+    boolean addListener(IView view);
+    boolean removeListener(IView view);
 }
