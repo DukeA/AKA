@@ -4,6 +4,7 @@ import Model.GameObjects.IPlayer;
 import Model.GameObjects.Pad;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -21,10 +22,14 @@ public class PadView implements Screen ,IPlayer{
     private ShapeRenderer shapeRenderer;
     private int WIDTH;
     private int HEIGHT;
+    private int xPos;
+    private int yPos;
 
-    public PadView(int width,int height) {
+    public PadView(int width,int height,int xPos, int yPos) {
         this.WIDTH = width;
         this.HEIGHT = height;
+        this.xPos = xPos;
+        this.yPos = yPos;
         player =getPad();
         this.stage = new Stage(new FitViewport(WIDTH/2+10,HEIGHT/2+10));
 
@@ -32,18 +37,38 @@ public class PadView implements Screen ,IPlayer{
 
     @Override
     public void show() {
-
+        shapeRenderer = new ShapeRenderer();
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.BLUE);
+        shapeRenderer.rect((float) player.getPadXPos()
+                            ,(float)player.getPadYPos()
+                            ,(float)player.getWidth()
+                            , (float)player.getLength());
+        shapeRenderer.end();
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(1f,1f,1f,1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+        update(delta);
+        batch = new SpriteBatch();
+        batch.begin();
+        show();
+        batch.end();
+        stage.act();
+        stage.draw();
+    }
+    public void update(float delta)  {
+        stage.act(delta);
+        player.setPadXPos(player.getPadXPos()+player.getPadSpeed());
+        player.setPadYPos(player.getPadXPos()+player.getPadSpeed());
+
     }
 
     @Override
     public void resize(int width, int height) {
-
+        stage.getViewport().update(width,height);
     }
 
     @Override
@@ -73,6 +98,6 @@ public class PadView implements Screen ,IPlayer{
 
     @Override
     public Pad getPad() {
-        return new Pad(WIDTH);
+        return new Pad((float)HEIGHT,(float) WIDTH,xPos,yPos,);
     }
 }
