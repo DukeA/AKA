@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class PlayerController implements IPlayerController, InputProcessor{
     //The list will only contain unique subscribers and this is guaranteed by the
     //addListener and removeListener methods
-    private ArrayList<IView> subscribers = new ArrayList<IView>();
+    private ArrayList<IView> viewSubscribers = new ArrayList<IView>();
 
 
     //Add list of models that want this controller as input
@@ -30,8 +30,8 @@ public class PlayerController implements IPlayerController, InputProcessor{
     @Override
     public boolean addListener(IView view) {
 
-       if(!subscribers.contains(view)){ //If we don't have a the view, add it
-           subscribers.add(view);
+       if(!viewSubscribers.contains(view)){ //If we don't have a the view, add it
+           viewSubscribers.add(view);
            return true;
        }
 
@@ -41,8 +41,8 @@ public class PlayerController implements IPlayerController, InputProcessor{
     @Override
     public boolean removeListener(IView view) {
 
-        if(subscribers.contains(view)){ //If we do have the view, remove it
-            subscribers.remove(view);
+        if(viewSubscribers.contains(view)){ //If we do have the view, remove it
+            viewSubscribers.remove(view);
             return true;
         }
         return false;
@@ -89,7 +89,7 @@ public class PlayerController implements IPlayerController, InputProcessor{
     //Helper method, code reuse
     private void callSubscribersWith(int i){
         //Call all subscribers
-        for (IView view: subscribers){
+        for (IView view: viewSubscribers){
             view.keyWasPressed(i);
         }
     }
