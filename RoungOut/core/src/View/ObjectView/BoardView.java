@@ -22,9 +22,11 @@ import prototype.src.desktop.IScreen;
  */
 public class BoardView implements Screen {
 
-    private com.badlogic.gdx.scenes.scene2d.Stage stage;
+    private Stage stage;
 
     private BallView ballView;
+    private PadView padview;
+    private PadView padview2;
 
     private IBoard board;
     private ShapeRenderer shapeRenderer;
@@ -92,13 +94,13 @@ public class BoardView implements Screen {
         board =new Board(WIDTH, HEIGHT);
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
-        Gdx.gl.glLineWidth(16);
+        Gdx.gl.glLineWidth(32);
 
         batch.begin();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.ellipse(board.getXPos()-900,board.getYPos()-450,
-                board.getRadius(), board.getRadius()* WIDTH/HEIGHT);
+        shapeRenderer.ellipse(board.getXPos(),board.getYPos(),
+                board.getRadius(), (board.getRadius()* WIDTH/HEIGHT)-300);
         shapeRenderer.end();
         batch.end();
 
@@ -107,6 +109,12 @@ public class BoardView implements Screen {
         ballView = new BallView(WIDTH,HEIGHT);
         ballView.show();
 
+    }
+    public void drawPad() {
+        padview = new PadView(WIDTH,HEIGHT);
+        padview2 = new PadView(WIDTH, HEIGHT);
+        padview.show();
+        padview2.show();
     }
 
 }

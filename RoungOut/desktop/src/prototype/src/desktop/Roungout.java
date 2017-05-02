@@ -1,5 +1,6 @@
 package prototype.src.desktop;
 
+import View.MenuView.MenuView;
 import View.ObjectView.BoardView;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Camera;

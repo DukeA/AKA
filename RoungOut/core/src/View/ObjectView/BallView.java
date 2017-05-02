@@ -16,17 +16,19 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 /**
  * Created by DukeA on 2017-04-28.
  */
-public class BallView implements Screen {
+public class BallView implements Screen, IBall {
 
-    private IBall ball;
+    private Ball ball;
     private Stage stage;
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
-    private OrthographicCamera camera;
+    private int WIDTH;
+    private int HEIGHT;
 
     public BallView(int WIDTH, int HEIGHT) {
-        this.camera = camera;
-        ball = new Ball(WIDTH/2,HEIGHT/2,100f,0,0);
+        this.WIDTH = WIDTH;
+        this.HEIGHT =HEIGHT;
+        ball = getball();
         this.stage = new Stage(
                 new FitViewport(WIDTH / 2 + 10
                         , HEIGHT / 2 + 10));
@@ -38,10 +40,10 @@ public class BallView implements Screen {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.RED);
         shapeRenderer.ellipse(
-                (float) ( ball.getball().getX() - 200+ball.getball().getSpeed())
-                , (float) (ball.getball().getY() - 450 +ball.getball().getSpeed())
-                , (float)((ball.getball().getRadius()*2)*ball.getball().getY()/ball.getball().getX())
-                , (float) (ball.getball().getRadius() * ball.getball().getY() / ball.getball().getX()));
+                (float) ( ball.getX())
+                , (float) (ball.getY())
+                , (float)((ball.getRadius()*2)*ball.getY()/ball.getX())
+                , (float) (ball.getRadius() * ball.getY() / ball.getX()));
         shapeRenderer.end();
     }
 
@@ -52,7 +54,6 @@ public class BallView implements Screen {
         update(delta);
         batch = new SpriteBatch();
 
-        batch.setProjectionMatrix(camera.combined);
         batch.begin();
         show();
         batch.end();
@@ -62,9 +63,8 @@ public class BallView implements Screen {
 
     public void update(float delta) {
         stage.act(delta);
-        ball.getball().setPosition(ball.getball().getX() + ball.getball().getSpeed()
-                ,ball.getball().getY()+ball.getball().getSpeed());
-        camera.update();
+        ball.setPosition(ball.getX() + ball.getSpeed()
+                ,ball.getY()+ball.getSpeed());
     }
 
     @Override
@@ -92,4 +92,9 @@ public class BallView implements Screen {
         stage.dispose();
     }
 
+
+    @Override
+    public Ball getball() {
+        return new Ball(WIDTH,HEIGHT,10f,0,0);
+    }
 }
