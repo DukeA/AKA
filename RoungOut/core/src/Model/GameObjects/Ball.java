@@ -78,6 +78,10 @@ public class Ball implements IModel, Body, IBall {
         body.move();
     }
 
+    public void wasKeyPressed(int key) {
+        // Nothing to do here
+    }
+
     @Override
     public Ball getball() {
         return this;
