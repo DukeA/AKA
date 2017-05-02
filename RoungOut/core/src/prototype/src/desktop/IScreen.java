@@ -6,7 +6,7 @@ import com.badlogic.gdx.Screen;
 /**
  * Created by DukeA on 2017-05-02.
  */
-public interface IScreen extends Screen {
+public interface IScreen {
 
-    public Roungout getRoungout();
+    public BoardView getBorderView();
 }

@@ -14,13 +14,13 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import prototype.src.desktop.IScreen;
-import prototype.src.desktop.Roungout;
+
 
 
 /**
  * Created by DukeA on 2017-04-28.
  */
-public class BoardView implements IScreen{
+public class BoardView implements Screen {
 
     private com.badlogic.gdx.scenes.scene2d.Stage stage;
 
@@ -31,12 +31,11 @@ public class BoardView implements IScreen{
     private SpriteBatch batch;
     private final int WIDTH;
     private final int HEIGHT;
-    private IScreen screen;
 
 
-    public BoardView() {
-        this.WIDTH = 1980;
-        this.HEIGHT = 1080;
+    public BoardView(int WIDTH,int HEIGHT) {
+        this.WIDTH = WIDTH;
+        this.HEIGHT = HEIGHT;
         this.stage = new Stage(new FitViewport(WIDTH,HEIGHT));
 
     }
@@ -110,9 +109,4 @@ public class BoardView implements IScreen{
 
     }
 
-
-    @Override
-    public Roungout getRoungout() {
-        return Roungout();
-    }
 }

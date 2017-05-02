@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
-public class Roungout extends Game {
+public class Roungout extends Game implements IScreen {
 
     public static final String TITLE = "Roungout";
     public static final float VERSION =0.1f;
@@ -16,9 +16,15 @@ public class Roungout extends Game {
     public static int HEIGHT =1080;
     public static boolean RESIZE = false;
 
-    private IScreen iScreen;
+    private BoardView iScreen;
     public OrthographicCamera camera;
     public SpriteBatch batch;
+
+    @Override
+    public BoardView getBorderView() {
+        iScreen = new BoardView(WIDTH,HEIGHT);
+        return iScreen;
+    }
 
     public enum Screen {
         MainMenu,
@@ -32,8 +38,7 @@ public class Roungout extends Game {
     public void create() {
         camera = new OrthographicCamera();
         camera.setToOrtho(false,WIDTH,HEIGHT);
-        iScreen =  new BoardView();
-        this.setScreen(iScreen);
+        this.setScreen(getBorderView());
     }
 
     public void render() {
