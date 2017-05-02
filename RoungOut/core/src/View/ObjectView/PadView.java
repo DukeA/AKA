@@ -98,6 +98,6 @@ public class PadView implements Screen ,IPlayer{
 
     @Override
     public Pad getPad() {
-        return new Pad((float)HEIGHT,(float) WIDTH,xPos,yPos,);
+        return new Pad((float)HEIGHT,(float) WIDTH,xPos,yPos,0);
     }
 }

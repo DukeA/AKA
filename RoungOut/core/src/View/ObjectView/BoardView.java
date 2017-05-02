@@ -46,6 +46,7 @@ public class BoardView implements Screen {
     public void show() {
         drawBoard();
         drawBall();
+        drawPad();
 
     }
 
@@ -111,8 +112,8 @@ public class BoardView implements Screen {
 
     }
     public void drawPad() {
-        padview = new PadView(WIDTH,HEIGHT);
-        padview2 = new PadView(WIDTH, HEIGHT);
+        padview = new PadView(WIDTH,HEIGHT,WIDTH/2+100,HEIGHT/2);
+        padview2 = new PadView(WIDTH, HEIGHT,WIDTH/2 +110,HEIGHT/2);
         padview.show();
         padview2.show();
     }
