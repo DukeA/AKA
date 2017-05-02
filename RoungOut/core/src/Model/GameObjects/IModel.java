@@ -16,6 +16,6 @@ public interface IModel {
     void setSpeed(double speed);
     void setMaxSpeed(double maxSpeed);
     void move();
-    void wasKeyPressed(int key);
+    void keyWasPressed(int key);
 
 }

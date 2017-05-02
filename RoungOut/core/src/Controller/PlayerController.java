@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.GameObjects.IModel;
 import View.IView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -15,13 +16,14 @@ public class PlayerController implements IPlayerController, InputProcessor{
     //The list will only contain unique subscribers and this is guaranteed by the
     //addListener and removeListener methods
     private ArrayList<IView> viewSubscribers = new ArrayList<IView>();
+    ArrayList<IModel> modelSubscribers = new ArrayList<IModel>();
 
 
     //Add list of models that want this controller as input
 
-    private char latestKey= ' ';//init with blank
+    private String latestKey = " ";//init with blank
     @Override
-    public char latestKeyPressed()
+    public String latestKeyPressed()
     {
         //Used for debug
         return latestKey;
@@ -53,30 +55,11 @@ public class PlayerController implements IPlayerController, InputProcessor{
         /**
          *  This will be called when a key is pressed down (keyboard) by libgdx's InputProcessor
          */
-        if (keycode == Input.Keys.A){
-            latestKey= 'A'; //debug
-            callSubscribersWith(keycode);
-        }
-
-        if (keycode == Input.Keys.D){
-            latestKey= 'D';//debug
-            callSubscribersWith(keycode);
-        }
-
-        if (keycode == Input.Keys.DPAD_LEFT){
-            latestKey= 'V'; //debug
-            callSubscribersWith(keycode);
-        }
-
-        if (keycode == Input.Keys.DPAD_RIGHT){
-            latestKey= 'H'; //debug
-            callSubscribersWith(keycode);
-        }
+        latestKey = Input.Keys.toString(keycode);
+        callModelSubscribersWith(keycode);
+        callViewSubscribersWith(keycode);
 
         /**
-         *  P1:WASD          P2:UNVH (Upp, Ner, Vnster, Hger)
-         *      W                   U
-         *  A   S   D           V   N   H
          *
          *  It would be much simpler if the return value of the interfaced could be an int and
          *  simply import the "com.badlogic.gdx.Input" library to reach the Inputs.Keys field
@@ -87,10 +70,17 @@ public class PlayerController implements IPlayerController, InputProcessor{
     }
 
     //Helper method, code reuse
-    private void callSubscribersWith(int i){
+    private void callViewSubscribersWith(int i){
         //Call all subscribers
         for (IView view: viewSubscribers){
             view.keyWasPressed(i);
+        }
+    }
+    //Helper method
+    private void callModelSubscribersWith(int i){
+        //Call all subscribers
+        for (IModel model : modelSubscribers){
+            model.keyWasPressed(i);
         }
     }
 

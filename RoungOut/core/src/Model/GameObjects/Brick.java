@@ -70,7 +70,7 @@ public class Brick implements IModel, Body {
         body.move();
     }
 
-    public void wasKeyPressed(int key) {
+    public void keyWasPressed(int key) {
         // Nothing to do here.
     }
 }
