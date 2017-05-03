@@ -58,13 +58,14 @@ public class PadView implements Screen ,IPad{
     public void render(float delta) {
         Gdx.gl.glClearColor(1f,1f,1f,1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
         update(delta);
         batch = new SpriteBatch();
         batch.begin();
         show();
         batch.end();
-        stage.act();
-        stage.draw();
+
     }
     public void update(float delta)  {
         stage.act(delta);

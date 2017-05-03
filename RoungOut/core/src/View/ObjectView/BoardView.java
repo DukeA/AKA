@@ -26,7 +26,6 @@ public class BoardView implements Screen {
 
     private BallView ballView;
     private PadView padview;
-    private PadView padview2;
 
     private IBoard board;
     private ShapeRenderer shapeRenderer;
@@ -54,11 +53,12 @@ public class BoardView implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
         update(delta);
         show();
 
-        stage.act();
-        stage.draw();
+
     }
 
     public void update(float delta) {

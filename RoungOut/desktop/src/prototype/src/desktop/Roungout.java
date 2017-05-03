@@ -19,7 +19,6 @@ public class Roungout extends Game implements IScreen {
 
     private BoardView iScreen;
     public OrthographicCamera camera;
-    public SpriteBatch batch;
 
     @Override
     public BoardView getBorderView() {
