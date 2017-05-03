@@ -7,7 +7,7 @@ import View.IView; // The controller needs to get subs from the views
  */
 public interface IPlayerController {
 
-    char latestKeyPressed();
+    String latestKeyPressed();
     boolean addListener(IView view);
     boolean removeListener(IView view);
 }

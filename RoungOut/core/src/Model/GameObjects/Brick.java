@@ -69,4 +69,8 @@ public class Brick implements IModel, Body {
     public void move() {
         body.move();
     }
+
+    public void keyWasPressed(int key) {
+        // Nothing to do here.
+    }
 }
