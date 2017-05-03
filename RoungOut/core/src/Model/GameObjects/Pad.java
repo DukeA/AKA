@@ -24,7 +24,7 @@ public class Pad {
         return body.getX();
     }
     public double getPadYPos() {
-        return body.getX();
+        return body.getY();
     }
     public double getPadSpeed() {
         return body.getSpeed();

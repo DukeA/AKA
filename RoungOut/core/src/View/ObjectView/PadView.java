@@ -1,5 +1,6 @@
 package View.ObjectView;
 
+import Model.GameObjects.IPad;
 import Model.GameObjects.IPlayer;
 import Model.GameObjects.Pad;
 import com.badlogic.gdx.Gdx;
@@ -14,9 +15,10 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 /**
  * Created by DukeA on 2017-05-02.
  */
-public class PadView implements Screen ,IPlayer{
+public class PadView implements Screen ,IPad{
 
-    private Pad player;
+    private Pad pad;
+    private Pad pad2;
     private Stage stage;
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
@@ -24,11 +26,13 @@ public class PadView implements Screen ,IPlayer{
     private int HEIGHT;
 
 
+
     public PadView(int width,int height) {
         this.WIDTH = width;
         this.HEIGHT = height;
 
-        player =getPad();
+        pad =createPad(WIDTH/2-350,HEIGHT/2);
+        pad2=createPad(WIDTH/2-450,HEIGHT/2);
         this.stage = new Stage(new FitViewport(WIDTH,HEIGHT));
 
     }
@@ -38,10 +42,15 @@ public class PadView implements Screen ,IPlayer{
         shapeRenderer = new ShapeRenderer();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.BLUE);
-        shapeRenderer.rect((float) player.getPadXPos()
-                            ,(float)player.getPadYPos()
-                            ,(float)player.getWidth()
-                            , (float)player.getLength());
+        shapeRenderer.rect((float) pad.getPadXPos()
+                            ,(float)pad.getPadYPos()
+                            ,(float)pad.getWidth()
+                            , (float)pad.getLength());
+        shapeRenderer.rect((float) pad2.getPadXPos()
+                ,(float)pad2.getPadYPos()
+                ,(float)pad2.getWidth()
+                , (float)pad2.getLength());
+
         shapeRenderer.end();
     }
 
@@ -59,13 +68,12 @@ public class PadView implements Screen ,IPlayer{
     }
     public void update(float delta)  {
         stage.act(delta);
-        player.setPadXPos(player.getPadXPos()+player.getPadSpeed());
-        player.setPadYPos(player.getPadXPos()+player.getPadSpeed());
 
     }
 
     @Override
     public void resize(int width, int height) {
+
         stage.getViewport().update(width,height);
     }
 
@@ -90,12 +98,7 @@ public class PadView implements Screen ,IPlayer{
     }
 
     @Override
-    public int getPoints() {
-        return 0;
-    }
-
-    @Override
-    public Pad getPad() {
-        return new Pad(30f,60f ,WIDTH/2,HEIGHT/2,0);
+    public Pad createPad(int xPos,int yPos) {
+        return new Pad(80f,15f ,xPos,yPos,0);
     }
 }
