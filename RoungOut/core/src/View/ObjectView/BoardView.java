@@ -100,8 +100,8 @@ public class BoardView implements Screen {
         batch.begin();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.ellipse(board.getXPos(),board.getYPos(),
-                board.getRadius(), (board.getRadius()* WIDTH/HEIGHT)-300);
+        shapeRenderer.ellipse(WIDTH/4,25,
+                board.getRadius()*(WIDTH/4)/(HEIGHT/4), (board.getRadius()*(WIDTH/4)/(HEIGHT/4)));
         shapeRenderer.end();
         batch.end();
 
@@ -112,8 +112,8 @@ public class BoardView implements Screen {
 
     }
     public void drawPad() {
-        padview = new PadView(WIDTH,HEIGHT,WIDTH/2+100,HEIGHT/2);
-        padview2 = new PadView(WIDTH, HEIGHT,WIDTH/2 +110,HEIGHT/2);
+        padview = new PadView(WIDTH-500,HEIGHT-300);
+        padview2 = new PadView(WIDTH, HEIGHT);
         padview.show();
         padview2.show();
     }

@@ -16,7 +16,7 @@ public class Board implements IBoard {
     public Board(int Width, int Height) {
         xPos = Width/2;
         yPos = Height/2;
-        radius = (float) Math.sqrt(Math.pow((Width/2),2)+Math.pow((Height/2),2));
+        radius = (float) Math.sqrt(Math.pow((Width/4),2)+Math.pow((Height/4),2));
     }
 
     public float getXPos() {

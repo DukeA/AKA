@@ -27,11 +27,10 @@ public class BallView implements Screen, IBall {
 
     public BallView(int WIDTH, int HEIGHT) {
         this.WIDTH = WIDTH;
-        this.HEIGHT =HEIGHT;
+        this.HEIGHT = HEIGHT;
         ball = getball();
         this.stage = new Stage(
-                new FitViewport(WIDTH / 2 + 10
-                        , HEIGHT / 2 + 10));
+                new FitViewport(WIDTH, HEIGHT));
     }
 
     @Override
@@ -40,9 +39,9 @@ public class BallView implements Screen, IBall {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.RED);
         shapeRenderer.ellipse(
-                (float) ( ball.getX())
+                (float) (ball.getX())
                 , (float) (ball.getY())
-                , (float)((ball.getRadius()*2)*ball.getY()/ball.getX())
+                , (float) ((ball.getRadius() * ball.getY() / ball.getX()))
                 , (float) (ball.getRadius() * ball.getY() / ball.getX()));
         shapeRenderer.end();
     }
@@ -64,7 +63,7 @@ public class BallView implements Screen, IBall {
     public void update(float delta) {
         stage.act(delta);
         ball.setPosition(ball.getX() + ball.getSpeed()
-                ,ball.getY()+ball.getSpeed());
+                , ball.getY() + ball.getSpeed());
     }
 
     @Override
@@ -95,6 +94,6 @@ public class BallView implements Screen, IBall {
 
     @Override
     public Ball getball() {
-        return new Ball(WIDTH,HEIGHT,10f,0,0);
+        return new Ball(WIDTH / 2, HEIGHT / 2, 60f, 0, 0);
     }
 }

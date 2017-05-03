@@ -22,16 +22,14 @@ public class PadView implements Screen ,IPlayer{
     private ShapeRenderer shapeRenderer;
     private int WIDTH;
     private int HEIGHT;
-    private int xPos;
-    private int yPos;
 
-    public PadView(int width,int height,int xPos, int yPos) {
+
+    public PadView(int width,int height) {
         this.WIDTH = width;
         this.HEIGHT = height;
-        this.xPos = xPos;
-        this.yPos = yPos;
+
         player =getPad();
-        this.stage = new Stage(new FitViewport(WIDTH/2+10,HEIGHT/2+10));
+        this.stage = new Stage(new FitViewport(WIDTH,HEIGHT));
 
     }
 
@@ -98,6 +96,6 @@ public class PadView implements Screen ,IPlayer{
 
     @Override
     public Pad getPad() {
-        return new Pad((float)HEIGHT,(float) WIDTH,xPos,yPos,0);
+        return new Pad(30f,60f ,WIDTH/2,HEIGHT/2,0);
     }
 }
