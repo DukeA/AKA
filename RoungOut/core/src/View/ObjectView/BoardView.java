@@ -43,9 +43,6 @@ public class BoardView implements Screen {
 
     @Override
     public void show() {
-        drawBoard();
-        drawBall();
-        drawPad();
 
     }
 
@@ -55,10 +52,21 @@ public class BoardView implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+        board =new Board(WIDTH, HEIGHT);
+        batch = new SpriteBatch();
+        shapeRenderer = new ShapeRenderer();
+        Gdx.gl.glLineWidth(32);
+
+        batch.begin();
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(Color.BLACK);
+        shapeRenderer.ellipse(WIDTH/4,25,
+                board.getRadius()*(WIDTH/4)/(HEIGHT/4)
+                , (board.getRadius()*(WIDTH/4)/(HEIGHT/4)));
+        shapeRenderer.end();
+        batch.end();
+        drawobjects();
         update(delta);
-        show();
-
-
     }
 
     public void update(float delta) {
@@ -84,6 +92,12 @@ public class BoardView implements Screen {
     public void hide() {
 
     }
+    public void drawobjects() {
+        //ballView = new BallView(WIDTH,HEIGHT);
+        //ballView.render(Gdx.graphics.getDeltaTime());
+        padview = new PadView(WIDTH  ,HEIGHT);
+        padview.render(Gdx.graphics.getDeltaTime());
+    }
 
 
     @Override
@@ -91,31 +105,5 @@ public class BoardView implements Screen {
         stage.dispose();
     }
 
-    public void drawBoard() {
-        board =new Board(WIDTH, HEIGHT);
-        batch = new SpriteBatch();
-        shapeRenderer = new ShapeRenderer();
-        Gdx.gl.glLineWidth(32);
-
-        batch.begin();
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.ellipse(WIDTH/4,25,
-                board.getRadius()*(WIDTH/4)/(HEIGHT/4)
-                , (board.getRadius()*(WIDTH/4)/(HEIGHT/4)));
-        shapeRenderer.end();
-        batch.end();
-
-    }
-    public void drawBall(){
-        ballView = new BallView(WIDTH,HEIGHT);
-        ballView.show();
-
-    }
-    public void drawPad() {
-        padview = new PadView(WIDTH  ,HEIGHT);
-        padview.show();
-
-    }
 
 }

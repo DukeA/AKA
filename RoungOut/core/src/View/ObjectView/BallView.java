@@ -24,18 +24,32 @@ public class BallView implements Screen, IBall {
     private ShapeRenderer shapeRenderer;
     private int WIDTH;
     private int HEIGHT;
+    OrthographicCamera camera;
 
     public BallView(int WIDTH, int HEIGHT) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
-        ball = getball();
+        ball = createBall(WIDTH/2,HEIGHT/2);
         this.stage = new Stage(
                 new FitViewport(WIDTH, HEIGHT));
+
     }
 
     @Override
     public void show() {
+
+
+    }
+
+    @Override
+    public void render(float delta) {
+        Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+        camera = new OrthographicCamera(WIDTH,HEIGHT);
+        camera.update();
+        batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
+        batch.begin();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.RED);
         shapeRenderer.ellipse(
@@ -43,27 +57,18 @@ public class BallView implements Screen, IBall {
                 , (float) (ball.getY())
                 , (float) ((ball.getRadius() * ball.getY() / ball.getX()))
                 , (float) (ball.getRadius() * ball.getY() / ball.getX()));
+        shapeRenderer.translate((float) ball.getX(),(float) ball.getY(),0);
         shapeRenderer.end();
-    }
-
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-        update(delta);
-        batch = new SpriteBatch();
-
-        batch.begin();
-        show();
         batch.end();
+        ball.setX(ball.getX()+ball.getAngle()+ball.getSpeed());
+        ball.setY(ball.getX()+ball.getSpeed()+ball.getAngle());
+        dispose();
         stage.act();
         stage.draw();
     }
 
     public void update(float delta) {
         stage.act(delta);
-        ball.setPosition(ball.getX() + ball.getSpeed()
-                , ball.getY() + ball.getSpeed());
     }
 
     @Override
@@ -88,12 +93,15 @@ public class BallView implements Screen, IBall {
 
     @Override
     public void dispose() {
+
         stage.dispose();
+        shapeRenderer.dispose();
+
     }
 
 
     @Override
-    public Ball getball() {
-        return new Ball(WIDTH / 2, HEIGHT / 2, 60f, 0, 0);
+    public Ball createBall(int xPos,int yPos) {
+        return new Ball(xPos, yPos, 60f, 1, 10);
     }
 }
