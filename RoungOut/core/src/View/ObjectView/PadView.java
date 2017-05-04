@@ -36,11 +36,7 @@ public class PadView implements  IPad {
 
     }
 
-    public void render(float delta) {
-        Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-        update(delta);
-        batch.begin();
+    public void render() {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.BLUE);
         shapeRenderer.rect((float) pad.getPadXPos()
@@ -52,7 +48,6 @@ public class PadView implements  IPad {
                 , (float) pad2.getWidth()
                 , (float) pad2.getLength());
         shapeRenderer.end();
-        batch.end();
     }
 
     public void update(float delta) {

@@ -32,19 +32,15 @@ public class BallView implements  IBall {
         ball = getball();
     }
 
-    public void render(float delta) {
-        Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-        update(delta);
+    public void render() {
 
-        batch.begin();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.RED);
         shapeRenderer.ellipse((float)ball.getX()
                 ,(float) ball.getY()
                 ,(float)ball.getRadius() *((WIDTH/4)/(HEIGHT/4))
                 ,(float)ball.getRadius()*((WIDTH/4)/(HEIGHT/4)));
-        batch.end();
+        shapeRenderer.end();
     }
 
 
