@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 /**
  * Created by DukeA on 2017-04-28.
  */
-public class BallView implements Screen, IBall {
+public class BallView implements  IBall {
 
     private Ball ball;
     private Stage stage;
@@ -33,20 +33,6 @@ public class BallView implements Screen, IBall {
                 new FitViewport(WIDTH, HEIGHT));
     }
 
-    @Override
-    public void show() {
-        shapeRenderer = new ShapeRenderer();
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(Color.RED);
-        shapeRenderer.ellipse(
-                (float) (ball.getX())
-                , (float) (ball.getY())
-                , (float) ((ball.getRadius() * ball.getY() / ball.getX()))
-                , (float) (ball.getRadius() * ball.getY() / ball.getX()));
-        shapeRenderer.end();
-    }
-
-    @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
@@ -54,44 +40,25 @@ public class BallView implements Screen, IBall {
         batch = new SpriteBatch();
 
         batch.begin();
-        show();
+        shapeRenderer = new ShapeRenderer();
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.RED);
+        shapeRenderer.ellipse((float)ball.getX()
+                ,(float) ball.getY()
+                ,(float)ball.getRadius() *((WIDTH/4)/(HEIGHT/4))
+                ,(float)ball.getRadius()*((WIDTH/4)/(HEIGHT/4)));
         batch.end();
-        stage.act();
-        stage.draw();
     }
 
+
     public void update(float delta) {
-        stage.act(delta);
         ball.setPosition(ball.getX() + ball.getSpeed()
                 , ball.getY() + ball.getSpeed());
     }
 
-    @Override
-    public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
-    }
-
-    @Override
-    public void pause() {
+    public void reSize(int width, int height) {
 
     }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
-
-    @Override
-    public void dispose() {
-        stage.dispose();
-    }
-
-
     @Override
     public Ball getball() {
         return new Ball(WIDTH / 2, HEIGHT / 2, 60f, 0, 0);

@@ -3,7 +3,7 @@ package Tests;
 import Model.Collsion.Collision;
 import Model.GameObjects.Ball;
 import Model.GameObjects.Physics.RectangleBody;
-import Model.ViewObjects.Board;
+import Model.GameObjects.Board;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

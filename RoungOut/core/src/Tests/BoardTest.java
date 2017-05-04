@@ -1,7 +1,7 @@
 package Tests;
 
-import Model.ViewObjects.Board;
-import Model.ViewObjects.IBoard;
+import Model.GameObjects.Board;
+import Model.GameObjects.IBoard;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

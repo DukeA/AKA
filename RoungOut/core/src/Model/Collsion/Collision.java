@@ -3,7 +3,7 @@ package Model.Collsion;
 import Model.GameObjects.Ball;
 import Model.GameObjects.Physics.Body;
 import Model.GameObjects.Physics.CircleBody;
-import Model.ViewObjects.Board;
+import Model.GameObjects.Board;
 
 /**
  * @author Ken Bäcklund

@@ -1,6 +1,6 @@
 package prototype.src.desktop;
 
-import View.ObjectView.GameView;
+import View.ObjectView.BoardView;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import prototype.src.desktop.IScreen;
@@ -14,12 +14,12 @@ public class Roungout extends Game implements IScreen {
     public static int HEIGHT =1080;
     public static boolean RESIZE = true;
 
-    private GameView iScreen;
+    private BoardView iScreen;
     public OrthographicCamera camera;
 
     @Override
-    public GameView getBorderView() {
-        iScreen = new GameView(WIDTH,HEIGHT);
+    public BoardView getBorderView() {
+        iScreen = new BoardView(WIDTH,HEIGHT);
         return iScreen;
     }
 
