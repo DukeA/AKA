@@ -124,6 +124,11 @@ public class Location {
         yPos += deltaY;
     }
 
+    public void move(double distance) {
+        xPos += deltaX * distance;
+        yPos += deltaY * distance;
+    }
+
     public double distance(double relXPos, double relYPos) {
         double dx = xPos - relXPos;
         double dy = yPos - relYPos;

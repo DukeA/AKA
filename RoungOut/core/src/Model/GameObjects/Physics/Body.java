@@ -21,5 +21,6 @@ public interface Body {
     double distance(double xPos, double yPos);
 
     void move();
+    void move(double distance);
 
 }

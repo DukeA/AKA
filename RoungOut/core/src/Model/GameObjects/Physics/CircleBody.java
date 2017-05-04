@@ -93,4 +93,8 @@ public class CircleBody implements Body {
     public void move() {
         location.move();
     }
+
+    public void move(double distance) {
+        location.move(distance);
+    }
 }

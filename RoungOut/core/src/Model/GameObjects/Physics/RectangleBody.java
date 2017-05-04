@@ -108,4 +108,8 @@ public class RectangleBody implements Body {
     public void move() {
         location.move();
     }
+
+    public void move(double distance) {
+        location.move(distance);
+    }
 }
