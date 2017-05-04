@@ -26,25 +26,21 @@ public class PadView implements  IPad {
     private int HEIGHT;
 
 
-    public PadView(int width, int height) {
+    public PadView(int width, int height,SpriteBatch batch,ShapeRenderer renderer) {
         this.WIDTH = width;
         this.HEIGHT = height;
-
+        this.batch = batch;
+        this.shapeRenderer = renderer;
         pad = createPad(WIDTH / 2 - 350, HEIGHT / 2);
         pad2 = createPad(WIDTH / 2 - 450, HEIGHT / 2);
-        this.stage = new Stage(new FitViewport(WIDTH, HEIGHT));
 
     }
 
     public void render(float delta) {
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
         update(delta);
-        batch = new SpriteBatch();
         batch.begin();
-        shapeRenderer = new ShapeRenderer();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.BLUE);
         shapeRenderer.rect((float) pad.getPadXPos()
@@ -55,10 +51,8 @@ public class PadView implements  IPad {
                 , (float) pad2.getPadYPos()
                 , (float) pad2.getWidth()
                 , (float) pad2.getLength());
-
         shapeRenderer.end();
         batch.end();
-
     }
 
     public void update(float delta) {

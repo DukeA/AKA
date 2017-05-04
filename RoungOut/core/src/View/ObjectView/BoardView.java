@@ -11,17 +11,13 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-import prototype.src.desktop.IScreen;
-
+import java.util.List;
 
 
 /**
  * Created by DukeA on 2017-04-28.
  */
 public class BoardView implements Screen , IViews{
-
-
-    private IViews views;
     private BallView ballView;
     private PadView padView;
     private IBoard board;
@@ -34,8 +30,10 @@ public class BoardView implements Screen , IViews{
     public BoardView(int WIDTH,int HEIGHT) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
-        padView = views.createPad(WIDTH,HEIGHT);
-        ballView = views.createBall(WIDTH,HEIGHT);
+        batch = new SpriteBatch();
+        shapeRenderer = new ShapeRenderer();
+        padView = createPad(WIDTH,HEIGHT,batch,shapeRenderer);
+        ballView = createBall(WIDTH,HEIGHT,batch,shapeRenderer);
 
     }
 
@@ -53,21 +51,22 @@ public class BoardView implements Screen , IViews{
         board =new Board(WIDTH, HEIGHT);
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
-        Gdx.gl.glLineWidth(32);
+        Gdx.gl.glLineWidth(16);
 
         batch.begin();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.ellipse(WIDTH/4,25,
+        shapeRenderer.ellipse(WIDTH/4,5,
                 board.getRadius()*(WIDTH/4)/(HEIGHT/4)
                 , (board.getRadius()*(WIDTH/4)/(HEIGHT/4)));
         shapeRenderer.end();
         batch.end();
-        padView.render(Gdx.graphics.getDeltaTime());
-        ballView.render(Gdx.graphics.getDeltaTime());
+        padView.render(delta);
+        ballView.render(delta);
 
 
     }
+
 
     public void update(float delta) {
 
@@ -101,12 +100,12 @@ public class BoardView implements Screen , IViews{
     }
 
     @Override
-    public BallView createBall(int xPos, int yPos) {
-        return new BallView(xPos, yPos);
+    public BallView createBall(int xPos, int yPos, SpriteBatch batch, ShapeRenderer renderer) {
+        return new BallView(WIDTH,HEIGHT,batch,renderer);
     }
 
     @Override
-    public PadView createPad(int xPos, int yPos) {
-        return new PadView(xPos, yPos);
+    public PadView createPad(int xPos, int yPos, SpriteBatch batch, ShapeRenderer renderer) {
+        return new PadView(WIDTH,HEIGHT,batch,renderer);
     }
 }

@@ -19,28 +19,25 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 public class BallView implements  IBall {
 
     private Ball ball;
-    private Stage stage;
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
     private int WIDTH;
     private int HEIGHT;
 
-    public BallView(int WIDTH, int HEIGHT) {
+    public BallView(int WIDTH, int HEIGHT,SpriteBatch batch, ShapeRenderer renderer) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
+        this.batch = batch;
+        this.shapeRenderer = renderer;
         ball = getball();
-        this.stage = new Stage(
-                new FitViewport(WIDTH, HEIGHT));
     }
 
     public void render(float delta) {
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         update(delta);
-        batch = new SpriteBatch();
 
         batch.begin();
-        shapeRenderer = new ShapeRenderer();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.RED);
         shapeRenderer.ellipse((float)ball.getX()
