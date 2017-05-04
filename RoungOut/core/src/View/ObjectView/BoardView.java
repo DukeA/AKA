@@ -61,8 +61,8 @@ public class BoardView implements Screen , IViews{
                 , (board.getRadius()*(WIDTH/4)/(HEIGHT/4)));
         shapeRenderer.end();
 
-        padView.render();
-        ballView.render();
+        padView.render(delta);
+        ballView.render(delta);
         batch.end();
 
 

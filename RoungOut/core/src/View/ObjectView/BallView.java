@@ -32,8 +32,8 @@ public class BallView implements  IBall {
         ball = getball();
     }
 
-    public void render() {
-
+    public void render(float delta) {
+        this.update(delta);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.RED);
         shapeRenderer.ellipse((float)ball.getX()
@@ -41,19 +41,24 @@ public class BallView implements  IBall {
                 ,(float)ball.getRadius() *((WIDTH/4)/(HEIGHT/4))
                 ,(float)ball.getRadius()*((WIDTH/4)/(HEIGHT/4)));
         shapeRenderer.end();
+
     }
 
 
     public void update(float delta) {
         ball.setPosition(ball.getX() + ball.getSpeed()
                 , ball.getY() + ball.getSpeed());
+        ball.move();
     }
 
     public void reSize(int width, int height) {
 
     }
+    public void dispose() {
+        shapeRenderer.dispose();
+    }
     @Override
     public Ball getball() {
-        return new Ball(WIDTH / 2, HEIGHT / 2, 60f, 0, 0);
+        return new Ball(WIDTH / 2, HEIGHT / 2, 30f, 0, 0);
     }
 }

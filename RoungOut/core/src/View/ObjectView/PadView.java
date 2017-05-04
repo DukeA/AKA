@@ -22,6 +22,7 @@ public class PadView implements  IPad {
     private Stage stage;
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
+    private ShapeRenderer shapeRenderer2;
     private int WIDTH;
     private int HEIGHT;
 
@@ -31,18 +32,23 @@ public class PadView implements  IPad {
         this.HEIGHT = height;
         this.batch = batch;
         this.shapeRenderer = renderer;
+        this.shapeRenderer2 = renderer;
         pad = createPad(WIDTH / 2 - 350, HEIGHT / 2);
         pad2 = createPad(WIDTH / 2 - 450, HEIGHT / 2);
 
     }
 
-    public void render() {
+    public void render(float delta) {
+
+        update(delta);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.BLUE);
         shapeRenderer.rect((float) pad.getPadXPos()
                 , (float) pad.getPadYPos()
                 , (float) pad.getWidth()
                 , (float) pad.getLength());
+
+        shapeRenderer.setColor(Color.LIME);
         shapeRenderer.rect((float) pad2.getPadXPos()
                 , (float) pad2.getPadYPos()
                 , (float) pad2.getWidth()
@@ -56,6 +62,9 @@ public class PadView implements  IPad {
 
     public void reSize(int width, int height) {
 
+    }
+    public void dispose() {
+        shapeRenderer.dispose();
     }
 
     @Override
