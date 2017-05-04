@@ -6,25 +6,24 @@ package Model.GameObjects.Physics;
 public class Location {
 
     // Get/Set values
-    private double xPos;
-    private double yPos;
-    private double speed;
-    private double maxSpeed;
-    private double angle;
+    private float xPos;
+    private float yPos;
+    private float speed;
+    private float maxSpeed;
+    private float angle;
 
     // Get only values
-    private double deltaX;
-    private double deltaY;
+    private float deltaX;
+    private float deltaY;
 
-    public Location(double xPos, double yPos, double angle, double speed, double maxSpeed) {
+    public Location(float xPos, float yPos, float angle, float speed, float maxSpeed) {
         setMaxSpeed(maxSpeed);
         setPosition(xPos, yPos);
         setAngle(angle);
         setSpeed(speed);
     }
-
-    public Location(double xPos, double yPos, double angle, double speed) {
-        this(xPos, yPos, angle, speed, Double.MAX_VALUE);
+    public Location(float xPos, float yPos, float angle, float speed) {
+        this(xPos, yPos, angle, speed, Float.MAX_VALUE);
     }
 
     public Location(Location loc) {
@@ -35,8 +34,9 @@ public class Location {
 
     // Helper methods /////////////////////////////////////////////////////////
     private void updateDeltaValues() {
-        deltaX = Math.cos(angle) * speed;
-        deltaY = Math.sin(angle) * speed;
+        deltaX = (float) Math.cos(angle) * speed;
+        deltaY = (float) Math.sin(angle) * speed;
+        //Casting since Math. req double thus making the left side of the equation a double
     }
 
     private void enforceSpeed() {     // Limit speed
@@ -55,55 +55,55 @@ public class Location {
     }
 
     // Getters ////////////////////////////////////////////////////////////////
-    public double getX() {
+    public float getX() {
         return xPos;
     }
 
-    public double getY() {
+    public float getY() {
         return yPos;
     }
 
-    public double getSpeed() {
+    public float getSpeed() {
         return speed;
     }
 
-    public double getAngle() {
+    public float getAngle() {
         return angle;
     }
 
-    public double getDeltaX() {
+    public float getDeltaX() {
         return deltaX;
     }
 
-    public double getDeltaY() {
+    public float getDeltaY() {
         return deltaY;
     }
 
-    public double getMaxSpeed() {
+    public float getMaxSpeed() {
         return maxSpeed;
     }
 
     // Setters ////////////////////////////////////////////////////////////////
-    public void setX(double xPos) {
+    public void setX(float xPos) {
         this.xPos = xPos;
     }
 
-    public void setY(double yPos) {
+    public void setY(float yPos) {
         this.yPos = yPos;
     }
 
-    public void setPosition(double xPos, double yPos) {
+    public void setPosition(float xPos, float yPos) {
         this.xPos = xPos;
         this.yPos = yPos;
     }
 
-    public void setSpeed(double speed) {
+    public void setSpeed(float speed) {
         this.speed = speed;     // Negative speed OK
         enforceSpeed();
         updateDeltaValues();
     }
 
-    public void setMaxSpeed(double maxSpeed) {
+    public void setMaxSpeed(float maxSpeed) {
         if (maxSpeed < 0) {
             throw new IllegalArgumentException("Max speed cannot be less than zero.");
         }
@@ -111,7 +111,7 @@ public class Location {
         enforceSpeed();
     }
 
-    public void setAngle(double radians) {
+    public void setAngle(float radians) {
         this.angle = radians;
         limitAngle();
         updateDeltaValues();
@@ -124,13 +124,13 @@ public class Location {
         yPos += deltaY;
     }
 
-    public double distance(double relXPos, double relYPos) {
+    public float distance(double relXPos, double relYPos) {
         double dx = xPos - relXPos;
         double dy = yPos - relYPos;
-        return Math.sqrt(dx*dx+dy*dy);
+        return (float) Math.sqrt(dx*dx+dy*dy);
     }
 
-    public double distance(Location location) {
+    public float distance(Location location) {
         return distance(location.getX(), location.getY());
     }
 

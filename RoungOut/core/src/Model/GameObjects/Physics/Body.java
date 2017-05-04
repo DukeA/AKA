@@ -4,7 +4,7 @@ package Model.GameObjects.Physics;
  * @author Ken Bäcklund
  */
 public interface Body {
-
+/*
     double getX();
     double getY();
     double getAngle();
@@ -21,5 +21,7 @@ public interface Body {
     double distance(double xPos, double yPos);
 
     void move();
+*/
 
+    Location getLoc();
 }

@@ -6,19 +6,23 @@ package Model.GameObjects.Physics;
 public class RectangleBody implements Body {
 
     private Location location;
-    private RectangleShape shape;
+    private float width;
+    private float height;
+    //private RectangleShape shape;
 
     // Constructors ///////////////////////////////////////////////////////////
-    public RectangleBody(double xPos, double yPos, double width, double height, double angle, double speed) {
+    public RectangleBody(float xPos, float yPos, float width, float height, float angle, float speed) {
         location = new Location(xPos, yPos, angle, speed);
-        shape = new RectangleShape(width, height);
+        this.width=width;
+
+       // shape = new RectangleShape(width, height);
     }
 
-    public RectangleBody(double xPos, double yPos, double width, double height) {
-        this(xPos, yPos, width, height, 0f, 0f);
+    public RectangleBody(float xPos, float yPos, float width, float height) {
+        this(xPos, yPos, width, height, 0, 0);
     }
 
-    public RectangleBody(double width, double height) {
+    public RectangleBody(float width, float height) {
         this(0f, 0f, width, height, 0f, 0f);
     }
 
@@ -34,68 +38,73 @@ public class RectangleBody implements Body {
     }
 
     // Getters ////////////////////////////////////////////////////////////////
-    public double getX() {
+    public float getX() {
         return location.getX();
     }
 
-    public double getY() {
+    public float getY() {
         return location.getY();
     }
 
-    public double getWidth() {
-        return shape.getWidth();
+    public float getWidth() {
+        return this.width;
     }
 
-    public double getHeight() {
-        return shape.getHeight();
+    public float getHeight() {
+        return this.height;
     }
 
-    public double getAngle() {
+    public float getAngle() {
         return location.getAngle();
     }
 
-    public double getSpeed() {
+    public float getSpeed() {
         return location.getSpeed();
     }
 
 
 
     // Setters ////////////////////////////////////////////////////////////////
-    public void setX(double xPos) {
+    public void setX(float xPos) {
         location.setX(xPos);
     }
 
-    public void setY(double yPos) {
+    public void setY(float yPos) {
         location.setY(yPos);
     }
 
-    public void setSize(double width, double height) {
-        shape = new RectangleShape(width, height);
+    public void setSize(float newWidth, float newheight) {
+        this.width = newWidth;
+        this.height = newheight;
     }
 
-    public void setPosition(double xPos, double yPos) {
+    public void setPosition(float xPos, float yPos) {
         location.setPosition(xPos, yPos);
     }
 
-    public void setAngle(double radians) {
+    public void setAngle(float radians) {
         location.setAngle(radians);
     }
 
-    public void setSpeed(double speed) {
+    public void setSpeed(float speed) {
         location.setSpeed(speed);
     }
 
-    public void setMaxSpeed(double maxSpeed) {
+    public void setMaxSpeed(float maxSpeed) {
         location.setMaxSpeed(maxSpeed);
     }
 
 
+    @Override
+    public Location getLoc() {
+        return location;
+    }
 
     // Other methods //////////////////////////////////////////////////////////
     public double distance(Body body) {
-        double dCenterPoints = location.distance(body.getX(), body.getY());
-        double dToOther = distance(body.getX(), body.getY());
-        double dFromOther = body.distance(getX(), getY());
+        float dCenterPoints = location.distance(body.getX(), body.getY());
+        float dToOther = distance(body.getX(), body.getY());
+        float dFromOther = body.distance(getX(), getY());
         return Math.max(0, (dToOther + dFromOther)- dCenterPoints);
     }
 
