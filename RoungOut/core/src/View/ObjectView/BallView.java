@@ -23,6 +23,8 @@ public class BallView implements  IBall {
     private ShapeRenderer shapeRenderer;
     private int WIDTH;
     private int HEIGHT;
+    private float xBall;
+    private float yBall;
 
     public BallView(int WIDTH, int HEIGHT,SpriteBatch batch, ShapeRenderer renderer) {
         this.WIDTH = WIDTH;
@@ -46,9 +48,8 @@ public class BallView implements  IBall {
 
 
     public void update(float delta) {
-        ball.setPosition(ball.getX() + ball.getSpeed()
-                , ball.getY() + ball.getSpeed());
-        ball.move();
+        ball.setY(ball.getY()+ball.getSpeed()+ball.getAngle());
+        ball.setX(ball.getX()+ball.getSpeed()+ball.getAngle());
     }
 
     public void reSize(int width, int height) {
@@ -59,6 +60,6 @@ public class BallView implements  IBall {
     }
     @Override
     public Ball getball() {
-        return new Ball(WIDTH / 2, HEIGHT / 2, 30f, 0, 0);
+        return new Ball(WIDTH / 2, HEIGHT / 2, 30f, 1, 1);
     }
 }
