@@ -27,10 +27,9 @@ public class PadView implements  IPad {
     private int HEIGHT;
 
 
-    public PadView(int width, int height,SpriteBatch batch,ShapeRenderer renderer) {
+    public PadView(int width, int height,ShapeRenderer renderer) {
         this.WIDTH = width;
         this.HEIGHT = height;
-        this.batch = batch;
         this.shapeRenderer = renderer;
         this.shapeRenderer2 = renderer;
         pad = createPad(WIDTH / 2 - 350, HEIGHT / 2);
@@ -40,7 +39,6 @@ public class PadView implements  IPad {
 
     public void render(float delta) {
 
-        update(delta);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.BLUE);
         shapeRenderer.rect((float) pad.getPadXPos()
@@ -54,10 +52,6 @@ public class PadView implements  IPad {
                 , (float) pad2.getWidth()
                 , (float) pad2.getLength());
         shapeRenderer.end();
-    }
-
-    public void update(float delta) {
-
     }
 
     public void reSize(int width, int height) {

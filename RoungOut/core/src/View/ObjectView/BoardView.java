@@ -32,8 +32,8 @@ public class BoardView implements Screen , IViews{
         this.HEIGHT = HEIGHT;
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
-        padView = createPad(WIDTH,HEIGHT,batch,shapeRenderer);
-        ballView = createBall(WIDTH,HEIGHT,batch,shapeRenderer);
+        padView = createPad(WIDTH,HEIGHT,shapeRenderer);
+        ballView = createBall(WIDTH,HEIGHT,shapeRenderer);
 
     }
 
@@ -102,12 +102,12 @@ public class BoardView implements Screen , IViews{
     }
 
     @Override
-    public BallView createBall(int xPos, int yPos, SpriteBatch batch, ShapeRenderer renderer) {
-        return new BallView(WIDTH,HEIGHT,batch,renderer);
+    public BallView createBall(int xPos, int yPos,  ShapeRenderer renderer) {
+        return new BallView(WIDTH,HEIGHT,renderer);
     }
 
     @Override
-    public PadView createPad(int xPos, int yPos, SpriteBatch batch, ShapeRenderer renderer) {
-        return new PadView(WIDTH,HEIGHT,batch,renderer);
+    public PadView createPad(int xPos, int yPos, ShapeRenderer renderer) {
+        return new PadView(WIDTH,HEIGHT,renderer);
     }
 }

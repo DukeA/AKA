@@ -8,6 +8,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
  * Created by DukeA on 2017-05-04.
  */
 public interface IViews {
-    BallView createBall(int xPos, int yPos, SpriteBatch batch, ShapeRenderer renderer);
-    PadView createPad(int xPos,int yPos,SpriteBatch batch,ShapeRenderer renderer);
+    BallView createBall(int xPos, int yPos,  ShapeRenderer renderer);
+    PadView createPad(int xPos,int yPos,ShapeRenderer renderer);
 }
