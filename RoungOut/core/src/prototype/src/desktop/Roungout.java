@@ -34,7 +34,7 @@ public class Roungout extends Game implements IScreen {
 
     @Override
     public OptionView getOptionView() {
-        return null;
+        return OptionView = new OptionView(WIDTH,HEIGHT);
     }
 
 
@@ -42,7 +42,7 @@ public class Roungout extends Game implements IScreen {
     public void create() {
         camera = new OrthographicCamera();
         camera.setToOrtho(false,WIDTH,HEIGHT);
-        this.setScreen(getMenuView());
+        this.setScreen(getOptionView());
     }
 
     public void render() {
