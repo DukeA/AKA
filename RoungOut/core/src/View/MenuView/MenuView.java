@@ -3,18 +3,18 @@ package View.MenuView;
 import View.ObjectView.BoardView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import static com.badlogic.gdx.graphics.Color.DARK_GRAY;
 
@@ -33,8 +33,8 @@ public class MenuView  implements Screen, IHeadView{
     private TextButton playButton;
     private TextButton optionsButton;
     private TextButton exitButton;
+    private TextureRegion Texture;
     private Skin skin;
-    private Texture logo;
 
 
     public MenuView(int WIDTH, int HEIGHT) {
@@ -43,7 +43,7 @@ public class MenuView  implements Screen, IHeadView{
         this.skin = new Skin(Gdx.files.internal("uiskin.json"));
         this.font = new BitmapFont();
         this.stage = new Stage();
-        this.camera = new OrthographicCamera();
+        this.camera = new OrthographicCamera(WIDTH,HEIGHT);
     }
 
     @Override
@@ -51,6 +51,10 @@ public class MenuView  implements Screen, IHeadView{
         table = new Table();
         table.setFillParent(true);
         table.top();
+
+        Texture = new TextureRegion(new Texture(Gdx.files.local(".\\core\\src\\Assets\\logo.png")));
+
+        Image image = new Image(Texture);
 
 
         playButton = new TextButton("Play"
@@ -89,16 +93,17 @@ public class MenuView  implements Screen, IHeadView{
             }
         });
 
+        table.add(image).width(700).height(400);
         table.row();
         table.add(playButton).prefHeight(50)
-                .prefWidth(20).width(500).padTop(200)
+                .prefWidth(20).width(500).padTop(100)
                 .setActorX(WIDTH/2);
         table.row();
         table.add(optionsButton).prefHeight(50)
-                .prefWidth(20).width(500).padTop(200).setActorX(WIDTH/2);
+                .prefWidth(20).width(500).padTop(100).setActorX(WIDTH/2);
         table.row();
         table.add(exitButton).prefHeight(50)
-                .prefWidth(20).width(500).padTop(200).setActorX(WIDTH/2);
+                .prefWidth(20).width(500).padTop(100).setActorX(WIDTH/2);
         table.row();
 
 
@@ -108,16 +113,16 @@ public class MenuView  implements Screen, IHeadView{
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0,1f,0.5f,1f);
+        Gdx.gl.glClearColor(1f,0f,0f,1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch = new SpriteBatch();
 
         batch.begin();
-        font = new BitmapFont();
-        font.draw(batch,"RoungOut",WIDTH/2, HEIGHT/2);
-        font.setColor(DARK_GRAY);
-        stage.act();
         stage.draw();
+
+
+
+
 
         batch.end();
 
