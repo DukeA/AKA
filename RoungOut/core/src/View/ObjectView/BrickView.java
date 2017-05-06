@@ -33,7 +33,7 @@ public class BrickView  {
     public void dispose() {
         shapeRenderer.dispose();
     }
-    public void Resize(int width, int HEIGHT) {
+    public void resize(int width, int HEIGHT) {
 
     }
 

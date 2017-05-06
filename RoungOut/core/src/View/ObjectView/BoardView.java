@@ -20,6 +20,8 @@ import java.util.List;
 public class BoardView implements Screen , IViews{
     private BallView ballView;
     private PadView padView;
+    private BrickView brickView;
+    private ScoreView scoreView;
     private IBoard board;
     private ShapeRenderer shapeRenderer;
     private SpriteBatch batch;
@@ -34,7 +36,8 @@ public class BoardView implements Screen , IViews{
         shapeRenderer = new ShapeRenderer();
         padView = createPad(WIDTH,HEIGHT,shapeRenderer);
         ballView = createBall(WIDTH,HEIGHT,shapeRenderer);
-
+        brickView = createBricks(WIDTH,HEIGHT,shapeRenderer);
+        scoreView = createScorePad(WIDTH,HEIGHT,shapeRenderer);
     }
 
     @Override
@@ -108,6 +111,17 @@ public class BoardView implements Screen , IViews{
 
     @Override
     public PadView createPad(int xPos, int yPos, ShapeRenderer renderer) {
+
         return new PadView(WIDTH,HEIGHT,renderer);
+    }
+
+    @Override
+    public BrickView createBricks(int xPos, int yPos, ShapeRenderer renderer) {
+        return new BrickView(WIDTH,HEIGHT,renderer);
+    }
+
+    @Override
+    public ScoreView createScorePad(int xPos, int yPos, ShapeRenderer renderer) {
+        return new ScoreView(WIDTH,HEIGHT,renderer);
     }
 }
