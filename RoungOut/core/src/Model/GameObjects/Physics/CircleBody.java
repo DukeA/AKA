@@ -7,6 +7,7 @@ public class CircleBody implements Body {
 
     private Location location;
     private CircleShape shape;
+    private float radius;
 
     // Constructors ///////////////////////////////////////////////////////////
     public CircleBody(double xPos, double yPos, double radius, double angle, double speed) {
@@ -27,67 +28,77 @@ public class CircleBody implements Body {
     }
 
     // Getters ////////////////////////////////////////////////////////////////
-    public double getX() {
+    @Override
+    public float getX() {
         return location.getX();
     }
 
-    public double getY() {
+    @Override
+    public float getY() {
         return location.getY();
     }
 
-    public double getAngle() {
+    @Override
+    public float getAngle() {
         return location.getAngle();
     }
 
-    public double getSpeed() {
+    @Override
+    public float getSpeed() {
         return location.getSpeed();
     }
 
     public double getRadius() {
-        return shape.getRadius();
+        return radius);
     }
 
-
+    @Override
+    public Location getLoc() {return location;}
 
     // Setters ////////////////////////////////////////////////////////////////
-    public void setX(double xPos) {
+    @Override
+    public void setX(float xPos) {
         location.setX(xPos);
     }
 
-    public void setY(double yPos) {
+    @Override
+    public void setY(float yPos) {
         location.setY(yPos);
     }
 
-    public void setPosition(double xPos, double yPos) {
+    @Override
+    public void setPosition(float xPos, float yPos) {
         location.setPosition(xPos, yPos);
     }
 
-    public void setAngle(double radians) {
+    @Override
+    public void setAngle(float radians) {
         location.setAngle(radians);
     }
 
-    public void setSpeed(double speed) {
+    @Override
+    public void setSpeed(float speed) {
         location.setSpeed(speed);
     }
 
-    public void setRadius(double radius) {
-        shape = new CircleShape(radius);
+    public void setRadius(float radius) {
+        this.radius=radius;
     }
 
-    public void setMaxSpeed(double maxSpeed) {
+    public void setMaxSpeed(float maxSpeed) {
         location.setMaxSpeed(maxSpeed);
     }
 
     // Other methods //////////////////////////////////////////////////////////
-    public double distance(double xPos, double yPos) {
-        return Math.max(0, location.distance(xPos, yPos) - getRadius());
+    public float distance(float xPos, float yPos) {
+        return (float) Math.max(0, location.distance(xPos, yPos) - getRadius());
     }
 
-    public double distance(Body body) {
+    public float distance(Body body) {
         double dCenterPoints = location.distance(body.getX(), body.getY());
         double dToOther = distance(body.getX(), body.getY());
         double dFromOther = body.distance(getX(), getY());
-        return Math.max(0, (dToOther + dFromOther)- dCenterPoints);
+        return (float) Math.max(0, (dToOther + dFromOther)- dCenterPoints);
     }
 
     public void move() {
