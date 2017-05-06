@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -33,7 +34,7 @@ public class MenuView  implements Screen, IHeadView{
     private TextButton optionsButton;
     private TextButton exitButton;
     private Skin skin;
-    private TextArea textArea;
+    private Texture logo;
 
 
     public MenuView(int WIDTH, int HEIGHT) {
@@ -50,8 +51,6 @@ public class MenuView  implements Screen, IHeadView{
         table = new Table();
         table.setFillParent(true);
         table.top();
-
-        textArea = new TextArea("ROUNGOUT",skin);
 
 
         playButton = new TextButton("Play"
@@ -92,14 +91,14 @@ public class MenuView  implements Screen, IHeadView{
 
         table.row();
         table.add(playButton).prefHeight(50)
-                .prefWidth(20).width(500).padBottom(200)
+                .prefWidth(20).width(500).padTop(200)
                 .setActorX(WIDTH/2);
         table.row();
         table.add(optionsButton).prefHeight(50)
-                .prefWidth(20).width(500).padBottom(200).setActorX(WIDTH/2);
+                .prefWidth(20).width(500).padTop(200).setActorX(WIDTH/2);
         table.row();
         table.add(exitButton).prefHeight(50)
-                .prefWidth(20).width(500).padBottom(200).setActorX(WIDTH/2);
+                .prefWidth(20).width(500).padTop(200).setActorX(WIDTH/2);
         table.row();
 
 
@@ -114,11 +113,12 @@ public class MenuView  implements Screen, IHeadView{
         batch = new SpriteBatch();
 
         batch.begin();
-        stage.act();
-        stage.draw();
         font = new BitmapFont();
         font.draw(batch,"RoungOut",WIDTH/2, HEIGHT/2);
         font.setColor(DARK_GRAY);
+        stage.act();
+        stage.draw();
+
         batch.end();
 
     }
@@ -153,5 +153,8 @@ public class MenuView  implements Screen, IHeadView{
     public BoardView createBoardView(int HEIGHT, int WIDTH) {
         return new BoardView(WIDTH,HEIGHT);
     }
-    
+    public OptionView createOptionView(int HEIGHT, int WIDTH) {
+        return new OptionView(WIDTH,HEIGHT);
+    }
+
 }
