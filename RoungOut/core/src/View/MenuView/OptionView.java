@@ -17,7 +17,7 @@ public class OptionView implements Screen {
     private int HEIGHT;
     private SpriteBatch batch;
     private Table table;
-    private Stage stage
+    private Stage stage;
     private BitmapFont font;
 
     public OptionView(int WIDTH, int HEIGHT) {

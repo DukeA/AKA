@@ -40,7 +40,7 @@ public class MenuView  implements Screen, IHeadView{
     public MenuView(int WIDTH, int HEIGHT) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
-        this.skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+        this.skin = new Skin(Gdx.files.internal("uiskin.json"));
         this.font = new BitmapFont();
         this.stage = new Stage();
         this.camera = new OrthographicCamera();
@@ -51,25 +51,22 @@ public class MenuView  implements Screen, IHeadView{
         table = new Table();
         table.setFillParent(true);
         table.top();
-        assetManager = new AssetManager();
-        assetManager.load("gfx/uiskin.json", Skin.class);
-        assetManager.finishLoading();
 
 
         playButton = new TextButton("Play"
-                , assetManager.get("gfx/uiskin.json",Skin.class),"default");
+                , skin,"default");
         playButton.setWidth(200f);
         playButton.setHeight(20f);
         playButton.setPosition(WIDTH/2-300f,HEIGHT/2-10f);
 
         optionsButton = new TextButton("Options"
-                ,assetManager.get("gfx/uiskin.json",Skin.class),"default");
+                ,skin,"default");
         optionsButton.setWidth(200f);
         optionsButton.setHeight(20f);
         optionsButton.setPosition(WIDTH/2-200f,HEIGHT/2-10f);
 
         exitButton = new TextButton("Exit",
-                assetManager.get("gfx/uiskin.json",Skin.class),"default");
+                skin,"default");
         exitButton.setWidth(200f);
         exitButton.setHeight(20f);
         exitButton.setPosition(WIDTH/2-100f,HEIGHT/2-10f);
