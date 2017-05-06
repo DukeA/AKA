@@ -20,7 +20,7 @@ public class OptionView implements Screen {
     private int HEIGHT;
     private SpriteBatch batch;
     private Window resArea;
-    private  Window muteArea;
+    private Window muteArea;
     private Skin skin;
     private Table table;
     private Label label;

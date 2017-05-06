@@ -10,6 +10,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 import java.util.List;
 
@@ -22,6 +25,7 @@ public class BoardView implements Screen , IViews{
     private PadView padView;
     private BrickView brickView;
     private ScoreView scoreView;
+    private Stage stage;
     private IBoard board;
     private ShapeRenderer shapeRenderer;
     private SpriteBatch batch;
@@ -37,7 +41,7 @@ public class BoardView implements Screen , IViews{
         padView = createPad(WIDTH,HEIGHT,shapeRenderer);
         ballView = createBall(WIDTH,HEIGHT,shapeRenderer);
         brickView = createBricks(WIDTH,HEIGHT,shapeRenderer);
-        scoreView = createScorePad(WIDTH,HEIGHT,shapeRenderer);
+        scoreView = createScorePad(WIDTH,HEIGHT);
     }
 
     @Override
@@ -54,6 +58,7 @@ public class BoardView implements Screen , IViews{
         board =new Board(WIDTH, HEIGHT);
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
+        stage = new Stage(new ExtendViewport(WIDTH,HEIGHT));
         Gdx.gl.glLineWidth(16);
 
         batch.begin();
@@ -66,7 +71,8 @@ public class BoardView implements Screen , IViews{
 
         padView.render(delta);
         ballView.render(delta);
-        scoreView.render(delta);
+        scoreView.render(delta,batch);
+        stage.draw();
         batch.end();
 
 
@@ -122,7 +128,7 @@ public class BoardView implements Screen , IViews{
     }
 
     @Override
-    public ScoreView createScorePad(int xPos, int yPos, ShapeRenderer renderer) {
-        return new ScoreView(WIDTH,HEIGHT,renderer);
+    public ScoreView createScorePad(int xPos, int yPos ) {
+        return new ScoreView(WIDTH,HEIGHT);
     }
 }
