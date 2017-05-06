@@ -6,63 +6,59 @@ import Model.GameObjects.Physics.CircleBody;
 /**
  * @author Ken Bäcklund
  */
-public class Ball implements IModel, Body {
+public class Ball implements IModel {
 
     private CircleBody body;
 
-    public Ball(double xPos, double yPos, double radius, double angle, double speed) {
+    public Ball(float xPos, float yPos, float radius, float angle, float speed) {
         body = new CircleBody(xPos, yPos, radius, angle, speed);
     }
 
-    public Ball(double xPos, double yPos, double radius) {
+    public Ball(float xPos, float yPos, float radius) {
         body = new CircleBody(xPos, yPos, radius, 0f, 0f);
     }
 
-    public double getX() {
+    public float getX() {
         return body.getX();
     }
 
-    public double getY() {
+    public float getY() {
         return body.getY();
     }
 
-    public double getAngle() {
+    public float getAngle() {
         return body.getAngle();
     }
 
-    public double getSpeed() {
+    public float getSpeed() {
         return body.getSpeed();
     }
 
-    public double getRadius() {
+    public float getRadius() {
         return body.getRadius();
     }
 
-    public void setX(double xPos) {
+    public void setX(float xPos) {
         body.setX(xPos);
     }
 
-    public void setY(double yPos) {
+    public void setY(float yPos) {
         body.setY(yPos);
     }
 
-    public void setPosition(double xPos, double yPos) {
+    public void setPosition(float xPos, float yPos) {
         body.setPosition(xPos, yPos);
     }
 
-    public void setAngle(double radians) {
+    public void setAngle(float radians) {
         body.setAngle(radians);
     }
 
-    public void setSpeed(double speed) {
+    public void setSpeed(float speed) {
         body.setSpeed(speed);
     }
 
-    public void setRadius(double radius) {
-        body.setRadius(radius);
-    }
-
-    public void setMaxSpeed(double maxSpeed) {
+    public void setMaxSpeed(float maxSpeed) {
         body.setMaxSpeed(maxSpeed);
     }
 
@@ -70,7 +66,7 @@ public class Ball implements IModel, Body {
         return body.distance(otherBody);
     }
 
-    public double distance(double xPos, double yPos) {
+    public double distance(float xPos, float yPos) {
         return body.distance(xPos, yPos);
     }
 

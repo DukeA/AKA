@@ -60,7 +60,7 @@ public class CircleBody implements Body {
     public Location getLoc() {return location;}
 
     //Used here (dunno if its only here or used somewhere else)
-    float getRadius(){return radius;}
+    public float getRadius(){return radius;}
 
     // Setters ////////////////////////////////////////////////////////////////
     @Override

@@ -68,8 +68,6 @@ public class RectangleBody implements Body {
         return location.getSpeed();
     }
 
-
-
     // Setters ////////////////////////////////////////////////////////////////
     @Override
     public void setX(float xPos) {
@@ -91,18 +89,22 @@ public class RectangleBody implements Body {
         this.height = height;
     }
 
+    @Override
     public void setPosition(float xPos, float yPos) {
         location.setPosition(xPos, yPos);
     }
 
+    @Override
     public void setAngle(float radians) {
         location.setAngle(radians);
     }
 
+    @Override
     public void setSpeed(float speed) {
         location.setSpeed(speed);
     }
 
+    @Override
     public void setMaxSpeed(float maxSpeed) {
         location.setMaxSpeed(maxSpeed);
     }
@@ -122,12 +124,14 @@ public class RectangleBody implements Body {
         return Math.max(0, (dToOther + dFromOther)- dCenterPoints);
     }
 
+    @Override
     public float distance(float xPos, float yPos) {
         double dx = lineDistance(location.getX(), xPos, getWidth());
         double dy = lineDistance(location.getY(), yPos, getHeight());
         return (float) Math.sqrt(dx*dx+dy*dy);
     }
 
+    @Override
     public void move() {
         location.move();
     }

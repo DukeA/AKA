@@ -17,7 +17,7 @@ public class Player implements IPlayer {
     }
 
     //Overloaded with specific parameters, points allways starts at 0
-    public Player(float PadL, float PadW, double PadXPos, double PadYPos, float PadSpeed){
+    public Player(float PadL, float PadW, float PadXPos, float PadYPos, float PadSpeed){
         pad = new Pad(PadL,PadW,PadXPos,PadYPos,PadSpeed);
         points = 0;
     }
