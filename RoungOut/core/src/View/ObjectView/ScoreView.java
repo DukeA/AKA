@@ -22,31 +22,38 @@ public class ScoreView implements IScore{
 
     private final int WIDTH;
     private final int HEIGHT;
-    private SpriteBatch batch;
+    private ShapeRenderer shapeRenderer;
     private Player player;
     private int player1Points;
     private Player player2;
     private int player2Points;
     private BitmapFont font;
+    private BitmapFont font2;
+    private Texture texture;
 
-
-    public ScoreView(int Width, int Height) {
+    public ScoreView(int Width, int Height, ShapeRenderer shapeRenderer) {
         this.WIDTH = Width;
         this.HEIGHT = Height;
         this.player = new Player();
         this.player2 = new Player();
+        this.shapeRenderer = shapeRenderer;
 
     }
-    public void render(float delta,SpriteBatch batch) {
+    public void render(float delta) {
         update(delta);
-        this.batch = batch;
 
         String player1points = String.valueOf(player1Points);
-        font = new BitmapFont(Gdx.files.internal("main.fnt")
-                ,Gdx.files.internal("main.png"),false);
+        font = new BitmapFont();
 
         font.setColor(Color.DARK_GRAY);
-        font.draw(batch,"Player1: "+player1points,WIDTH,HEIGHT);
+        font.draw()
+
+        String player2Points = String.valueOf(player1points);
+        font2 = new BitmapFont();
+
+        font2.setColor(Color.DARK_GRAY);
+        font2.draw(batch,"Player2: " +player2Points, WIDTH-500,HEIGHT);
+
 
 
     }
