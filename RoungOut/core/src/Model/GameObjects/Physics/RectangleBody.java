@@ -38,26 +38,32 @@ public class RectangleBody implements Body {
     }
 
     // Getters ////////////////////////////////////////////////////////////////
+    @Override
     public float getX() {
         return location.getX();
     }
 
+    @Override
     public float getY() {
         return location.getY();
     }
 
+    @Override
     public float getWidth() {
         return this.width;
     }
 
+    @Override
     public float getHeight() {
         return this.height;
     }
 
+    @Override
     public float getAngle() {
         return location.getAngle();
     }
 
+    @Override
     public float getSpeed() {
         return location.getSpeed();
     }
@@ -65,17 +71,14 @@ public class RectangleBody implements Body {
 
 
     // Setters ////////////////////////////////////////////////////////////////
+    @Override
     public void setX(float xPos) {
         location.setX(xPos);
     }
 
+    @Override
     public void setY(float yPos) {
         location.setY(yPos);
-    }
-
-    public void setSize(float newWidth, float newheight) {
-        this.width = newWidth;
-        this.height = newheight;
     }
 
     @Override
