@@ -42,7 +42,7 @@ public class Roungout extends Game implements IScreen {
     public void create() {
         camera = new OrthographicCamera();
         camera.setToOrtho(false,WIDTH,HEIGHT);
-        this.setScreen(getOptionView());
+        this.setScreen(getBorderView());
     }
 
     public void render() {
