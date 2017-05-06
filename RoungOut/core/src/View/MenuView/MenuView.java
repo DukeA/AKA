@@ -4,6 +4,7 @@ import View.IHeadView;
 import View.ObjectView.BoardView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 /**
@@ -31,6 +33,9 @@ public class MenuView  implements Screen, IHeadView{
     private TextButton optionsButton;
     private TextButton exitButton;
     private Skin skin;
+    private AssetManager assetManager;
+    private TextArea textArea;
+
 
     public MenuView(int WIDTH, int HEIGHT) {
         this.WIDTH = WIDTH;
@@ -46,18 +51,25 @@ public class MenuView  implements Screen, IHeadView{
         table = new Table();
         table.setFillParent(true);
         table.top();
+        assetManager = new AssetManager();
+        assetManager.load("gfx/uiskin.json", Skin.class);
+        assetManager.finishLoading();
 
-        playButton = new TextButton("Play", skin,"default");
+
+        playButton = new TextButton("Play"
+                , assetManager.get("gfx/uiskin.json",Skin.class),"default");
         playButton.setWidth(200f);
         playButton.setHeight(20f);
         playButton.setPosition(WIDTH/2-300f,HEIGHT/2-10f);
 
-        optionsButton = new TextButton("Options",skin,"default");
+        optionsButton = new TextButton("Options"
+                ,assetManager.get("gfx/uiskin.json",Skin.class),"default");
         optionsButton.setWidth(200f);
         optionsButton.setHeight(20f);
         optionsButton.setPosition(WIDTH/2-200f,HEIGHT/2-10f);
 
-        exitButton = new TextButton("Exit",skin,"default");
+        exitButton = new TextButton("Exit",
+                assetManager.get("gfx/uiskin.json",Skin.class),"default");
         exitButton.setWidth(200f);
         exitButton.setHeight(20f);
         exitButton.setPosition(WIDTH/2-100f,HEIGHT/2-10f);
