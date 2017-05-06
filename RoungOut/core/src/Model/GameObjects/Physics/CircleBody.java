@@ -10,23 +10,22 @@ public class CircleBody implements Body {
     private float radius;
 
     // Constructors ///////////////////////////////////////////////////////////
-    public CircleBody(double xPos, double yPos, double radius, double angle, double speed) {
+    public CircleBody(float xPos, float yPos, float radius, float angle, float speed) {
         location = new Location(xPos, yPos, angle, speed);
         shape = new CircleShape(radius);
     }
 
-    public CircleBody(double xPos, double yPos, double radius) {
+    public CircleBody(float xPos, float yPos, float radius) {
         this(xPos, yPos, radius, 0f, 0f);
     }
 
-    public CircleBody(double radius) {
+    public CircleBody(float radius) {
         this(0f, 0f, radius, 0f, 0f);
     }
 
     public CircleBody(CircleBody c) {
         this(c.getX(), c.getY(), c.getRadius(), c.getAngle(), c.getSpeed());
     }
-
     // Getters ////////////////////////////////////////////////////////////////
     @Override
     public float getX() {
@@ -48,12 +47,21 @@ public class CircleBody implements Body {
         return location.getSpeed();
     }
 
-    public double getRadius() {
-        return radius);
+    @Override
+    public float getWidth() {
+        return radius*2;
+    }
+
+    @Override
+    public float getHeight() {
+        return radius*2;
     }
 
     @Override
     public Location getLoc() {return location;}
+
+    //Used here (dunno if its only here or used somewhere else)
+    float getRadius(){return radius;}
 
     // Setters ////////////////////////////////////////////////////////////////
     @Override
@@ -81,8 +89,14 @@ public class CircleBody implements Body {
         location.setSpeed(speed);
     }
 
-    public void setRadius(float radius) {
-        this.radius=radius;
+    @Override
+    public void setWidth(float width) {
+        this.radius=radius*2;
+    }
+
+    @Override
+    public void setHeight(float width) {
+        this.radius=radius*2;
     }
 
     public void setMaxSpeed(float maxSpeed) {

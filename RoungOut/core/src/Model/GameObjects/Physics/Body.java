@@ -9,6 +9,8 @@ public interface Body {
     float getY();
     float getAngle();
     float getSpeed();
+    float getWidth();
+    float getHeight();
 
     void setX(float xPos);
     void setY(float yPos);
@@ -16,6 +18,8 @@ public interface Body {
     void setAngle(float radians);
     void setSpeed(float speed);
     void setMaxSpeed(float maxSpeed);
+    void setWidth(float width);
+    void setHeight(float height);
 
     float distance(Body body);
     float distance(float xPos, float yPos);
