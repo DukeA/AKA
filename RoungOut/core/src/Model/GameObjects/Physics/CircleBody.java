@@ -6,13 +6,11 @@ package Model.GameObjects.Physics;
 public class CircleBody implements Body {
 
     private Location location;
-    private CircleShape shape;
     private float radius;
 
     // Constructors ///////////////////////////////////////////////////////////
     public CircleBody(float xPos, float yPos, float radius, float angle, float speed) {
         location = new Location(xPos, yPos, angle, speed);
-        shape = new CircleShape(radius);
     }
 
     public CircleBody(float xPos, float yPos, float radius) {
@@ -20,9 +18,10 @@ public class CircleBody implements Body {
     }
 
     public CircleBody(float radius) {
-        this(0f, 0f, radius, 0f, 0f);
+        this(0, 0, radius, 0, 0);
     }
 
+    //Clone constructor
     public CircleBody(CircleBody c) {
         this(c.getX(), c.getY(), c.getRadius(), c.getAngle(), c.getSpeed());
     }
@@ -91,23 +90,26 @@ public class CircleBody implements Body {
 
     @Override
     public void setWidth(float width) {
-        this.radius=radius*2;
+        this.radius=Math.abs(width/2);
     }
 
     @Override
-    public void setHeight(float width) {
-        this.radius=radius*2;
+    public void setHeight(float height) {
+        this.radius=Math.abs(height/2);
     }
 
+    @Override
     public void setMaxSpeed(float maxSpeed) {
         location.setMaxSpeed(maxSpeed);
     }
 
     // Other methods //////////////////////////////////////////////////////////
+    @Override
     public float distance(float xPos, float yPos) {
         return (float) Math.max(0, location.distance(xPos, yPos) - getRadius());
     }
 
+    @Override
     public float distance(Body body) {
         double dCenterPoints = location.distance(body.getX(), body.getY());
         double dToOther = distance(body.getX(), body.getY());
@@ -115,6 +117,7 @@ public class CircleBody implements Body {
         return (float) Math.max(0, (dToOther + dFromOther)- dCenterPoints);
     }
 
+    @Override
     public void move() {
         location.move();
     }

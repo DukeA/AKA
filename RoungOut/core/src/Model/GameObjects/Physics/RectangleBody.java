@@ -78,6 +78,16 @@ public class RectangleBody implements Body {
         this.height = newheight;
     }
 
+    @Override
+    public void setWidth(float width) {
+        this.width = width;
+    }
+
+    @Override
+    public void setHeight(float height) {
+        this.height = height;
+    }
+
     public void setPosition(float xPos, float yPos) {
         location.setPosition(xPos, yPos);
     }
@@ -101,17 +111,18 @@ public class RectangleBody implements Body {
     }
 
     // Other methods //////////////////////////////////////////////////////////
-    public double distance(Body body) {
+    @Override
+    public float distance(Body body) {
         float dCenterPoints = location.distance(body.getX(), body.getY());
         float dToOther = distance(body.getX(), body.getY());
         float dFromOther = body.distance(getX(), getY());
         return Math.max(0, (dToOther + dFromOther)- dCenterPoints);
     }
 
-    public double distance(double xPos, double yPos) {
-        double dx = lineDistance(location.getX(), xPos, shape.getWidth());
-        double dy = lineDistance(location.getY(), yPos, shape.getHeight());
-        return Math.sqrt(dx*dx+dy*dy);
+    public float distance(float xPos, float yPos) {
+        double dx = lineDistance(location.getX(), xPos, getWidth());
+        double dy = lineDistance(location.getY(), yPos, getHeight());
+        return (float) Math.sqrt(dx*dx+dy*dy);
     }
 
     public void move() {
