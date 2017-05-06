@@ -1,4 +1,4 @@
-package View;
+package View.MenuView;
 
 import View.MenuView.OptionView;
 import View.ObjectView.BoardView;
@@ -8,5 +8,4 @@ import View.ObjectView.BoardView;
  */
 public interface IHeadView {
     public BoardView createBoardView(int HEIGHT, int WIDTH);
-    public OptionView createOptionView(int HEIGHT, int WIDTH);
 }
