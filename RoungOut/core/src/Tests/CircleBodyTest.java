@@ -29,48 +29,27 @@ class CircleBodyTest {
     }
 
     @Test
-    void getX() {
+    void getters() {
         Assertions.assertEquals(XPOS, body.getX(), THRESHOLD);
-    }
-
-    @Test
-    void getY() {
         Assertions.assertEquals(YPOS, body.getY(), THRESHOLD);
-    }
 
-    @Test
-    void getRadius() {
         Assertions.assertEquals(RADIUS, body.getRadius(), THRESHOLD);
-    }
 
-    @Test
-    void getAngle() {
         double expectedAngle = (ANGLE + 8f*Math.PI) % (2f*Math.PI);
         Assertions.assertEquals(expectedAngle, body.getAngle(), THRESHOLD);
-    }
 
-    @Test
-    void getSpeed() {
         Assertions.assertEquals(SPEED, body.getSpeed(), THRESHOLD);
     }
 
     @Test
-    void setX() {
-        float expectedX = XPOS + 10f;
-        body.setX(expectedX);
-        Assertions.assertEquals(expectedX, body.getX(), THRESHOLD);
-    }
+    void setXandY() {
+        body.setX(10);
+        Assertions.assertEquals(10, body.getX(), THRESHOLD);
 
-    @Test
-    void setY() {
-        float expectedY = YPOS - 10f;
-        body.setY(expectedY);
-        Assertions.assertEquals(expectedY, body.getY(), THRESHOLD);
-    }
+        body.setY(11);
+        Assertions.assertEquals(11, body.getY(), THRESHOLD);
 
-    @Test
-    void setPosition() {
-        float expectedX = XPOS + 10f;
+        float expectedX = XPOS - 10f;
         float expectedY = YPOS - 10f;
         body.setPosition(expectedX, expectedY);
         Assertions.assertEquals(expectedX, body.getX(), THRESHOLD);
@@ -89,10 +68,15 @@ class CircleBodyTest {
     }
 
     @Test
-    void setSpeed() {
+    void setSpeeds() {
         float expectedSpeed = SPEED + 100f;
         body.setSpeed(expectedSpeed);
         Assertions.assertEquals(expectedSpeed, body.getSpeed(), THRESHOLD);
+
+        //Test so we can't go over our max speed
+        body.setMaxSpeed(SPEED);
+        body.setSpeed(SPEED + 10f);
+        Assertions.assertEquals(SPEED, body.getSpeed(), THRESHOLD);
     }
 
     @Test
@@ -102,12 +86,7 @@ class CircleBodyTest {
         Assertions.assertEquals(expectedRadius, body.getRadius(), THRESHOLD);
     }
 
-    @Test
-    void setMaxSpeed() {
-        body.setMaxSpeed(SPEED);
-        body.setSpeed(SPEED + 10f);
-        Assertions.assertEquals(SPEED, body.getSpeed(), THRESHOLD);
-    }
+
 
     @Test
     void distanceTwoCircles() {

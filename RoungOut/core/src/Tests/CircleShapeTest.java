@@ -28,19 +28,13 @@ class CircleShapeTest {
     }
 
     @Test
-    void getWidth() {
+    void getters() {
         Assertions.assertEquals(DIAMETER, cShape1.getWidth(), THRESHOLD);
         Assertions.assertEquals(DIAMETER, cShape2.getWidth(), THRESHOLD);
-    }
 
-    @Test
-    void getHeight() {
         Assertions.assertEquals(DIAMETER, cShape1.getHeight(), THRESHOLD);
         Assertions.assertEquals(DIAMETER, cShape2.getHeight(), THRESHOLD);
-    }
 
-    @Test
-    void getRadius() {
         Assertions.assertEquals(RADIUS, cShape1.getRadius(), THRESHOLD);
         Assertions.assertEquals(RADIUS, cShape2.getRadius(), THRESHOLD);
     }

@@ -18,10 +18,7 @@ public class BrickTest {
     private static final float HEIGHT = 20f;
     private static final double ANGLE = Math.PI / 2f;   // =45 degrees
     private static final float SPEED = 10f;
-
     private Brick brick;
-
-
 
     @BeforeEach
     void setUp() {
@@ -29,32 +26,20 @@ public class BrickTest {
     }
 
     @Test
-    void getX() {
+    void getters() {
         Assertions.assertEquals(XPOS, brick.getX(), THRESHOLD);
-    }
-
-    @Test
-    void getY() {
         Assertions.assertEquals(YPOS, brick.getY(), THRESHOLD);
     }
 
     @Test
-    void setX() {
-        float expectedX = XPOS + 10f;
-        brick.setX(expectedX);
-        Assertions.assertEquals(expectedX, brick.getX(), THRESHOLD);
-    }
+    void setters() {
+        brick.setX(10);
+        Assertions.assertEquals(10, brick.getX(), THRESHOLD);
 
-    @Test
-    void setY() {
-        float expectedY = YPOS - 10f;
-        brick.setY(expectedY);
-        Assertions.assertEquals(expectedY, brick.getY(), THRESHOLD);
-    }
+        brick.setY(11);
+        Assertions.assertEquals(11, brick.getY(), THRESHOLD);
 
-    @Test
-    void setPosition() {
-        float expectedX = XPOS + 10f;
+        float expectedX = XPOS - 10f;
         float expectedY = YPOS - 10f;
         brick.setPosition(expectedX, expectedY);
         Assertions.assertEquals(expectedX, brick.getX(), THRESHOLD);

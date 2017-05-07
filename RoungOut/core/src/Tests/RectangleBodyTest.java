@@ -31,52 +31,24 @@ class RectangleBodyTest {
     }
 
     @Test
-    void getX() {
+    void getters() {
         Assertions.assertEquals(XPOS, body.getX(), THRESHOLD);
-    }
-
-    @Test
-    void getY() {
         Assertions.assertEquals(YPOS, body.getY(), THRESHOLD);
-    }
-
-    @Test
-    void getWidth() {
         Assertions.assertEquals(WIDTH, body.getWidth(), THRESHOLD);
-    }
-
-    @Test
-    void getHeight() {
         Assertions.assertEquals(HEIGHT, body.getHeight(), THRESHOLD);
-    }
-
-    @Test
-    void getAngle() {
         double expectedAngle = (ANGLE + 8f*Math.PI) % (2f*Math.PI);
         Assertions.assertEquals(expectedAngle, body.getAngle(), THRESHOLD);
-    }
-
-    @Test
-    void getSpeed() {
         Assertions.assertEquals(SPEED, body.getSpeed(), THRESHOLD);
     }
 
     @Test
-    void setX() {
-        float expectedX = XPOS + 10f;
-        body.setX(expectedX);
-        Assertions.assertEquals(expectedX, body.getX(), THRESHOLD);
-    }
+    void setXandY() {
+        body.setX(10);
+        Assertions.assertEquals(10, body.getX(), THRESHOLD);
 
-    @Test
-    void setY() {
-        float expectedY = YPOS - 10f;
-        body.setY(expectedY);
-        Assertions.assertEquals(expectedY, body.getY(), THRESHOLD);
-    }
+        body.setY(11);
+        Assertions.assertEquals(11, body.getY(), THRESHOLD);
 
-    @Test
-    void setPosition() {
         float expectedX = XPOS + 10f;
         float expectedY = YPOS - 10f;
         body.setPosition(expectedX, expectedY);
@@ -88,7 +60,7 @@ class RectangleBodyTest {
     void setSize() {
         float expectedX = WIDTH + 10f;
         float expectedY = HEIGHT - 10f;
-       // body.setSize(expectedX, expectedY);
+       // body.setSize(expectedX, expectedY); //this method doesent exist anymore
         body.setWidth(expectedX);
         body.setHeight(expectedY);
         Assertions.assertEquals(expectedX, body.getWidth(), THRESHOLD);
@@ -107,14 +79,11 @@ class RectangleBodyTest {
     }
 
     @Test
-    void setSpeed() {
+    void setSpeeds() {
         float expectedSpeed = SPEED + 100f;
         body.setSpeed(expectedSpeed);
         Assertions.assertEquals(expectedSpeed, body.getSpeed(), THRESHOLD);
-    }
 
-    @Test
-    void setMaxSpeed() {
         body.setMaxSpeed(SPEED);
         body.setSpeed(SPEED + 10f);
         Assertions.assertEquals(SPEED, body.getSpeed(), THRESHOLD);

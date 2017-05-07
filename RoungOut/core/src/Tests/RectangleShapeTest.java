@@ -23,15 +23,11 @@ class RectangleShapeTest {
         rShape1 = new RectangleShape(WIDTH, HEIGHT);
         rShape2 = new RectangleShape(rShape1);
     }
-
     @Test
-    void getWidth() {
+    void getters() {
         Assertions.assertEquals(WIDTH, rShape1.getWidth(), THRESHOLD);
         Assertions.assertEquals(WIDTH, rShape2.getWidth(), THRESHOLD);
-    }
 
-    @Test
-    void getHeight() {
         Assertions.assertEquals(HEIGHT, rShape1.getHeight(), THRESHOLD);
         Assertions.assertEquals(HEIGHT, rShape2.getHeight(), THRESHOLD);
     }

@@ -28,47 +28,29 @@ class BallTest {
     }
 
     @Test
-    void getX() {
+    void getters() {
         Assertions.assertEquals(XPOS, ball.getX(), THRESHOLD);
-    }
-
-    @Test
-    void getY() {
         Assertions.assertEquals(YPOS, ball.getY(), THRESHOLD);
-    }
 
-    @Test
-    void getAngle() {
+        //GetAngle
         double expectedAngle = (ANGLE + 8f*Math.PI) % (2f*Math.PI);
         Assertions.assertEquals(expectedAngle, ball.getAngle(), THRESHOLD);
-    }
 
-    @Test
-    void getSpeed() {
+        //GetSpeed
         Assertions.assertEquals(SPEED, ball.getSpeed(), THRESHOLD);
     }
 
     @Test
-    void setX() {
-        float expectedX = XPOS + 1f;
-        ball.setX(expectedX);
-        Assertions.assertEquals(expectedX, ball.getX(), THRESHOLD);
-    }
+    void setXandY() {
+        ball.setX(10);
+        Assertions.assertEquals(10, ball.getX(), THRESHOLD);
 
-    @Test
-    void setY() {
-        float expectedY = YPOS - 1f;
-        ball.setY(expectedY);
-        Assertions.assertEquals(expectedY, ball.getY(), THRESHOLD);
-    }
+        ball.setY(11);
+        Assertions.assertEquals(11, ball.getY(), THRESHOLD);
 
-    @Test
-    void setPosition() {
-        float expectedX = XPOS + 1f;
-        float expectedY = YPOS - 1f;
-        ball.setPosition(expectedX, expectedY);
-        Assertions.assertEquals(expectedX, ball.getX(), THRESHOLD);
-        Assertions.assertEquals(expectedY, ball.getY(), THRESHOLD);
+        ball.setPosition(20, 21);
+        Assertions.assertEquals(20, ball.getX(), THRESHOLD);
+        Assertions.assertEquals(21, ball.getY(), THRESHOLD);
     }
 
     @Test
@@ -83,18 +65,14 @@ class BallTest {
     }
 
     @Test
-    void setSpeed() {
-        float expectedSpeed = SPEED + 100f;
-        ball.setSpeed(expectedSpeed);
-        Assertions.assertEquals(expectedSpeed, ball.getSpeed(), THRESHOLD);
-    }
+    void setSpeeds() {
+        ball.setSpeed(10);
+        Assertions.assertEquals(10, ball.getSpeed(), THRESHOLD);
 
-    @Test
-    void setMaxSpeed() {
-        float expectedSpeed = SPEED;
-        ball.setMaxSpeed(expectedSpeed);
-        ball.setSpeed(expectedSpeed + 100f);
-        Assertions.assertEquals(expectedSpeed, ball.getSpeed(), THRESHOLD);
+        //Test so we cant set a speed higher than the MaxSpeed
+        ball.setMaxSpeed(20);
+        ball.setSpeed(20 + 100f);
+        Assertions.assertEquals(20, ball.getSpeed(), THRESHOLD);
     }
 
     @Test

@@ -26,54 +26,30 @@ class LocationTest {
     }
 
     @Test
-    void getX() {
+    void getters() {
         Assertions.assertEquals(XPOS, loc.getX(), THRESHOLD);
-    }
-
-    @Test
-    void getY() {
         Assertions.assertEquals(YPOS, loc.getY(), THRESHOLD);
-    }
 
-    @Test
-    void getSpeed() {
         Assertions.assertEquals(SPEED, loc.getSpeed(), THRESHOLD);
-    }
 
-    @Test
-    void getAngle() {
         double expectedAngle = (ANGLE + 8f*Math.PI) % (2f*Math.PI);
         Assertions.assertEquals(expectedAngle, loc.getAngle(), THRESHOLD);
-    }
 
-    @Test
-    void getDeltaX() {
         double expectedDX = SPEED * Math.cos(ANGLE);
         Assertions.assertEquals(expectedDX, loc.getDeltaX(), THRESHOLD);
-    }
 
-    @Test
-    void getDeltaY() {
         double expectedDY = SPEED * Math.sin(ANGLE);
         Assertions.assertEquals(expectedDY, loc.getDeltaY(), THRESHOLD);
     }
 
     @Test
-    void setX() {
-        float expectedX = XPOS + 1f;
-        loc.setX(expectedX);
-        Assertions.assertEquals(expectedX, loc.getX(), THRESHOLD);
-    }
+    void setXandY() {
+        loc.setX(10);
+        Assertions.assertEquals(11, loc.getX(), THRESHOLD);
 
-    @Test
-    void setY() {
-        float expectedY = YPOS - 1f;
-        loc.setY(expectedY);
-        Assertions.assertEquals(expectedY, loc.getY(), THRESHOLD);
-    }
+        loc.setY(11);
+        Assertions.assertEquals(11, loc.getY(), THRESHOLD);
 
-    @Test
-    void setPosition() {
         float expectedX = XPOS + 1f;
         float expectedY = YPOS - 1f;
         loc.setPosition(expectedX, expectedY);
