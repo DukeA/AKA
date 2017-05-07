@@ -11,14 +11,17 @@ public class CircleBody implements Body {
     // Constructors ///////////////////////////////////////////////////////////
     public CircleBody(float xPos, float yPos, float radius, float angle, float speed) {
         location = new Location(xPos, yPos, angle, speed);
+        this.radius=radius;
     }
 
     public CircleBody(float xPos, float yPos, float radius) {
-        this(xPos, yPos, radius, 0f, 0f);
+        location = new Location(xPos, yPos, 0f, 0f);
+        this.radius=radius;
     }
 
     public CircleBody(float radius) {
-        this(0, 0, radius, 0, 0);
+        location = new Location(0,0,0,0);
+        this.radius = radius;
     }
 
     //Clone constructor
@@ -106,15 +109,15 @@ public class CircleBody implements Body {
     // Other methods //////////////////////////////////////////////////////////
     @Override
     public float distance(float xPos, float yPos) {
-        return (float) Math.max(0, location.distance(xPos, yPos) - getRadius());
+        return Math.max(0, location.distance(xPos, yPos) - getRadius());
     }
 
     @Override
     public float distance(Body body) {
-        double dCenterPoints = location.distance(body.getX(), body.getY());
-        double dToOther = distance(body.getX(), body.getY());
-        double dFromOther = body.distance(getX(), getY());
-        return (float) Math.max(0, (dToOther + dFromOther)- dCenterPoints);
+        float dCenterPoints = location.distance(body.getX(), body.getY());
+        float dToOther = distance(body.getX(), body.getY());
+        float dFromOther = body.distance(this.getX(), this.getY());
+        return Math.max(0, (dToOther + dFromOther)- dCenterPoints);
     }
 
     @Override

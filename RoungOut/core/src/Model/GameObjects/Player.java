@@ -26,8 +26,8 @@ public class Player implements IPlayer {
       pad.setPadXPos(x);
       pad.setPadYPos(y);
     }
-    public ArrayList<Double> getPadCoordinates() {
-        ArrayList<Double> coordinateList = new ArrayList<Double>();
+    public ArrayList<Float> getPadCoordinates() {
+        ArrayList<Float> coordinateList = new ArrayList<Float>();
         coordinateList.add(0,pad.getPadXPos());
         coordinateList.add(1,pad.getPadYPos());
         return coordinateList;

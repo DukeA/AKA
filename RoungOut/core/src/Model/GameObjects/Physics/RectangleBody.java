@@ -14,27 +14,34 @@ public class RectangleBody implements Body {
     public RectangleBody(float xPos, float yPos, float width, float height, float angle, float speed) {
         location = new Location(xPos, yPos, angle, speed);
         this.width=width;
+        this.height = height;
 
        // shape = new RectangleShape(width, height);
     }
 
     public RectangleBody(float xPos, float yPos, float width, float height) {
-        this(xPos, yPos, width, height, 0, 0);
+        location = new Location(xPos,yPos,0,0);
+        this.width=width;
+        this.height=height;
     }
 
     public RectangleBody(float width, float height) {
-        this(0f, 0f, width, height, 0f, 0f);
+        location = new Location(0f, 0f , 0f, 0f);
+        this.width=width;
+        this.height=height;
     }
 
     public RectangleBody(RectangleBody r) {
-        this(r.getX(), r.getY(), r.getWidth(), r.getHeight(), r.getAngle(), r.getSpeed());
+        location = r.getLoc();
+        this.width=r.getWidth();
+        this.height=r.getHeight();
     }
 
     // Private helper methods /////////////////////////////////////////////////
 
-    private double lineDistance(double lineCenterPoint, double otherPoint, double lineSize) {
+    private float lineDistance(double lineCenterPoint, double otherPoint, double lineSize) {
         // Get the distance from the center of a line segment towards another point.
-        return Math.max(0, Math.abs(lineCenterPoint - otherPoint) - lineSize/2f);
+        return (float) Math.max(0, Math.abs(lineCenterPoint - otherPoint) - lineSize/2f);
     }
 
     // Getters ////////////////////////////////////////////////////////////////
@@ -126,8 +133,8 @@ public class RectangleBody implements Body {
 
     @Override
     public float distance(float xPos, float yPos) {
-        double dx = lineDistance(location.getX(), xPos, getWidth());
-        double dy = lineDistance(location.getY(), yPos, getHeight());
+        float dx = lineDistance(location.getX(), xPos, getWidth());
+        float dy = lineDistance(location.getY(), yPos, getHeight());
         return (float) Math.sqrt(dx*dx+dy*dy);
     }
 

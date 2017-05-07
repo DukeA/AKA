@@ -14,8 +14,8 @@ public class PadTest {
     //Values that is used in these test cases
     float padL=20;
     float padW=10;
-    double padXPos=100;
-    double padYPos=100;
+    float padXPos=100;
+    float padYPos=100;
     float padSpd=100;
     @BeforeEach
     public void beforeEach() {

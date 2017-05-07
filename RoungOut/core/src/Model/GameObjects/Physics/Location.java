@@ -124,9 +124,9 @@ public class Location {
         yPos += deltaY;
     }
 
-    public float distance(double relXPos, double relYPos) {
-        double dx = xPos - relXPos;
-        double dy = yPos - relYPos;
+    public float distance(float relXPos, float relYPos) {
+        float dx = xPos - relXPos;
+        float dy = yPos - relYPos;
         return (float) Math.sqrt(dx*dx+dy*dy);
     }
 

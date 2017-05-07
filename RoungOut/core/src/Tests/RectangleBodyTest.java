@@ -12,14 +12,14 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class RectangleBodyTest {
 
-    private static final double THRESHOLD = 0.0001f;
+    private static final float THRESHOLD = 0.0001f;
 
-    private static final double XPOS = 100f;
-    private static final double YPOS = -100f;
-    private static final double WIDTH = 40f;
-    private static final double HEIGHT = 20f;
-    private static final double ANGLE = Math.PI / 2f;   // =45 degrees
-    private static final double SPEED = 10f;
+    private static final float XPOS = 100f;
+    private static final float YPOS = -100f;
+    private static final float WIDTH = 40f;
+    private static final float HEIGHT = 20f;
+    private static final float ANGLE = (float) Math.PI / 2f;   // =45 degrees
+    private static final float SPEED = 10f;
 
     private RectangleBody body;
 
@@ -63,22 +63,22 @@ class RectangleBodyTest {
 
     @Test
     void setX() {
-        double expectedX = XPOS + 10f;
+        float expectedX = XPOS + 10f;
         body.setX(expectedX);
         Assertions.assertEquals(expectedX, body.getX(), THRESHOLD);
     }
 
     @Test
     void setY() {
-        double expectedY = YPOS - 10f;
+        float expectedY = YPOS - 10f;
         body.setY(expectedY);
         Assertions.assertEquals(expectedY, body.getY(), THRESHOLD);
     }
 
     @Test
     void setPosition() {
-        double expectedX = XPOS + 10f;
-        double expectedY = YPOS - 10f;
+        float expectedX = XPOS + 10f;
+        float expectedY = YPOS - 10f;
         body.setPosition(expectedX, expectedY);
         Assertions.assertEquals(expectedX, body.getX(), THRESHOLD);
         Assertions.assertEquals(expectedY, body.getY(), THRESHOLD);
@@ -86,18 +86,20 @@ class RectangleBodyTest {
 
     @Test
     void setSize() {
-        double expectedX = WIDTH + 10f;
-        double expectedY = HEIGHT - 10f;
-        body.setSize(expectedX, expectedY);
+        float expectedX = WIDTH + 10f;
+        float expectedY = HEIGHT - 10f;
+       // body.setSize(expectedX, expectedY);
+        body.setWidth(expectedX);
+        body.setHeight(expectedY);
         Assertions.assertEquals(expectedX, body.getWidth(), THRESHOLD);
         Assertions.assertEquals(expectedY, body.getHeight(), THRESHOLD);
     }
 
     @Test
     void setAngle() {
-        double maxAngle = 2f*Math.PI;
-        double minAngle = -maxAngle;
-        for (double a = minAngle; a < maxAngle; a += maxAngle/32f) {
+        float maxAngle = (float)(2f*Math.PI);
+        float minAngle = -maxAngle;
+        for (float a = minAngle; a < maxAngle; a += maxAngle/32f) {
             double expectedAngle = (a + 8f*Math.PI) % (2f*Math.PI);
             body.setAngle(a);
             Assertions.assertEquals(expectedAngle, body.getAngle(), THRESHOLD);
@@ -106,7 +108,7 @@ class RectangleBodyTest {
 
     @Test
     void setSpeed() {
-        double expectedSpeed = SPEED + 100f;
+        float expectedSpeed = SPEED + 100f;
         body.setSpeed(expectedSpeed);
         Assertions.assertEquals(expectedSpeed, body.getSpeed(), THRESHOLD);
     }
@@ -121,18 +123,18 @@ class RectangleBodyTest {
     @Test
     void distanceTwoRectangles() {
 
-        double otherWidth = HEIGHT;     // Same dimensions with a 90 degree turn
-        double otherHeight = WIDTH;
+        float otherWidth = HEIGHT;     // Same dimensions with a 90 degree turn
+        float otherHeight = WIDTH;
 
-        double range = 2f*(WIDTH + HEIGHT);
+        float range = 2f*(WIDTH + HEIGHT);
 
         RectangleBody other = new RectangleBody(0f, 0f, otherWidth, otherHeight);
         body.setPosition(0f, 0f);
 
         System.out.printf("%.2f   %.2f\n", body.distance(other), other.distance(body));
 
-        for (double ry = -range; ry < range; ry++) {
-            for (double rx = -range; rx < range; rx++) {
+        for (float ry = -range; ry < range; ry++) {
+            for (float rx = -range; rx < range; rx++) {
                 other.setPosition(rx, ry);
 
             }

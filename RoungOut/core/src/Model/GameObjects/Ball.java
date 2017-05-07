@@ -74,6 +74,8 @@ public class Ball implements IModel {
         body.move();
     }
 
+    public Body getBody(){return body;}
+
     public void keyWasPressed(int key) {
         // Nothing to do here
     }

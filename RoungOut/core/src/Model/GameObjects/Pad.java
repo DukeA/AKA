@@ -14,19 +14,19 @@ public class Pad {
 
     //Getters
 
-    public double getLength() {
+    public float getLength() {
         return body.getHeight();
     }
-    public double getWidth() {
+    public float getWidth() {
         return body.getWidth();
     }
-    public double getPadXPos() {
+    public float getPadXPos() {
         return body.getX();
     }
-    public double getPadYPos() {
+    public float getPadYPos() {
         return body.getY();
     }
-    public double getPadSpeed() {
+    public float getPadSpeed() {
         return body.getSpeed();
     }
 

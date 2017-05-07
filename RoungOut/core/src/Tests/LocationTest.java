@@ -12,10 +12,10 @@ class LocationTest {
 
     private Location loc;
 
-    private final static double XPOS = 100.0f;
-    private final static double YPOS = -100.0f;
-    private final static double ANGLE = 4f*Math.PI;
-    private final static double SPEED = 10.0f;
+    private final static float XPOS = 100.0f;
+    private final static float YPOS = -100.0f;
+    private final static float ANGLE = (float) (4f*Math.PI);
+    private final static float SPEED = 10.0f;
 
     private final static double THRESHOLD = 0.0001f;
 
@@ -60,22 +60,22 @@ class LocationTest {
 
     @Test
     void setX() {
-        double expectedX = XPOS + 1f;
+        float expectedX = XPOS + 1f;
         loc.setX(expectedX);
         Assertions.assertEquals(expectedX, loc.getX(), THRESHOLD);
     }
 
     @Test
     void setY() {
-        double expectedY = YPOS - 1f;
+        float expectedY = YPOS - 1f;
         loc.setY(expectedY);
         Assertions.assertEquals(expectedY, loc.getY(), THRESHOLD);
     }
 
     @Test
     void setPosition() {
-        double expectedX = XPOS + 1f;
-        double expectedY = YPOS - 1f;
+        float expectedX = XPOS + 1f;
+        float expectedY = YPOS - 1f;
         loc.setPosition(expectedX, expectedY);
         Assertions.assertEquals(expectedX, loc.getX(), THRESHOLD);
         Assertions.assertEquals(expectedY, loc.getY(), THRESHOLD);
@@ -84,7 +84,7 @@ class LocationTest {
     @Test
     void setSpeed() {
         // Delta values are also affected by speed change
-        double expectedSpeed = SPEED + 100f;
+        float expectedSpeed = SPEED + 100f;
         double expectedDX = Math.cos(ANGLE) * expectedSpeed;
         double expectedDY = Math.sin(ANGLE) * expectedSpeed;
         loc.setSpeed(expectedSpeed);
@@ -95,7 +95,7 @@ class LocationTest {
 
     @Test
     void setMaxSpeed() {
-        double expectedSpeed = SPEED;
+        float expectedSpeed = SPEED;
         loc.setMaxSpeed(expectedSpeed);
         loc.setSpeed(expectedSpeed + 100f);
         Assertions.assertEquals(expectedSpeed, loc.getMaxSpeed(), THRESHOLD);
@@ -114,7 +114,7 @@ class LocationTest {
     void setAngle() {
         double maxAngle = 4f*Math.PI;
         double minAngle = -maxAngle;
-        for (double a = minAngle; a < maxAngle; a += maxAngle/64f) {
+        for (float a = (float) minAngle; a < maxAngle; a += maxAngle/64f) {
             double expectedAngle = (a + 8f*Math.PI) % (2f*Math.PI);
             loc.setAngle(a);
             Assertions.assertEquals(expectedAngle, loc.getAngle(), THRESHOLD);

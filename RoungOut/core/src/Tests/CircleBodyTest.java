@@ -13,13 +13,13 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class CircleBodyTest {
 
-    private static final double THRESHOLD = 0.0001f;
+    private static final float THRESHOLD = 0.0001f;
 
-    private static final double XPOS = 100f;
-    private static final double YPOS = -100f;
-    private static final double RADIUS = 10f;
-    private static final double ANGLE = Math.PI / 2f;   // =45 degrees
-    private static final double SPEED = 20f;
+    private static final float XPOS = 100f;
+    private static final float YPOS = -100f;
+    private static final float RADIUS = 10f;
+    private static final float ANGLE = (float) Math.PI / 2f;   // =45 degrees
+    private static final float SPEED = 20f;
 
     private CircleBody body;
 
@@ -56,22 +56,22 @@ class CircleBodyTest {
 
     @Test
     void setX() {
-        double expectedX = XPOS + 10f;
+        float expectedX = XPOS + 10f;
         body.setX(expectedX);
         Assertions.assertEquals(expectedX, body.getX(), THRESHOLD);
     }
 
     @Test
     void setY() {
-        double expectedY = YPOS - 10f;
+        float expectedY = YPOS - 10f;
         body.setY(expectedY);
         Assertions.assertEquals(expectedY, body.getY(), THRESHOLD);
     }
 
     @Test
     void setPosition() {
-        double expectedX = XPOS + 10f;
-        double expectedY = YPOS - 10f;
+        float expectedX = XPOS + 10f;
+        float expectedY = YPOS - 10f;
         body.setPosition(expectedX, expectedY);
         Assertions.assertEquals(expectedX, body.getX(), THRESHOLD);
         Assertions.assertEquals(expectedY, body.getY(), THRESHOLD);
@@ -79,10 +79,10 @@ class CircleBodyTest {
 
     @Test
     void setAngle() {
-        double maxAngle = 2f*Math.PI;
-        double minAngle = -maxAngle;
-        for (double a = minAngle; a < maxAngle; a += maxAngle/32f) {
-            double expectedAngle = (a + 8f*Math.PI) % (2f*Math.PI);
+        float maxAngle = (float) (2f*Math.PI);
+        float minAngle = -maxAngle;
+        for (float a = minAngle; a < maxAngle; a += maxAngle/32f) {
+            float expectedAngle = (float) ((a + 8f*Math.PI) % (2f*Math.PI));
             body.setAngle(a);
             Assertions.assertEquals(expectedAngle, body.getAngle(), THRESHOLD);
         }
@@ -90,15 +90,15 @@ class CircleBodyTest {
 
     @Test
     void setSpeed() {
-        double expectedSpeed = SPEED + 100f;
+        float expectedSpeed = SPEED + 100f;
         body.setSpeed(expectedSpeed);
         Assertions.assertEquals(expectedSpeed, body.getSpeed(), THRESHOLD);
     }
 
     @Test
     void setRadius() {
-        double expectedRadius = RADIUS + 1f;
-        body.setRadius(expectedRadius);
+        float expectedRadius = RADIUS + 1f;
+        body.setWidth(expectedRadius*2); //setWidth on a circleBody is equvivalent to seting the diameter
         Assertions.assertEquals(expectedRadius, body.getRadius(), THRESHOLD);
     }
 
@@ -111,20 +111,22 @@ class CircleBodyTest {
 
     @Test
     void distanceTwoCircles() {
-        double otherRadius = RADIUS * 2f;
-        double range = 10f*RADIUS;
-        double stepX = RADIUS / 3f;
-        double stepY = RADIUS / 5f;
+        float otherRadius = RADIUS * 2f;
+        float range = 10f*RADIUS;
+        float stepX = RADIUS / 3f;
+        float stepY = RADIUS / 5f;
         CircleBody someBody = new CircleBody(XPOS, YPOS, otherRadius, 0f, 0f);
 
-        for (double dy = -range; dy < range; dy += stepY ) {
-            for (double dx = -range; dx < range; dx += stepX ) {
+        for (float dy = -range; dy < range; dy += stepY ) {
+            for (float dx = -range; dx < range; dx += stepX ) {
                 someBody.setPosition(body.getX() + dx, body.getY() + dy);
 
-                double relDx = body.getX() - someBody.getX();
-                double relDy = body.getY() - someBody.getY();
-                double centerDistance = Math.sqrt(relDx*relDx + relDy*relDy);
-                double expectedDistance = Math.max(0, centerDistance - RADIUS - otherRadius);
+                float relDx = body.getX() - someBody.getX();
+                float relDy = body.getY() - someBody.getY();
+                float centerDistance = (float) Math.sqrt(relDx*relDx + relDy*relDy);
+                float expectedDistance = Math.max(0, centerDistance - RADIUS - otherRadius);
+                System.out.print("Expected: " + expectedDistance +" ");
+                System.out.println("Reality: " + body.distance(someBody));
                 Assertions.assertEquals(expectedDistance, body.distance(someBody));
 
             }
@@ -134,21 +136,21 @@ class CircleBodyTest {
     @Test
     void distanceCircleRectangle() {
 
-        double cRadius = 10f;
-        double rWidth = cRadius*2f;
-        double rHeight = cRadius*3f;
-        double range = cRadius*5f;
+        float cRadius = 10f;
+        float rWidth = cRadius*2f;
+        float rHeight = cRadius*3f;
+        float range = cRadius*5f;
 
         CircleBody    cir = new CircleBody   (0f, 0f, cRadius);
         RectangleBody rec = new RectangleBody(0f, 0f, rWidth, rHeight);
 
-        for (double ry = -range; ry < range; ry++) {
-            for (double rx = -range; rx < range; rx++) {
+        for (float ry = -range; ry < range; ry++) {
+            for (float rx = -range; rx < range; rx++) {
                 rec.setPosition(rx, ry);
 
-                double dx = Math.max(0f, Math.abs(cir.getX() - rec.getX()) - rec.getWidth()/2f);
-                double dy = Math.max(0f, Math.abs(cir.getY() - rec.getY()) - rec.getHeight()/2f);
-                double expectedDistance = Math.max(0, Math.sqrt(dx*dx+dy*dy) - cir.getRadius());
+                float dx = Math.max(0f, Math.abs(cir.getX() - rec.getX()) - rec.getWidth()/2f);
+                float dy = Math.max(0f, Math.abs(cir.getY() - rec.getY()) - rec.getHeight()/2f);
+                float expectedDistance = (float) Math.max(0, Math.sqrt(dx*dx+dy*dy) - cir.getRadius());
                 Assertions.assertEquals(expectedDistance, cir.distance(rec), THRESHOLD);
                 Assertions.assertEquals(expectedDistance, rec.distance(cir), THRESHOLD);
 

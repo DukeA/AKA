@@ -19,8 +19,8 @@ public class PlayerTest {
     //Values used for  these tests
     float PadLength = 12;
     float PadWidth = 30;
-    double PadXPos = 100;
-    double PadYPos = 100;
+    float PadXPos = 100;
+    float PadYPos = 100;
     float PadSpeed = 30;
 
     @BeforeEach
@@ -60,7 +60,7 @@ public class PlayerTest {
     }
     @Test
     public void getCordinates(){
-        ArrayList<Double> cords = new ArrayList<Double>();
+        ArrayList<Float> cords = new ArrayList<Float>();
         cords.add(0,PadXPos);
         cords.add(1,PadYPos);
 
