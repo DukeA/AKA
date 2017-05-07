@@ -71,7 +71,7 @@ public class BoardView implements Screen , IViews{
 
         padView.render(delta);
         ballView.render(delta);
-        scoreView.render(delta);
+        scoreView.render(delta,stage,batch);
         stage.draw();
         batch.end();
 

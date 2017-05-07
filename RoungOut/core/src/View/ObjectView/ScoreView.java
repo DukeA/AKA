@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import javafx.scene.text.Font;
 
 /**
@@ -25,11 +26,14 @@ public class ScoreView implements IScore{
     private ShapeRenderer shapeRenderer;
     private Player player;
     private int player1Points;
+    private SpriteBatch batch;
     private Player player2;
     private int player2Points;
-    private BitmapFont font;
-    private BitmapFont font2;
-    private Texture texture;
+    private  TextField player1Field;
+    private TextField player2Field;
+    private Stage stage;
+    private Skin skin;
+    private Table table;
 
     public ScoreView(int Width, int Height, ShapeRenderer shapeRenderer) {
         this.WIDTH = Width;
@@ -37,22 +41,25 @@ public class ScoreView implements IScore{
         this.player = new Player();
         this.player2 = new Player();
         this.shapeRenderer = shapeRenderer;
+        this.skin = new Skin(Gdx.files.internal("uiskin.json"));
+
+
 
     }
-    public void render(float delta) {
+    public void render(float delta,Stage stage, SpriteBatch batch) {
         update(delta);
-
+        this.batch =batch;
+        this.stage = stage;
+        this.table = new Table(skin);
         String player1points = String.valueOf(player1Points);
-        font = new BitmapFont();
+        String player2points = String.valueOf(player2Points);
+        player2Field = new TextField("Player 2: " +player2points,skin);
+        player1Field =new TextField("Player 1: " + player1points,skin);
+        table.add(player2Field).setActorBounds(WIDTH/2,HEIGHT/2,30,30);
+        table.add(player1Field).setActorBounds(WIDTH/2,HEIGHT/2,30,30);
+        
+        stage.addActor(table);
 
-        font.setColor(Color.DARK_GRAY);
-        font.draw()
-
-        String player2Points = String.valueOf(player1points);
-        font2 = new BitmapFont();
-
-        font2.setColor(Color.DARK_GRAY);
-        font2.draw(batch,"Player2: " +player2Points, WIDTH-500,HEIGHT);
 
 
 
