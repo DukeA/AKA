@@ -26,14 +26,10 @@ public class ScoreView implements IScore{
     private ShapeRenderer shapeRenderer;
     private Player player;
     private int player1Points;
-    private SpriteBatch batch;
     private Player player2;
     private int player2Points;
-    private  TextField player1Field;
-    private TextField player2Field;
-    private Stage stage;
-    private Skin skin;
-    private Table table;
+    private BitmapFont font;
+    private BitmapFont font2;
 
     public ScoreView(int Width, int Height, ShapeRenderer shapeRenderer) {
         this.WIDTH = Width;
@@ -41,28 +37,28 @@ public class ScoreView implements IScore{
         this.player = new Player();
         this.player2 = new Player();
         this.shapeRenderer = shapeRenderer;
-        this.skin = new Skin(Gdx.files.internal("uiskin.json"));
+        this.font =  new BitmapFont();
+        font.setColor(Color.WHITE);
+        this.font2 = new BitmapFont();
+        font2.setColor(Color.WHITE);
 
 
 
     }
-    public void render(float delta,Stage stage, SpriteBatch batch) {
+    public void render(float delta) {
         update(delta);
-        this.batch =batch;
-        this.stage = stage;
-        this.table = new Table(skin);
+
         String player1points = String.valueOf(player1Points);
         String player2points = String.valueOf(player2Points);
-        player2Field = new TextField("Player 2: " +player2points,skin);
-        player1Field =new TextField("Player 1: " + player1points,skin);
-        table.add(player2Field).setActorBounds(WIDTH/2,HEIGHT/2,30,30);
-        table.add(player1Field).setActorBounds(WIDTH/2,HEIGHT/2,30,30);
-        
-        stage.addActor(table);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.BLACK);
+        shapeRenderer.rect(WIDTH-300,HEIGHT-100,200,50);
+        shapeRenderer.end();
 
-
-
-
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.BLACK);
+        shapeRenderer.rect(20,HEIGHT-100,200,50);
+        shapeRenderer.end();
     }
     public void update(float delta) {
         player1Points = getScore(player);

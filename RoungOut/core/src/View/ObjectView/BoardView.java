@@ -71,7 +71,7 @@ public class BoardView implements Screen , IViews{
 
         padView.render(delta);
         ballView.render(delta);
-        scoreView.render(delta,stage,batch);
+        scoreView.render(delta);
         stage.draw();
         batch.end();
 
@@ -126,6 +126,7 @@ public class BoardView implements Screen , IViews{
     public BrickView createBricks(int xPos, int yPos, ShapeRenderer renderer) {
         return new BrickView(WIDTH,HEIGHT,renderer);
     }
+
 
     @Override
     public ScoreView createScorePad(int xPos, int yPos,ShapeRenderer renderer ) {
