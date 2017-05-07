@@ -41,7 +41,7 @@ public class BoardView implements Screen , IViews{
         padView = createPad(WIDTH,HEIGHT,shapeRenderer);
         ballView = createBall(WIDTH,HEIGHT,shapeRenderer);
         brickView = createBricks(WIDTH,HEIGHT,shapeRenderer);
-        scoreView = createScorePad(WIDTH,HEIGHT,shapeRenderer);
+        scoreView = createScorePad(WIDTH,HEIGHT,batch);
     }
 
     @Override
@@ -129,7 +129,7 @@ public class BoardView implements Screen , IViews{
 
 
     @Override
-    public ScoreView createScorePad(int xPos, int yPos,ShapeRenderer renderer ) {
-        return new ScoreView(WIDTH,HEIGHT, renderer);
+    public ScoreView createScorePad(int xPos, int yPos,SpriteBatch spriteBatch ) {
+        return new ScoreView(WIDTH,HEIGHT,spriteBatch);
     }
 }

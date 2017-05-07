@@ -12,5 +12,5 @@ public interface IViews {
     BallView createBall(int xPos, int yPos,  ShapeRenderer renderer);
     PadView createPad(int xPos,int yPos,ShapeRenderer renderer);
     BrickView createBricks (int xPos,int yPos,ShapeRenderer renderer);
-    ScoreView createScorePad(int xPos, int yPos,ShapeRenderer renderer);
+    ScoreView createScorePad(int xPos, int yPos,SpriteBatch spriteBatch);
 }

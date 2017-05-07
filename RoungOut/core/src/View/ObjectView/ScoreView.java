@@ -23,7 +23,7 @@ public class ScoreView implements IScore{
 
     private final int WIDTH;
     private final int HEIGHT;
-    private ShapeRenderer shapeRenderer;
+    private SpriteBatch spriteBatch;
     private Player player;
     private int player1Points;
     private Player player2;
@@ -31,16 +31,16 @@ public class ScoreView implements IScore{
     private BitmapFont font;
     private BitmapFont font2;
 
-    public ScoreView(int Width, int Height, ShapeRenderer shapeRenderer) {
+    public ScoreView(int Width, int Height,SpriteBatch spriteBatch) {
         this.WIDTH = Width;
         this.HEIGHT = Height;
         this.player = new Player();
         this.player2 = new Player();
-        this.shapeRenderer = shapeRenderer;
+        this.spriteBatch = spriteBatch;
         this.font =  new BitmapFont();
-        font.setColor(Color.WHITE);
+        font.setColor(Color.BLACK);
         this.font2 = new BitmapFont();
-        font2.setColor(Color.WHITE);
+        font2.setColor(Color.BLACK);
 
 
 
@@ -50,15 +50,12 @@ public class ScoreView implements IScore{
 
         String player1points = String.valueOf(player1Points);
         String player2points = String.valueOf(player2Points);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.rect(WIDTH-300,HEIGHT-100,200,50);
-        shapeRenderer.end();
-
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.rect(20,HEIGHT-100,200,50);
-        shapeRenderer.end();
+        spriteBatch.begin();
+        font.draw(spriteBatch,"Player 1: " +player1points,100,HEIGHT-100);
+        font.getData().setScale(2);
+        font2.draw(spriteBatch,"Player 2: " +player2points,WIDTH-300,HEIGHT-100);
+        font2.getData().setScale(2);
+        spriteBatch.end();
     }
     public void update(float delta) {
         player1Points = getScore(player);
