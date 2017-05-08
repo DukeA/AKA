@@ -5,6 +5,7 @@ import View.IView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import org.omg.PortableInterceptor.INACTIVE;
 
 import java.util.ArrayList;
 
@@ -16,10 +17,12 @@ public class PlayerController implements IPlayerController, InputProcessor{
     //The list will only contain unique subscribers and this is guaranteed by the
     //addListener and removeListener methods
     private ArrayList<IView> viewSubscribers = new ArrayList<IView>();
-    ArrayList<IModel> modelSubscribers = new ArrayList<IModel>();
+    private ArrayList<IModel> modelSubscribers = new ArrayList<IModel>();
 
-
-    //Add list of models that want this controller as input
+    private int P1Right;
+    private int P1Left;
+    private int P2Right;
+    private int P2Left;
 
     private String latestKey = " ";//init with blank
     @Override
@@ -64,6 +67,7 @@ public class PlayerController implements IPlayerController, InputProcessor{
          *  It would be much simpler if the return value of the interfaced could be an int and
          *  simply import the "com.badlogic.gdx.Input" library to reach the Inputs.Keys field
          *  UPDATE: Decided to send ints instead of chars since that was simpler, char still stored for debug
+         *  UPDATE2: Decided that the controller should send explicit calls to the objects listening to the controller
          *
          */
         return true;
@@ -112,6 +116,11 @@ public class PlayerController implements IPlayerController, InputProcessor{
 
     public PlayerController() {
         Gdx.input.setInputProcessor(this);
+        this.P1Left = Input.Keys.A;
+        this.P1Right = Input.Keys.D;
+        this.P2Left = Input.Keys.J;
+        this.P2Right = Input.Keys.L;
+
         //Makes it so LibGdx sends calls to this controller
         //(Adds the created PlayerController as a listener for LibGdx)
     }
