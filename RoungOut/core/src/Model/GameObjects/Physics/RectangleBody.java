@@ -2,6 +2,7 @@ package Model.GameObjects.Physics;
 
 /**
  * @author Ken Bäcklund
+ * Modified by Alex 2017-05-07
  */
 public class RectangleBody implements Body {
 

@@ -45,7 +45,7 @@ class LocationTest {
     @Test
     void setXandY() {
         loc.setX(10);
-        Assertions.assertEquals(11, loc.getX(), THRESHOLD);
+        Assertions.assertEquals(10, loc.getX(), THRESHOLD);
 
         loc.setY(11);
         Assertions.assertEquals(11, loc.getY(), THRESHOLD);

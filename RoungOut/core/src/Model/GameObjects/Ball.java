@@ -5,6 +5,7 @@ import Model.GameObjects.Physics.CircleBody;
 
 /**
  * @author Ken Bäcklund
+ * Modified by Alex 07-05-17
  */
 public class Ball implements IModel {
 
