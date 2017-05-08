@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by Alex on 2017-04-28.
  */
-public class PlayerController implements IPlayerController, InputProcessor{
+public class PlayerController extends ControllerHandler implements IPlayerController{
     //The list will only contain unique subscribers and this is guaranteed by the
     //addListener and removeListener methods
     private ArrayList<IView> viewSubscribers = new ArrayList<IView>();
@@ -89,7 +89,7 @@ public class PlayerController implements IPlayerController, InputProcessor{
     }
 
     //We don't need these inputs
-    @Override
+ /*   @Override
     public boolean keyUp(int keycode) {
         return false;
     }
@@ -112,15 +112,17 @@ public class PlayerController implements IPlayerController, InputProcessor{
     @Override
     public boolean scrolled(int amount) {
         return false;
-    }
+    }*/
 
     public PlayerController() {
-        Gdx.input.setInputProcessor(this);
+        PlayerController.setControllerAtIndex(0,this);
+        Gdx.input.setInputProcessor(PlayerController.getControllerAtIndex(0));
+
+       // Gdx.input.setInputProcessor(this);
         this.P1Left = Input.Keys.A;
         this.P1Right = Input.Keys.D;
         this.P2Left = Input.Keys.J;
         this.P2Right = Input.Keys.L;
-
         //Makes it so LibGdx sends calls to this controller
         //(Adds the created PlayerController as a listener for LibGdx)
     }
