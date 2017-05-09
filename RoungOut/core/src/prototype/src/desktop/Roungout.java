@@ -24,7 +24,7 @@ public class Roungout extends Game {
 
     private MenuView MenuView;
     public OrthographicCamera camera;
-    public IView IView;
+    public IView boardView;
 
     private ArrayList<ISwitchController> controllers = new ArrayList<ISwitchController>();
     private ArrayList<IView> viewers = new ArrayList<IView>();
@@ -36,11 +36,13 @@ public class Roungout extends Game {
     private IModel player2 = new Player(20,10,0,0,5);
 
     public void inintControllers(){
+        boardView = new BoardView(WIDTH,HEIGHT);
+        viewers.add(boardView);
 
         PlayerController playerController = new PlayerController(viewers,controllers,player1,player2);
         controllers.add(0,playerController);
         playerController.updateControllerList(controllers);
-        IView = new PadView();
+
     }
 
 
@@ -50,6 +52,7 @@ public class Roungout extends Game {
         view = new BoardView(WIDTH,HEIGHT);
         camera.setToOrtho(false, WIDTH, HEIGHT);
         this.setScreen(view);
+        inintControllers();
     }
 
     public void render() {
