@@ -1,6 +1,8 @@
 package View.ObjectView;
 
 
+import Controller.IPlayerController;
+import Controller.PlayerController;
 import Model.GameObjects.Board;
 import Model.GameObjects.IBoard;
 import View.IView;
@@ -29,6 +31,7 @@ public class BoardView implements Screen , IViews{
     private IBoard board;
     private ShapeRenderer shapeRenderer;
     private SpriteBatch batch;
+    private IPlayerController controller;
     private final int WIDTH;
     private final int HEIGHT;
 
@@ -53,7 +56,7 @@ public class BoardView implements Screen , IViews{
     public void render(float delta) {
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        update(delta);
+        update();
 
         board =new Board(WIDTH, HEIGHT);
         batch = new SpriteBatch();
@@ -78,10 +81,15 @@ public class BoardView implements Screen , IViews{
 
 
     }
+    public void update() {
+        float delta = Gdx.graphics.getDeltaTime();
+        this.update(delta);
 
+    }
 
     public void update(float delta) {
-
+    ballView.update(delta);
+    scoreView.update(delta);
     }
 
     @Override
@@ -132,4 +140,5 @@ public class BoardView implements Screen , IViews{
     public ScoreView createScorePad(int xPos, int yPos,SpriteBatch spriteBatch ) {
         return new ScoreView(WIDTH,HEIGHT,spriteBatch);
     }
+    
 }
