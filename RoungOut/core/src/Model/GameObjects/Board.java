@@ -6,6 +6,7 @@ import java.util.Set;
 
 /**
  * Created by Adam on 2017-03-29.
+ * Updated by Ken on 2017-05-10.
  */
 public class Board implements IBoard {
 
@@ -38,14 +39,58 @@ public class Board implements IBoard {
     }
 
     public Set<Ball> getBalls() {
-        return null;
+        return this.balls;
     }
 
     public Set<Brick> getBricks() {
-        return null;
+        return this.bricks;
     }
 
     public Set<Pad> getPads() {
-        return null;
+        return this.pads;
     }
+
+    public void update(float deltaTime) {
+        for (Ball ball : balls) {
+            ball.move(deltaTime);
+        }
+    }
+
+    public void addBall(Ball ball) {
+        if (ball != null) {
+            this.balls.add(ball);
+        }
+    }
+
+    public void addBrick(Brick brick) {
+        if (brick != null) {
+            this.bricks.add(brick);
+        }
+    }
+
+    public void addPad(Pad pad) {
+        if (pad != null) {
+            this.pads.add(pad);
+        }
+    }
+
+    public void removeBall(Ball ball) {
+        if (ball != null) {
+            this.balls.remove(ball);
+        }
+    }
+
+    public void removeBrick(Brick brick) {
+        if (brick != null) {
+            this.bricks.remove(brick);
+        }
+    }
+
+    public void removePad(Pad pad) {
+        if (pad != null) {
+            this.pads.remove(pad);
+        }
+    }
+
+
 }

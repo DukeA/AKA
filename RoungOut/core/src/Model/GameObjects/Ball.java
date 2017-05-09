@@ -71,8 +71,8 @@ public class Ball implements IModel {
         return body.distance(xPos, yPos);
     }
 
-    public void move() {
-        body.move();
+    public void move(float deltaTime) {
+        body.move(deltaTime);
     }
 
     public Body getBody(){return body;}

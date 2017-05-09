@@ -80,7 +80,7 @@ class BallTest {
         for (double a = -2f*Math.PI; a < 2f*Math.PI; a += Math.PI/64f) {
             double expectedX = ball.getX() + Math.cos(ANGLE) * SPEED;
             double expectedY = ball.getY() + Math.sin(ANGLE) * SPEED;
-            ball.move();
+            ball.move(1);
             Assertions.assertEquals(expectedX, ball.getX(), THRESHOLD);
             Assertions.assertEquals(expectedY, ball.getY(), THRESHOLD);
         }

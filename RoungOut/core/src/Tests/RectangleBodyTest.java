@@ -123,7 +123,7 @@ class RectangleBodyTest {
         for (double a = -2f*Math.PI; a < 2f*Math.PI; a += Math.PI/64f) {
             double expectedX = body.getX() + Math.cos(ANGLE) * SPEED;
             double expectedY = body.getY() + Math.sin(ANGLE) * SPEED;
-            body.move();
+            body.move(1);
             Assertions.assertEquals(expectedX, body.getX(), THRESHOLD);
             Assertions.assertEquals(expectedY, body.getY(), THRESHOLD);
         }

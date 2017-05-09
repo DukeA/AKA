@@ -70,10 +70,6 @@ public class Brick implements IModel {
         return body.distance(xPos, yPos);
     }
 
-    public void move() {
-        body.move();
-    }
-
     // DO-Nothing
     @Override
     public void moveLeft() {}

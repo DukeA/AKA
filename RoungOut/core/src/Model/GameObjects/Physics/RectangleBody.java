@@ -140,7 +140,7 @@ public class RectangleBody implements Body {
     }
 
     @Override
-    public void move() {
-        location.move();
+    public void move(float deltaTime) {
+        location.move(deltaTime);
     }
 }

@@ -24,6 +24,6 @@ public interface Body {
     float distance(Body body);
     float distance(float xPos, float yPos);
 
-    void move();
+    void move(float deltaTime);
     Location getLoc();
 }

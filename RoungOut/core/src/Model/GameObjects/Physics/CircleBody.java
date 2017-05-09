@@ -122,7 +122,7 @@ public class CircleBody implements Body {
     }
 
     @Override
-    public void move() {
-        location.move();
+    public void move(float deltaTime) {
+        location.move(deltaTime);
     }
 }

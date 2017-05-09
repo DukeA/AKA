@@ -120,9 +120,9 @@ public class Location {
 
     // Other methods //////////////////////////////////////////////////////////
 
-    public void move() {
-        xPos += deltaX;
-        yPos += deltaY;
+    public void move(float deltaTime) {
+        xPos += deltaTime * deltaX;
+        yPos += deltaTime * deltaY;
     }
 
     public float distance(float relXPos, float relYPos) {

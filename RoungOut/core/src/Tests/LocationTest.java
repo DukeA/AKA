@@ -102,7 +102,7 @@ class LocationTest {
         for (double a = -2f*Math.PI; a < 2f*Math.PI; a += Math.PI/64f) {
             double expectedX = loc.getX() + Math.cos(ANGLE) * SPEED;
             double expectedY = loc.getY() + Math.sin(ANGLE) * SPEED;
-            loc.move();
+            loc.move(1);
             Assertions.assertEquals(expectedX, loc.getX(), THRESHOLD);
             Assertions.assertEquals(expectedY, loc.getY(), THRESHOLD);
         }
@@ -116,7 +116,7 @@ class LocationTest {
         double expectedDistance2 = Math.sqrt(
                 loc.getDeltaX()*loc.getDeltaX() + loc.getDeltaY()*loc.getDeltaY() );
         Assertions.assertEquals(expectedDistance1, loc.distance(loc2), THRESHOLD);
-        loc2.move();
+        loc2.move(1);
         Assertions.assertEquals(expectedDistance2, loc.distance(loc2), THRESHOLD);
     }
 

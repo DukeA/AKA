@@ -47,7 +47,7 @@ public class BallView implements  IBall,IViews {
 
     @Override
     public void update(float delta) {
-        ball.move();
+        ball.move(delta);
     }
     @Override
     public void reSize(int width, int height) {
