@@ -77,7 +77,10 @@ public class Ball implements IModel {
 
     public Body getBody(){return body;}
 
-    public void keyWasPressed(int key) {
-        // Nothing to do here
-    }
+    //DO-Nothing
+    @Override
+    public void moveLeft() {}
+
+    @Override
+    public void moveRight() {}
 }

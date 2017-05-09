@@ -1,12 +1,13 @@
 package Model.GameObjects;
 
+import java.awt.image.ImageConsumer;
 import java.util.ArrayList;
 
 /**
  * Created by DukeA on 2017-04-04.
  * Modified by Alex on 2017-04-24
  */
-public class Player implements IPlayer {
+public class Player implements IPlayer, IModel {
     private Pad pad;
     private int points;
 
@@ -23,13 +24,13 @@ public class Player implements IPlayer {
     }
 
     public void setPadCoordinates(float x, float y) {
-      pad.setPadXPos(x);
-      pad.setPadYPos(y);
+      pad.getBody().setX(x);
+      pad.getBody().setY(y);
     }
     public ArrayList<Float> getPadCoordinates() {
         ArrayList<Float> coordinateList = new ArrayList<Float>();
-        coordinateList.add(0,pad.getPadXPos());
-        coordinateList.add(1,pad.getPadYPos());
+        coordinateList.add(0,pad.getBody().getX());
+        coordinateList.add(1,pad.getBody().getY());
         return coordinateList;
     }
 
@@ -42,9 +43,14 @@ public class Player implements IPlayer {
         return this.pad;
     }
 
-    public void movePad() {
-       //  this.pad.PadMove(pad.getPadXPos()+pad.getPadSpeed(),pad.getPadYPos()+pad.getPadSpeed());
-        this.pad.padMove();
+    @Override
+    public void moveLeft() {
+        pad.padMoveLeft();
+    }
+
+    @Override
+    public void moveRight() {
+        pad.padMoveRight();
     }
 
     @Override

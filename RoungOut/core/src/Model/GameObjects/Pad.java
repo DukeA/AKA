@@ -1,6 +1,7 @@
 package Model.GameObjects;
 
 
+import Model.GameObjects.Physics.Body;
 import Model.GameObjects.Physics.RectangleBody;
 
 /**
@@ -13,7 +14,6 @@ public class Pad {
     //Completly revamped, barely needed since a body is a pad
 
     //Getters
-
     public float getLength() {
         return body.getHeight();
     }
@@ -29,10 +29,12 @@ public class Pad {
     public float getPadSpeed() {
         return body.getSpeed();
     }
+    public Body getBody() {
+        return body;
+    }
 
 
-
-    //Setters
+    //Setters, mainly used in testing
     public void setPadXPos(float padXPos) {
         body.setX(padXPos);
     }
@@ -46,14 +48,21 @@ public class Pad {
     //Constructor
     public Pad(float length, float width, float padXPos, float padYPos,float padSpeed) {
         this.body =new RectangleBody(padXPos,padYPos,width,length);
-        this.setSpeed(padSpeed);
+        this.body.setSpeed(padSpeed);
     }
 
     //Method: Moves by incrementing the x and y pos with it's speed
-    public void padMove(){
+    public void padMoveRight(){
         body.setX(body.getX() + body.getSpeed());
         //padXPos = padXPos + padSpeed;
         body.setY(body.getY()+body.getSpeed());
+        //padYPos = padYPos + padSpeed;
+    }
+
+    public void padMoveLeft(){
+        body.setX(body.getX() + (body.getSpeed() * -1));
+        //padXPos = padXPos + padSpeed;
+        body.setY(body.getY()+ (body.getSpeed() * -1));
         //padYPos = padYPos + padSpeed;
     }
 
