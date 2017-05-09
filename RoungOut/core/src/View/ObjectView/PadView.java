@@ -3,6 +3,7 @@ package View.ObjectView;
 import Model.GameObjects.IPad;
 import Model.GameObjects.IPlayer;
 import Model.GameObjects.Pad;
+import View.IView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -15,7 +16,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 /**
  * Created by DukeA on 2017-05-02.
  */
-public class PadView implements IPad, IViews {
+public class PadView implements IPad, IViews, IView {
 
     private Pad pad;
     private Pad pad2;
@@ -58,7 +59,7 @@ public class PadView implements IPad, IViews {
 
     @Override
     public void update(float delta) {
-
+        this.update();
     }
 
     public void reSize(int width, int height) {
@@ -72,5 +73,12 @@ public class PadView implements IPad, IViews {
     @Override
     public Pad createPad(int xPos, int yPos) {
         return new Pad(80f, 15f, xPos, yPos, 0);
+    }
+
+    @Override
+    public void update() {
+
+
+
     }
 }

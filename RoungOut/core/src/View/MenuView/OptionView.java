@@ -21,11 +21,13 @@ public class OptionView implements Screen {
     private SpriteBatch batch;
     private Window resArea;
     private Window muteArea;
+    private Window keyArea;
     private Skin skin;
     private Table table;
     private Label label;
     private Stage stage;
     private BitmapFont font;
+
     private CheckBox[] box;
     private CheckBox[] muteBox;
 
@@ -45,6 +47,7 @@ public class OptionView implements Screen {
         table.top();
         resArea = new Window("Resolution",skin);
         muteArea = new Window("Mute",skin);
+        keyArea = new Window("Key Change",skin);
         box = new CheckBox [3];
         muteBox = new CheckBox[2];
         label = new Label("Options",skin);
@@ -102,7 +105,11 @@ public class OptionView implements Screen {
             }
         });
         table.row();
+        table.add(keyArea).width(400).height(100);
         stage.addActor(table);
+
+
+
 
     }
 

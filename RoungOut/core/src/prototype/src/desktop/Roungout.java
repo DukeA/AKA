@@ -3,15 +3,13 @@ package prototype.src.desktop;
 import Controller.ISwitchController;
 import Controller.PlayerController;
 import Model.GameObjects.IModel;
-import Model.GameObjects.IPlayer;
 import Model.GameObjects.Player;
 import View.IView;
 import View.MenuView.MenuView;
-import View.MenuView.OptionView;
 import View.ObjectView.BoardView;
+import View.ObjectView.PadView;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import prototype.src.desktop.IScreen;
 
 import java.util.ArrayList;
 
@@ -26,9 +24,12 @@ public class Roungout extends Game {
 
     private MenuView MenuView;
     public OrthographicCamera camera;
+    public IView IView;
 
     private ArrayList<ISwitchController> controllers = new ArrayList<ISwitchController>();
     private ArrayList<IView> viewers = new ArrayList<IView>();
+
+    private BoardView view;
 
     //Should the controller use IPlayers instead??
     private IModel player1 = new Player(20,10,0,0,5);
@@ -39,13 +40,16 @@ public class Roungout extends Game {
         PlayerController playerController = new PlayerController(viewers,controllers,player1,player2);
         controllers.add(0,playerController);
         playerController.updateControllerList(controllers);
+        IView = new PadView();
     }
 
 
     @Override
     public void create() {
         camera = new OrthographicCamera();
+        view = new BoardView(WIDTH,HEIGHT);
         camera.setToOrtho(false, WIDTH, HEIGHT);
+        this.setScreen(view);
     }
 
     public void render() {
