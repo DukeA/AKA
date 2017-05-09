@@ -11,7 +11,7 @@ import prototype.src.desktop.IScreen;
 public class Roungout extends Game implements IScreen {
 
     public static final String TITLE = "Roungout";
-    public static final float VERSION =0.2f;
+    public static final float VERSION = 0.3f;
     public static int WIDTH =1980;
     public static int HEIGHT =1080;
     public static boolean RESIZE = true;
