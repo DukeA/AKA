@@ -140,5 +140,5 @@ public class BoardView implements Screen , IViews{
     public ScoreView createScorePad(int xPos, int yPos,SpriteBatch spriteBatch ) {
         return new ScoreView(WIDTH,HEIGHT,spriteBatch);
     }
-    
+
 }
