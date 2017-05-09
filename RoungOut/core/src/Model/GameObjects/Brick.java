@@ -6,15 +6,15 @@ import Model.GameObjects.Physics.*;
 /**
  * Created by kendu on 2017-05-01.
  */
-public class Brick implements IModel, Body {
+public class Brick implements IModel {
 
     private RectangleBody body;
 
-    public Brick(double xPos, double yPos, double width, double height, double angle, double speed) {
+    public Brick(float xPos, float yPos, float width, float height, float angle, float speed) {
         body = new RectangleBody(xPos, yPos, width, height, angle, speed);
     }
 
-    public Brick(double xPos, double yPos, double width, double height) {
+    public Brick(float xPos, float yPos, float width, float height) {
         body = new RectangleBody(xPos, yPos, width, height, 0f, 0f);
     }
 
@@ -34,27 +34,27 @@ public class Brick implements IModel, Body {
         return body.getSpeed();
     }
 
-    public void setX(double xPos) {
+    public void setX(float xPos) {
         body.setX(xPos);
     }
 
-    public void setY(double yPos) {
+    public void setY(float yPos) {
         body.setY(yPos);
     }
 
-    public void setPosition(double xPos, double yPos) {
+    public void setPosition(float xPos, float yPos) {
         body.setPosition(xPos, yPos);
     }
 
-    public void setAngle(double radians) {
+    public void setAngle(float radians) {
         body.setAngle(radians);
     }
 
-    public void setSpeed(double speed) {
+    public void setSpeed(float speed) {
         body.setSpeed(speed);
     }
 
-    public void setMaxSpeed(double maxSpeed) {
+    public void setMaxSpeed(float maxSpeed) {
         body.setMaxSpeed(maxSpeed);
     }
 
@@ -62,7 +62,7 @@ public class Brick implements IModel, Body {
         return body.distance(otherBody);
     }
 
-    public double distance(double xPos, double yPos) {
+    public double distance(float xPos, float yPos) {
         return body.distance(xPos, yPos);
     }
 

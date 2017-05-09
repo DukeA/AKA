@@ -2,94 +2,126 @@ package Model.GameObjects.Physics;
 
 /**
  * @author Ken Bäcklund
+ * Modified by Alex 07-05-17
  */
 public class CircleBody implements Body {
 
     private Location location;
-    private CircleShape shape;
+    private float radius;
 
     // Constructors ///////////////////////////////////////////////////////////
-    public CircleBody(double xPos, double yPos, double radius, double angle, double speed) {
+    public CircleBody(float xPos, float yPos, float radius, float angle, float speed) {
         location = new Location(xPos, yPos, angle, speed);
-        shape = new CircleShape(radius);
+        this.radius=radius;
     }
 
-    public CircleBody(double xPos, double yPos, double radius) {
-        this(xPos, yPos, radius, 0f, 0f);
+    public CircleBody(float xPos, float yPos, float radius) {
+        location = new Location(xPos, yPos, 0f, 0f);
+        this.radius=radius;
     }
 
-    public CircleBody(double radius) {
-        this(0f, 0f, radius, 0f, 0f);
+    public CircleBody(float radius) {
+        location = new Location(0,0,0,0);
+        this.radius = radius;
     }
 
+    //Clone constructor
     public CircleBody(CircleBody c) {
         this(c.getX(), c.getY(), c.getRadius(), c.getAngle(), c.getSpeed());
     }
-
     // Getters ////////////////////////////////////////////////////////////////
-    public double getX() {
+    @Override
+    public float getX() {
         return location.getX();
     }
 
-    public double getY() {
+    @Override
+    public float getY() {
         return location.getY();
     }
 
-    public double getAngle() {
+    @Override
+    public float getAngle() {
         return location.getAngle();
     }
 
-    public double getSpeed() {
+    @Override
+    public float getSpeed() {
         return location.getSpeed();
     }
 
-    public double getRadius() {
-        return shape.getRadius();
+    @Override
+    public float getWidth() {
+        return radius*2;
     }
 
+    @Override
+    public float getHeight() {
+        return radius*2;
+    }
 
+    @Override
+    public Location getLoc() {return location;}
+
+    //Used here (dunno if its only here or used somewhere else)
+    public float getRadius(){return radius;}
 
     // Setters ////////////////////////////////////////////////////////////////
-    public void setX(double xPos) {
+    @Override
+    public void setX(float xPos) {
         location.setX(xPos);
     }
 
-    public void setY(double yPos) {
+    @Override
+    public void setY(float yPos) {
         location.setY(yPos);
     }
 
-    public void setPosition(double xPos, double yPos) {
+    @Override
+    public void setPosition(float xPos, float yPos) {
         location.setPosition(xPos, yPos);
     }
 
-    public void setAngle(double radians) {
+    @Override
+    public void setAngle(float radians) {
         location.setAngle(radians);
     }
 
-    public void setSpeed(double speed) {
+    @Override
+    public void setSpeed(float speed) {
         location.setSpeed(speed);
     }
 
-    public void setRadius(double radius) {
-        shape = new CircleShape(radius);
+    @Override
+    public void setWidth(float width) {
+        this.radius=Math.abs(width/2);
     }
 
-    public void setMaxSpeed(double maxSpeed) {
+    @Override
+    public void setHeight(float height) {
+        this.radius=Math.abs(height/2);
+    }
+
+    @Override
+    public void setMaxSpeed(float maxSpeed) {
         location.setMaxSpeed(maxSpeed);
     }
 
     // Other methods //////////////////////////////////////////////////////////
-    public double distance(double xPos, double yPos) {
+    @Override
+    public float distance(float xPos, float yPos) {
         return Math.max(0, location.distance(xPos, yPos) - getRadius());
     }
 
-    public double distance(Body body) {
-        double dCenterPoints = location.distance(body.getX(), body.getY());
-        double dToOther = distance(body.getX(), body.getY());
-        double dFromOther = body.distance(getX(), getY());
+    @Override
+    public float distance(Body body) {
+        float dCenterPoints = location.distance(body.getX(), body.getY());
+        float dToOther = distance(body.getX(), body.getY());
+        float dFromOther = body.distance(this.getX(), this.getY());
         return Math.max(0, (dToOther + dFromOther)- dCenterPoints);
     }
 
+    @Override
     public void move() {
         location.move();
     }

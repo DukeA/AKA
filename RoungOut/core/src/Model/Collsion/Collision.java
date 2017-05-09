@@ -20,8 +20,9 @@ public class Collision {
         return (someBody.distance(anyBody) <= 0.0001f);
     }
 
-    public boolean isOutsideBoardRange(Ball ball, double boardRadius) {
-        board.setRadius(boardRadius);   // TODO: Temporary solution
+    public boolean isOutsideBoardRange(Ball ball, float boardRadius) {
+        board.setWidth(boardRadius *2);   // TODO: Temporary solution
+        //setWidth and setHeight in a circleBody is the same as setting the diameter
         return (ball.distance(board) >= 0.0001f);
     }
 

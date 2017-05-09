@@ -17,7 +17,7 @@ public class Player implements IPlayer {
     }
 
     //Overloaded with specific parameters, points allways starts at 0
-    public Player(float PadL, float PadW, double PadXPos, double PadYPos, float PadSpeed){
+    public Player(float PadL, float PadW, float PadXPos, float PadYPos, float PadSpeed){
         pad = new Pad(PadL,PadW,PadXPos,PadYPos,PadSpeed);
         points = 0;
     }
@@ -26,8 +26,8 @@ public class Player implements IPlayer {
       pad.setPadXPos(x);
       pad.setPadYPos(y);
     }
-    public ArrayList<Double> getPadCoordinates() {
-        ArrayList<Double> coordinateList = new ArrayList<Double>();
+    public ArrayList<Float> getPadCoordinates() {
+        ArrayList<Float> coordinateList = new ArrayList<Float>();
         coordinateList.add(0,pad.getPadXPos());
         coordinateList.add(1,pad.getPadYPos());
         return coordinateList;

@@ -14,29 +14,29 @@ public class Pad {
 
     //Getters
 
-    public double getLength() {
+    public float getLength() {
         return body.getHeight();
     }
-    public double getWidth() {
+    public float getWidth() {
         return body.getWidth();
     }
-    public double getPadXPos() {
+    public float getPadXPos() {
         return body.getX();
     }
-    public double getPadYPos() {
+    public float getPadYPos() {
         return body.getY();
     }
-    public double getPadSpeed() {
+    public float getPadSpeed() {
         return body.getSpeed();
     }
 
 
 
     //Setters
-    public void setPadXPos(double padXPos) {
+    public void setPadXPos(float padXPos) {
         body.setX(padXPos);
     }
-    public void setPadYPos(double padYPos) {
+    public void setPadYPos(float padYPos) {
         body.setY(padYPos);
     }
     public void setSpeed(float speed) {
@@ -44,7 +44,7 @@ public class Pad {
     }
 
     //Constructor
-    public Pad(float length, float width, double padXPos, double padYPos,float padSpeed) {
+    public Pad(float length, float width, float padXPos, float padYPos,float padSpeed) {
         this.body =new RectangleBody(padXPos,padYPos,width,length);
         this.setSpeed(padSpeed);
     }
@@ -58,7 +58,7 @@ public class Pad {
     }
 
     //Overloaded Method: This simply sets the X and Y pos to the given values
-    public void padMove(double xPos, double yPos) {
+    public void padMove(float xPos, float yPos) {
         setPadXPos(xPos);
         setPadYPos(yPos);
     }

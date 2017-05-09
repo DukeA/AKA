@@ -10,18 +10,15 @@ import org.junit.jupiter.api.Test;
  */
 public class BrickTest {
 
-    private static final double THRESHOLD = 0.0001f;
+    private static final float THRESHOLD = 0.0001f;
 
-    private static final double XPOS = 0f;
-    private static final double YPOS = 0f;
-    private static final double WIDTH = 30f;
-    private static final double HEIGHT = 20f;
+    private static final float XPOS = 0f;
+    private static final float YPOS = 0f;
+    private static final float WIDTH = 30f;
+    private static final float HEIGHT = 20f;
     private static final double ANGLE = Math.PI / 2f;   // =45 degrees
-    private static final double SPEED = 10f;
-
+    private static final float SPEED = 10f;
     private Brick brick;
-
-
 
     @BeforeEach
     void setUp() {
@@ -29,33 +26,21 @@ public class BrickTest {
     }
 
     @Test
-    void getX() {
+    void getters() {
         Assertions.assertEquals(XPOS, brick.getX(), THRESHOLD);
-    }
-
-    @Test
-    void getY() {
         Assertions.assertEquals(YPOS, brick.getY(), THRESHOLD);
     }
 
     @Test
-    void setX() {
-        double expectedX = XPOS + 10f;
-        brick.setX(expectedX);
-        Assertions.assertEquals(expectedX, brick.getX(), THRESHOLD);
-    }
+    void setters() {
+        brick.setX(10);
+        Assertions.assertEquals(10, brick.getX(), THRESHOLD);
 
-    @Test
-    void setY() {
-        double expectedY = YPOS - 10f;
-        brick.setY(expectedY);
-        Assertions.assertEquals(expectedY, brick.getY(), THRESHOLD);
-    }
+        brick.setY(11);
+        Assertions.assertEquals(11, brick.getY(), THRESHOLD);
 
-    @Test
-    void setPosition() {
-        double expectedX = XPOS + 10f;
-        double expectedY = YPOS - 10f;
+        float expectedX = XPOS - 10f;
+        float expectedY = YPOS - 10f;
         brick.setPosition(expectedX, expectedY);
         Assertions.assertEquals(expectedX, brick.getX(), THRESHOLD);
         Assertions.assertEquals(expectedY, brick.getY(), THRESHOLD);

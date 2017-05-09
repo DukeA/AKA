@@ -2,109 +2,144 @@ package Model.GameObjects.Physics;
 
 /**
  * @author Ken Bäcklund
+ * Modified by Alex 2017-05-07
  */
 public class RectangleBody implements Body {
 
     private Location location;
-    private RectangleShape shape;
+    private float width;
+    private float height;
+    //private RectangleShape shape;
 
     // Constructors ///////////////////////////////////////////////////////////
-    public RectangleBody(double xPos, double yPos, double width, double height, double angle, double speed) {
+    public RectangleBody(float xPos, float yPos, float width, float height, float angle, float speed) {
         location = new Location(xPos, yPos, angle, speed);
-        shape = new RectangleShape(width, height);
+        this.width=width;
+        this.height = height;
+
+       // shape = new RectangleShape(width, height);
     }
 
-    public RectangleBody(double xPos, double yPos, double width, double height) {
-        this(xPos, yPos, width, height, 0f, 0f);
+    public RectangleBody(float xPos, float yPos, float width, float height) {
+        location = new Location(xPos,yPos,0,0);
+        this.width=width;
+        this.height=height;
     }
 
-    public RectangleBody(double width, double height) {
-        this(0f, 0f, width, height, 0f, 0f);
+    public RectangleBody(float width, float height) {
+        location = new Location(0f, 0f , 0f, 0f);
+        this.width=width;
+        this.height=height;
     }
 
     public RectangleBody(RectangleBody r) {
-        this(r.getX(), r.getY(), r.getWidth(), r.getHeight(), r.getAngle(), r.getSpeed());
+        location = r.getLoc();
+        this.width=r.getWidth();
+        this.height=r.getHeight();
     }
 
     // Private helper methods /////////////////////////////////////////////////
 
-    private double lineDistance(double lineCenterPoint, double otherPoint, double lineSize) {
+    private float lineDistance(double lineCenterPoint, double otherPoint, double lineSize) {
         // Get the distance from the center of a line segment towards another point.
-        return Math.max(0, Math.abs(lineCenterPoint - otherPoint) - lineSize/2f);
+        return (float) Math.max(0, Math.abs(lineCenterPoint - otherPoint) - lineSize/2f);
     }
 
     // Getters ////////////////////////////////////////////////////////////////
-    public double getX() {
+    @Override
+    public float getX() {
         return location.getX();
     }
 
-    public double getY() {
+    @Override
+    public float getY() {
         return location.getY();
     }
 
-    public double getWidth() {
-        return shape.getWidth();
+    @Override
+    public float getWidth() {
+        return this.width;
     }
 
-    public double getHeight() {
-        return shape.getHeight();
+    @Override
+    public float getHeight() {
+        return this.height;
     }
 
-    public double getAngle() {
+    @Override
+    public float getAngle() {
         return location.getAngle();
     }
 
-    public double getSpeed() {
+    @Override
+    public float getSpeed() {
         return location.getSpeed();
     }
 
-
-
     // Setters ////////////////////////////////////////////////////////////////
-    public void setX(double xPos) {
+    @Override
+    public void setX(float xPos) {
         location.setX(xPos);
     }
 
-    public void setY(double yPos) {
+    @Override
+    public void setY(float yPos) {
         location.setY(yPos);
     }
 
-    public void setSize(double width, double height) {
-        shape = new RectangleShape(width, height);
+    @Override
+    public void setWidth(float width) {
+        this.width = width;
     }
 
-    public void setPosition(double xPos, double yPos) {
+    @Override
+    public void setHeight(float height) {
+        this.height = height;
+    }
+
+    @Override
+    public void setPosition(float xPos, float yPos) {
         location.setPosition(xPos, yPos);
     }
 
-    public void setAngle(double radians) {
+    @Override
+    public void setAngle(float radians) {
         location.setAngle(radians);
     }
 
-    public void setSpeed(double speed) {
+    @Override
+    public void setSpeed(float speed) {
         location.setSpeed(speed);
     }
 
-    public void setMaxSpeed(double maxSpeed) {
+    @Override
+    public void setMaxSpeed(float maxSpeed) {
         location.setMaxSpeed(maxSpeed);
     }
 
 
+    @Override
+    public Location getLoc() {
+        return location;
+    }
 
     // Other methods //////////////////////////////////////////////////////////
-    public double distance(Body body) {
-        double dCenterPoints = location.distance(body.getX(), body.getY());
-        double dToOther = distance(body.getX(), body.getY());
-        double dFromOther = body.distance(getX(), getY());
+    @Override
+    public float distance(Body body) {
+        float dCenterPoints = location.distance(body.getX(), body.getY());
+        float dToOther = distance(body.getX(), body.getY());
+        float dFromOther = body.distance(getX(), getY());
         return Math.max(0, (dToOther + dFromOther)- dCenterPoints);
     }
 
-    public double distance(double xPos, double yPos) {
-        double dx = lineDistance(location.getX(), xPos, shape.getWidth());
-        double dy = lineDistance(location.getY(), yPos, shape.getHeight());
-        return Math.sqrt(dx*dx+dy*dy);
+    @Override
+    public float distance(float xPos, float yPos) {
+        float dx = lineDistance(location.getX(), xPos, getWidth());
+        float dy = lineDistance(location.getY(), yPos, getHeight());
+        return (float) Math.sqrt(dx*dx+dy*dy);
     }
 
+    @Override
     public void move() {
         location.move();
     }

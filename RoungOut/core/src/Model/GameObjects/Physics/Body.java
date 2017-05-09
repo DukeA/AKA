@@ -5,21 +5,25 @@ package Model.GameObjects.Physics;
  */
 public interface Body {
 
-    double getX();
-    double getY();
-    double getAngle();
-    double getSpeed();
+    float getX();
+    float getY();
+    float getAngle();
+    float getSpeed();
+    float getWidth();
+    float getHeight();
 
-    void setX(double xPos);
-    void setY(double yPos);
-    void setPosition(double xPos, double yPos);
-    void setAngle(double radians);
-    void setSpeed(double speed);
-    void setMaxSpeed(double maxSpeed);
+    void setX(float xPos);
+    void setY(float yPos);
+    void setPosition(float xPos, float yPos);
+    void setAngle(float radians);
+    void setSpeed(float speed);
+    void setMaxSpeed(float maxSpeed);
+    void setWidth(float width);
+    void setHeight(float height);
 
-    double distance(Body body);
-    double distance(double xPos, double yPos);
+    float distance(Body body);
+    float distance(float xPos, float yPos);
 
     void move();
-
+    Location getLoc();
 }
