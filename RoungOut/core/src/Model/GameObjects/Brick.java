@@ -8,6 +8,10 @@ import Model.GameObjects.Physics.*;
  */
 public class Brick implements IModel {
 
+    public enum BrickType {
+        NORMAL, SPEED_UP_BALL, SLOW_DOWN_BALL
+    }
+
     private RectangleBody body;
 
     public Brick(float xPos, float yPos, float width, float height, float angle, float speed) {

@@ -28,7 +28,7 @@ public class BoardTest {
         Assertions.assertEquals(board.getRadius(),
                 //this seems to be a faulty formula
                 //(float) (Height/2 + Math.pow(Width,2)/8*Height));
-        (float) Math.sqrt(Math.pow((Width/4),2)+Math.pow((Height/4),2)));
+        (float) Math.sqrt(Math.pow((Width),2)+Math.pow((Height),2))/4);
     }
     @Test
     public void boardTest(){
