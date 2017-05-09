@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by DukeA on 2017-05-06.
  */
-public class BrickView  {
+public class BrickView implements  IViews  {
 
 
     private int WIDTH;
@@ -30,10 +30,19 @@ public class BrickView  {
         shapeRenderer.setColor(Color.LIGHT_GRAY);
         //shapeRenderer.rect();
     }
-    public void dispose() {
-        shapeRenderer.dispose();
+
+    @Override
+    public void update(float delta) {
+
     }
-    public void resize(int width, int HEIGHT) {
+
+    @Override
+    public void reSize(int width, int height) {
+
+    }
+
+    @Override
+    public void dispose() {
 
     }
 

@@ -9,8 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
  * Created by DukeA on 2017-05-04.
  */
 public interface IViews {
-    BallView createBall(int xPos, int yPos,  ShapeRenderer renderer);
-    PadView createPad(int xPos,int yPos,ShapeRenderer renderer);
-    BrickView createBricks (int xPos,int yPos,ShapeRenderer renderer);
-    ScoreView createScorePad(int xPos, int yPos,SpriteBatch spriteBatch);
+
+
+    public void render(float delta);
+    public void update(float delta);
+    public void reSize(int width,int height);
+    public void dispose();
 }

@@ -16,17 +16,15 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 /**
  * Created by DukeA on 2017-04-28.
  */
-public class BoardView implements Screen , IViews{
-    private BallView ballView;
-    private PadView padView;
-    private BrickView brickView;
-    private ScoreView scoreView;
+public class BoardView implements Screen, IView {
+   private ArrayList<IViews> views;
     private Stage stage;
     private IBoard board;
     private ShapeRenderer shapeRenderer;
@@ -41,10 +39,11 @@ public class BoardView implements Screen , IViews{
         this.HEIGHT = HEIGHT;
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
-        padView = createPad(WIDTH,HEIGHT,shapeRenderer);
-        ballView = createBall(WIDTH,HEIGHT,shapeRenderer);
-        brickView = createBricks(WIDTH,HEIGHT,shapeRenderer);
-        scoreView = createScorePad(WIDTH,HEIGHT,batch);
+        views = new ArrayList<IViews>();
+        views.add(0,createPad(WIDTH,HEIGHT,shapeRenderer));
+        views.add(1,createBall(WIDTH,HEIGHT,shapeRenderer));
+        views.add(2,createBricks(WIDTH,HEIGHT,shapeRenderer));
+        views.add(3,createScorePad(WIDTH,HEIGHT,batch));
     }
 
     @Override
@@ -72,9 +71,9 @@ public class BoardView implements Screen , IViews{
                 , (board.getRadius()*(WIDTH/4)/(HEIGHT/4)));
         shapeRenderer.end();
 
-        padView.render(delta);
-        ballView.render(delta);
-        scoreView.render(delta);
+        for (int i =0; i<views.size(); i++) {
+            views.get(i).render(delta);
+        }
         stage.draw();
         batch.end();
 
@@ -88,8 +87,9 @@ public class BoardView implements Screen , IViews{
     }
 
     public void update(float delta) {
-    ballView.update(delta);
-    scoreView.update(delta);
+        for (int i =0; i<views.size(); i++) {
+            views.get(i).update(delta);
+        }
     }
 
     @Override
@@ -118,25 +118,16 @@ public class BoardView implements Screen , IViews{
 
         shapeRenderer.dispose();
     }
-
-    @Override
     public BallView createBall(int xPos, int yPos,  ShapeRenderer renderer) {
         return new BallView(WIDTH,HEIGHT,renderer);
     }
-
-    @Override
     public PadView createPad(int xPos, int yPos, ShapeRenderer renderer) {
 
         return new PadView(WIDTH,HEIGHT,renderer);
     }
-
-    @Override
     public BrickView createBricks(int xPos, int yPos, ShapeRenderer renderer) {
         return new BrickView(WIDTH,HEIGHT,renderer);
     }
-
-
-    @Override
     public ScoreView createScorePad(int xPos, int yPos,SpriteBatch spriteBatch ) {
         return new ScoreView(WIDTH,HEIGHT,spriteBatch);
     }

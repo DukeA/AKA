@@ -19,7 +19,7 @@ import javafx.scene.text.Font;
 /**
  * Created by DukeA on 2017-05-06.
  */
-public class ScoreView implements IScore{
+public class ScoreView implements IScore, IViews{
 
     private final int WIDTH;
     private final int HEIGHT;
@@ -61,6 +61,12 @@ public class ScoreView implements IScore{
         player1Points = getScore(player);
         player2Points = getScore(player2);
     }
+
+    @Override
+    public void reSize(int width, int height) {
+
+    }
+
     public void dispose() {
 
     }

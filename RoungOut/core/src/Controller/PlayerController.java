@@ -67,19 +67,19 @@ public class PlayerController implements IPlayerController, ISwitchController{
         latestKey = Input.Keys.toString(keycode);
 
         if (keycode== P1Left){
-            Player1.moveLeft();
+            //Player1.moveLeft();
         }
 
         if (keycode== P1Right){
-            Player1.moveRight();
+            //Player1.moveRight();
         }
 
         if (keycode== P2Left){
-            Player2.moveLeft();
+            //Player2.moveLeft();
         }
 
         if (keycode== P2Right){
-            Player2.moveRight();
+            //Player2.moveRight();
         }
 
         if (keycode== Input.Keys.ESCAPE){

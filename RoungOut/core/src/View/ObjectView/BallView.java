@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 /**
  * Created by DukeA on 2017-04-28.
  */
-public class BallView implements  IBall {
+public class BallView implements  IBall,IViews {
 
     private Ball ball;
     private SpriteBatch batch;
@@ -32,27 +32,28 @@ public class BallView implements  IBall {
         this.shapeRenderer = renderer;
         ball = getball();
     }
-
+    @Override
     public void render(float delta) {
         this.update(delta);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.RED);
-        shapeRenderer.ellipse((float)ball.getX()
-                ,(float) ball.getY()
-                ,(float)ball.getRadius() *((WIDTH/4)/(HEIGHT/4))
-                ,(float)ball.getRadius()*((WIDTH/4)/(HEIGHT/4)));
+        shapeRenderer.ellipse(ball.getX()
+                , ball.getY()
+                ,ball.getRadius() *((WIDTH/4)/(HEIGHT/4))
+                ,ball.getRadius()*((WIDTH/4)/(HEIGHT/4)));
         shapeRenderer.end();
 
     }
 
-
+    @Override
     public void update(float delta) {
         ball.move();
     }
-
+    @Override
     public void reSize(int width, int height) {
 
     }
+    @Override
     public void dispose() {
         shapeRenderer.dispose();
     }
