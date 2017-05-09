@@ -21,6 +21,7 @@ public class SplashView implements Screen {
     public SplashView(int WIDTH, int HEIGHT) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
+        batch = new SpriteBatch();
     }
 
 
@@ -29,7 +30,7 @@ public class SplashView implements Screen {
         splashtexture = new Texture(Gdx.files.internal(""));
         sprite = new Sprite(splashtexture);
         sprite.setSize(WIDTH,HEIGHT);
-        batch = new SpriteBatch();
+
     }
 
     @Override
@@ -38,7 +39,7 @@ public class SplashView implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        Splas
+        sprite.draw(batch);
         batch.end();
     }
 
