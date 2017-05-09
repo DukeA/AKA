@@ -30,6 +30,13 @@ public class PadTest {
         Assertions.assertEquals(pad.getPadXPos(),padXPos);
         Assertions.assertEquals(pad.getPadYPos(),padYPos);
         Assertions.assertEquals(pad.getPadSpeed(),padSpd);
+
+        //Also, try the same thing but go via getBody
+        Assertions.assertEquals(pad.getBody().getHeight(),padL);
+        Assertions.assertEquals(pad.getBody().getWidth(),padW);
+        Assertions.assertEquals(pad.getBody().getX(),padXPos);
+        Assertions.assertEquals(pad.getBody().getY(),padYPos);
+        Assertions.assertEquals(pad.getBody().getSpeed(),padSpd);
     }
     @Test
     public void padMoveTest() {
@@ -41,14 +48,22 @@ public class PadTest {
         pad.setSpeed(10); //set new speed and check that speed
         Assertions.assertEquals(pad.getPadSpeed(),10);
 
-        // Get the next X and Y coordinate
-        double newX = pad.getPadXPos() + pad.getPadSpeed(); //Verifying the next position
-        double newY = pad.getPadYPos() + pad.getPadSpeed();
+        //Get the current positions, will soon be the old pos
+        float oldX = pad.getPadXPos();
+        float oldY = pad.getPadYPos();
 
-        pad.padMove(); //move the pad with regards to the speed variable
+        // Get the next X and Y coordinate
+        float newX = pad.getPadXPos() + pad.getPadSpeed(); //Verifying the next position
+        float newY = pad.getPadYPos() + pad.getPadSpeed();
+
+        pad.padMoveRight(); //move the pad with regards to the speed variable
         //Check that the pad has moved
         Assertions.assertEquals(pad.getPadXPos() , newX);
         Assertions.assertEquals(pad.getPadYPos() , newY);
+
+        pad.padMoveLeft(); //move the otherway
+        Assertions.assertEquals(pad.getPadXPos() , oldX);
+        Assertions.assertEquals(pad.getPadYPos() , oldY);
     }
 
 }

@@ -28,18 +28,26 @@ public class PlayerTest {
 
    @Test
     public void playerMoveTest() {
-        // Get the next X coordinate
-        double nextX = player.getPad().getPadXPos()
-                + player.getPad().getPadSpeed();
-        //Get the next Y Coordinate
-        double nextY = player.getPad().getPadYPos()
-                + player.getPad().getPadSpeed();
+        //Get the current X and Y pos
+       float oldX = player.getPad().getPadXPos();
+       float oldY = player.getPad().getPadYPos();
 
-        player.movePad();
+
+        // Get the next X and Y coordinates
+        float nextX = player.getPad().getPadXPos() + player.getPad().getPadSpeed();
+        float nextY = player.getPad().getPadYPos() + player.getPad().getPadSpeed();
+
+        player.moveRight();
 
         //Check that the pad has moved to the desired positions
+        //Similar test is in the test for Pad
         Assertions.assertEquals(player.getPad().getPadXPos() , nextX);
         Assertions.assertEquals(player.getPad().getPadYPos() , nextY);
+
+       player.moveLeft();
+       //Move back to start pos
+       Assertions.assertEquals(player.getPad().getPadXPos() , oldX);
+       Assertions.assertEquals(player.getPad().getPadYPos() , oldY);
     }
 
     @Test
