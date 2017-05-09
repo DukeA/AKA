@@ -21,7 +21,6 @@ public class PadView implements IPad, IViews {
     private Pad pad2;
     private ShapeRenderer shapeRenderer2;
     private ShapeRenderer shapeRenderer;
-    private SpriteBatch batch;
     private int WIDTH;
     private int HEIGHT;
 
