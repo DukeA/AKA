@@ -26,7 +26,7 @@ public class BrickView implements  IViews  {
         this.shapeRenderer = renderer;
         bricks = new ArrayList<RectangleBody>();
         for(int i =0; i > 9; i++)  {
-            bricks.add(i,createBrick(Width/2, HEIGHT/2) );
+            bricks.add(i,createBrick(Width/2+10, HEIGHT/2+10) );
         }
 
     }
@@ -34,7 +34,7 @@ public class BrickView implements  IViews  {
     public void render(float delta) {
         for (int i =0; i>bricks.size();i++) {
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-            shapeRenderer.setColor(Color.LIGHT_GRAY);
+            shapeRenderer.setColor(Color.DARK_GRAY);
             shapeRenderer.rect(bricks.get(i).getX(),bricks.get(i).getY(),
                     bricks.get(i).getWidth(),bricks.get(i).getHeight());
             shapeRenderer.end();
