@@ -1,25 +1,14 @@
 package View.ObjectView;
 
-import Model.GameObjects.IScore;
 import Model.GameObjects.Player;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import javafx.scene.text.Font;
 
 /**
  * Created by DukeA on 2017-05-06.
  */
-public class ScoreView implements IScore, IViews{
+public class ScoreView implements  IViews{
 
     private final int WIDTH;
     private final int HEIGHT;
@@ -74,8 +63,6 @@ public class ScoreView implements IScore, IViews{
 
 
     }
-
-    @Override
     public int getScore(Player player) {
         return player.getPoints();
     }

@@ -59,6 +59,6 @@ public class BallView implements  IBall,IViews {
     }
     @Override
     public Ball getball() {
-        return new Ball(WIDTH / 2, HEIGHT / 2, 30f, 0, 0);
+        return new Ball(WIDTH / 2+30, HEIGHT / 2-30, 30f, 0, 0);
     }
 }
