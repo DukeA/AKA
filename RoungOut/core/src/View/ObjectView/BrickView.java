@@ -1,6 +1,7 @@
 package View.ObjectView;
 
 import Model.GameObjects.Brick;
+import Model.GameObjects.Physics.RectangleBody;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -15,7 +16,7 @@ public class BrickView implements  IViews  {
     private int WIDTH;
     private int HEIGHT;
     private ShapeRenderer shapeRenderer;
-    private ArrayList<Brick> bricks;
+    private ArrayList<RectangleBody> bricks;
 
 
 
@@ -23,7 +24,7 @@ public class BrickView implements  IViews  {
         this.WIDTH = Width;
         this.HEIGHT = Height;
         this.shapeRenderer = renderer;
-        bricks = new ArrayList<Brick>();
+        bricks = new ArrayList<RectangleBody>();
         for(int i =0; i > 9; i++)  {
             bricks.add(i,createBrick(Width/2, HEIGHT/2) );
         }
@@ -35,7 +36,7 @@ public class BrickView implements  IViews  {
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             shapeRenderer.setColor(Color.LIGHT_GRAY);
             shapeRenderer.rect(bricks.get(i).getX(),bricks.get(i).getY(),
-                                bricks.get(i).ge);
+                    bricks.get(i).getWidth(),bricks.get(i).getHeight());
             shapeRenderer.end();
         }
     }
@@ -55,8 +56,8 @@ public class BrickView implements  IViews  {
 
     }
 
-    public Brick createBrick(int xpos,int yPos) {
-        return new Brick(xpos,yPos,30,30);
+    public RectangleBody createBrick(int xpos,int yPos) {
+        return new RectangleBody(xpos,yPos,30,30);
     }
 
 }
