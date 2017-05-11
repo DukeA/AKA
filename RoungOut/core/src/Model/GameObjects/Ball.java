@@ -3,11 +3,12 @@ package Model.GameObjects;
 import Model.GameObjects.Physics.Body;
 import Model.GameObjects.Physics.CircleBody;
 
+
 /**
  * @author Ken Bäcklund
  * Modified by Alex 07-05-17
  */
-public class Ball implements IModel {
+public class Ball implements IModel, IBall {
 
     private CircleBody body;
 
@@ -83,4 +84,9 @@ public class Ball implements IModel {
 
     @Override
     public void moveRight() {}
+
+    @Override
+    public CircleBody getball() {
+        return this.body;
+    }
 }

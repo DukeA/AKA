@@ -3,6 +3,7 @@ package View.ObjectView;
 import Model.GameObjects.Ball;
 import Model.GameObjects.IBall;
 import Model.GameObjects.Physics.CircleBody;
+import View.IView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -16,38 +17,30 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 /**
  * Created by DukeA on 2017-04-28.
  */
-public class BallView implements  IBall,IViews {
+public class BallView implements IViews, IView {
 
-    private Ball ball;
-    private SpriteBatch batch;
+    private IBall ball;
     private ShapeRenderer shapeRenderer;
     private int WIDTH;
     private int HEIGHT;
-    private float xBall;
-    private float yBall;
+
 
     public BallView(int WIDTH, int HEIGHT, ShapeRenderer renderer) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
         this.shapeRenderer = renderer;
-        ball = getball();
+        ball = new Ball(WIDTH/2 - 250, HEIGHT / 2+20, 30f, 1, 100);
     }
     @Override
     public void render(float delta) {
-        this.update(delta);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.RED);
-        shapeRenderer.ellipse(ball.getX()
-                , ball.getY()
-                ,ball.getRadius() *((WIDTH/4)/(HEIGHT/4))
-                ,ball.getRadius()*((WIDTH/4)/(HEIGHT/4)));
+        shapeRenderer.ellipse(ball.getball().getX()
+                , ball.getball().getY()
+                ,ball.getball().getRadius() *((WIDTH/4)/(HEIGHT/4))
+                ,ball.getball().getRadius()*((WIDTH/4)/(HEIGHT/4)));
         shapeRenderer.end();
 
-    }
-
-    @Override
-    public void update(float delta) {
-        ball.move(delta);
     }
     @Override
     public void reSize(int width, int height) {
@@ -57,8 +50,9 @@ public class BallView implements  IBall,IViews {
     public void dispose() {
         shapeRenderer.dispose();
     }
+
     @Override
-    public Ball getball() {
-        return new Ball( WIDTH/2 - 250, HEIGHT / 2+20, 30f, 0, 0);
+    public void update() {
+
     }
 }

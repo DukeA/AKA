@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import static com.badlogic.gdx.graphics.Color.DARK_GRAY;
@@ -62,36 +63,21 @@ public class MenuView  implements Screen, IHeadView{
         playButton.setWidth(1000f);
         playButton.setHeight(30f);
         playButton.setPosition(WIDTH/2,HEIGHT/2);
-        playButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-
-            }
-        });
+        playButton.addListener(new ClickListener());
 
         optionsButton = new TextButton("Options"
                 ,skin,"default");
         optionsButton.setWidth(200f);
         optionsButton.setHeight(20f);
         optionsButton.setPosition(WIDTH/2,HEIGHT/2);
-        optionsButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-
-            }
-        });
+        optionsButton.addListener(new ClickListener());
 
         exitButton = new TextButton("Exit",
                 skin,"default");
         exitButton.setWidth(200f);
         exitButton.setHeight(20f);
         exitButton.setPosition(WIDTH/2,HEIGHT/2);
-        exitButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-
-            }
-        });
+        exitButton.addListener(new ClickListener());
 
         table.add(image).width(700).height(400);
         table.row();

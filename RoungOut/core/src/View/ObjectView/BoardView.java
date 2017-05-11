@@ -81,16 +81,9 @@ public class BoardView implements Screen, IView {
 
     }
     public void update() {
-        float delta = Gdx.graphics.getDeltaTime();
-        this.update(delta);
 
     }
 
-    public void update(float delta) {
-        for (int i =0; i<views.size(); i++) {
-            views.get(i).update(delta);
-        }
-    }
 
     @Override
     public void resize(int width, int height) {

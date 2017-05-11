@@ -1,6 +1,8 @@
 package View.ObjectView;
 
+import Model.GameObjects.IPlayer;
 import Model.GameObjects.Player;
+import View.IView;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -8,15 +10,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /**
  * Created by DukeA on 2017-05-06.
  */
-public class ScoreView implements  IViews{
+public class ScoreView implements  IViews, IView{
 
     private final int WIDTH;
     private final int HEIGHT;
     private SpriteBatch spriteBatch;
-    private Player player;
-    private int player1Points;
-    private Player player2;
-    private int player2Points;
+    private IPlayer player;
+    private IPlayer player2;
     private BitmapFont font;
     private BitmapFont font2;
 
@@ -35,20 +35,15 @@ public class ScoreView implements  IViews{
 
     }
     public void render(float delta) {
-        update(delta);
 
-        String player1points = String.valueOf(player1Points);
-        String player2points = String.valueOf(player2Points);
+        String player1points = String.valueOf(player.getPoints());
+        String player2points = String.valueOf(player.getPoints());
         spriteBatch.begin();
         font.draw(spriteBatch,"Player 1: " +player1points,100,HEIGHT-100);
         font.getData().setScale(2);
         font2.draw(spriteBatch,"Player 2: " +player2points,WIDTH-300,HEIGHT-100);
         font2.getData().setScale(2);
         spriteBatch.end();
-    }
-    public void update(float delta) {
-        player1Points = getScore(player);
-        player2Points = getScore(player2);
     }
 
     @Override
@@ -65,5 +60,10 @@ public class ScoreView implements  IViews{
     }
     public int getScore(Player player) {
         return player.getPoints();
+    }
+
+    @Override
+    public void update() {
+
     }
 }

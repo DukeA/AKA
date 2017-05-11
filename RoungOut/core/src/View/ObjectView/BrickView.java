@@ -2,6 +2,7 @@ package View.ObjectView;
 
 import Model.GameObjects.Brick;
 import Model.GameObjects.Physics.RectangleBody;
+import View.IView;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by DukeA on 2017-05-06.
  */
-public class BrickView implements  IViews  {
+public class BrickView implements  IViews, IView {
 
 
     private int WIDTH;
@@ -47,10 +48,6 @@ public class BrickView implements  IViews  {
         }
     }
 
-    @Override
-    public void update(float delta) {
-
-    }
 
     @Override
     public void reSize(int width, int height) {
@@ -59,6 +56,7 @@ public class BrickView implements  IViews  {
 
     @Override
     public void dispose() {
+        shapeRenderer.dispose();
 
     }
 
@@ -66,4 +64,8 @@ public class BrickView implements  IViews  {
         return new RectangleBody(xpos,yPos,30,30);
     }
 
+    @Override
+    public void update() {
+
+    }
 }

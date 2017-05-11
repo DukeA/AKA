@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
  * Created by DukeA on 2017-05-05.
@@ -63,26 +64,16 @@ public class OptionView implements Screen {
             resArea.add(box[i]);
         }
         box[0].setText("1980 X 1080");
-        box[0].addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
+        box[0].addListener(new ClickListener());
 
-            }
-        });
+
         box[1].setText("720 X 420");
-        box[1].addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
+        box[1].addListener(new ClickListener());
 
-            }
-        });
         box[2].setText("1280 X 720");
-        box[2].addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
+        box[2].addListener(new ClickListener());
 
-            }
-        });
+
         table.row();
         table.add(muteArea).width(400).height(100);
         muteArea.add(muteBox);
@@ -91,19 +82,12 @@ public class OptionView implements Screen {
             muteArea.add(muteBox[i]);
         }
         muteBox[0].setText("Yes");
-        muteBox[0].addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
+        muteBox[0].addListener(new ClickListener());
 
-            }
-        });
+
         muteBox[1].setText("No");
-        muteBox[1].addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
+        muteBox[1].addListener(new ClickListener());
 
-            }
-        });
         table.row();
         table.add(keyArea).width(400).height(100);
         stage.addActor(table);
