@@ -64,14 +64,26 @@ public class OptionView implements Screen {
             resArea.add(box[i]);
         }
         box[0].setText("1980 X 1080");
-        box[0].addListener(new ClickListener());
+        box[0].addListener(new ClickListener(){
+            public void Click(Actor actor, float x, float y) {
+
+            }
+        });
 
 
         box[1].setText("720 X 420");
-        box[1].addListener(new ClickListener());
+        box[1].addListener(new ClickListener(){
+            public void Click(Actor actor, float x, float y) {
+
+            }
+        });
 
         box[2].setText("1280 X 720");
-        box[2].addListener(new ClickListener());
+        box[2].addListener(new ClickListener(){
+            public void Click(Actor actor, float x, float y) {
+
+            }
+        });
 
 
         table.row();
@@ -82,11 +94,19 @@ public class OptionView implements Screen {
             muteArea.add(muteBox[i]);
         }
         muteBox[0].setText("Yes");
-        muteBox[0].addListener(new ClickListener());
+        muteBox[0].addListener(new ClickListener(){
+            public void Click(Actor actor, float x, float y) {
+
+            }
+        });
 
 
         muteBox[1].setText("No");
-        muteBox[1].addListener(new ClickListener());
+        muteBox[1].addListener(new ClickListener(){
+            public void Click(Actor actor, float x, float y) {
+
+            }
+        });
 
         table.row();
         table.add(keyArea).width(400).height(100);

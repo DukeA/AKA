@@ -1,8 +1,6 @@
 package View.ObjectView;
 
-import Model.GameObjects.Brick;
 import Model.GameObjects.Physics.RectangleBody;
-import View.IView;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -11,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by DukeA on 2017-05-06.
  */
-public class BrickView implements  IViews, IView {
+public class BrickView implements  IViews {
 
 
     private int WIDTH;
@@ -61,6 +59,7 @@ public class BrickView implements  IViews, IView {
     }
 
     public RectangleBody createBrick(int xpos,int yPos) {
+
         return new RectangleBody(xpos,yPos,30,30);
     }
 

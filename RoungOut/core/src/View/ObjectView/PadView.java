@@ -1,16 +1,14 @@
 package View.ObjectView;
 
 import Model.GameObjects.IPlayer;
-import Model.GameObjects.Pad;
 import Model.GameObjects.Player;
-import View.IView;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 /**
  * Created by DukeA on 2017-05-02.
  */
-public class PadView implements  IViews, IView {
+public class PadView implements  IViews {
 
     private IPlayer pad;
     private IPlayer pad2;

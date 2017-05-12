@@ -2,7 +2,6 @@ package View.ObjectView;
 
 import Model.GameObjects.IPlayer;
 import Model.GameObjects.Player;
-import View.IView;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /**
  * Created by DukeA on 2017-05-06.
  */
-public class ScoreView implements  IViews, IView{
+public class ScoreView implements  IViews{
 
     private final int WIDTH;
     private final int HEIGHT;

@@ -1,11 +1,8 @@
 package Controller;
 
 import Model.GameObjects.IModel;
-import View.IView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
-import org.omg.PortableInterceptor.INACTIVE;
 
 import java.util.ArrayList;
 

@@ -2,22 +2,13 @@ package View.ObjectView;
 
 import Model.GameObjects.Ball;
 import Model.GameObjects.IBall;
-import Model.GameObjects.Physics.CircleBody;
-import View.IView;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 
 /**
  * Created by DukeA on 2017-04-28.
  */
-public class BallView implements IViews, IView {
+public class BallView implements IViews {
 
     private IBall ball;
     private ShapeRenderer shapeRenderer;

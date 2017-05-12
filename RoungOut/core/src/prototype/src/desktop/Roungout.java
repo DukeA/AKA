@@ -4,10 +4,8 @@ import Controller.ISwitchController;
 import Controller.PlayerController;
 import Model.GameObjects.IModel;
 import Model.GameObjects.Player;
-import View.IView;
 import View.MenuView.MenuView;
 import View.ObjectView.BoardView;
-import View.ObjectView.PadView;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
