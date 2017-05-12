@@ -19,11 +19,11 @@ public class BallView implements IViews {
     private int HEIGHT;
 
 
-    public BallView(int WIDTH, int HEIGHT, ShapeRenderer renderer) {
+    public BallView(int WIDTH, int HEIGHT, ShapeRenderer renderer,Board board) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
         this.shapeRenderer = renderer;
-        ball = new Board(WIDTH, HEIGHT);
+        ball = board;
 
     }
 

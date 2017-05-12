@@ -7,6 +7,7 @@ import Model.GameObjects.Player;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import prototype.src.desktop.Roungout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,15 +24,16 @@ public class ScoreView implements  IViews{
     private BitmapFont font;
     private BitmapFont font2;
 
-    public ScoreView(int Width, int Height,SpriteBatch spriteBatch) {
+    public ScoreView(int Width, int Height,SpriteBatch spriteBatch,Board board) {
         this.WIDTH = Width;
         this.HEIGHT = Height;
-        this.player = new Board(Width,Height);
+        this.player = board;
         this.spriteBatch = spriteBatch;
         this.font =  new BitmapFont();
         font.setColor(Color.BLACK);
         this.font2 = new BitmapFont();
         font2.setColor(Color.BLACK);
+
 
 
 

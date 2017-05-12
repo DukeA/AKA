@@ -29,16 +29,18 @@ public class BoardView implements Screen, IViews {
     private final int HEIGHT;
 
 
-    public BoardView(int WIDTH,int HEIGHT) {
+    public BoardView(int WIDTH,int HEIGHT,Board board) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
+        this.board = board;
         views = new ArrayList<IViews>();
-        views.add(0,createPad(WIDTH,HEIGHT,shapeRenderer));
-        views.add(1,createBall(WIDTH,HEIGHT,shapeRenderer));
-        views.add(2,createBricks(WIDTH,HEIGHT,shapeRenderer));
-        views.add(3,createScorePad(WIDTH,HEIGHT,batch));
+        views.add(0,createPad(WIDTH,HEIGHT,shapeRenderer,board));
+        views.add(1,createBall(WIDTH,HEIGHT,shapeRenderer,board));
+        views.add(2,createBricks(WIDTH,HEIGHT,shapeRenderer,board));
+        views.add(3,createScorePad(WIDTH,HEIGHT,batch,board));
+
     }
 
     @Override
@@ -51,7 +53,7 @@ public class BoardView implements Screen, IViews {
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         update(delta);
-        board =new Board(WIDTH, HEIGHT);
+
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         stage = new Stage(new ExtendViewport(WIDTH,HEIGHT));
@@ -114,18 +116,18 @@ public class BoardView implements Screen, IViews {
         }
     }
 
-    public BallView createBall(int xPos, int yPos,  ShapeRenderer renderer) {
-        return new BallView(WIDTH,HEIGHT,renderer);
+    public BallView createBall(int xPos, int yPos,  ShapeRenderer renderer, Board board) {
+        return new BallView(WIDTH,HEIGHT,renderer,board);
     }
-    public PadView createPad(int xPos, int yPos, ShapeRenderer renderer) {
+    public PadView createPad(int xPos, int yPos, ShapeRenderer renderer,Board board) {
 
-        return new PadView(WIDTH,HEIGHT,renderer);
+        return new PadView(WIDTH,HEIGHT,renderer,board);
     }
-    public BrickView createBricks(int xPos, int yPos, ShapeRenderer renderer) {
-        return new BrickView(WIDTH,HEIGHT,renderer);
+    public BrickView createBricks(int xPos, int yPos, ShapeRenderer renderer,Board board) {
+        return new BrickView(WIDTH,HEIGHT,renderer,board);
     }
-    public ScoreView createScorePad(int xPos, int yPos,SpriteBatch spriteBatch ) {
-        return new ScoreView(WIDTH,HEIGHT,spriteBatch);
+    public ScoreView createScorePad(int xPos, int yPos,SpriteBatch spriteBatch,Board board ) {
+        return new ScoreView(WIDTH,HEIGHT,spriteBatch,board);
     }
 
 }

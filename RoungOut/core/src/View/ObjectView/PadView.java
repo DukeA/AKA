@@ -21,32 +21,28 @@ public class PadView implements IViews {
     private int HEIGHT;
 
 
-    public PadView(int width, int height, ShapeRenderer renderer) {
+    public PadView(int width, int height, ShapeRenderer renderer, Board board) {
         this.WIDTH = width;
         this.HEIGHT = height;
         this.shapeRenderer2 = renderer;
         this.shapeRenderer = renderer;
-        Pads = new Board(WIDTH, HEIGHT);
+        this.Pads = board;
 
     }
 
     public void render(float delta) {
         List<Player> p = new ArrayList<Player>(Pads.getPlayers());
-            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-            shapeRenderer.setColor(Color.BLUE);
-            shapeRenderer.rect(p.get(0).getPad().getPadXPos(),
-                    p.get(0).getPad().getPadYPos(),
-                    p.get(0).getPad().getWidth(),
-                    p.get(0).getPad().getLength());
-            shapeRenderer.end();
-
-            shapeRenderer2.begin(ShapeRenderer.ShapeType.Filled);
-            shapeRenderer2.setColor(Color.LIME);
-            shapeRenderer2.rect(p.get(1).getPad().getPadXPos(),
-                    p.get(1).getPad().getPadYPos(),
-                    p.get(1).getPad().getWidth(),
-                    p.get(1).getPad().getLength());
-            shapeRenderer2.end();
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.BLUE);
+        shapeRenderer.rect(p.get(0).getPad().getPadXPos(),
+                p.get(0).getPad().getPadYPos(),
+                p.get(0).getPad().getWidth(),
+                p.get(0).getPad().getLength());
+        shapeRenderer.rect(p.get(1).getPad().getPadXPos(),
+                p.get(1).getPad().getPadYPos(),
+                p.get(1).getPad().getWidth(),
+                p.get(1).getPad().getLength());
+        shapeRenderer.end();
 
     }
 

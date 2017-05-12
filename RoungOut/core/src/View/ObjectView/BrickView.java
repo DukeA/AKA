@@ -23,11 +23,11 @@ public class BrickView implements  IViews {
 
 
 
-    public BrickView(int Width, int Height, ShapeRenderer renderer) {
+    public BrickView(int Width, int Height, ShapeRenderer renderer,Board board) {
         this.WIDTH = Width;
         this.HEIGHT = Height;
         this.shapeRenderer = renderer;
-        board = new Board(Width,HEIGHT);
+        this.board = board;
 
     }
 
@@ -54,10 +54,6 @@ public class BrickView implements  IViews {
 
     }
 
-    public RectangleBody createBrick(int xpos,int yPos) {
-
-        return new RectangleBody(xpos,yPos,30,30);
-    }
 
     @Override
     public void update(float delta) {

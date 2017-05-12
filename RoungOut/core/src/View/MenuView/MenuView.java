@@ -1,5 +1,6 @@
 package View.MenuView;
 
+import Model.GameObjects.Board;
 import View.ObjectView.BoardView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -147,8 +148,8 @@ public class MenuView implements Screen, IHeadView {
     }
 
     @Override
-    public BoardView createBoardView(int HEIGHT, int WIDTH) {
-        return new BoardView(WIDTH, HEIGHT);
+    public BoardView createBoardView(int HEIGHT, int WIDTH,Board board) {
+        return new BoardView(WIDTH, HEIGHT, board);
     }
 
     public OptionView createOptionView(int HEIGHT, int WIDTH) {

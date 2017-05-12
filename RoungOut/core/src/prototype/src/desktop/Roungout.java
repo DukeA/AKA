@@ -10,6 +10,7 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Roungout extends Game {
@@ -19,7 +20,7 @@ public class Roungout extends Game {
     public static int WIDTH =1980;
     public static int HEIGHT =1080;
     public static boolean RESIZE = true;
-    public static boolean FULLSCREEN = true;
+    public static boolean FULLSCREEN = false;
 
     private MenuView MenuView;
     public OrthographicCamera camera;
@@ -36,10 +37,11 @@ public class Roungout extends Game {
 
 
     public void inintControllers(){
-        boardView = new BoardView(WIDTH,HEIGHT);
+        List<Player> players = new ArrayList<Player>(board.getPlayers());
+        boardView = new BoardView(WIDTH,HEIGHT,board);
         viewers.add(boardView);
-
-        PlayerController playerController = new PlayerController(viewers,controllers,player1,player2);
+        PlayerController playerController = new PlayerController(viewers,controllers
+                ,players.get(0),players.get(1));
         controllers.add(0,playerController);
         playerController.updateControllerList(controllers);
 
@@ -48,15 +50,15 @@ public class Roungout extends Game {
 
     @Override
     public void create() {
-        GameObjects();
 
 
 
 
 
         //TODO MAKE GAME LOOP
+        board = new Board(WIDTH,HEIGHT);
         camera = new OrthographicCamera();
-        view = new BoardView(WIDTH,HEIGHT);
+        view = new BoardView(WIDTH,HEIGHT,board);
         camera.setToOrtho(false, WIDTH, HEIGHT);
         this.setScreen(view);
         inintControllers();
@@ -70,19 +72,5 @@ public class Roungout extends Game {
 
     }
 
-    public void GameObjects() {
-        board = new Board(WIDTH,HEIGHT);
-        board.addPlayer(new Player(80f, 30f, WIDTH / 2 - 350, HEIGHT / 2, 0));
-        board.addPlayer(new Player(80f, 30f, WIDTH / 2 - 350, HEIGHT / 2, 0));
-        board.addBrick(new Brick(WIDTH/2-40,HEIGHT/2,30,30));
-        board.addBrick(new Brick(WIDTH/2,HEIGHT/2,30,30));
-        board.addBrick(new Brick(WIDTH/2+40,HEIGHT/2,30,30));
-        board.addBrick(new Brick(WIDTH/2-40,HEIGHT/2-40,30,30));
-        board.addBrick(new Brick(WIDTH/2,HEIGHT/2-40,30,30));
-        board.addBrick(new Brick(WIDTH/2+40,HEIGHT/2-40,30,30));
-        board.addBrick(new Brick(WIDTH/2-40,HEIGHT/2+40,30,30));
-        board.addBrick(new Brick(WIDTH/2,HEIGHT/2+40,30,30));
-        board.addBrick(new Brick(WIDTH/2+40,HEIGHT/2+40,30,30));
-        board.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 30f, 1, 100));
-    }
+
 }
