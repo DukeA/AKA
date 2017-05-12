@@ -28,15 +28,6 @@ public class BrickView implements  IViews {
         this.HEIGHT = Height;
         this.shapeRenderer = renderer;
         board = new Board(Width,HEIGHT);
-        board.addBrick(new Brick(Width/2-40,Height/2,30,30));
-        board.addBrick(new Brick(Width/2,Height/2,30,30));
-        board.addBrick(new Brick(Width/2+40,Height/2,30,30));
-        board.addBrick(new Brick(Width/2-40,Height/2-40,30,30));
-        board.addBrick(new Brick(Width/2,Height/2-40,30,30));
-        board.addBrick(new Brick(Width/2+40,Height/2-40,30,30));
-        board.addBrick(new Brick(Width/2-40,Height/2+40,30,30));
-        board.addBrick(new Brick(Width/2,Height/2+40,30,30));
-        board.addBrick(new Brick(Width/2+40,Height/2+40,30,30));
 
     }
 

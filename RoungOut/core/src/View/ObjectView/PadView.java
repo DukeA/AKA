@@ -27,8 +27,6 @@ public class PadView implements IViews {
         this.shapeRenderer2 = renderer;
         this.shapeRenderer = renderer;
         Pads = new Board(WIDTH, HEIGHT);
-        Pads.addPad(new Player(80f, 30f, WIDTH / 2 - 350, HEIGHT / 2, 0));
-        Pads.addPad(new Player(80f, 30f, WIDTH / 2 - 450, HEIGHT / 2, 0));
 
     }
 

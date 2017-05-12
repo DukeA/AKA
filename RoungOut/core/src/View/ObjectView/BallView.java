@@ -24,7 +24,7 @@ public class BallView implements IViews {
         this.HEIGHT = HEIGHT;
         this.shapeRenderer = renderer;
         ball = new Board(WIDTH, HEIGHT);
-        ball.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 30f, 1, 100));
+
     }
 
     @Override

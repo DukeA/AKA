@@ -32,8 +32,6 @@ public class ScoreView implements  IViews{
         font.setColor(Color.BLACK);
         this.font2 = new BitmapFont();
         font2.setColor(Color.BLACK);
-        player.addPad(new Player(80f, 30f, WIDTH / 2 - 350, HEIGHT / 2, 0));
-        player.addPad(new Player(80f, 30f, WIDTH / 2 - 450, HEIGHT / 2, 0));
 
 
 

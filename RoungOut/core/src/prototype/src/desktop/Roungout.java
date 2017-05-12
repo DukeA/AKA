@@ -2,8 +2,7 @@ package prototype.src.desktop;
 
 import Controller.ISwitchController;
 import Controller.PlayerController;
-import Model.GameObjects.IModel;
-import Model.GameObjects.Player;
+import Model.GameObjects.*;
 import View.MenuView.MenuView;
 import View.ObjectView.BoardView;
 import View.ObjectView.IViews;
@@ -31,9 +30,10 @@ public class Roungout extends Game {
 
     private BoardView view;
 
-    //Should the controller use IPlayers instead??
-    private IModel player1 = new Player(20,10,0,0,5);
-    private IModel player2 = new Player(20,10,0,0,5);
+    private Board board;
+
+
+
 
     public void inintControllers(){
         boardView = new BoardView(WIDTH,HEIGHT);
@@ -48,6 +48,12 @@ public class Roungout extends Game {
 
     @Override
     public void create() {
+        GameObjects();
+
+
+
+
+
         //TODO MAKE GAME LOOP
         camera = new OrthographicCamera();
         view = new BoardView(WIDTH,HEIGHT);
@@ -62,5 +68,21 @@ public class Roungout extends Game {
 
     public void dispose() {
 
+    }
+
+    public void GameObjects() {
+        board = new Board(WIDTH,HEIGHT);
+        board.addPlayer(new Player(80f, 30f, WIDTH / 2 - 350, HEIGHT / 2, 0));
+        board.addPlayer(new Player(80f, 30f, WIDTH / 2 - 350, HEIGHT / 2, 0));
+        board.addBrick(new Brick(WIDTH/2-40,HEIGHT/2,30,30));
+        board.addBrick(new Brick(WIDTH/2,HEIGHT/2,30,30));
+        board.addBrick(new Brick(WIDTH/2+40,HEIGHT/2,30,30));
+        board.addBrick(new Brick(WIDTH/2-40,HEIGHT/2-40,30,30));
+        board.addBrick(new Brick(WIDTH/2,HEIGHT/2-40,30,30));
+        board.addBrick(new Brick(WIDTH/2+40,HEIGHT/2-40,30,30));
+        board.addBrick(new Brick(WIDTH/2-40,HEIGHT/2+40,30,30));
+        board.addBrick(new Brick(WIDTH/2,HEIGHT/2+40,30,30));
+        board.addBrick(new Brick(WIDTH/2+40,HEIGHT/2+40,30,30));
+        board.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 30f, 1, 100));
     }
 }

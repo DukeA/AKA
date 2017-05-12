@@ -69,7 +69,7 @@ public class Board implements IBoard {
         }
     }
 
-    public void addPad(Player pad) {
+    public void addPlayer(Player pad) {
         if (pad != null) {
             this.players.add(pad);
         }
