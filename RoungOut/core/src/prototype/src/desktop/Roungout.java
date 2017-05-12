@@ -1,13 +1,12 @@
 package prototype.src.desktop;
 
-import Controller.ISwitchController;
+import Controller.ControllerHandler;
 import Controller.PlayerController;
 import Model.GameObjects.IModel;
 import Model.GameObjects.Player;
 import View.IView;
 import View.MenuView.MenuView;
 import View.ObjectView.BoardView;
-import View.ObjectView.PadView;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
@@ -26,7 +25,7 @@ public class Roungout extends Game {
     public OrthographicCamera camera;
     public IView boardView;
 
-    private ArrayList<ISwitchController> controllers = new ArrayList<ISwitchController>();
+
     private ArrayList<IView> viewers = new ArrayList<IView>();
 
     private BoardView view;
@@ -35,14 +34,30 @@ public class Roungout extends Game {
     private IModel player1 = new Player(20,10,0,0,5);
     private IModel player2 = new Player(20,10,0,0,5);
 
+    public enum EnumIndexes {
+        PLAYER_CONTROLLER(0),
+        MENU_CONTROLLER(1),
+        OPTIONS_CONTOLLERS(2);
+
+        private int indexvalue;
+        EnumIndexes(int i ) {
+            this.indexvalue = i;
+        }
+        public int getIndexvalue(){
+            return this.indexvalue;
+        }
+    }
+
     public void inintControllers(){
         boardView = new BoardView(WIDTH,HEIGHT);
         viewers.add(boardView);
+        ControllerHandler handler = new ControllerHandler();
 
-        PlayerController playerController = new PlayerController(viewers,controllers,player1,player2);
-        controllers.add(0,playerController);
-        playerController.updateControllerList(controllers);
 
+        PlayerController playerController = new PlayerController(viewers,EnumIndexes.PLAYER_CONTROLLER.getIndexvalue(),player1,player2);
+
+        ControllerHandler handler = new ControllerHandler();
+        handler.addController(EnumIndexes.PLAYER_CONTROLLER.getIndexvalue(),playerController);
     }
 
 

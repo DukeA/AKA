@@ -1,8 +1,6 @@
 package View.ObjectView;
 
 
-import Controller.IPlayerController;
-import Controller.PlayerController;
 import Model.GameObjects.Board;
 import Model.GameObjects.IBoard;
 import View.IView;
@@ -13,11 +11,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
