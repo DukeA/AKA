@@ -4,8 +4,8 @@ import java.util.Set;
 
 /**
  * Created by Adam on 2017-03-30.
- * Update by Adam on 2017-03-30
- * Pat on the back by Adam on 2017-03-30
+ * Update by Ken on 2017-05-12
+ *
  */
 public interface IBoard {
     public float getXPos();
