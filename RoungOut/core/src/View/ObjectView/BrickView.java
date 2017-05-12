@@ -1,21 +1,25 @@
 package View.ObjectView;
 
+import Model.GameObjects.Ball;
+import Model.GameObjects.Board;
+import Model.GameObjects.Brick;
 import Model.GameObjects.Physics.RectangleBody;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by DukeA on 2017-05-06.
  */
 public class BrickView implements  IViews {
 
-
+    private Board board;
     private int WIDTH;
     private int HEIGHT;
     private ShapeRenderer shapeRenderer;
-    private ArrayList<RectangleBody> bricks;
+
 
 
 
@@ -23,25 +27,26 @@ public class BrickView implements  IViews {
         this.WIDTH = Width;
         this.HEIGHT = Height;
         this.shapeRenderer = renderer;
-        bricks = new ArrayList<RectangleBody>();
-        bricks.add(0,createBrick(Width/2-40,Height/2));
-        bricks.add(1,createBrick(Width/2,Height/2));
-        bricks.add(2,createBrick(Width/2+40,Height/2));
-        bricks.add(3,createBrick(Width/2-40,Height/2-40));
-        bricks.add(4,createBrick(Width/2,Height/2-40));
-        bricks.add(5,createBrick(Width/2+40,Height/2-40));
-        bricks.add(6,createBrick(Width/2-40,Height/2+40));
-        bricks.add(7,createBrick(Width/2,Height/2+40));
-        bricks.add(8,createBrick(Width/2+40,Height/2+40));
+        board = new Board(Width,HEIGHT);
+        board.addBrick(new Brick(Width/2-40,Height/2,30,30));
+        board.addBrick(new Brick(Width/2,Height/2,30,30));
+        board.addBrick(new Brick(Width/2+40,Height/2,30,30));
+        board.addBrick(new Brick(Width/2-40,Height/2-40,30,30));
+        board.addBrick(new Brick(Width/2,Height/2-40,30,30));
+        board.addBrick(new Brick(Width/2+40,Height/2-40,30,30));
+        board.addBrick(new Brick(Width/2-40,Height/2+40,30,30));
+        board.addBrick(new Brick(Width/2,Height/2+40,30,30));
+        board.addBrick(new Brick(Width/2+40,Height/2+40,30,30));
 
     }
 
     public void render(float delta) {
-        for (int i =0; i < bricks.size();i++) {
+        for (Brick brick : board.getBricks()) {
+
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             shapeRenderer.setColor(Color.DARK_GRAY);
-            shapeRenderer.rect(bricks.get(i).getX(),bricks.get(i).getY(),
-                    bricks.get(i).getWidth(),bricks.get(i).getHeight());
+            shapeRenderer.rect((float)brick.getX(),(float)brick.getY(),
+                    30f,30f);
             shapeRenderer.end();
         }
     }
@@ -64,7 +69,7 @@ public class BrickView implements  IViews {
     }
 
     @Override
-    public void update() {
+    public void update(float delta) {
 
     }
 }

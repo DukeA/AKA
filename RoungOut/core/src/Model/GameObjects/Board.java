@@ -17,7 +17,7 @@ public class Board implements IBoard {
 
     private Set<Ball> balls;
     private Set<Brick> bricks;
-    private Set<Pad> pads;
+    private Set<Player> players;
 
     public Board(int Width, int Height) {
         xPos = Width/2;
@@ -25,7 +25,7 @@ public class Board implements IBoard {
         radius = (float) Math.sqrt(Math.pow((Width/4),2)+Math.pow((Height/4),2));
         balls = new HashSet<Ball>();
         bricks = new HashSet<Brick>();
-        pads = new HashSet<Pad>();
+        players = new HashSet<Player>();
     }
 
     public float getXPos() {
@@ -46,13 +46,14 @@ public class Board implements IBoard {
         return this.bricks;
     }
 
-    public Set<Pad> getPads() {
-        return this.pads;
+    public Set<Player> getPlayers() {
+        return this.players;
     }
 
     public void update(float deltaTime) {
         for (Ball ball : balls) {
             ball.move(deltaTime);
+
         }
     }
 
@@ -68,9 +69,9 @@ public class Board implements IBoard {
         }
     }
 
-    public void addPad(Pad pad) {
+    public void addPad(Player pad) {
         if (pad != null) {
-            this.pads.add(pad);
+            this.players.add(pad);
         }
     }
 
@@ -88,7 +89,7 @@ public class Board implements IBoard {
 
     public void removePad(Pad pad) {
         if (pad != null) {
-            this.pads.remove(pad);
+            this.players.remove(pad);
         }
     }
 

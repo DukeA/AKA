@@ -4,7 +4,8 @@ import java.util.Set;
 
 /**
  * Created by Adam on 2017-03-30.
- * Updated by Ken on 2017-05-09.
+ * Update by Adam on 2017-03-30
+ * Pat on the back by Adam on 2017-03-30
  */
 public interface IBoard {
     public float getXPos();
@@ -13,8 +14,8 @@ public interface IBoard {
 
     public Set<Ball> getBalls();
     public Set<Brick> getBricks();
-    public Set<Player> getPlayer();
+    public Set<Player> getPlayers();
 
-    public void update(float deltaTime);
+    public void update( float delta);
 
 }

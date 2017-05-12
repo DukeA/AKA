@@ -100,7 +100,7 @@ public class PlayerController implements IPlayerController, ISwitchController{
     private void updateAllViews() {
         //Call update to all views
         for (IViews view : viewSubscribers) {
-            view.update();
+            view.update(Gdx.graphics.getDeltaTime());
         }
     }
 

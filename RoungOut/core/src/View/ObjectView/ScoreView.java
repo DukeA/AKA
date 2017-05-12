@@ -1,5 +1,7 @@
 package View.ObjectView;
 
+import Model.GameObjects.Board;
+import Model.GameObjects.IBoard;
 import Model.GameObjects.IPlayer;
 import Model.GameObjects.Player;
 import com.badlogic.gdx.graphics.Color;
@@ -34,9 +36,8 @@ public class ScoreView implements  IViews{
 
     }
     public void render(float delta) {
-
         String player1points = String.valueOf(player.getPoints());
-        String player2points = String.valueOf(player.getPoints());
+        String player2points = String.valueOf(player2.getPoints());
         spriteBatch.begin();
         font.draw(spriteBatch,"Player 1: " +player1points,100,HEIGHT-100);
         font.getData().setScale(2);
@@ -53,6 +54,12 @@ public class ScoreView implements  IViews{
     public void dispose() {
 
     }
+
+    @Override
+    public void update(float delta) {
+
+    }
+
     public void resize(int width, int height) {
 
 
@@ -61,8 +68,4 @@ public class ScoreView implements  IViews{
         return player.getPoints();
     }
 
-    @Override
-    public void update() {
-
-    }
 }

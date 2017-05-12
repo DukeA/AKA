@@ -50,7 +50,7 @@ public class BoardView implements Screen, IViews {
     public void render(float delta) {
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        update(delta);
         board =new Board(WIDTH, HEIGHT);
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
@@ -108,9 +108,9 @@ public class BoardView implements Screen, IViews {
     }
 
     @Override
-    public void update() {
+    public void update(float delta) {
         for (IViews views: views) {
-            views.update();
+            views.update(delta);
         }
     }
 

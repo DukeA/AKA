@@ -20,6 +20,7 @@ public class Roungout extends Game {
     public static int WIDTH =1980;
     public static int HEIGHT =1080;
     public static boolean RESIZE = true;
+    public static boolean FULLSCREEN = true;
 
     private MenuView MenuView;
     public OrthographicCamera camera;

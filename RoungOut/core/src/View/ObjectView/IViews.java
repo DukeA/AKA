@@ -14,5 +14,5 @@ public interface IViews {
     public void render(float delta);
     public void reSize(int width,int height);
     public void dispose();
-    public void update();
+    public void update(float delta);
 }

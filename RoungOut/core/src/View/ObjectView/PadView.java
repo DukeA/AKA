@@ -1,5 +1,6 @@
 package View.ObjectView;
 
+import Model.GameObjects.Board;
 import Model.GameObjects.IPlayer;
 import Model.GameObjects.Player;
 import com.badlogic.gdx.graphics.Color;
@@ -8,10 +9,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 /**
  * Created by DukeA on 2017-05-02.
  */
-public class PadView implements  IViews {
+public class PadView implements IViews {
 
-    private IPlayer pad;
-    private IPlayer pad2;
+    private Board Pads;
     private ShapeRenderer shapeRenderer2;
     private ShapeRenderer shapeRenderer;
     private int WIDTH;
@@ -23,30 +23,22 @@ public class PadView implements  IViews {
         this.HEIGHT = height;
         this.shapeRenderer2 = renderer;
         this.shapeRenderer = renderer;
-        pad =  new Player(80f,30f,WIDTH / 2 - 350, HEIGHT / 2,0);
-        pad2 = new Player(80f,30f,WIDTH / 2 - 450, HEIGHT / 2,0);
+        Pads = new Board(WIDTH, HEIGHT);
+        Pads.addPad(new Player(80f, 30f, WIDTH / 2 - 350, HEIGHT / 2, 0));
+        Pads.addPad(new Player(80f, 30f, WIDTH / 2 - 450, HEIGHT / 2, 0));
 
     }
 
     public void render(float delta) {
-
-        shapeRenderer.end();
-
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(Color.BLUE);
-        shapeRenderer.rect(pad.getPad().getPadXPos()
-                , pad.getPad().getPadYPos()
-                , pad.getPad().getWidth()
-                , pad.getPad().getLength());
-        shapeRenderer.end();
-
-        shapeRenderer2.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer2.setColor(Color.LIME);
-        shapeRenderer2.rect(pad2.getPad().getPadXPos()
-                , pad2.getPad().getPadYPos()
-                , pad2.getPad().getWidth()
-                , pad2.getPad().getLength());
-        shapeRenderer2.end();
+        for (Player p : Pads.getPlayers()) {
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            shapeRenderer.setColor(Color.BLUE);
+            shapeRenderer.rect(p.getPad().getPadXPos(),
+                    p.getPad().getPadYPos(),
+                    p.getPad().getWidth(),
+                    p.getPad().getLength());
+            shapeRenderer.end();
+        }
     }
 
 
@@ -58,9 +50,9 @@ public class PadView implements  IViews {
         shapeRenderer.dispose();
     }
 
-
     @Override
-    public void update() {
+    public void update(float delta) {
 
     }
+
 }
