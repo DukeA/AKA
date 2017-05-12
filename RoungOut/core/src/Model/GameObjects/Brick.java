@@ -13,13 +13,17 @@ public class Brick implements IModel {
     }
 
     private RectangleBody body;
+    private Enum brickvalue;
+
 
     public Brick(float xPos, float yPos, float width, float height, float angle, float speed) {
         body = new RectangleBody(xPos, yPos, width, height, angle, speed);
+        brickvalue = BrickType.NORMAL;
     }
 
     public Brick(float xPos, float yPos, float width, float height) {
         body = new RectangleBody(xPos, yPos, width, height, 0f, 0f);
+        brickvalue = BrickType.NORMAL;
     }
 
     public double getX() {

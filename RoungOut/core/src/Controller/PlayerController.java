@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.GameObjects.IModel;
+import View.ObjectView.IViews;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 public class PlayerController implements IPlayerController, ISwitchController{
     //The list will only contain unique subscribers and this is guaranteed by the
     //addListener and removeListener methods
-    private ArrayList<IView> viewSubscribers = new ArrayList<IView>();
+    private ArrayList<IViews> viewSubscribers = new ArrayList<IViews>();
     //    private ArrayList<IModel> modelSubscribers = new ArrayList<IModel>();
     private ArrayList<ISwitchController> controllers = new ArrayList<ISwitchController>();
 
@@ -35,8 +36,7 @@ public class PlayerController implements IPlayerController, ISwitchController{
         return latestKey;
     }
 
-    @Override
-    public boolean addListener(IView view) {
+    public boolean addListener(IViews view) {
 
        if(!viewSubscribers.contains(view)){ //If we don't have a the view, add it
            viewSubscribers.add(view);
@@ -46,8 +46,8 @@ public class PlayerController implements IPlayerController, ISwitchController{
         return false;
     }
 
-    @Override
-    public boolean removeListener(IView view) {
+
+    public boolean removeListener(IViews view) {
 
         if(viewSubscribers.contains(view)){ //If we do have the view, remove it
             viewSubscribers.remove(view);
@@ -99,7 +99,7 @@ public class PlayerController implements IPlayerController, ISwitchController{
     //Helper method, code reuse
     private void updateAllViews() {
         //Call update to all views
-        for (IView view : viewSubscribers) {
+        for (IViews view : viewSubscribers) {
             view.update();
         }
     }
@@ -141,7 +141,7 @@ public class PlayerController implements IPlayerController, ISwitchController{
     }
     //End of these inputs
 
-    public PlayerController(ArrayList<IView> views, ArrayList<ISwitchController> controllerList, IModel P1, IModel P2) {
+    public PlayerController(ArrayList<IViews> views, ArrayList<ISwitchController> controllerList, IModel P1, IModel P2) {
         Gdx.input.setInputProcessor(this);
 
         this.Player1=P1;

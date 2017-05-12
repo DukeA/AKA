@@ -13,7 +13,7 @@ public interface IBoard {
 
     public Set<Ball> getBalls();
     public Set<Brick> getBricks();
-    public Set<Pad> getPads();
+    public Set<Player> getPlayer();
 
     public void update(float deltaTime);
 

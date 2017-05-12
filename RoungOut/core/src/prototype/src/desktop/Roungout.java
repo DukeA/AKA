@@ -6,6 +6,7 @@ import Model.GameObjects.IModel;
 import Model.GameObjects.Player;
 import View.MenuView.MenuView;
 import View.ObjectView.BoardView;
+import View.ObjectView.IViews;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
@@ -22,10 +23,10 @@ public class Roungout extends Game {
 
     private MenuView MenuView;
     public OrthographicCamera camera;
-    public IView boardView;
+    public IViews boardView;
 
     private ArrayList<ISwitchController> controllers = new ArrayList<ISwitchController>();
-    private ArrayList<IView> viewers = new ArrayList<IView>();
+    private ArrayList<IViews> viewers = new ArrayList<IViews>();
 
     private BoardView view;
 
@@ -46,6 +47,7 @@ public class Roungout extends Game {
 
     @Override
     public void create() {
+        //TODO MAKE GAME LOOP
         camera = new OrthographicCamera();
         view = new BoardView(WIDTH,HEIGHT);
         camera.setToOrtho(false, WIDTH, HEIGHT);
