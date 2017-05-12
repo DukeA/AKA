@@ -1,6 +1,7 @@
 package prototype.src.desktop;
 
 import Controller.ControllerHandler;
+import Controller.IController;
 import Controller.PlayerController;
 import Model.GameObjects.IModel;
 import Model.GameObjects.Player;
@@ -34,30 +35,23 @@ public class Roungout extends Game {
     private IModel player1 = new Player(20,10,0,0,5);
     private IModel player2 = new Player(20,10,0,0,5);
 
-    public enum EnumIndexes {
-        PLAYER_CONTROLLER(0),
-        MENU_CONTROLLER(1),
-        OPTIONS_CONTOLLERS(2);
-
-        private int indexvalue;
-        EnumIndexes(int i ) {
-            this.indexvalue = i;
-        }
-        public int getIndexvalue(){
-            return this.indexvalue;
-        }
-    }
 
     public void inintControllers(){
         boardView = new BoardView(WIDTH,HEIGHT);
         viewers.add(boardView);
+        //ControllerHandler handler = new ControllerHandler();
+        /*ArrayList<EnumIndexes> indexes = new ArrayList<EnumIndexes>();
+        indexes.add(0,EnumIndexes.PLAYER_CONTROLLER);
+        indexes.add(1,EnumIndexes.MENU_CONTROLLER);
+        indexes.add(2,EnumIndexes.OPTIONS_CONTOLLERS);
+        */
         ControllerHandler handler = new ControllerHandler();
 
+        ArrayList<IController> controllers = new ArrayList<IController>();
+        PlayerController playerController = new PlayerController(viewers,player1,player2, handler);
+        controllers.add(playerController);
 
-        PlayerController playerController = new PlayerController(viewers,EnumIndexes.PLAYER_CONTROLLER.getIndexvalue(),player1,player2);
 
-        ControllerHandler handler = new ControllerHandler();
-        handler.addController(EnumIndexes.PLAYER_CONTROLLER.getIndexvalue(),playerController);
     }
 
 

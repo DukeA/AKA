@@ -18,10 +18,11 @@ public class PlayerController implements IController{
     //    private ArrayList<IModel> modelSubscribers = new ArrayList<IModel>();
    // private ArrayList<ISwitchController> controllers = new ArrayList<ISwitchController>();
 
-    int index;
+    final EnumIndexes index = EnumIndexes.PLAYER_CONTROLLER; //Static Enum
+    private IHandler handler;
 
-    IModel Player1;
-    IModel Player2;
+    private IModel Player1;
+    private IModel Player2;
 
     //Keys, made this way inorder to rebind them in the future
     private int P1Right;
@@ -46,26 +47,28 @@ public class PlayerController implements IController{
 
         if (keycode== P1Left){
             Player1.moveLeft();
+            updateAllViews();
         }
 
         if (keycode== P1Right){
             Player1.moveRight();
+            updateAllViews();
         }
 
         if (keycode== P2Left){
             Player2.moveLeft();
+            updateAllViews();
         }
 
         if (keycode== P2Right){
             Player2.moveRight();
+            updateAllViews();
         }
 
         if (keycode== Input.Keys.ESCAPE){
-
+            handler.callSetNewInput(EnumIndexes.MENU_CONTROLLER);
+            updateAllViews();
         }
-
-        updateAllViews();
-
         /**
          *
          *  It would be much simpler if the return value of the interfaced could be an int and
@@ -118,10 +121,11 @@ public class PlayerController implements IController{
     }
     //End of these inputs
 
-    public PlayerController(ArrayList<IView> views, int index ,IModel P1, IModel P2) {
+    public PlayerController(ArrayList<IView> views,IModel P1, IModel P2, IHandler handler) {
         Gdx.input.setInputProcessor(this);
 
-        this.index= index;
+        this.handler = handler;
+        handler.
 
         this.Player1=P1;
         this.Player2=P2;
