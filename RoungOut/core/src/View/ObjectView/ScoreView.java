@@ -46,7 +46,7 @@ public class ScoreView implements  IViews{
                 spriteBatch.begin();
                 font.draw(spriteBatch,"Player 1: " +playerPoints,100,HEIGHT-100);
                 font.getData().setScale(2);
-                font2.draw(spriteBatch,"Player 2: " +player2Points ,WIDTH-200,HEIGHT-100);
+                font2.draw(spriteBatch,"Player 2: " +player2Points ,WIDTH-300,HEIGHT-100);
                 font2.getData().setScale(2);
                 spriteBatch.end();
 

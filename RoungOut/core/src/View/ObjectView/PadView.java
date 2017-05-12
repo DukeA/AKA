@@ -38,12 +38,16 @@ public class PadView implements IViews {
                 p.get(0).getPad().getPadYPos(),
                 p.get(0).getPad().getWidth(),
                 p.get(0).getPad().getLength());
-        shapeRenderer.rect(p.get(1).getPad().getPadXPos(),
+        shapeRenderer.end();
+
+
+        shapeRenderer2.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer2.setColor(Color.LIME);
+        shapeRenderer2.rect(p.get(1).getPad().getPadXPos(),
                 p.get(1).getPad().getPadYPos(),
                 p.get(1).getPad().getWidth(),
                 p.get(1).getPad().getLength());
-        shapeRenderer.end();
-
+        shapeRenderer2.end();
     }
 
 

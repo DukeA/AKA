@@ -21,7 +21,6 @@ import java.util.ArrayList;
  */
 public class BoardView implements Screen, IViews {
    private ArrayList<IViews> views;
-    private Stage stage;
     private IBoard board;
     private ShapeRenderer shapeRenderer;
     private SpriteBatch batch;
@@ -54,9 +53,6 @@ public class BoardView implements Screen, IViews {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         update(delta);
 
-        batch = new SpriteBatch();
-        shapeRenderer = new ShapeRenderer();
-        stage = new Stage(new ExtendViewport(WIDTH,HEIGHT));
         Gdx.gl.glLineWidth(16);
 
         batch.begin();
@@ -66,12 +62,11 @@ public class BoardView implements Screen, IViews {
                 board.getRadius()*(WIDTH/4)/(HEIGHT/4)
                 , (board.getRadius()*(WIDTH/4)/(HEIGHT/4)));
         shapeRenderer.end();
-
+        batch.end();
         for (int i =0; i<views.size(); i++) {
             views.get(i).render(delta);
         }
-        stage.draw();
-        batch.end();
+
 
 
 

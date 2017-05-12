@@ -28,7 +28,7 @@ public class Board implements IBoard {
         players = new HashSet<Player>();
 
         this.addPlayer(new Player(80f, 30f, Width / 2 - 350, Height / 2, 0));
-        this.addPlayer(new Player(80f, 30f, Width / 2 - 350, Height / 2, 0));
+        this.addPlayer(new Player(80f, 30f, Width / 2 - 450, Height / 2, 0));
         this.addBrick(new Brick(Width/2-40,Height/2,30,30));
         this.addBrick(new Brick(Width/2,Height/2,30,30));
         this.addBrick(new Brick(Width/2+40,Height/2,30,30));
