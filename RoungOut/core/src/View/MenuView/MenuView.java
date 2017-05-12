@@ -1,9 +1,9 @@
 package View.MenuView;
 
+import Model.GameObjects.Board;
 import View.ObjectView.BoardView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,19 +13,17 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
-import static com.badlogic.gdx.graphics.Color.DARK_GRAY;
+import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.actor;
 
 /**
  * Created by DukeA on 2017-04-28.
  */
-public class MenuView  implements Screen, IHeadView{
+public class MenuView implements Screen, IHeadView {
 
-    private  int WIDTH;
-    private  int HEIGHT;
+    private int WIDTH;
+    private int HEIGHT;
     private OrthographicCamera camera;
     private Stage stage;
     private SpriteBatch batch;
@@ -44,7 +42,7 @@ public class MenuView  implements Screen, IHeadView{
         this.skin = new Skin(Gdx.files.internal("uiskin.json"));
         this.font = new BitmapFont();
         this.stage = new Stage();
-        this.camera = new OrthographicCamera(WIDTH,HEIGHT);
+        this.camera = new OrthographicCamera(WIDTH, HEIGHT);
     }
 
     @Override
@@ -59,37 +57,49 @@ public class MenuView  implements Screen, IHeadView{
 
 
         playButton = new TextButton("Play"
-                , skin,"default");
+                , skin, "default");
         playButton.setWidth(1000f);
         playButton.setHeight(30f);
-        playButton.setPosition(WIDTH/2,HEIGHT/2);
-        playButton.addListener(new ClickListener());
+        playButton.setPosition(WIDTH / 2, HEIGHT / 2);
+        playButton.addListener(new ClickListener() {
+            public void Click(Actor actor, float x, float y) {
+
+            }
+        });
 
         optionsButton = new TextButton("Options"
-                ,skin,"default");
+                , skin, "default");
         optionsButton.setWidth(200f);
         optionsButton.setHeight(20f);
-        optionsButton.setPosition(WIDTH/2,HEIGHT/2);
-        optionsButton.addListener(new ClickListener());
+        optionsButton.setPosition(WIDTH / 2, HEIGHT / 2);
+        optionsButton.addListener(new ClickListener(){
+            public void Click(Actor actor, float x, float y) {
+
+            }
+        });
 
         exitButton = new TextButton("Exit",
-                skin,"default");
+                skin, "default");
         exitButton.setWidth(200f);
         exitButton.setHeight(20f);
-        exitButton.setPosition(WIDTH/2,HEIGHT/2);
-        exitButton.addListener(new ClickListener());
+        exitButton.setPosition(WIDTH / 2, HEIGHT / 2);
+        exitButton.addListener(new ClickListener(){
+            public void Click(Actor actor, float x, float y) {
+
+            }
+        });
 
         table.add(image).width(700).height(400);
         table.row();
         table.add(playButton).prefHeight(50)
                 .prefWidth(20).width(500).padTop(100)
-                .setActorX(WIDTH/2);
+                .setActorX(WIDTH / 2);
         table.row();
         table.add(optionsButton).prefHeight(50)
-                .prefWidth(20).width(500).padTop(100).setActorX(WIDTH/2);
+                .prefWidth(20).width(500).padTop(100).setActorX(WIDTH / 2);
         table.row();
         table.add(exitButton).prefHeight(50)
-                .prefWidth(20).width(500).padTop(100).setActorX(WIDTH/2);
+                .prefWidth(20).width(500).padTop(100).setActorX(WIDTH / 2);
         table.row();
 
 
@@ -99,15 +109,12 @@ public class MenuView  implements Screen, IHeadView{
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1f,0f,0f,1f);
+        Gdx.gl.glClearColor(1f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch = new SpriteBatch();
 
         batch.begin();
         stage.draw();
-
-
-
 
 
         batch.end();
@@ -141,11 +148,12 @@ public class MenuView  implements Screen, IHeadView{
     }
 
     @Override
-    public BoardView createBoardView(int HEIGHT, int WIDTH) {
-        return new BoardView(WIDTH,HEIGHT);
+    public BoardView createBoardView(int HEIGHT, int WIDTH,Board board) {
+        return new BoardView(WIDTH, HEIGHT, board);
     }
+
     public OptionView createOptionView(int HEIGHT, int WIDTH) {
-        return new OptionView(WIDTH,HEIGHT);
+        return new OptionView(WIDTH, HEIGHT);
     }
 
 }

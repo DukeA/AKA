@@ -1,30 +1,33 @@
 package View.ObjectView;
 
+import Model.GameObjects.Board;
+import Model.GameObjects.IBoard;
 import Model.GameObjects.IPlayer;
 import Model.GameObjects.Player;
-import View.IView;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import prototype.src.desktop.Roungout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by DukeA on 2017-05-06.
  */
-public class ScoreView implements  IViews, IView{
+public class ScoreView implements  IViews{
 
     private final int WIDTH;
     private final int HEIGHT;
     private SpriteBatch spriteBatch;
-    private IPlayer player;
-    private IPlayer player2;
+    private Board player;
     private BitmapFont font;
     private BitmapFont font2;
 
-    public ScoreView(int Width, int Height,SpriteBatch spriteBatch) {
+    public ScoreView(int Width, int Height,SpriteBatch spriteBatch,Board board) {
         this.WIDTH = Width;
         this.HEIGHT = Height;
-        this.player = new Player();
-        this.player2 = new Player();
+        this.player = board;
         this.spriteBatch = spriteBatch;
         this.font =  new BitmapFont();
         font.setColor(Color.BLACK);
@@ -33,17 +36,23 @@ public class ScoreView implements  IViews, IView{
 
 
 
+
     }
     public void render(float delta) {
+        List<Player> players = new ArrayList<Player>(player.getPlayers());
 
-        String player1points = String.valueOf(player.getPoints());
-        String player2points = String.valueOf(player.getPoints());
-        spriteBatch.begin();
-        font.draw(spriteBatch,"Player 1: " +player1points,100,HEIGHT-100);
-        font.getData().setScale(2);
-        font2.draw(spriteBatch,"Player 2: " +player2points,WIDTH-300,HEIGHT-100);
-        font2.getData().setScale(2);
-        spriteBatch.end();
+                String playerPoints = String.valueOf(players.get(0).getPoints());
+                String player2Points = String.valueOf(players.get(1).getPoints());
+                spriteBatch.begin();
+                font.draw(spriteBatch,"Player 1: " +playerPoints,100,HEIGHT-100);
+                font.getData().setScale(2);
+                font2.draw(spriteBatch,"Player 2: " +player2Points ,WIDTH-300,HEIGHT-100);
+                font2.getData().setScale(2);
+                spriteBatch.end();
+
+
+
+
     }
 
     @Override
@@ -54,6 +63,12 @@ public class ScoreView implements  IViews, IView{
     public void dispose() {
 
     }
+
+    @Override
+    public void update(float delta) {
+
+    }
+
     public void resize(int width, int height) {
 
 
@@ -62,8 +77,4 @@ public class ScoreView implements  IViews, IView{
         return player.getPoints();
     }
 
-    @Override
-    public void update() {
-
-    }
 }

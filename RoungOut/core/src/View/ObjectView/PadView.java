@@ -1,53 +1,52 @@
 package View.ObjectView;
 
+import Model.GameObjects.Board;
 import Model.GameObjects.IPlayer;
-import Model.GameObjects.Pad;
 import Model.GameObjects.Player;
-import View.IView;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by DukeA on 2017-05-02.
  */
-public class PadView implements  IViews, IView {
+public class PadView implements IViews {
 
-    private IPlayer pad;
-    private IPlayer pad2;
+    private Board Pads;
     private ShapeRenderer shapeRenderer2;
     private ShapeRenderer shapeRenderer;
     private int WIDTH;
     private int HEIGHT;
 
 
-    public PadView(int width, int height, ShapeRenderer renderer) {
+    public PadView(int width, int height, ShapeRenderer renderer, Board board) {
         this.WIDTH = width;
         this.HEIGHT = height;
         this.shapeRenderer2 = renderer;
         this.shapeRenderer = renderer;
-        pad =  new Player(80f,30f,WIDTH / 2 - 350, HEIGHT / 2,0);
-        pad2 = new Player(80f,30f,WIDTH / 2 - 450, HEIGHT / 2,0);
+        this.Pads = board;
 
     }
 
     public void render(float delta) {
-
-        shapeRenderer.end();
-
+        List<Player> p = new ArrayList<Player>(Pads.getPlayers());
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.BLUE);
-        shapeRenderer.rect(pad.getPad().getPadXPos()
-                , pad.getPad().getPadYPos()
-                , pad.getPad().getWidth()
-                , pad.getPad().getLength());
+        shapeRenderer.rect(p.get(0).getPad().getPadXPos(),
+                p.get(0).getPad().getPadYPos(),
+                p.get(0).getPad().getWidth(),
+                p.get(0).getPad().getLength());
         shapeRenderer.end();
+
 
         shapeRenderer2.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer2.setColor(Color.LIME);
-        shapeRenderer2.rect(pad2.getPad().getPadXPos()
-                , pad2.getPad().getPadYPos()
-                , pad2.getPad().getWidth()
-                , pad2.getPad().getLength());
+        shapeRenderer2.rect(p.get(1).getPad().getPadXPos(),
+                p.get(1).getPad().getPadYPos(),
+                p.get(1).getPad().getWidth(),
+                p.get(1).getPad().getLength());
         shapeRenderer2.end();
     }
 
@@ -60,9 +59,9 @@ public class PadView implements  IViews, IView {
         shapeRenderer.dispose();
     }
 
-
     @Override
-    public void update() {
+    public void update(float delta) {
 
     }
+
 }

@@ -2,6 +2,7 @@ package Model.GameObjects.Physics;
 
 /**
  * @author Ken Bäcklund
+ *
  */
 public interface Body {
 

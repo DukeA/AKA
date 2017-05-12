@@ -1,6 +1,6 @@
 package Controller;
 
-import View.IView; // The controller needs to get subs from the views
+import View.ObjectView.IViews;
 
 /**
  * Created by Alex on 2017-04-28.
@@ -8,6 +8,6 @@ import View.IView; // The controller needs to get subs from the views
 public interface IPlayerController {
 
     String latestKeyPressed();
-    boolean addListener(IView view);
-    boolean removeListener(IView view);
+    boolean addListener(IViews view);
+    boolean removeListener(IViews view);
 }
