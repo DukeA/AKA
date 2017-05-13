@@ -42,12 +42,6 @@ public class Roungout extends Game {
 
 
 
-    //Should the controller use IPlayers instead??
-    private IPlayer player1 = new Player(20,10,0,0,5);
-    private IPlayer player2 = new Player(20,10,0,0,5);
-
-
-
     public void inintControllers(){
         List<IPlayer> players = new ArrayList<IPlayer>(board.getPlayers());
         boardView = new BoardView(WIDTH,HEIGHT,board);
@@ -68,7 +62,7 @@ public class Roungout extends Game {
     @Override
     public void create() {
 
-
+        //board = board.getBoard() // needed inorder to update the board
 
 
 
