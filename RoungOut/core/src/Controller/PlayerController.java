@@ -15,10 +15,11 @@ public class PlayerController implements IController{
     //The list will only contain unique subscribers and this is guaranteed by the
     //addListener and removeListener methods
     private ArrayList<IView> viewSubscribers = new ArrayList<IView>();
+
     //    private ArrayList<IModel> modelSubscribers = new ArrayList<IModel>();
    // private ArrayList<ISwitchController> controllers = new ArrayList<ISwitchController>();
 
-    final EnumIndexes index = EnumIndexes.PLAYER_CONTROLLER; //Static Enum
+    private final EnumIndexes typeOfMenu = EnumIndexes.PLAYER_CONTROLLER; //Static Enum
     private IHandler handler;
 
     private IModel Player1;
@@ -66,7 +67,8 @@ public class PlayerController implements IController{
         }
 
         if (keycode== Input.Keys.ESCAPE){
-            handler.callSetNewInput(EnumIndexes.MENU_CONTROLLER); //Set the menu Controller to active input via handler
+            handler.callSetNewInput(EnumIndexes.MENU_CONTROLLER);
+            //if ESC -> Set the menu Controller to active input via handler
             updateAllViews();
         }
         /**
@@ -94,7 +96,7 @@ public class PlayerController implements IController{
     }
 
     @Override
-    public EnumIndexes getEnumIndex(){ return index;}
+    public EnumIndexes getTypeOfMenu(){ return typeOfMenu;}
 
     //We don't need these inputs
     @Override
@@ -125,6 +127,7 @@ public class PlayerController implements IController{
 
     public PlayerController(ArrayList<IView> views,IModel P1, IModel P2, IHandler handler) {
         Gdx.input.setInputProcessor(this);
+        //This is the only Controller that claims the inputProcessor
 
         this.handler = handler;
 

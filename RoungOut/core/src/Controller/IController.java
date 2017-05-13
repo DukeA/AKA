@@ -7,7 +7,7 @@ import com.badlogic.gdx.InputProcessor;
  */
 public interface IController extends InputProcessor{
     void changeInputProcessor();
-    EnumIndexes getEnumIndex();
+    EnumIndexes getTypeOfMenu();
 
 }
 

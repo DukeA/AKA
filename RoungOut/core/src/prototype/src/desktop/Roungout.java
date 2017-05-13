@@ -52,6 +52,9 @@ public class Roungout extends Game {
         controllers.add(playerController);
 
 
+
+        //Init the handler with the controllers
+        handler.setControllers(controllers);
     }
 
 

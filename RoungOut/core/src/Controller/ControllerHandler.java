@@ -17,18 +17,18 @@ public class ControllerHandler implements IHandler {
     }
 
     @Override
-    public void callSetNewInput(EnumIndexes index) {
+    public void callSetNewInput(EnumIndexes controllerEnum) {
         for (int i =0; i < controllers.size(); i++){
             //We get each controllers Enum;
-            EnumIndexes tmp = controllers.get(i).getEnumIndex();
+            EnumIndexes tmp = controllers.get(i).getTypeOfMenu();
 
-            if(tmp == index){
+            if(tmp == controllerEnum){
                 //If the controller's enum matches index then set it to the new inputProcessor
                 controllers.get(i).changeInputProcessor();
                 break;//we brake since we found a input processor
             }
         }
-        controllers.get(enums.indexOf(index)).changeInputProcessor();
+        controllers.get(enums.indexOf(controllerEnum)).changeInputProcessor();
     }
 
     public void setControllers (ArrayList<IController> newControllers){
