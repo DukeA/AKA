@@ -125,7 +125,6 @@ public class PlayerController implements IController{
         Gdx.input.setInputProcessor(this);
 
         this.handler = handler;
-        handler.
 
         this.Player1=P1;
         this.Player2=P2;

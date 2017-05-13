@@ -21,9 +21,15 @@ public class ControllerHandler implements IHandler {
         controllers.get(enums.indexOf(index)).changeInputProcessor();
     }
 
+    public void setControllers (ArrayList<IController> newControllers){
+        controllers = newControllers;
+    }
+
             //enums.get(enums.indexOf(EnumIndexes.MENU_CONTROLLER));
 
-    //Constructor
+    //Constructors
+    public ControllerHandler(){}
+
     public ControllerHandler(ArrayList<IController> controllers) {
         this.controllers = controllers;
     }

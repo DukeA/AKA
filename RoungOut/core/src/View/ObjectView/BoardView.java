@@ -25,7 +25,7 @@ public class BoardView implements Screen, IView {
     private IBoard board;
     private ShapeRenderer shapeRenderer;
     private SpriteBatch batch;
-    private IPlayerController controller;
+    //private IPlayerController controller;
     private final int WIDTH;
     private final int HEIGHT;
 
