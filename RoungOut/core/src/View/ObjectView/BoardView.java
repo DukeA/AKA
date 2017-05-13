@@ -1,7 +1,9 @@
 package View.ObjectView;
 
 
-import Controller.IPlayerController;
+
+
+
 import Model.GameObjects.Board;
 import Model.GameObjects.IBoard;
 import com.badlogic.gdx.Gdx;
@@ -24,6 +26,9 @@ public class BoardView implements Screen, IViews {
     private IBoard board;
     private ShapeRenderer shapeRenderer;
     private SpriteBatch batch;
+
+    //private IPlayerController controller;
+
     private final int WIDTH;
     private final int HEIGHT;
 

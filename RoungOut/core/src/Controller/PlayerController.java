@@ -2,6 +2,7 @@ package Controller;
 
 import Model.GameObjects.IModel;
 import View.ObjectView.IViews;
+import Model.GameObjects.IPlayer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
@@ -11,15 +12,20 @@ import java.util.ArrayList;
 /**
  * Created by Alex on 2017-04-28.
  */
-public class PlayerController implements IPlayerController, ISwitchController{
+public class PlayerController implements IController{
     //The list will only contain unique subscribers and this is guaranteed by the
     //addListener and removeListener methods
-    private ArrayList<IViews> viewSubscribers = new ArrayList<IViews>();
-    //    private ArrayList<IModel> modelSubscribers = new ArrayList<IModel>();
-    private ArrayList<ISwitchController> controllers = new ArrayList<ISwitchController>();
 
-    IModel Player1;
-    IModel Player2;
+    private ArrayList<IViews> viewSubscribers = new ArrayList<IViews>();
+
+    //    private ArrayList<IModel> modelSubscribers = new ArrayList<IModel>();
+   // private ArrayList<ISwitchController> controllers = new ArrayList<ISwitchController>();
+
+    private final EnumIndexes typeOfMenu = EnumIndexes.PLAYER_CONTROLLER; //Static Enum
+    private IHandler handler;
+
+    private IPlayer Player1;
+    private IPlayer Player2;
 
     //Keys, made this way inorder to rebind them in the future
     private int P1Right;
@@ -29,32 +35,12 @@ public class PlayerController implements IPlayerController, ISwitchController{
 
 
     private String latestKey = " ";//init with blank
-    @Override
     public String latestKeyPressed()
     {
         //Used for debug
         return latestKey;
     }
 
-    public boolean addListener(IViews view) {
-
-       if(!viewSubscribers.contains(view)){ //If we don't have a the view, add it
-           viewSubscribers.add(view);
-           return true;
-       }
-
-        return false;
-    }
-
-
-    public boolean removeListener(IViews view) {
-
-        if(viewSubscribers.contains(view)){ //If we do have the view, remove it
-            viewSubscribers.remove(view);
-            return true;
-        }
-        return false;
-    }
 
     @Override
     public boolean keyDown(int keycode) {
@@ -65,26 +51,29 @@ public class PlayerController implements IPlayerController, ISwitchController{
 
         if (keycode== P1Left){
             Player1.moveLeft();
+            updateAllViews();
         }
 
         if (keycode== P1Right){
             Player1.moveRight();
+            updateAllViews();
         }
 
         if (keycode== P2Left){
             Player2.moveLeft();
+            updateAllViews();
         }
 
         if (keycode== P2Right){
             Player2.moveRight();
+            updateAllViews();
         }
 
         if (keycode== Input.Keys.ESCAPE){
-
+            handler.callSetNewInput(EnumIndexes.MENU_CONTROLLER);
+            //if ESC -> Set the menu Controller to active input via handler
+            updateAllViews();
         }
-
-        updateAllViews();
-
         /**
          *
          *  It would be much simpler if the return value of the interfaced could be an int and
@@ -105,14 +94,12 @@ public class PlayerController implements IPlayerController, ISwitchController{
     }
 
     @Override
-    public void updateControllerList(ArrayList<ISwitchController> newList) {
-        this.controllers = newList;
+    public void changeInputProcessor() {
+        Gdx.input.setInputProcessor(this);
     }
 
     @Override
-    public void setCurrentIP(int index) {
-        Gdx.input.setInputProcessor(controllers.get(index));
-    }
+    public EnumIndexes getTypeOfMenu(){ return typeOfMenu;}
 
     //We don't need these inputs
     @Override
@@ -141,8 +128,13 @@ public class PlayerController implements IPlayerController, ISwitchController{
     }
     //End of these inputs
 
-    public PlayerController(ArrayList<IViews> views, ArrayList<ISwitchController> controllerList, IModel P1, IModel P2) {
+
+    public PlayerController(ArrayList<IViews> views, IPlayer P1, IPlayer P2, IHandler handler) {
+
         Gdx.input.setInputProcessor(this);
+        //This is the only Controller that claims the inputProcessor
+
+        this.handler = handler;
 
         this.Player1=P1;
         this.Player2=P2;
@@ -152,7 +144,7 @@ public class PlayerController implements IPlayerController, ISwitchController{
         this.P2Left = Input.Keys.J;
         this.P2Right = Input.Keys.L;
 
-        this.controllers=controllerList;
+        //this.controllers=controllerList;
         //this.modelSubscribers=models;
         this.viewSubscribers=views;
         //Makes it so LibGdx sends calls to this controller

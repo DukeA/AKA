@@ -1,13 +1,21 @@
 package prototype.src.desktop;
 
-import Controller.ISwitchController;
+import Controller.ControllerHandler;
+import Controller.IController;
 import Controller.PlayerController;
+
 import Model.GameObjects.*;
 import View.MenuView.MenuView;
 import View.ObjectView.BoardView;
 import View.ObjectView.IViews;
+
+
+import Model.GameObjects.IPlayer;
+import Model.GameObjects.Player;
+
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,25 +34,34 @@ public class Roungout extends Game {
     public OrthographicCamera camera;
     public IViews boardView;
 
-    private ArrayList<ISwitchController> controllers = new ArrayList<ISwitchController>();
-    private ArrayList<IViews> viewers = new ArrayList<IViews>();
 
-    private BoardView view;
+   private ArrayList<IViews> viewers = new ArrayList<IViews>();
 
-    private Board board;
+   private BoardView view;
+   private Board board;
 
+
+
+    //Should the controller use IPlayers instead??
+    private IPlayer player1 = new Player(20,10,0,0,5);
+    private IPlayer player2 = new Player(20,10,0,0,5);
 
 
 
     public void inintControllers(){
-        List<Player> players = new ArrayList<Player>(board.getPlayers());
+        List<IPlayer> players = new ArrayList<IPlayer>(board.getPlayers());
         boardView = new BoardView(WIDTH,HEIGHT,board);
         viewers.add(boardView);
-        PlayerController playerController = new PlayerController(viewers,controllers
-                ,players.get(0),players.get(1));
-        controllers.add(0,playerController);
-        playerController.updateControllerList(controllers);
 
+        ControllerHandler handler = new ControllerHandler();
+
+        PlayerController playerController = new PlayerController(viewers,players.get(0),players.get(1),handler);
+        ArrayList<IController> controllers = new ArrayList<IController>();
+
+        controllers.add(playerController);
+
+        //Init the handler with the controllers
+        handler.setControllers(controllers);
     }
 
 

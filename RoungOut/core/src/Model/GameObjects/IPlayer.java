@@ -6,4 +6,6 @@ package Model.GameObjects;
 public interface IPlayer {
     int getPoints();
     Pad getPad(); // We send the whole object to the ones who want it
+    void moveLeft();
+    void moveRight();
 }

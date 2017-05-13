@@ -4,7 +4,5 @@ package Model.GameObjects;
  * Re-Created by Alex 07-05-17
  */
 public interface IModel {
-
-    void moveLeft();
-    void moveRight();
+    //Probably not needed...
 }
