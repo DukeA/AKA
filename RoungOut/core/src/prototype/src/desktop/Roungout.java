@@ -3,13 +3,15 @@ package prototype.src.desktop;
 import Controller.ControllerHandler;
 import Controller.IController;
 import Controller.PlayerController;
-import Model.GameObjects.IModel;
+
+import Model.GameObjects.IPlayer;
 import Model.GameObjects.Player;
 import View.IView;
 import View.MenuView.MenuView;
 import View.ObjectView.BoardView;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+
 
 import java.util.ArrayList;
 
@@ -32,8 +34,8 @@ public class Roungout extends Game {
     private BoardView view;
 
     //Should the controller use IPlayers instead??
-    private IModel player1 = new Player(20,10,0,0,5);
-    private IModel player2 = new Player(20,10,0,0,5);
+    private IPlayer player1 = new Player(20,10,0,0,5);
+    private IPlayer player2 = new Player(20,10,0,0,5);
 
 
     public void inintControllers(){

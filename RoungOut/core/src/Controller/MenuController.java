@@ -7,7 +7,7 @@ import com.badlogic.gdx.Input;
 import java.util.ArrayList;
 
 /**
- * Created by Deltagare on 2017-05-13.
+ * Created by Alex on 2017-05-13.
  */
 public class MenuController implements IController {
 

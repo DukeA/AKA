@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.GameObjects.IModel;
+import Model.GameObjects.IPlayer;
 import View.IView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -22,8 +23,8 @@ public class PlayerController implements IController{
     private final EnumIndexes typeOfMenu = EnumIndexes.PLAYER_CONTROLLER; //Static Enum
     private IHandler handler;
 
-    private IModel Player1;
-    private IModel Player2;
+    private IPlayer Player1;
+    private IPlayer Player2;
 
     //Keys, made this way inorder to rebind them in the future
     private int P1Right;
@@ -125,7 +126,7 @@ public class PlayerController implements IController{
     }
     //End of these inputs
 
-    public PlayerController(ArrayList<IView> views,IModel P1, IModel P2, IHandler handler) {
+    public PlayerController(ArrayList<IView> views, IPlayer P1, IPlayer P2, IHandler handler) {
         Gdx.input.setInputProcessor(this);
         //This is the only Controller that claims the inputProcessor
 
