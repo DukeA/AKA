@@ -18,6 +18,16 @@ public class ControllerHandler implements IHandler {
 
     @Override
     public void callSetNewInput(EnumIndexes index) {
+        for (int i =0; i < controllers.size(); i++){
+            //We get each controllers Enum;
+            EnumIndexes tmp = controllers.get(i).getEnumIndex();
+
+            if(tmp == index){
+                //If the controller's enum matches index then set it to the new inputProcessor
+                controllers.get(i).changeInputProcessor();
+                break;//we brake since we found a input processor
+            }
+        }
         controllers.get(enums.indexOf(index)).changeInputProcessor();
     }
 

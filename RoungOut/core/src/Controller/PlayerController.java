@@ -66,7 +66,7 @@ public class PlayerController implements IController{
         }
 
         if (keycode== Input.Keys.ESCAPE){
-            handler.callSetNewInput(EnumIndexes.MENU_CONTROLLER);
+            handler.callSetNewInput(EnumIndexes.MENU_CONTROLLER); //Set the menu Controller to active input via handler
             updateAllViews();
         }
         /**
@@ -93,6 +93,8 @@ public class PlayerController implements IController{
         Gdx.input.setInputProcessor(this);
     }
 
+    @Override
+    public EnumIndexes getEnumIndex(){ return index;}
 
     //We don't need these inputs
     @Override
