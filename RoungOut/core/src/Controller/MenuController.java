@@ -37,7 +37,7 @@ public class MenuController implements IController {
         latestKey = Input.Keys.toString(keycode);
 
         if (keycode== Input.Keys.ESCAPE){
-            handler.callSetNewInput(EnumIndexes.PLAYER_CONTROLLER);
+            handler.callSetNewInput(EnumIndexes.GAME_CONTROLLER);
             //IF ESC -> Go back to the game
             updateAllViews();
         }
