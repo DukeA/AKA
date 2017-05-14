@@ -68,6 +68,9 @@ public class Roungout extends Game {
 
         //TODO MAKE GAME LOOP
         board = new Board(WIDTH,HEIGHT);
+
+        createSampleBoard(board);                   // Moved sample creation from Board class
+
         camera = new OrthographicCamera();
         view = new BoardView(WIDTH,HEIGHT,board);
         camera.setToOrtho(false, WIDTH, HEIGHT);
@@ -83,5 +86,20 @@ public class Roungout extends Game {
 
     }
 
+    // Game sample data
+    public void createSampleBoard(Board b) {
+        b.addPlayer(new Player(80f, 30f, WIDTH / 2 - 350, HEIGHT / 2, 0));
+        b.addPlayer(new Player(80f, 30f, WIDTH / 2 - 450, HEIGHT / 2, 0));
+        b.addBrick(new Brick(WIDTH/2-40,HEIGHT/2,30,30));
+        b.addBrick(new Brick(WIDTH/2,HEIGHT/2,30,30));
+        b.addBrick(new Brick(WIDTH/2+40,HEIGHT/2,30,30));
+        b.addBrick(new Brick(WIDTH/2-40,HEIGHT/2-40,30,30));
+        b.addBrick(new Brick(WIDTH/2,HEIGHT/2-40,30,30));
+        b.addBrick(new Brick(WIDTH/2+40,HEIGHT/2-40,30,30));
+        b.addBrick(new Brick(WIDTH/2-40,HEIGHT/2+40,30,30));
+        b.addBrick(new Brick(WIDTH/2,HEIGHT/2+40,30,30));
+        b.addBrick(new Brick(WIDTH/2+40,HEIGHT/2+40,30,30));
+        b.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 30f, 1, 100));
+    }
 
 }
