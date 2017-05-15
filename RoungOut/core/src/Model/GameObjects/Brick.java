@@ -26,19 +26,19 @@ public class Brick implements IModel {
         brickvalue = BrickType.NORMAL;
     }
 
-    public double getX() {
+    public float getX() {
         return body.getX();
     }
 
-    public double getY() {
+    public float getY() {
         return body.getY();
     }
 
-    public double getAngle() {
+    public float getAngle() {
         return body.getAngle();
     }
 
-    public double getSpeed() {
+    public float getSpeed() {
         return body.getSpeed();
     }
 
