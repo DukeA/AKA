@@ -25,7 +25,7 @@ public class SDownBrick  extends Brick {
     public float getSpeed() {
         return this.speedValue;
     }
-    public
+   
 
     //TODO What else needs to be here?
 }

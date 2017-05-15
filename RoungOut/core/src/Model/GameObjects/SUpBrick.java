@@ -9,7 +9,7 @@ public class SUpBrick extends Brick {
 
     private Enum value;
     private  float SpeedValue;
-    
+
 
     public SUpBrick(float xPos, float yPos, float width, float height) {
         super(xPos, yPos, width, height);
