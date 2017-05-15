@@ -98,35 +98,65 @@ public class Board implements IBoard, IPowerUp {
 
 
     @Override
-    public void PSpeedUP() {
+    public void pSpeedUP() {
         for (Ball ball : balls) {
             for (Player pad : players) {
-                    ball.setSpeed(ball.getSpeed()
-                            + brick.getSpeedValue());
-                    pad.getPad().setSpeed(
-                            pad.getPad().getPadSpeed() +);
-                }
-
-            }
-        }
-    }
-
-    @Override
-    public void PSpeedDown() {
-        for (Ball ball : balls) {
-            for (Player pad : players) {
-
+                ball.setSpeed(ball.getSpeed()
+                        + getPspeedUp());
+                pad.getPad().setSpeed(
+                        pad.getPad().getPadSpeed()
+                                + getPspeedUp());
             }
 
         }
     }
 
+
     @Override
-    public void EffectOver() {
+    public void pSpeedDown() {
         for (Ball ball : balls) {
             for (Player pad : players) {
+                ball.setSpeed(ball.getSpeed() + getPspeedDown());
 
+                pad.getPad().setSpeed(
+                        pad.getPad().getPadSpeed() + getPspeedDown());
+            }
+
+        }
+    }
+
+    @Override
+    public void effectOver() {
+        for (Ball ball : balls) {
+            for (Player pad : players) {
+                ball.setSpeed(ball.getSpeed() - getPspeedUp() + getPspeedDown());
+                pad.getPad().setSpeed(
+                        pad.getPad().getPadSpeed() - getPspeedUp() + getPspeedDown());
             }
         }
+    }
+
+    @Override
+    public float getPspeedUp() {
+        float brickspeed = 0;
+        for (Brick brick : bricks) {
+            if (brick.getClass() == SUpBrick.class
+                    && brick.equals(null)) {
+                brickspeed = brick.getSpeed();
+            }
+        }
+        return brickspeed;
+    }
+
+    @Override
+    public float getPspeedDown() {
+        float brickspeed = 0;
+        for (Brick brick : bricks) {
+            if (brick.getClass() == SDownBrick.class &&
+                    brick.equals(null)) {
+                brickspeed = brick.getSpeed();
+            }
+        }
+        return brickspeed;
     }
 }

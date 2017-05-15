@@ -92,11 +92,11 @@ public class Roungout extends Game {
         b.addPlayer(new Player(80f, 30f, WIDTH / 2 - 450, HEIGHT / 2, 0));
         b.addBrick(new Brick(WIDTH/2-40,HEIGHT/2,30,30));
         b.addBrick(new Brick(WIDTH/2,HEIGHT/2,30,30));
-        b.addBrick(new Brick(WIDTH/2+40,HEIGHT/2,30,30));
+        b.addBrick(new SDownBrick(WIDTH/2+40,HEIGHT/2,30,30));
         b.addBrick(new Brick(WIDTH/2-40,HEIGHT/2-40,30,30));
         b.addBrick(new Brick(WIDTH/2,HEIGHT/2-40,30,30));
         b.addBrick(new Brick(WIDTH/2+40,HEIGHT/2-40,30,30));
-        b.addBrick(new Brick(WIDTH/2-40,HEIGHT/2+40,30,30));
+        b.addBrick(new SUpBrick(WIDTH/2-40,HEIGHT/2+40,30,30));
         b.addBrick(new Brick(WIDTH/2,HEIGHT/2+40,30,30));
         b.addBrick(new Brick(WIDTH/2+40,HEIGHT/2+40,30,30));
         b.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 30f, 1, 100));
