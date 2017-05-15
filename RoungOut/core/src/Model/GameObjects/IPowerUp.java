@@ -5,7 +5,11 @@ package Model.GameObjects;
  */
 public interface IPowerUp {
 
+    float speedUpvalue;
+    float speedDownvalue;
 
-
+    void PSpeedUP();
+    void PSpeedDown();
+    void EffectOver();
 
 }

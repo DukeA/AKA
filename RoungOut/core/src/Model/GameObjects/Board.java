@@ -8,7 +8,7 @@ import java.util.Set;
  * Created by Adam on 2017-03-29.
  * Updated by Ken on 2017-05-10.
  */
-public class Board implements IBoard {
+public class Board implements IBoard, IPowerUp {
 
 
     private float xPos;
@@ -20,9 +20,9 @@ public class Board implements IBoard {
     private Set<Player> players;
 
     public Board(int Width, int Height) {
-        xPos = Width/2;
-        yPos = Height/2;
-        radius = (float) Math.sqrt(Math.pow((Width/4),2)+Math.pow((Height/4),2));
+        xPos = Width / 2;
+        yPos = Height / 2;
+        radius = (float) Math.sqrt(Math.pow((Width / 4), 2) + Math.pow((Height / 4), 2));
         balls = new HashSet<Ball>();
         bricks = new HashSet<Brick>();
         players = new HashSet<Player>();
@@ -32,9 +32,11 @@ public class Board implements IBoard {
     public float getXPos() {
         return this.xPos;
     }
+
     public float getYPos() {
         return this.yPos;
     }
+
     public float getRadius() {
         return this.radius;
     }
@@ -95,4 +97,36 @@ public class Board implements IBoard {
     }
 
 
+    @Override
+    public void PSpeedUP() {
+        for (Ball ball : balls) {
+            for (Player pad : players) {
+                    ball.setSpeed(ball.getSpeed()
+                            + brick.getSpeedValue());
+                    pad.getPad().setSpeed(
+                            pad.getPad().getPadSpeed() +);
+                }
+
+            }
+        }
+    }
+
+    @Override
+    public void PSpeedDown() {
+        for (Ball ball : balls) {
+            for (Player pad : players) {
+
+            }
+
+        }
+    }
+
+    @Override
+    public void EffectOver() {
+        for (Ball ball : balls) {
+            for (Player pad : players) {
+
+            }
+        }
+    }
 }
