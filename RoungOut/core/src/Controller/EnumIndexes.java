@@ -7,7 +7,7 @@ public enum EnumIndexes {
 
     GAME_CONTROLLER,
     MENU_CONTROLLER,
-    OPTIONS_CONTOLLERS;
+    OPTIONS_CONTOLLER;
 
     /*    private final int index;
 
