@@ -47,6 +47,7 @@ public class MenuView implements Screen, IHeadView {
 
     @Override
     public void show() {
+        
         table = new Table();
         table.setFillParent(true);
         table.top();
