@@ -6,22 +6,16 @@ import Controller.PlayerController;
 
 import Model.GameObjects.*;
 import View.MenuView.MenuView;
+import View.MenuView.OptionView;
 import View.MenuView.SplashView;
 import View.ObjectView.BoardView;
 import View.ObjectView.IViews;
-
-
 import Model.GameObjects.IPlayer;
-import Model.GameObjects.Player;
-
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.TimeUtils;
-
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 public class Roungout extends Game  {
@@ -35,13 +29,14 @@ public class Roungout extends Game  {
 
     private long startTime;
     private SplashView splashScreen;
-    private MenuView menuView;
     public OrthographicCamera camera;
     public IViews boardView;
 
 
     private ArrayList<IViews> viewers = new ArrayList<IViews>();
 
+
+    private OptionView options;
     private BoardView view;
     private Board board;
 
@@ -70,13 +65,15 @@ public class Roungout extends Game  {
 
         //TODO MAKE GAME LOOP
 
+
         startTime = TimeUtils.millis() * 100;
-        splashScreen = new SplashView(WIDTH, HEIGHT,this);
+        splashScreen = new SplashView(WIDTH, HEIGHT, this);
         camera = new OrthographicCamera();
         camera.setToOrtho(false, WIDTH, HEIGHT);
         board = new Board(WIDTH, HEIGHT);
         view = new BoardView(WIDTH, HEIGHT, board);
-        this.setScreen(splashScreen);
+       this.setScreen(splashScreen);
+
 
 
 

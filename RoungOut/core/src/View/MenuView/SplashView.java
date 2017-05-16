@@ -1,5 +1,6 @@
 package View.MenuView;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -13,22 +14,22 @@ import prototype.src.desktop.Roungout;
 /**
  * Created by DukeA on 2017-05-09.
  */
-public class SplashView implements Screen, IRoungout {
+public class SplashView implements Screen {
 
     private int WIDTH;
     private int HEIGHT;
-    private final Roungout game;
+    private Game game;
     private Stage stage;
     private MenuView view;
     private Texture splashtexture;
     private Sprite sprite;
     private SpriteBatch batch;
 
-    public SplashView(int WIDTH, int HEIGHT) {
+    public SplashView(int WIDTH, int HEIGHT, Game game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
-        this.game = getGame();
-        view = new MenuView(WIDTH,HEIGHT);
+        this.game = game;
+        view = new MenuView(WIDTH,HEIGHT,game);
         splashtexture = new Texture(Gdx.files.internal(".\\core\\src\\Assets\\splash.png"));
         sprite = new Sprite(splashtexture);
         sprite.setSize(WIDTH,HEIGHT);
@@ -54,10 +55,10 @@ public class SplashView implements Screen, IRoungout {
             batch.begin();
             sprite.draw(batch);
             batch.end();
-            if (Gdx.input.isTouched()){
-                game.setScreen(view);
-                dispose();
+            if (Gdx.input.isTouched()) {
+              game.setScreen(view);
             }
+
 
     }
 
@@ -86,8 +87,4 @@ public class SplashView implements Screen, IRoungout {
         batch.dispose();
     }
 
-    @Override
-    public Roungout getGame() {
-        return new Roungout();
-    }
 }

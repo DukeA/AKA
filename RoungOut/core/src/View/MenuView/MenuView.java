@@ -2,6 +2,7 @@ package View.MenuView;
 
 import Model.GameObjects.Board;
 import View.ObjectView.BoardView;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -20,10 +21,11 @@ import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.actor;
 /**
  * Created by DukeA on 2017-04-28.
  */
-public class MenuView implements Screen, IHeadView {
+public class MenuView  implements IHeadView, Screen {
 
     private int WIDTH;
     private int HEIGHT;
+    private Game game;
     private OrthographicCamera camera;
     private Stage stage;
     private SpriteBatch batch;
@@ -36,9 +38,10 @@ public class MenuView implements Screen, IHeadView {
     private Skin skin;
 
 
-    public MenuView(int WIDTH, int HEIGHT) {
+    public MenuView(int WIDTH, int HEIGHT, Game game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
+        this.game = game;
         this.skin = new Skin(Gdx.files.internal("uiskin.json"));
         this.font = new BitmapFont();
         this.stage = new Stage();
@@ -47,7 +50,7 @@ public class MenuView implements Screen, IHeadView {
 
     @Override
     public void show() {
-        
+
         table = new Table();
         table.setFillParent(true);
         table.top();
@@ -64,6 +67,8 @@ public class MenuView implements Screen, IHeadView {
         playButton.setPosition(WIDTH / 2, HEIGHT / 2);
         playButton.addListener(new ClickListener() {
             public void Click(Actor actor, float x, float y) {
+
+                game.setScreen(BoardView);
 
             }
         });
