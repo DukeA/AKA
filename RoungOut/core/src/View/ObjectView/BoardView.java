@@ -6,14 +6,13 @@ package View.ObjectView;
 
 import Model.GameObjects.Board;
 import Model.GameObjects.IBoard;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 import java.util.ArrayList;
 
@@ -21,11 +20,12 @@ import java.util.ArrayList;
 /**
  * Created by DukeA on 2017-04-28.
  */
-public class BoardView implements Screen, IViews {
+public class BoardView  implements IViews,Screen {
    private ArrayList<IViews> views;
     private IBoard board;
     private ShapeRenderer shapeRenderer;
     private SpriteBatch batch;
+    private Game game;
 
     //private IPlayerController controller;
 
@@ -33,9 +33,10 @@ public class BoardView implements Screen, IViews {
     private final int HEIGHT;
 
 
-    public BoardView(int WIDTH,int HEIGHT,Board board) {
+    public BoardView(int WIDTH,int HEIGHT,Board board, Game game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
+        this.game = game;
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         this.board = board;

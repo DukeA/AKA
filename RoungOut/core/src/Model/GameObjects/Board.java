@@ -8,7 +8,7 @@ import java.util.Set;
  * Created by Adam on 2017-03-29.
  * Updated by Ken on 2017-05-10.
  */
-public class Board implements IBoard {
+public class Board implements IBoard, IPowerUp {
 
 
     private float xPos;
@@ -20,21 +20,24 @@ public class Board implements IBoard {
     private Set<Player> players;
 
     public Board(int Width, int Height) {
-        xPos = Width/2;
-        yPos = Height/2;
-        radius = (float) Math.sqrt(Math.pow((Width/4),2)+Math.pow((Height/4),2));
+        xPos = Width / 2;
+        yPos = Height / 2;
+        radius = (float) Math.sqrt(Math.pow((Width / 4), 2) + Math.pow((Height / 4), 2));
         balls = new HashSet<Ball>();
         bricks = new HashSet<Brick>();
         players = new HashSet<Player>();
+        createSampleBoard(Width, Height);
 
     }
 
     public float getXPos() {
         return this.xPos;
     }
+
     public float getYPos() {
         return this.yPos;
     }
+
     public float getRadius() {
         return this.radius;
     }
@@ -94,5 +97,82 @@ public class Board implements IBoard {
         }
     }
 
+    public void createSampleBoard(int WIDTH, int HEIGHT) {
+        this.addPlayer(new Player(80f, 30f, WIDTH / 2 - 350, HEIGHT / 2, 0));
+        this.addPlayer(new Player(80f, 30f, WIDTH / 2 - 450, HEIGHT / 2, 0));
+        this.addBrick(new Brick(WIDTH / 2 - 40, HEIGHT / 2, 30, 30));
+        this.addBrick(new Brick(WIDTH / 2, HEIGHT / 2, 30, 30));
+        this.addBrick(new SDownBrick(WIDTH / 2 + 40, HEIGHT / 2, 30, 30));
+        this.addBrick(new Brick(WIDTH / 2 - 40, HEIGHT / 2 - 40, 30, 30));
+        this.addBrick(new Brick(WIDTH / 2, HEIGHT / 2 - 40, 30, 30));
+        this.addBrick(new Brick(WIDTH / 2 + 40, HEIGHT / 2 - 40, 30, 30));
+        this.addBrick(new SUpBrick(WIDTH / 2 - 40, HEIGHT / 2 + 40, 30, 30));
+        this.addBrick(new Brick(WIDTH / 2, HEIGHT / 2 + 40, 30, 30));
+        this.addBrick(new Brick(WIDTH / 2 + 40, HEIGHT / 2 + 40, 30, 30));
+        this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 30f, 1, 100));
+    }
 
+
+    @Override
+    public void pSpeedUP() {
+        for (Ball ball : balls) {
+            for (Player pad : players) {
+                ball.setSpeed(ball.getSpeed()
+                        + getPspeedUp());
+                pad.getPad().setSpeed(
+                        pad.getPad().getPadSpeed()
+                                + getPspeedUp());
+            }
+
+        }
+    }
+
+
+    @Override
+    public void pSpeedDown() {
+        for (Ball ball : balls) {
+            for (Player pad : players) {
+                ball.setSpeed(ball.getSpeed() + getPspeedDown());
+
+                pad.getPad().setSpeed(
+                        pad.getPad().getPadSpeed() + getPspeedDown());
+            }
+
+        }
+    }
+
+    @Override
+    public void effectOver() {
+        for (Ball ball : balls) {
+            for (Player pad : players) {
+                ball.setSpeed(ball.getSpeed() - getPspeedUp() + getPspeedDown());
+                pad.getPad().setSpeed(
+                        pad.getPad().getPadSpeed() - getPspeedUp() + getPspeedDown());
+            }
+        }
+    }
+
+    @Override
+    public float getPspeedUp() {
+        float brickspeed = 0;
+        for (Brick brick : bricks) {
+            if (brick.getClass() == SUpBrick.class
+                    && brick.equals(null)) {
+                brickspeed = brick.getSpeed();
+            }
+        }
+        return brickspeed;
+    }
+
+    @Override
+    public float getPspeedDown() {
+        float brickspeed = 0;
+        for (Brick brick : bricks) {
+            if (brick.getClass() == SDownBrick.class &&
+                    brick.equals(null)) {
+                brickspeed = brick.getSpeed();
+            }
+        }
+        return brickspeed;
+    }
 }

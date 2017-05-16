@@ -2,6 +2,7 @@ package View.MenuView;
 
 import Model.GameObjects.Board;
 import View.ObjectView.BoardView;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -20,10 +22,13 @@ import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.actor;
 /**
  * Created by DukeA on 2017-04-28.
  */
-public class MenuView implements Screen, IHeadView {
+public class MenuView  implements IHeadView, Screen {
 
     private int WIDTH;
     private int HEIGHT;
+    private BoardView view;
+    private OptionView optionView;
+    private Game game;
     private OrthographicCamera camera;
     private Stage stage;
     private SpriteBatch batch;
@@ -36,9 +41,10 @@ public class MenuView implements Screen, IHeadView {
     private Skin skin;
 
 
-    public MenuView(int WIDTH, int HEIGHT) {
+    public MenuView(int WIDTH, int HEIGHT, Game game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
+        this.game = game;
         this.skin = new Skin(Gdx.files.internal("uiskin.json"));
         this.font = new BitmapFont();
         this.stage = new Stage();
@@ -47,6 +53,7 @@ public class MenuView implements Screen, IHeadView {
 
     @Override
     public void show() {
+    Gdx.input.setInputProcessor(stage);
         table = new Table();
         table.setFillParent(true);
         table.top();
@@ -62,9 +69,14 @@ public class MenuView implements Screen, IHeadView {
         playButton.setHeight(30f);
         playButton.setPosition(WIDTH / 2, HEIGHT / 2);
         playButton.addListener(new ClickListener() {
-            public void Click(Actor actor, float x, float y) {
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                game.getScreen().hide();
+                game.getScreen().dispose();
 
+                game.setScreen(view);
             }
+
         });
 
         optionsButton = new TextButton("Options"
@@ -73,9 +85,14 @@ public class MenuView implements Screen, IHeadView {
         optionsButton.setHeight(20f);
         optionsButton.setPosition(WIDTH / 2, HEIGHT / 2);
         optionsButton.addListener(new ClickListener(){
-            public void Click(Actor actor, float x, float y) {
-
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                game.getScreen().hide();
+                game.getScreen().dispose();
+                optionView = new OptionView(WIDTH,HEIGHT,game);
+                game.setScreen(optionView);
             }
+
         });
 
         exitButton = new TextButton("Exit",
@@ -84,9 +101,12 @@ public class MenuView implements Screen, IHeadView {
         exitButton.setHeight(20f);
         exitButton.setPosition(WIDTH / 2, HEIGHT / 2);
         exitButton.addListener(new ClickListener(){
-            public void Click(Actor actor, float x, float y) {
-
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                Gdx.app.exit();
             }
+
+
         });
 
         table.add(image).width(700).height(400);
@@ -148,12 +168,14 @@ public class MenuView implements Screen, IHeadView {
     }
 
     @Override
-    public BoardView createBoardView(int HEIGHT, int WIDTH,Board board) {
-        return new BoardView(WIDTH, HEIGHT, board);
+    public BoardView createBoardView(int HEIGHT, int WIDTH,Board board, Game game) {
+
+        return new BoardView(WIDTH, HEIGHT, board, game);
     }
 
-    public OptionView createOptionView(int HEIGHT, int WIDTH) {
-        return new OptionView(WIDTH, HEIGHT);
+    public OptionView createOptionView(int HEIGHT, int WIDTH ,Game game) {
+
+        return new OptionView(WIDTH, HEIGHT, game);
     }
 
 }
