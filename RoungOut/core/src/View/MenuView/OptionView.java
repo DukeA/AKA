@@ -43,6 +43,7 @@ public class OptionView implements Screen {
 
     @Override
     public void show() {
+        Gdx.input.setInputProcessor(stage);
         table = new Table();
         table.setFillParent(true);
         table.top();

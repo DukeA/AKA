@@ -25,6 +25,8 @@ public class MenuView  implements IHeadView, Screen {
 
     private int WIDTH;
     private int HEIGHT;
+    private BoardView view;
+    private OptionView optionView;
     private Game game;
     private OrthographicCamera camera;
     private Stage stage;
@@ -50,7 +52,7 @@ public class MenuView  implements IHeadView, Screen {
 
     @Override
     public void show() {
-
+    Gdx.input.setInputProcessor(stage);
         table = new Table();
         table.setFillParent(true);
         table.top();
@@ -66,11 +68,7 @@ public class MenuView  implements IHeadView, Screen {
         playButton.setHeight(30f);
         playButton.setPosition(WIDTH / 2, HEIGHT / 2);
         playButton.addListener(new ClickListener() {
-            public void Click(Actor actor, float x, float y) {
 
-                game.setScreen(BoardView);
-
-            }
         });
 
         optionsButton = new TextButton("Options"
@@ -79,9 +77,7 @@ public class MenuView  implements IHeadView, Screen {
         optionsButton.setHeight(20f);
         optionsButton.setPosition(WIDTH / 2, HEIGHT / 2);
         optionsButton.addListener(new ClickListener(){
-            public void Click(Actor actor, float x, float y) {
 
-            }
         });
 
         exitButton = new TextButton("Exit",
@@ -90,9 +86,7 @@ public class MenuView  implements IHeadView, Screen {
         exitButton.setHeight(20f);
         exitButton.setPosition(WIDTH / 2, HEIGHT / 2);
         exitButton.addListener(new ClickListener(){
-            public void Click(Actor actor, float x, float y) {
 
-            }
         });
 
         table.add(image).width(700).height(400);
