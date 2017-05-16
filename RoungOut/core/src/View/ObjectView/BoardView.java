@@ -6,6 +6,7 @@ package View.ObjectView;
 
 import Model.GameObjects.Board;
 import Model.GameObjects.IBoard;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -24,6 +25,7 @@ public class BoardView  implements IViews,Screen {
     private IBoard board;
     private ShapeRenderer shapeRenderer;
     private SpriteBatch batch;
+    private Game game;
 
     //private IPlayerController controller;
 
@@ -31,9 +33,10 @@ public class BoardView  implements IViews,Screen {
     private final int HEIGHT;
 
 
-    public BoardView(int WIDTH,int HEIGHT,Board board) {
+    public BoardView(int WIDTH,int HEIGHT,Board board, Game game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
+        this.game = game;
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         this.board = board;

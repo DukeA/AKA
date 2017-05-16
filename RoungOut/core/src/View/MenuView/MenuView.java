@@ -69,6 +69,7 @@ public class MenuView  implements IHeadView, Screen {
         playButton.setPosition(WIDTH / 2, HEIGHT / 2);
         playButton.addListener(new ClickListener() {
 
+
         });
 
         optionsButton = new TextButton("Options"
@@ -148,12 +149,14 @@ public class MenuView  implements IHeadView, Screen {
     }
 
     @Override
-    public BoardView createBoardView(int HEIGHT, int WIDTH,Board board) {
-        return new BoardView(WIDTH, HEIGHT, board);
+    public BoardView createBoardView(int HEIGHT, int WIDTH,Board board, Game game) {
+
+        return new BoardView(WIDTH, HEIGHT, board, game);
     }
 
-    public OptionView createOptionView(int HEIGHT, int WIDTH) {
-        return new OptionView(WIDTH, HEIGHT);
+    public OptionView createOptionView(int HEIGHT, int WIDTH ,Game game) {
+
+        return new OptionView(WIDTH, HEIGHT, game);
     }
 
 }

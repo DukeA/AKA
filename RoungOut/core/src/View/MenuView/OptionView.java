@@ -1,5 +1,6 @@
 package View.MenuView;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -28,13 +29,15 @@ public class OptionView implements Screen {
     private Label label;
     private Stage stage;
     private BitmapFont font;
+    private Game game;
 
     private CheckBox[] box;
     private CheckBox[] muteBox;
 
-    public OptionView(int WIDTH, int HEIGHT) {
+    public OptionView(int WIDTH, int HEIGHT , Game game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
+        this.game = game;
         this.skin = new Skin(Gdx.files.internal("uiskin.json"));
         font = new BitmapFont();
         stage = new Stage();
