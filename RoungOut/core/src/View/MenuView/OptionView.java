@@ -2,12 +2,14 @@ package View.MenuView;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -30,6 +32,7 @@ public class OptionView implements Screen {
     private Stage stage;
     private BitmapFont font;
     private Game game;
+    private MenuView view;
 
     private CheckBox[] box;
     private CheckBox[] muteBox;
@@ -42,6 +45,7 @@ public class OptionView implements Screen {
         font = new BitmapFont();
         stage = new Stage();
         batch = new SpriteBatch();
+
     }
 
     @Override
@@ -63,13 +67,17 @@ public class OptionView implements Screen {
         label.setEllipsis(true);
         table.row();
         table.add(resArea).padTop(100).width(400).height(100);
+        resArea.setMovable(false);
+        keyArea.setMovable(false);
+        muteArea.setMovable(false);
         for (int i =0; i<box.length; i++) {
             box[i] = new CheckBox("",skin);
             resArea.add(box[i]);
         }
         box[0].setText("1980 X 1080");
         box[0].addListener(new ClickListener(){
-            public void Click(Actor actor, float x, float y) {
+            @Override
+            public void clicked(InputEvent event, float x, float y){
 
             }
         });
@@ -77,14 +85,16 @@ public class OptionView implements Screen {
 
         box[1].setText("720 X 420");
         box[1].addListener(new ClickListener(){
-            public void Click(Actor actor, float x, float y) {
+            @Override
+            public void clicked(InputEvent event, float x, float y){
 
             }
         });
 
         box[2].setText("1280 X 720");
         box[2].addListener(new ClickListener(){
-            public void Click(Actor actor, float x, float y) {
+            @Override
+            public void clicked(InputEvent event, float x, float y){
 
             }
         });
@@ -99,7 +109,8 @@ public class OptionView implements Screen {
         }
         muteBox[0].setText("Yes");
         muteBox[0].addListener(new ClickListener(){
-            public void Click(Actor actor, float x, float y) {
+            @Override
+            public void clicked(InputEvent event, float x, float y){
 
             }
         });
@@ -107,10 +118,15 @@ public class OptionView implements Screen {
 
         muteBox[1].setText("No");
         muteBox[1].addListener(new ClickListener(){
-            public void Click(Actor actor, float x, float y) {
+            @Override
+            public void clicked(InputEvent event, float x, float y){
 
             }
         });
+
+
+
+
 
         table.row();
         table.add(keyArea).width(400).height(100);
@@ -131,6 +147,10 @@ public class OptionView implements Screen {
         stage.act();
         stage.draw();
         batch.end();
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            view =  new MenuView(WIDTH,HEIGHT ,game);
+            game.setScreen(view);
+        }
     }
 
     @Override

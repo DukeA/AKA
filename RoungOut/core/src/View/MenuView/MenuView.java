@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -68,7 +69,13 @@ public class MenuView  implements IHeadView, Screen {
         playButton.setHeight(30f);
         playButton.setPosition(WIDTH / 2, HEIGHT / 2);
         playButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                game.getScreen().hide();
+                game.getScreen().dispose();
 
+                game.setScreen(view);
+            }
 
         });
 
@@ -78,6 +85,13 @@ public class MenuView  implements IHeadView, Screen {
         optionsButton.setHeight(20f);
         optionsButton.setPosition(WIDTH / 2, HEIGHT / 2);
         optionsButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                game.getScreen().hide();
+                game.getScreen().dispose();
+                optionView = new OptionView(WIDTH,HEIGHT,game);
+                game.setScreen(optionView);
+            }
 
         });
 
@@ -87,6 +101,11 @@ public class MenuView  implements IHeadView, Screen {
         exitButton.setHeight(20f);
         exitButton.setPosition(WIDTH / 2, HEIGHT / 2);
         exitButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                Gdx.app.exit();
+            }
+
 
         });
 
