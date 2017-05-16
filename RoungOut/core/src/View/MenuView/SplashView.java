@@ -18,6 +18,7 @@ public class SplashView implements Screen {
 
     private int WIDTH;
     private int HEIGHT;
+    private long startTime;
     private Game game;
     private Stage stage;
     private MenuView view;
@@ -34,6 +35,7 @@ public class SplashView implements Screen {
         sprite = new Sprite(splashtexture);
         sprite.setSize(WIDTH,HEIGHT);
         stage = new Stage();
+        startTime = TimeUtils.millis();
 
     }
 
@@ -51,13 +53,15 @@ public class SplashView implements Screen {
 
         Gdx.gl.glClearColor(0.14f,0.23f,0.27f,0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
             batch = new SpriteBatch();
             batch.begin();
             sprite.draw(batch);
             batch.end();
-            if (Gdx.input.isTouched()) {
+
+
+            if (TimeUtils.timeSinceMillis(startTime) > 10000){
               game.setScreen(view);
-              this.hide();
             }
 
 
