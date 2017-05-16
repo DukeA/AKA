@@ -26,6 +26,7 @@ public class Board implements IBoard, IPowerUp {
         balls = new HashSet<Ball>();
         bricks = new HashSet<Brick>();
         players = new HashSet<Player>();
+        createSampleBoard(Width, Height);
 
     }
 
@@ -94,6 +95,21 @@ public class Board implements IBoard, IPowerUp {
         if (pad != null) {
             this.players.remove(pad);
         }
+    }
+
+    public void createSampleBoard(int WIDTH, int HEIGHT) {
+        this.addPlayer(new Player(80f, 30f, WIDTH / 2 - 350, HEIGHT / 2, 0));
+        this.addPlayer(new Player(80f, 30f, WIDTH / 2 - 450, HEIGHT / 2, 0));
+        this.addBrick(new Brick(WIDTH / 2 - 40, HEIGHT / 2, 30, 30));
+        this.addBrick(new Brick(WIDTH / 2, HEIGHT / 2, 30, 30));
+        this.addBrick(new SDownBrick(WIDTH / 2 + 40, HEIGHT / 2, 30, 30));
+        this.addBrick(new Brick(WIDTH / 2 - 40, HEIGHT / 2 - 40, 30, 30));
+        this.addBrick(new Brick(WIDTH / 2, HEIGHT / 2 - 40, 30, 30));
+        this.addBrick(new Brick(WIDTH / 2 + 40, HEIGHT / 2 - 40, 30, 30));
+        this.addBrick(new SUpBrick(WIDTH / 2 - 40, HEIGHT / 2 + 40, 30, 30));
+        this.addBrick(new Brick(WIDTH / 2, HEIGHT / 2 + 40, 30, 30));
+        this.addBrick(new Brick(WIDTH / 2 + 40, HEIGHT / 2 + 40, 30, 30));
+        this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 30f, 1, 100));
     }
 
 
