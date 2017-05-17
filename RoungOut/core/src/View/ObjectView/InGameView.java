@@ -25,15 +25,12 @@ public class InGameView implements Screen {
     private int WIDTH;
     private int HEIGHT;
     private BoardView view;
-    private OptionView options;
     private Game game;
 
     private Table table;
     private TextButton resumeButton;
-    private TextButton optionsButton;
     private TextButton exitButton;
 
-    private OptionView optionView;
 
     private OrthographicCamera camera;
     private Stage stage;
@@ -73,20 +70,7 @@ public class InGameView implements Screen {
             }
 
         });
-        optionsButton = new TextButton("Options", skin, "default");
-        optionsButton.setWidth(200f);
-        optionsButton.setHeight(20f);
-        optionsButton.setPosition(WIDTH / 2, HEIGHT / 2);
-        optionsButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                game.getScreen().hide();
-                game.getScreen().dispose();
-                optionView = new OptionView(WIDTH, HEIGHT, game);
-                game.setScreen(optionView);
-            }
 
-        });
         exitButton = new TextButton("Quiet", skin, "default");
         exitButton.setWidth(200f);
         exitButton.setWidth(20f);
@@ -103,9 +87,6 @@ public class InGameView implements Screen {
         table.add(resumeButton).prefHeight(50)
                 .prefWidth(20).width(500).padTop(100)
                 .setActorX(WIDTH / 2);
-        table.row();
-        table.add(optionsButton).prefHeight(50)
-                .prefWidth(20).width(500).padTop(100).setActorX(WIDTH / 2);
         table.row();
         table.add(exitButton).prefHeight(50)
                 .prefWidth(20).width(500).padTop(100).setActorX(WIDTH / 2);

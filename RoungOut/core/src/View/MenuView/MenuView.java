@@ -27,7 +27,6 @@ public class MenuView  implements IHeadView, Screen {
 
     private int WIDTH;
     private int HEIGHT;
-    private MenuController controller;
     private BoardView view;
     private OptionView optionView;
     private Game game;
