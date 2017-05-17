@@ -2,7 +2,7 @@ package prototype.src.desktop;
 
 import Controller.ControllerHandler;
 import Controller.IController;
-import Controller.PlayerController;
+import Controller.GameController;
 
 import Model.GameObjects.*;
 import View.MenuView.SplashView;
@@ -45,10 +45,11 @@ public class Roungout extends Game  {
 
         ControllerHandler handler = new ControllerHandler();
 
-        PlayerController playerController = new PlayerController(viewers, players.get(0), players.get(1), handler);
+        GameController gameController = new GameController(viewers,players.get(0),players.get(1),handler);
+
         ArrayList<IController> controllers = new ArrayList<IController>();
 
-        controllers.add(playerController);
+        controllers.add(gameController);
 
         //Init the handler with the controllers
         handler.setControllers(controllers);

@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.GameObjects.IModel;
 import View.ObjectView.IViews;
 import Model.GameObjects.IPlayer;
 import com.badlogic.gdx.Gdx;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by Alex on 2017-04-28.
  */
-public class PlayerController implements IController{
+public class GameController implements IController{
     //The list will only contain unique subscribers and this is guaranteed by the
     //addListener and removeListener methods
 
@@ -21,7 +20,7 @@ public class PlayerController implements IController{
     //    private ArrayList<IModel> modelSubscribers = new ArrayList<IModel>();
    // private ArrayList<ISwitchController> controllers = new ArrayList<ISwitchController>();
 
-    private final EnumIndexes typeOfMenu = EnumIndexes.PLAYER_CONTROLLER; //Static Enum
+    private final EnumIndexes typeOfMenu = EnumIndexes.GAME_CONTROLLER; //Static Enum
     private IHandler handler;
 
     private IPlayer Player1;
@@ -33,6 +32,11 @@ public class PlayerController implements IController{
     private int P2Right;
     private int P2Left;
 
+    //KeyState, used to track if a key is being held down or not since InputProcessor does'nt do that
+    private boolean isP1RightDown;
+    private boolean isP1LeftDown;
+    private boolean isP2RightDown;
+    private boolean isP2LeftDown;
 
     private String latestKey = " ";//init with blank
     public String latestKeyPressed()
@@ -50,30 +54,40 @@ public class PlayerController implements IController{
         latestKey = Input.Keys.toString(keycode);
 
         if (keycode== P1Left){
+            isP1LeftDown=true;
+
             Player1.moveLeft();
-            updateAllViews();
+            updateAllViews(Gdx.graphics.getDeltaTime());
         }
 
         if (keycode== P1Right){
+            isP1RightDown = true;
+
             Player1.moveRight();
-            updateAllViews();
+            updateAllViews(Gdx.graphics.getDeltaTime());
         }
 
         if (keycode== P2Left){
+            isP2LeftDown = true;
+
             Player2.moveLeft();
-            updateAllViews();
+            updateAllViews(Gdx.graphics.getDeltaTime());
         }
 
         if (keycode== P2Right){
+            isP2RightDown = true;
+
             Player2.moveRight();
-            updateAllViews();
+            updateAllViews(Gdx.graphics.getDeltaTime());
         }
 
         if (keycode== Input.Keys.ESCAPE){
             handler.callSetNewInput(EnumIndexes.MENU_CONTROLLER);
+            isGameRunning =false;
             //if ESC -> Set the menu Controller to active input via handler
-            updateAllViews();
         }
+
+        System.out.println(latestKey);
         /**
          *
          *  It would be much simpler if the return value of the interfaced could be an int and
@@ -86,16 +100,18 @@ public class PlayerController implements IController{
     }
 
     //Helper method, code reuse
-    private void updateAllViews() {
+    private void updateAllViews(float deltaTime) {
         //Call update to all views
         for (IViews view : viewSubscribers) {
-            view.update(Gdx.graphics.getDeltaTime());
+            view.update(deltaTime);
         }
     }
 
     @Override
     public void changeInputProcessor() {
         Gdx.input.setInputProcessor(this);
+        isGameRunning = true;
+        gameLoop();
     }
 
     @Override
@@ -104,8 +120,25 @@ public class PlayerController implements IController{
     //We don't need these inputs
     @Override
     public boolean keyUp(int keycode) {
-        return false;
+        if (keycode== P1Left){
+            isP1LeftDown=false;
+        }
+
+        if (keycode== P1Right){
+            isP1RightDown = false;
+        }
+
+        if (keycode== P2Left){
+            isP2LeftDown = false;
+        }
+
+        if (keycode== P2Right) {
+            isP2RightDown = false;
+        }
+
+        return true;
     }
+
     @Override
     public boolean keyTyped(char character) { return false; }
     @Override
@@ -128,8 +161,42 @@ public class PlayerController implements IController{
     }
     //End of these inputs
 
+    void movePlayers(){
+    //Help function, checks if the key is being held down and if so, move accordingly
+        if (isP1LeftDown){
+            Player1.moveLeft();
+        }
 
-    public PlayerController(ArrayList<IViews> views, IPlayer P1, IPlayer P2, IHandler handler) {
+        if (isP1RightDown){
+            Player1.moveRight();
+        }
+
+        if (isP2LeftDown){
+            Player2.moveLeft();
+        }
+
+        if (isP2RightDown){
+            Player2.moveRight();
+        }
+
+    }
+
+
+
+    //GameLoopThe thing that makes the game run
+    private volatile boolean isGameRunning;
+    private void gameLoop(){
+        float deltaTime;
+        while (isGameRunning){
+            deltaTime = Gdx.graphics.getDeltaTime();
+            movePlayers(); //moves the players
+            //board.update(deltaTime); //not receiving a board as of now
+            updateAllViews(deltaTime);
+        }
+    }
+
+
+    public GameController(ArrayList<IViews> views, IPlayer P1, IPlayer P2, IHandler handler) {
 
         Gdx.input.setInputProcessor(this);
         //This is the only Controller that claims the inputProcessor
@@ -144,10 +211,18 @@ public class PlayerController implements IController{
         this.P2Left = Input.Keys.J;
         this.P2Right = Input.Keys.L;
 
+        this.isP1RightDown = false;
+        this.isP1LeftDown = false;
+        this.isP2RightDown = false;
+        this.isP2LeftDown = false;
+
         //this.controllers=controllerList;
         //this.modelSubscribers=models;
         this.viewSubscribers=views;
         //Makes it so LibGdx sends calls to this controller
         //(Adds the created PlayerController as a listener for LibGdx)
+
+
+        this.isGameRunning =false;
     }
 }

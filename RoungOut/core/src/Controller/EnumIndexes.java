@@ -5,9 +5,9 @@ package Controller;
  */
 public enum EnumIndexes {
 
-    PLAYER_CONTROLLER,
+    GAME_CONTROLLER,
     MENU_CONTROLLER,
-    OPTIONS_CONTOLLERS;
+    OPTIONS_CONTOLLER;
 
     /*    private final int index;
 

@@ -7,9 +7,10 @@ import com.badlogic.gdx.Input;
 import java.util.ArrayList;
 
 /**
- * Created by Alex on 2017-05-13.
+ * Created by Alex on 2017-05-15.
  */
-public class MenuController implements IController {
+public class OptionsController implements IController{
+
 
 
     //List that contains the views that this controller interacts with
@@ -19,7 +20,7 @@ public class MenuController implements IController {
     private IHandler handler;
 
     //the enum that decides the typ of menu this is
-    private final EnumIndexes typeOfMenu = EnumIndexes.MENU_CONTROLLER;
+    private final EnumIndexes typeOfMenu = EnumIndexes.OPTIONS_CONTOLLER;
 
 
     private String latestKey = " ";//init with blank
@@ -89,7 +90,7 @@ public class MenuController implements IController {
     //End of these inputs
 
 
-    public MenuController(ArrayList<IViews> viewSubscribers, IHandler handler) {
+    public OptionsController(ArrayList<IViews> viewSubscribers, IHandler handler) {
         this.viewSubscribers = viewSubscribers;
 
         this.handler = handler;

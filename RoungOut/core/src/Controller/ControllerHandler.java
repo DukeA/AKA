@@ -30,7 +30,6 @@ public class ControllerHandler implements IHandler {
                 break;//we brake since we found a input processor
             }
         }
-        controllers.get(enums.indexOf(controllerEnum)).changeInputProcessor();
     }
 
     public void setControllers (ArrayList<IController> newControllers){
