@@ -55,28 +55,28 @@ public class GameController implements IController{
 
         if (keycode== P1Left){
             isP1LeftDown=true;
-
+            System.out.println(Input.Keys.toString(keycode));
             Player1.moveLeft();
             updateAllViews(Gdx.graphics.getDeltaTime());
         }
 
         if (keycode== P1Right){
             isP1RightDown = true;
-
+            System.out.println(Input.Keys.toString(keycode));
             Player1.moveRight();
             updateAllViews(Gdx.graphics.getDeltaTime());
         }
 
         if (keycode== P2Left){
             isP2LeftDown = true;
-
+            System.out.println(Input.Keys.toString(keycode));
             Player2.moveLeft();
             updateAllViews(Gdx.graphics.getDeltaTime());
         }
 
         if (keycode== P2Right){
             isP2RightDown = true;
-
+            System.out.println(Input.Keys.toString(keycode));
             Player2.moveRight();
             updateAllViews(Gdx.graphics.getDeltaTime());
         }

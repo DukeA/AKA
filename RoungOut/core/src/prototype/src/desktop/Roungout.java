@@ -40,17 +40,13 @@ public class Roungout extends Game  {
 
     public void inintControllers() {
         List<IPlayer> players = new ArrayList<IPlayer>(board.getPlayers());
-        boardView = new BoardView(WIDTH, HEIGHT, this);
-        viewers.add(boardView);
 
         ControllerHandler handler = new ControllerHandler();
 
         GameController gameController = new GameController(viewers,players.get(0),players.get(1),handler);
-
         ArrayList<IController> controllers = new ArrayList<IController>();
 
         controllers.add(gameController);
-
         //Init the handler with the controllers
         handler.setControllers(controllers);
     }
@@ -68,7 +64,19 @@ public class Roungout extends Game  {
         camera.setToOrtho(false, WIDTH, HEIGHT);
         board = new Board(WIDTH, HEIGHT);
         view = new BoardView(WIDTH, HEIGHT,this);
-        inintControllers();
+        viewers.add(view);
+
+        //InitControllers
+        List<IPlayer> players = new ArrayList<IPlayer>(board.getPlayers());
+        ControllerHandler handler = new ControllerHandler();
+        GameController gameController = new GameController(viewers,players.get(0),players.get(1),handler);
+        ArrayList<IController> controllers = new ArrayList<IController>();
+        controllers.add(gameController);
+        //Init the handler with the controllers
+        handler.setControllers(controllers);
+
+
+
         this.setScreen(splashScreen);
 
 
@@ -83,7 +91,7 @@ public class Roungout extends Game  {
     }
 
     public void dispose() {
-
+        super.dispose();
     }
 
 

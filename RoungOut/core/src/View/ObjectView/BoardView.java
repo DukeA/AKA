@@ -58,7 +58,6 @@ public class BoardView  implements IViews,Screen {
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        board.update(delta);
         update(delta);
 
         Gdx.gl.glLineWidth(16);
@@ -113,6 +112,9 @@ public class BoardView  implements IViews,Screen {
 
     @Override
     public void update(float delta) {
+
+        board.update(delta);
+
         for (IViews views: views) {
             views.update(delta);
         }
