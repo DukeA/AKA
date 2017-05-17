@@ -58,8 +58,10 @@ public class BoardView  implements IViews,Screen {
 
     @Override
     public void render(float delta) {
+        //Clear the screen, and add background
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         update(delta);
 
         Gdx.gl.glLineWidth(16);
