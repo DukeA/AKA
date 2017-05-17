@@ -62,14 +62,13 @@ public class Roungout extends Game  {
         //board = board.getBoard() // needed inorder to update the board
 
         //TODO MAKE GAME LOOP
-
-
         startTime = TimeUtils.millis() * 100;
         splashScreen = new SplashView(WIDTH, HEIGHT, this);
         camera = new OrthographicCamera();
         camera.setToOrtho(false, WIDTH, HEIGHT);
         board = new Board(WIDTH, HEIGHT);
         view = new BoardView(WIDTH, HEIGHT,this);
+        inintControllers();
         this.setScreen(splashScreen);
 
 

@@ -111,7 +111,7 @@ public class GameController implements IController{
     public void changeInputProcessor() {
         Gdx.input.setInputProcessor(this);
         isGameRunning = true;
-        gameLoop();
+        //gameLoop();
     }
 
     @Override

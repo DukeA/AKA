@@ -1,9 +1,5 @@
 package View.ObjectView;
 
-
-
-
-
 import Model.GameObjects.Board;
 import Model.GameObjects.IBoard;
 import com.badlogic.gdx.Game;
@@ -62,6 +58,7 @@ public class BoardView  implements IViews,Screen {
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        board.update(delta);
         update(delta);
 
         Gdx.gl.glLineWidth(16);
