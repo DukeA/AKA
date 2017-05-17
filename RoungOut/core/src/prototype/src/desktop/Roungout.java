@@ -5,8 +5,6 @@ import Controller.IController;
 import Controller.PlayerController;
 
 import Model.GameObjects.*;
-import View.MenuView.MenuView;
-import View.MenuView.OptionView;
 import View.MenuView.SplashView;
 import View.ObjectView.BoardView;
 import View.ObjectView.IViews;
@@ -36,7 +34,6 @@ public class Roungout extends Game  {
     private ArrayList<IViews> viewers = new ArrayList<IViews>();
 
 
-    private OptionView options;
     private BoardView view;
     private Board board;
 
@@ -72,7 +69,7 @@ public class Roungout extends Game  {
         camera.setToOrtho(false, WIDTH, HEIGHT);
         board = new Board(WIDTH, HEIGHT);
         view = new BoardView(WIDTH, HEIGHT,this);
-       this.setScreen(splashScreen);
+        this.setScreen(splashScreen);
 
 
 

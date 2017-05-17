@@ -32,7 +32,6 @@ public class OptionView implements Screen {
     private Stage stage;
     private BitmapFont font;
     private Game game;
-    private MenuView view;
 
     private CheckBox[] box;
     private CheckBox[] muteBox;
@@ -147,10 +146,7 @@ public class OptionView implements Screen {
         stage.act();
         stage.draw();
         batch.end();
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            view =  new MenuView(WIDTH,HEIGHT ,game);
-            game.setScreen(view);
-        }
+
     }
 
     @Override

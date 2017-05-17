@@ -28,7 +28,6 @@ public class BoardView  implements IViews,Screen {
     private IBoard board;
     private ShapeRenderer shapeRenderer;
     private SpriteBatch batch;
-    private InGameView gameView;
     private Game game;
 
     //private IPlayerController controller;
@@ -44,8 +43,7 @@ public class BoardView  implements IViews,Screen {
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         this.board = new Board(WIDTH,HEIGHT);
-        gameView = new InGameView(WIDTH,HEIGHT,game);
-        views = new ArrayList<IViews>();
+               views = new ArrayList<IViews>();
         views.add(0,createPad(WIDTH,HEIGHT,shapeRenderer,(Board)board));
         views.add(1,createBall(WIDTH,HEIGHT,shapeRenderer,(Board)board));
         views.add(2,createBricks(WIDTH,HEIGHT,shapeRenderer,(Board)board));
@@ -77,10 +75,7 @@ public class BoardView  implements IViews,Screen {
         for (int i =0; i<views.size(); i++) {
             views.get(i).render(delta);
         }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-            game.setScreen(gameView);
-        }
+        
 
 
     }
