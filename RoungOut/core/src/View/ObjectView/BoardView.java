@@ -8,11 +8,14 @@ import Model.GameObjects.Board;
 import Model.GameObjects.IBoard;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 
 import java.util.ArrayList;
 
@@ -25,6 +28,7 @@ public class BoardView  implements IViews,Screen {
     private IBoard board;
     private ShapeRenderer shapeRenderer;
     private SpriteBatch batch;
+    private InGameView gameView;
     private Game game;
 
     //private IPlayerController controller;
@@ -33,18 +37,19 @@ public class BoardView  implements IViews,Screen {
     private final int HEIGHT;
 
 
-    public BoardView(int WIDTH,int HEIGHT,Board board, Game game) {
+    public BoardView(int WIDTH,int HEIGHT, Game game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
         this.game = game;
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
-        this.board = board;
+        this.board = new Board(WIDTH,HEIGHT);
+        gameView = new InGameView(WIDTH,HEIGHT,game);
         views = new ArrayList<IViews>();
-        views.add(0,createPad(WIDTH,HEIGHT,shapeRenderer,board));
-        views.add(1,createBall(WIDTH,HEIGHT,shapeRenderer,board));
-        views.add(2,createBricks(WIDTH,HEIGHT,shapeRenderer,board));
-        views.add(3,createScorePad(WIDTH,HEIGHT,batch,board));
+        views.add(0,createPad(WIDTH,HEIGHT,shapeRenderer,(Board)board));
+        views.add(1,createBall(WIDTH,HEIGHT,shapeRenderer,(Board)board));
+        views.add(2,createBricks(WIDTH,HEIGHT,shapeRenderer,(Board)board));
+        views.add(3,createScorePad(WIDTH,HEIGHT,batch,(Board)board));
 
     }
 
@@ -73,7 +78,9 @@ public class BoardView  implements IViews,Screen {
             views.get(i).render(delta);
         }
 
-
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
+            game.setScreen(gameView);
+        }
 
 
     }

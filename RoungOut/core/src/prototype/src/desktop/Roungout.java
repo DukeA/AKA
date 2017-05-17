@@ -43,7 +43,7 @@ public class Roungout extends Game  {
 
     public void inintControllers() {
         List<IPlayer> players = new ArrayList<IPlayer>(board.getPlayers());
-        boardView = new BoardView(WIDTH, HEIGHT, board, this);
+        boardView = new BoardView(WIDTH, HEIGHT, this);
         viewers.add(boardView);
 
         ControllerHandler handler = new ControllerHandler();
@@ -71,7 +71,7 @@ public class Roungout extends Game  {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, WIDTH, HEIGHT);
         board = new Board(WIDTH, HEIGHT);
-        view = new BoardView(WIDTH, HEIGHT, board,this);
+        view = new BoardView(WIDTH, HEIGHT,this);
        this.setScreen(splashScreen);
 
 

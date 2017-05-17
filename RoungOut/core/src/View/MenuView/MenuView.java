@@ -1,5 +1,6 @@
 package View.MenuView;
 
+import Controller.MenuController;
 import Model.GameObjects.Board;
 import View.ObjectView.BoardView;
 import com.badlogic.gdx.Game;
@@ -26,6 +27,7 @@ public class MenuView  implements IHeadView, Screen {
 
     private int WIDTH;
     private int HEIGHT;
+    private MenuController controller;
     private BoardView view;
     private OptionView optionView;
     private Game game;
@@ -65,7 +67,7 @@ public class MenuView  implements IHeadView, Screen {
 
         playButton = new TextButton("Play"
                 , skin, "default");
-        playButton.setWidth(1000f);
+        playButton.setWidth(200f);
         playButton.setHeight(30f);
         playButton.setPosition(WIDTH / 2, HEIGHT / 2);
         playButton.addListener(new ClickListener() {
@@ -73,7 +75,7 @@ public class MenuView  implements IHeadView, Screen {
             public void clicked(InputEvent event, float x, float y){
                 game.getScreen().hide();
                 game.getScreen().dispose();
-
+                view = new BoardView(WIDTH,HEIGHT,game);
                 game.setScreen(view);
             }
 
@@ -95,7 +97,7 @@ public class MenuView  implements IHeadView, Screen {
 
         });
 
-        exitButton = new TextButton("Exit",
+        exitButton = new TextButton("Quiet",
                 skin, "default");
         exitButton.setWidth(200f);
         exitButton.setHeight(20f);
@@ -168,9 +170,9 @@ public class MenuView  implements IHeadView, Screen {
     }
 
     @Override
-    public BoardView createBoardView(int HEIGHT, int WIDTH,Board board, Game game) {
+    public BoardView createBoardView(int HEIGHT, int WIDTH, Game game) {
 
-        return new BoardView(WIDTH, HEIGHT, board, game);
+        return new BoardView(WIDTH, HEIGHT, game);
     }
 
     public OptionView createOptionView(int HEIGHT, int WIDTH ,Game game) {
