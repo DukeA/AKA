@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import prototype.src.desktop.Roungout;
 
 /**
  * Created by DukeA on 2017-05-05.
@@ -31,12 +32,14 @@ public class OptionView implements Screen {
     private Label label;
     private Stage stage;
     private BitmapFont font;
-    private Game game;
+    private Roungout game;
+
+    private MenuView menuView;
 
     private CheckBox[] box;
     private CheckBox[] muteBox;
 
-    public OptionView(int WIDTH, int HEIGHT , Game game) {
+    public OptionView(int WIDTH, int HEIGHT , Roungout game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
         this.game = game;
@@ -125,8 +128,6 @@ public class OptionView implements Screen {
 
 
 
-
-
         table.row();
         table.add(keyArea).width(400).height(100);
         stage.addActor(table);
@@ -146,6 +147,11 @@ public class OptionView implements Screen {
         stage.act();
         stage.draw();
         batch.end();
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            menuView = new MenuView(WIDTH,HEIGHT, game);
+            game.setScreen(menuView);
+        }
 
     }
 

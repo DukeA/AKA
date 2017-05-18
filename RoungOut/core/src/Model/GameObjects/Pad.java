@@ -10,6 +10,10 @@ import Model.GameObjects.Physics.RectangleBody;
 public class Pad {
 
     private RectangleBody body;
+    private Float originX;
+    private Float originY;
+    private Float radius;
+
 
     //Completly revamped, barely needed since a body is a pad
 
@@ -17,18 +21,23 @@ public class Pad {
     public float getLength() {
         return body.getHeight();
     }
+
     public float getWidth() {
         return body.getWidth();
     }
+
     public float getPadXPos() {
         return body.getX();
     }
+
     public float getPadYPos() {
         return body.getY();
     }
+
     public float getPadSpeed() {
         return body.getSpeed();
     }
+
     public Body getBody() {
         return body;
     }
@@ -38,31 +47,40 @@ public class Pad {
     public void setPadXPos(float padXPos) {
         body.setX(padXPos);
     }
+
     public void setPadYPos(float padYPos) {
         body.setY(padYPos);
     }
+
     public void setSpeed(float speed) {
         body.setSpeed(speed);
     }
 
     //Constructor
-    public Pad(float length, float width, float padXPos, float padYPos,float padSpeed) {
-        this.body =new RectangleBody(padXPos,padYPos,width,length);
+    public Pad(float length, float width, float padXPos, float padYPos, float padSpeed) {
+        this.body = new RectangleBody(padXPos, padYPos, width, length);
         this.body.setSpeed(padSpeed);
+
     }
 
     //Method: Moves by incrementing the x and y pos with it's speed
-    public void padMoveRight(){
-        body.setX(body.getX() + body.getSpeed());
+    public void padMoveRight() {
+        this.radius =getPadXPos()/getPadYPos();
+        originX = body.getX() + body.getSpeed();
+        body.setX(originX + (float)Math.cos(30f) *radius);
         //padXPos = padXPos + padSpeed;
-        body.setY(body.getY()+body.getSpeed());
+        originY = body.getX() + body.getSpeed();
+        body.setY(originY + (float)Math.sin(30f) *radius);
         //padYPos = padYPos + padSpeed;
     }
 
-    public void padMoveLeft(){
-        body.setX(body.getX() + (body.getSpeed() * -1));
+    public void padMoveLeft() {
+        this.radius =getPadXPos()/getPadYPos();
+        originX = body.getX() + (body.getSpeed() * -1);
+        body.setX(originX - (float)Math.cos(30f) * radius);
         //padXPos = padXPos + padSpeed;
-        body.setY(body.getY()+ (body.getSpeed() * -1));
+        originY = body.getY() + (body.getSpeed() * -1);
+        body.setY(originY - (float)Math.sin(30f) * radius);
         //padYPos = padYPos + padSpeed;
     }
 
