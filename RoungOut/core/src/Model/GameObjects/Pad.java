@@ -38,6 +38,8 @@ public class Pad {
         return body.getSpeed();
     }
 
+    public float getAngle(){return body.getAngle();}
+
     public Body getBody() {
         return body;
     }
@@ -60,7 +62,7 @@ public class Pad {
     public Pad(float length, float width, float padXPos, float padYPos, float padSpeed) {
         this.body = new RectangleBody(padXPos, padYPos, width, length);
         this.body.setSpeed(padSpeed);
-
+        this.body.setAngle(270);
     }
 
     //Method: Moves by incrementing the x and y pos with it's speed
