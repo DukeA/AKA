@@ -13,6 +13,7 @@ public class Player implements IPlayer, IModel {
 
     public Player(){
         //Default values for a Player's pad
+<<<<<<< HEAD
         pad = new Pad(30,20,0,0,0,0,0);
         points = 0;
     }
@@ -21,6 +22,26 @@ public class Player implements IPlayer, IModel {
     public Player(float PadL, float PadW,float originX, float originY, float PadXPos, float PadYPos, float PadSpeed){
         pad = new Pad(PadL,PadW,originX,originY,PadXPos,PadYPos,PadSpeed);
         points = 0;
+=======
+        this.pad = new Pad(30,20,0,0,0);
+        this.points = 0;
+    }
+
+    //Overloaded with specific parameters, points allways starts at 0
+    public Player(float PadL, float PadW, float PadXPos, float PadYPos, float PadSpeed){
+        this.pad = new Pad(PadL,PadW,PadXPos,PadYPos,PadSpeed);
+        this.points = 0;
+    }
+    //Overloaded method, player+pad
+    public Player(Pad pad){
+        this.pad = pad;
+        this.points = 0;
+    }
+    //Overloaded method, copy a player
+    public Player(Player player){
+        this.pad = player.pad;
+        this.points = 0;
+>>>>>>> b0c640e85118d5400dc3d2120e5948951cc4354a
     }
 
     public void setPadCoordinates(float x, float y) {
