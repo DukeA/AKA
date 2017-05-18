@@ -32,6 +32,10 @@ public class ControllerHandler implements IHandler {
         }
     }
 
+    public ArrayList<IController> getcontrollers (){
+        return controllers;
+    }
+
     public void setControllers (ArrayList<IController> newControllers){
         controllers = newControllers;
     }

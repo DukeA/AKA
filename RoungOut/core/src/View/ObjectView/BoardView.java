@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+import prototype.src.desktop.Roungout;
 
 import java.util.ArrayList;
 
@@ -24,7 +25,7 @@ public class BoardView  implements IViews,Screen {
     private IBoard board;
     private ShapeRenderer shapeRenderer;
     private SpriteBatch batch;
-    private Game game;
+    private Roungout game;
 
     //private IPlayerController controller;
 
@@ -32,13 +33,15 @@ public class BoardView  implements IViews,Screen {
     private final int HEIGHT;
 
 
-    public BoardView(int WIDTH,int HEIGHT, Game game) {
+    public BoardView(int WIDTH,int HEIGHT, Roungout game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
         this.game = game;
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
-        this.board = new Board(WIDTH,HEIGHT);
+
+        this.board=game.getBoard();
+        //this.board = new Board(WIDTH,HEIGHT); //
                views = new ArrayList<IViews>();
         views.add(0,createPad(WIDTH,HEIGHT,shapeRenderer,(Board)board));
         views.add(1,createBall(WIDTH,HEIGHT,shapeRenderer,(Board)board));
@@ -49,7 +52,8 @@ public class BoardView  implements IViews,Screen {
 
     @Override
     public void show() {
-
+    Gdx.input.setInputProcessor(game.gameController);
+        //GIVE BACK CONTROLLER HERE
     }
 
     @Override
@@ -112,7 +116,7 @@ public class BoardView  implements IViews,Screen {
 
     @Override
     public void update(float delta) {
-
+        game.gameController.movePlayers();
         board.update(delta);
 
         for (IViews views: views) {

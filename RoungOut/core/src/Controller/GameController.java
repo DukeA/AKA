@@ -96,7 +96,7 @@ public class GameController implements IController{
          *  UPDATE2: Decided that the controller should send explicit calls to the objects listening to the controller
          *
          */
-        return true;
+        return false;
     }
 
     //Helper method, code reuse
@@ -110,7 +110,7 @@ public class GameController implements IController{
     @Override
     public void changeInputProcessor() {
         Gdx.input.setInputProcessor(this);
-        isGameRunning = true;
+        //isGameRunning = true;
         //gameLoop();
     }
 
@@ -136,11 +136,12 @@ public class GameController implements IController{
             isP2RightDown = false;
         }
 
-        return true;
+        return false;
     }
 
     @Override
-    public boolean keyTyped(char character) { return false; }
+    public boolean keyTyped(char character) {
+        return false; }
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) { return false; }
     @Override
@@ -161,7 +162,7 @@ public class GameController implements IController{
     }
     //End of these inputs
 
-    void movePlayers(){
+    public void movePlayers(){
     //Help function, checks if the key is being held down and if so, move accordingly
         if (isP1LeftDown){
             Player1.moveLeft();

@@ -30,6 +30,8 @@ public class Roungout extends Game  {
     public OrthographicCamera camera;
     public IViews boardView;
 
+    public GameController gameController;
+
 
     private ArrayList<IViews> viewers = new ArrayList<IViews>();
 
@@ -37,6 +39,9 @@ public class Roungout extends Game  {
     private BoardView view;
     private Board board;
 
+    public Board getBoard(){
+        return board;
+    }
 
     public void inintControllers() {
         List<IPlayer> players = new ArrayList<IPlayer>(board.getPlayers());
@@ -59,29 +64,29 @@ public class Roungout extends Game  {
 
         //TODO MAKE GAME LOOP
         startTime = TimeUtils.millis() * 100;
-        splashScreen = new SplashView(WIDTH, HEIGHT, this);
+        splashScreen = new SplashView(WIDTH, HEIGHT, this); //set input
         camera = new OrthographicCamera();
         camera.setToOrtho(false, WIDTH, HEIGHT);
         board = new Board(WIDTH, HEIGHT);
         view = new BoardView(WIDTH, HEIGHT,this);
         viewers.add(view);
 
+
         //InitControllers
         List<IPlayer> players = new ArrayList<IPlayer>(board.getPlayers());
         ControllerHandler handler = new ControllerHandler();
-        GameController gameController = new GameController(viewers,players.get(0),players.get(1),handler);
+        gameController = new GameController(viewers,players.get(0),players.get(1),handler);
+
+        Gdx.input.setInputProcessor(gameController);
         ArrayList<IController> controllers = new ArrayList<IController>();
         controllers.add(gameController);
         //Init the handler with the controllers
         handler.setControllers(controllers);
 
-
+        //Sets the input processor to this index (GAME CONTROLLER)
+        handler.getcontrollers().get(0).changeInputProcessor();
 
         this.setScreen(splashScreen);
-
-
-
-
     }
 
 

@@ -26,7 +26,7 @@ public class SplashView implements Screen {
     private Sprite sprite;
     private SpriteBatch batch;
 
-    public SplashView(int WIDTH, int HEIGHT, Game game) {
+    public SplashView(int WIDTH, int HEIGHT, Roungout game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
         this.game = game;

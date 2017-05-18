@@ -3,6 +3,7 @@ package Controller;
 import View.ObjectView.IViews;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  */
 public class MenuController implements IController {
 
-
+    ClickListener tmp = new ClickListener();
     //List that contains the views that this controller interacts with
     private ArrayList<IViews> viewSubscribers = new ArrayList<IViews>();
 

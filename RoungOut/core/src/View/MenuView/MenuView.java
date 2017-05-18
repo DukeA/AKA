@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import prototype.src.desktop.Roungout;
 
 import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.actor;
 
@@ -29,7 +30,7 @@ public class MenuView  implements IHeadView, Screen {
     private int HEIGHT;
     private BoardView view;
     private OptionView optionView;
-    private Game game;
+    private Roungout game;
     private OrthographicCamera camera;
     private Stage stage;
     private SpriteBatch batch;
@@ -42,7 +43,7 @@ public class MenuView  implements IHeadView, Screen {
     private Skin skin;
 
 
-    public MenuView(int WIDTH, int HEIGHT, Game game) {
+    public MenuView(int WIDTH, int HEIGHT, Roungout game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
         this.game = game;
@@ -169,12 +170,12 @@ public class MenuView  implements IHeadView, Screen {
     }
 
     @Override
-    public BoardView createBoardView(int HEIGHT, int WIDTH, Game game) {
+    public BoardView createBoardView(int HEIGHT, int WIDTH, Roungout game) {
 
         return new BoardView(WIDTH, HEIGHT, game);
     }
 
-    public OptionView createOptionView(int HEIGHT, int WIDTH ,Game game) {
+    public OptionView createOptionView(int HEIGHT, int WIDTH ,Roungout game) {
 
         return new OptionView(WIDTH, HEIGHT, game);
     }
