@@ -40,7 +40,7 @@ public class PadView implements IViews {
                 p.get(0).getPad().getOriginY(),
                 p.get(0).getPad().getWidth(),
                 p.get(0).getPad().getLength(),
-                50,30,
+                1,1,
                 p.get(0).getPad().getAngle());
         shapeRenderer.end();
 
@@ -54,7 +54,7 @@ public class PadView implements IViews {
                 p.get(1).getPad().getOriginY(),
                 p.get(1).getPad().getWidth(),
                 p.get(1).getPad().getLength(),
-                50,30,
+                1,1,
                 p.get(1).getPad().getAngle());
         shapeRenderer2.end();
     }

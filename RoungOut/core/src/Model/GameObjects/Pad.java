@@ -3,6 +3,9 @@ package Model.GameObjects;
 
 import Model.GameObjects.Physics.Body;
 import Model.GameObjects.Physics.RectangleBody;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector;
+
 
 /**
  * Created by Alex on 2017-04-01.
@@ -12,9 +15,11 @@ public class Pad {
     private RectangleBody body;
     private float originX;
     private float originY;
+    private float vectorX;
+    private float vectorY;
+
     private float scalex;
     private float scaley;
-    private float radius;
 
 
     //Completly revamped, barely needed since a body is a pad
@@ -91,27 +96,29 @@ public class Pad {
         this.body.setSpeed(padSpeed);
         this.originY = originY;
         this.originX =originX;
-        this.body.setAngle(270);
+        this.body.setAngle(0);
     }
 
     //Method: Moves by incrementing the x and y pos with it's speed
     public void padMoveRight() {
-        this.radius =getPadXPos()/getPadYPos();
-        originX = body.getX() + body.getSpeed();
-        body.setX(originX + (float)Math.cos(30f) *radius);
+        vectorX = body.getX()-originX;
+        vectorY = body.getY()-originY;
+        body.setX(vectorX - (float) Math.cos(0.5f));
         //padXPos = padXPos + padSpeed;
-        originY = body.getX() + body.getSpeed();
-        body.setY(originY + (float)Math.sin(30f) *radius);
+        body.setY(vectorY + (float)Math.sin(0.5f) );
         //padYPos = padYPos + padSpeed;
+
+
     }
 
     public void padMoveLeft() {
-        this.radius =getPadXPos()/getPadYPos();
-        originX = body.getX() + (body.getSpeed() * -1);
-        body.setX(originX - (float)Math.cos(30f) * radius);
+        vectorX = body.getX()-originX;
+        vectorY = body.getY()-originY;
+        
+
+        body.setX(vectorX + (float)Math.cos(0.5f));
         //padXPos = padXPos + padSpeed;
-        originY = body.getY() + (body.getSpeed() * -1);
-        body.setY(originY - (float)Math.sin(30f) * radius);
+        body.setY(vectorY - (float)Math.sin(0.5f) );
         //padYPos = padYPos + padSpeed;
     }
 
