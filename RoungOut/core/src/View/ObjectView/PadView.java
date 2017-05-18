@@ -33,20 +33,27 @@ public class PadView implements IViews {
     public void render(float delta) {
         List<Player> p = new ArrayList<Player>(Pads.getPlayers());
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(Color.BLUE);
-        shapeRenderer.rect(p.get(0).getPad().getPadXPos(),
-                p.get(0).getPad().getPadYPos(),
-                p.get(0).getPad().getWidth(),
-                p.get(0).getPad().getLength());
+        shapeRenderer.rect(p.get(1).getPad().getPadXPos(),
+                p.get(1).getPad().getPadYPos(),
+                p.get(1).getPad().getOriginX(),
+                p.get(1).getPad().getOriginY(),
+                p.get(1).getPad().getWidth(),
+                p.get(1).getPad().getLength(),
+                0,0,
+                p.get(1).getPad().getAngle());
         shapeRenderer.end();
 
 
         shapeRenderer2.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer2.setColor(Color.LIME);
-        shapeRenderer2.rect(p.get(1).getPad().getPadXPos(),
+        shapeRenderer2.rect(
+                p.get(1).getPad().getPadXPos(),
                 p.get(1).getPad().getPadYPos(),
+                p.get(1).getPad().getOriginX(),
+                p.get(1).getPad().getOriginY(),
                 p.get(1).getPad().getWidth(),
-                p.get(1).getPad().getLength());
+                p.get(1).getPad().getLength(),
+                0,0,
+                p.get(1).getPad().getAngle());
         shapeRenderer2.end();
     }
 

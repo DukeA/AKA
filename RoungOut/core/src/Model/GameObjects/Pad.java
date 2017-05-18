@@ -18,6 +18,12 @@ public class Pad {
     //Completly revamped, barely needed since a body is a pad
 
     //Getters
+    public float getOriginX(){
+        return originX;
+    }
+    public float getOriginY() {
+        return  originY;
+    }
     public float getLength() {
         return body.getHeight();
     }
@@ -43,7 +49,12 @@ public class Pad {
     public Body getBody() {
         return body;
     }
-
+    public void setOriginX(float padXPos)  {
+        this.originX =padXPos;
+    }
+    public void setOriginY(float padYPos) {
+        this.originY = padYPos;
+    }
 
     //Setters, mainly used in testing
     public void setPadXPos(float padXPos) {
@@ -59,9 +70,11 @@ public class Pad {
     }
 
     //Constructor
-    public Pad(float length, float width, float padXPos, float padYPos, float padSpeed) {
+    public Pad(float length, float width, float originX, float originY, float padXPos, float padYPos, float padSpeed) {
         this.body = new RectangleBody(padXPos, padYPos, width, length);
         this.body.setSpeed(padSpeed);
+        this.originY = originY;
+        this.originX =originX;
         this.body.setAngle(270);
     }
 

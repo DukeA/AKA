@@ -13,13 +13,13 @@ public class Player implements IPlayer, IModel {
 
     public Player(){
         //Default values for a Player's pad
-        pad = new Pad(30,20,0,0,0);
+        pad = new Pad(30,20,0,0,0,0,0);
         points = 0;
     }
 
     //Overloaded with specific parameters, points allways starts at 0
-    public Player(float PadL, float PadW, float PadXPos, float PadYPos, float PadSpeed){
-        pad = new Pad(PadL,PadW,PadXPos,PadYPos,PadSpeed);
+    public Player(float PadL, float PadW,float originX, float originY, float PadXPos, float PadYPos, float PadSpeed){
+        pad = new Pad(PadL,PadW,originX,originY,PadXPos,PadYPos,PadSpeed);
         points = 0;
     }
 
