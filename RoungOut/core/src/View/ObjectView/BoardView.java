@@ -116,7 +116,7 @@ public class BoardView  implements IViews,Screen {
 
     @Override
     public void update(float delta) {
-        game.gameController.movePlayers();
+        game.gameController.atRequest();
         board.update(delta);
 
         for (IViews views: views) {

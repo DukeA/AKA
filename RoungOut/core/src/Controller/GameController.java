@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by Alex on 2017-04-28.
  */
-public class GameController implements IController{
+public class GameController implements IController, IControllerWithRequest {
     //The list will only contain unique subscribers and this is guaranteed by the
     //addListener and removeListener methods
 
@@ -117,7 +117,7 @@ public class GameController implements IController{
     @Override
     public EnumIndexes getTypeOfMenu(){ return typeOfMenu;}
 
-    //We don't need these inputs
+
     @Override
     public boolean keyUp(int keycode) {
         if (keycode== P1Left){
@@ -138,10 +138,9 @@ public class GameController implements IController{
 
         return false;
     }
-
+    //Dont need these inputs
     @Override
-    public boolean keyTyped(char character) {
-        return false; }
+    public boolean keyTyped(char character) { return false;}
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) { return false; }
     @Override
@@ -162,7 +161,7 @@ public class GameController implements IController{
     }
     //End of these inputs
 
-    public void movePlayers(){
+    private void movePlayers(){
     //Help function, checks if the key is being held down and if so, move accordingly
         if (isP1LeftDown){
             Player1.moveLeft();
@@ -182,7 +181,13 @@ public class GameController implements IController{
 
     }
 
-
+    @Override
+    public void atRequest() {
+        //Since we update the model from the view (due to framework's implementation of rendering things)
+        //we need the loop to be a renderer, thus we would like to see which buttons are
+        // being held down at each frame so we can move the players
+        movePlayers();
+    }
 
     //GameLoopThe thing that makes the game run
     private volatile boolean isGameRunning;

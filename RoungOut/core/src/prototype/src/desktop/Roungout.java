@@ -4,6 +4,7 @@ import Controller.ControllerHandler;
 import Controller.IController;
 import Controller.GameController;
 
+import Controller.IControllerWithRequest;
 import Model.GameObjects.*;
 import View.MenuView.SplashView;
 import View.ObjectView.BoardView;
@@ -30,7 +31,7 @@ public class Roungout extends Game  {
     public OrthographicCamera camera;
     public IViews boardView;
 
-    public GameController gameController;
+    public IControllerWithRequest gameController;
 
 
     private ArrayList<IViews> viewers = new ArrayList<IViews>();
