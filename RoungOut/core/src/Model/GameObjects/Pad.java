@@ -10,14 +10,22 @@ import Model.GameObjects.Physics.RectangleBody;
 public class Pad {
 
     private RectangleBody body;
-    private Float originX;
-    private Float originY;
-    private Float radius;
+    private float originX;
+    private float originY;
+    private float scalex;
+    private float scaley;
+    private float radius;
 
 
     //Completly revamped, barely needed since a body is a pad
 
     //Getters
+    public float getScalex() {
+        return scalex;
+    }
+    public float getScaley() {
+        return  scaley;
+    }
     public float getOriginX(){
         return originX;
     }
@@ -49,6 +57,14 @@ public class Pad {
     public Body getBody() {
         return body;
     }
+
+    public void setScalex(float scalex) {
+        this.scalex = scalex;
+    }
+    public void setScaley(float scaley) {
+        this.scaley = scaley;
+    }
+
     public void setOriginX(float padXPos)  {
         this.originX =padXPos;
     }
