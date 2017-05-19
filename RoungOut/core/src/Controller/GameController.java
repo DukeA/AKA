@@ -4,6 +4,7 @@ import View.ObjectView.IViews;
 import Model.GameObjects.IPlayer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by Alex on 2017-04-28.
  */
-public class GameController implements IController, IControllerWithRequest {
+public class GameController extends ClickListener implements IController, IControllerWithRequest {
     //The list will only contain unique subscribers and this is guaranteed by the
     //addListener and removeListener methods
 

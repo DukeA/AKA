@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by Alex on 2017-05-13.
  */
-public class MenuController implements IController {
+public class MenuController extends ClickListener implements IController {
 
     ClickListener tmp = new ClickListener();
     //List that contains the views that this controller interacts with
