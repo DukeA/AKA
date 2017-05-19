@@ -40,6 +40,14 @@ public class CircleBody implements Body {
         return location.getY();
     }
 
+    public float getDeltaX() {
+        return location.getDeltaX();
+    }
+
+    public float getDeltaY() {
+        return location.getDeltaY();
+    }
+
     @Override
     public float getAngle() {
         return location.getAngle();

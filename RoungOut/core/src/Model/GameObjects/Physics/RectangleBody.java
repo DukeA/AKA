@@ -17,7 +17,7 @@ public class RectangleBody implements Body {
         this.width=width;
         this.height = height;
 
-       // shape = new RectangleShape(width, height);
+        // shape = new RectangleShape(width, height);
     }
 
     public RectangleBody(float xPos, float yPos, float width, float height) {
@@ -40,9 +40,9 @@ public class RectangleBody implements Body {
 
     // Private helper methods /////////////////////////////////////////////////
 
-    private float lineDistance(double lineCenterPoint, double otherPoint, double lineSize) {
+    private float lineDistance(float lineCenterPoint, float otherPoint, float lineSize) {
         // Get the distance from the center of a line segment towards another point.
-        return (float) Math.max(0, Math.abs(lineCenterPoint - otherPoint) - lineSize/2f);
+        return Math.max(0, Math.abs(lineCenterPoint - otherPoint) - lineSize/2f);
     }
 
     // Getters ////////////////////////////////////////////////////////////////
@@ -54,6 +54,14 @@ public class RectangleBody implements Body {
     @Override
     public float getY() {
         return location.getY();
+    }
+
+    public float getDeltaX() {
+        return location.getDeltaX();
+    }
+
+    public float getDeltaY() {
+        return location.getDeltaY();
     }
 
     @Override

@@ -1,29 +1,152 @@
 package Model.Collsion;
 
-import Model.GameObjects.Ball;
-import Model.GameObjects.Physics.Body;
-import Model.GameObjects.Physics.CircleBody;
-import Model.GameObjects.Board;
+import Model.GameObjects.*;
+import Model.GameObjects.Physics.RectangleBody;
+
+import java.util.*;
 
 /**
+ * Static collision methods between board, ball, bricks, and pads.
+ *
  * @author Ken Bäcklund
  */
 public class Collision {
 
-    private CircleBody board;       // TODO:  Temporary solution, will use proper Board class later.
 
-    public Collision() {
-        board = new CircleBody(0f, 0f, 1000f);  // TODO: Use proper board class
+    // Public methods /////////////////////////////////////////////////////////
+
+    public static boolean isBallOutsideBoard(Board board, Ball ball) {
+        float dx = ball.getX() - board.getXPos();
+        float dy = ball.getY() - board.getYPos();
+        float dz = (float) Math.sqrt(dx * dx + dy * dy) - (ball.getRadius() + board.getRadius());
+        return dz >= -0.0001f;  // That's close enough.
     }
 
-    public boolean isCollision(Body someBody, Body anyBody) {
-        return (someBody.distance(anyBody) <= 0.0001f);
+    // Estimate min deltaTime until any form of collision occurs.
+    public static float estimateNextCollision(Board board) {
+        float time = Float.MAX_VALUE;        // Default time is "never".
+        for (Ball ball : board.getBalls()) {
+            time = Math.min(time, estimateTimeSingleBallCollision(board, ball));
+        }
+        // Shortest time estimated. Best to save/decrement this value from deltaTime.
+        return time;
     }
 
-    public boolean isOutsideBoardRange(Ball ball, float boardRadius) {
-        board.setWidth(boardRadius *2);   // TODO: Temporary solution
-        //setWidth and setHeight in a circleBody is the same as setting the diameter
-        return (ball.distance(board) >= 0.0001f);
+    // Helper methods /////////////////////////////////////////////////////////
+    public static float estimateTimeSingleBallCollision(Board board, Ball ball) {
+        float time = Float.MAX_VALUE;        // Default time is "never".
+
+        // Shortest time until ball(s) exit board.
+        time = Math.min(time, estimateBallGone(board, ball));
+
+        // Shortest time until ball(s) hit a brick.
+        for (Brick brick : board.getBricks()) {
+            time = Math.min(time, estimateBrickCollision(ball, brick));
+        }
+
+        // Shortest time until ball(s) collide with any other ball
+        for (Ball otherBall : board.getBalls()) {
+            if (!ball.equals(otherBall)) {
+                time = Math.min(time, estimateBallCollision(ball, otherBall));
+            }
+        }
+
+        // Shortest time until ball(s) collide with any pad
+        for (Player player : board.getPlayers()) {
+            time = Math.min(time, estimatePadCollision(ball, player.getPad()));
+        }
+
+        return time;
     }
 
+
+    // Shortest deltaTime until ball(s) collide with any other ball
+    public static float estimateBallCollision(Ball b1, Ball b2) {
+        float t = estimateCircleCollisions(
+                b1.getX() - b2.getX(),
+                b1.getY() - b2.getY(),
+                b1.getDeltaX() - b2.getDeltaX(),
+                b1.getDeltaY() - b2.getDeltaY(),
+                b1.getRadius() + b2.getRadius());
+        return Float.isNaN(t) ? Float.MAX_VALUE : t;  // if no collision course, return max time.
+    }
+
+    // Shortest deltaTime until ball(s) hit a brick.
+    // TODO Testing
+    public static float estimateBrickCollision(Ball ball, Brick brick) {
+        return estimateRectCollision(ball, brick.getBody());
+    }
+
+    // Estimate deltaTime until a ball exits board.
+    public static float estimateBallGone(Board board, Ball ball) {
+        float t = estimateCircleCollisions(
+                ball.getX() - board.getXPos(),
+                ball.getY() - board.getYPos(),
+                ball.getDeltaX(),
+                ball.getDeltaY(),
+                ball.getRadius() + board.getRadius());
+        if (Float.isNaN(t)) {
+            return 0;   // No collision course, ball must be outside board
+        } else if (Math.abs(t) < 0.0001f) {
+            return 0;   // Close enough to border, consider it gone.
+        } else {
+            return t;   // Else, give estimated time until ball outside board.
+        }
+    }
+
+    // Shortest deltaTime until ball(s) hit a pad.
+    public static float estimatePadCollision(Ball ball, Pad pad) {
+        return estimateRectCollision(ball,
+                new RectangleBody(pad.getPadXPos(),pad.getPadYPos(), pad.getWidth(), pad.getLength()));
+    }
+
+    // Estimate deltaTime until two circular objects collide.
+    //     px,py:  Relative distance between circles.
+    //     dx,dy:  Relative movement between circles.
+    //     rr:     Radius of both circles added together
+    //   Returns:  deltaTime if collision course, NaN if no collision course.
+    public static float estimateCircleCollisions(float px, float py, float dx, float dy, float rr) {
+        // Look up quadratic formula for the calculations below.
+        float a = (dx * dx + dy * dy);
+        float b = 2 * (px * dx + py * dy);
+        float c = px * px + py * py - rr * rr;
+        float d = b * b - 4 * a * c;
+
+        if (d < 0)
+            return Float.NaN;
+
+        float t1 = (-b + (float) Math.sqrt(d)) / (2 * a);
+        float t2 = (-b - (float) Math.sqrt(d)) / (2 * a);
+        if (t1 < 0 || t2 < 0)
+            return Math.max(t1, t2);
+        else
+            return Math.min(t1, t2);
+    }
+
+    public static float estimateRectCollision(Ball ball, RectangleBody rect) {
+        List<Float> tValues = new ArrayList<Float>();
+        if (ball.getDeltaX() != 0) {
+            tValues.add((rect.getX() - ball.getX() + (rect.getWidth() / 2f + ball.getRadius())) / ball.getDeltaX());
+            tValues.add((rect.getX() - ball.getX() - (rect.getWidth() / 2f + ball.getRadius())) / ball.getDeltaX());
+        }
+        if (ball.getDeltaY() != 0) {
+            tValues.add((rect.getY() - ball.getY() + (rect.getHeight() / 2f + ball.getRadius())) / ball.getDeltaY());
+            tValues.add((rect.getY() - ball.getY() - (rect.getHeight() / 2f + ball.getRadius())) / ball.getDeltaY());
+        }
+        Collections.sort(tValues);
+
+        for (float t : tValues) {
+            if (t < 0) {
+                continue;
+            }
+            float dz = rect.distance( ball.getX() + t * ball.getDeltaX(),
+                    ball.getY() + t * ball.getDeltaY() ) - ball.getRadius();
+            if (Math.abs(dz) < 0.001f ) {
+                return t;
+            }
+
+        }
+
+        return Float.MAX_VALUE;
+    }
 }

@@ -4,7 +4,7 @@ import Model.GameObjects.IModel;
 import Model.GameObjects.Physics.*;
 
 /**
- * Created by kendu on 2017-05-01.
+ * @author Ken Bäcklund
  */
 public class Brick implements IModel {
 
@@ -34,12 +34,24 @@ public class Brick implements IModel {
         return body.getY();
     }
 
+    public float getWidth() {
+        return body.getWidth();
+    }
+
+    public float getHeight() {
+        return body.getHeight();
+    }
+
     public float getAngle() {
         return body.getAngle();
     }
 
     public float getSpeed() {
         return body.getSpeed();
+    }
+
+    public RectangleBody getBody() {
+        return body;
     }
 
     public void setX(float xPos) {
