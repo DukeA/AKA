@@ -65,7 +65,7 @@ public class OptionView implements Screen {
 
 
         table.add(label).padTop(150);
-        label.setFontScale(4);
+        label.setFontScale(1);
         label.setEllipsis(true);
         table.row();
         table.add(resArea).padTop(100).width(400).height(100);
