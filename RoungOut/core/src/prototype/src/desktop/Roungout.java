@@ -69,7 +69,7 @@ public class Roungout extends Game  {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, WIDTH, HEIGHT);
         board = new Board(WIDTH, HEIGHT);
-        board.update(56f);
+        board.createSampleBoard(WIDTH, HEIGHT);         // Sample board creation here. Otherwise BoardTest is screwed up.
         view = new BoardView(WIDTH, HEIGHT,this);
         this.setScreen(splashScreen);
 

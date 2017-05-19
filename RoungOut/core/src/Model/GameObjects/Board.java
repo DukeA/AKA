@@ -13,13 +13,13 @@ import java.util.Set;
  */
 public class Board implements IBoard, IPowerUp {
 
-    private static float ADJUST_COLLISION_DISTANCE = 0.1f;
+    private static float ADJUST_COLLISION_DISTANCE = 0.01f;
 
     protected final int WIDTH;
     protected final int HEIGHT;
 
     private CircleBody board;
-    private Ball lastBallModelAdded;
+    private Ball lastBallSpawned;
     private float nextCollisionTime;
 
     private float xPos;
@@ -46,8 +46,6 @@ public class Board implements IBoard, IPowerUp {
 
         observers = new HashSet<CollisionObserver>();
         nextCollisionTime = Collision.estimateNextCollision(this);
-
-        createSampleBoard(width, height);
 
     }
 
@@ -100,7 +98,6 @@ public class Board implements IBoard, IPowerUp {
             deltaTime -= minTime;
             if (deltaTime > 0) {
                 handleCollisions();
-                adjustBallsAfterCollision(ADJUST_COLLISION_DISTANCE);
                 nextCollisionTime = Collision.estimateNextCollision(this);
                 if (nextCollisionTime < 0.001f) {
                     throw new UnknownError("Estimating collision time is faulty.");
@@ -109,22 +106,10 @@ public class Board implements IBoard, IPowerUp {
         }
     }
 
-    public void adjustBallsAfterCollision(float adjustmentDistance) {
-        System.out.print("AdjustCollisions: ");
-        for (Ball ball : balls) {
-            while (Collision.estimateTimeSingleBallCollision(this, ball) < adjustmentDistance ) {
-                System.out.printf("From (x=%.2f, y=%.2f) ", ball.getX(), ball.getY());
-                ball.move(-adjustmentDistance);
-                System.out.printf(" to (x=%.2f, y=%.2f).   ", ball.getX(), ball.getY());
-            }
-        }
-        System.out.println();
-    }
-
     public void addBall(Ball ball) {
         if (ball != null) {
             this.balls.add(ball);
-            lastBallModelAdded = new Ball(ball);
+            lastBallSpawned = new Ball(ball);
             nextCollisionTime = Collision.estimateNextCollision(this);
             if (nextCollisionTime < ADJUST_COLLISION_DISTANCE) {
                 throw new IllegalArgumentException(String.format(
@@ -184,27 +169,23 @@ public class Board implements IBoard, IPowerUp {
     }
 
     public void handleCollisions() {
-        System.out.println("HandleCollisions");
         for (Ball ball : balls) {
             if (Collision.isBallOutsideBoard(this, ball)) {
-                System.out.println("Notify: Ball outside");
                 notifyBallExitBoard(ball);
                 respawnBall(ball);
             }
             for (Brick brick : bricks) {
                 if ( ball.distance(brick.getBody()) < ADJUST_COLLISION_DISTANCE ) {
                     notifyBallHitBrick(ball, brick);
-                    System.out.println("Ball hit brick.");
                     bounceBall(ball, getRectDeflectionAngle(
                             ball, brick.getX(), brick.getY(), brick.getWidth(), brick.getHeight()));
                 }
             }
             for (Player player : players) {
                 if ( ball.distance(player.getPad().getBody()) < ADJUST_COLLISION_DISTANCE ) {
+
                     notifyBallHitPlayerPad(ball, player);
                     Pad pad = player.getPad();
-                    System.out.printf("Ball hit player(x=%.1f, y=%.1f, w=%.1f, len=%.1f)\n",
-                            pad.getPadXPos(), pad.getPadYPos(), pad.getWidth(), pad.getLength());
                     bounceBall(ball, getRectDeflectionAngle(
                             ball, pad.getPadXPos(), pad.getPadYPos(), pad.getWidth(), pad.getLength()));
                 }
@@ -212,55 +193,40 @@ public class Board implements IBoard, IPowerUp {
             for (Ball otherBall : balls) {
                 if (!ball.equals(otherBall) && ball.distance(otherBall.getBody()) < ADJUST_COLLISION_DISTANCE ) {
                     notifyBallHitBall(ball, otherBall);
-                    System.out.println("Ball hit ball.");
                     bounceBall(ball, getCircleDeflectionAngle(ball, otherBall.getX(), otherBall.getY()));
                 }
             }
         }
     }
 
-    public void respawnBall(Ball b1) {
-        Ball b2 = new Ball(lastBallModelAdded);
-        balls.remove(b1);
-        addBall(b2);
-        System.out.printf("Board.respawnBall():\n    Old Ball(x=%.1f, y=%.1f, r=%.1f, a=%.1f, s=%.1f),\n    New Ball(x=%.1f, y=%.1f, r=%.1f, a=%.1f, s=%.1f)\n",
-                b1.getX(), b1.getY(), b1.getRadius(), b1.getAngle(), b1.getSpeed(),
-                b2.getX(), b2.getY(), b2.getRadius(), b2.getAngle(), b2.getSpeed() );
+    public void respawnBall(Ball oldBall) {
+        Ball newBall = new Ball(lastBallSpawned);
+        newBall.setAngle(lastBallSpawned.getAngle() + (float)Math.random());
+        balls.remove(oldBall);
+        addBall(newBall);
     }
 
     public float getCircleDeflectionAngle(Ball b1, float cirX, float cirY) {
         return (float)(Math.atan2( b1.getY() - cirY, b1.getX() - cirX ) + Math.PI/2f);
     }
 
-    // TODO: Initial test seems to be correct.
     public float getRectDeflectionAngle(Ball ball, float recX, float recY, float recW, float recH) {
         float px = recX + Math.min(recW/2f, Math.max(-recW/2f, ball.getX() - recX));
         float py = recY + Math.min(recH/2f, Math.max(-recH/2f, ball.getY() - recY));
         float pAngle = (float)(Math.atan2( ball.getY() - py, ball.getX() - px ) + Math.PI/2f);
-        /*System.out.printf("Deflect Ball(x%.1f, y%.1f, r%.1f) vs Rec(x%.1f, y%.1f, w%.1f, h%.1f) -> Edge(x%.1f, y%.1f, a%.1f)\n",
-                ball.getX(), ball.getY(), ball.getRadius(),
-                recX, recY, recW, recH,
-                px, py, Math.toDegrees(pAngle) );
-        */
         return pAngle;
     }
 
-    // TODO: Test of math seems correct, further testing needed.
     public void bounceBall(Ball ball, float deflectionAngle) {
+
         float angleDiff = (ball.getAngle() - deflectionAngle + PIx2) % PIx2;
-        System.out.printf("Bounce(x=%.0f, y=%.0f) towards %.0f deg, hitting %.0f deg. Angle difference = %.0f deg. ",
-                ball.getX(), ball.getX(),
-                Math.toDegrees(deflectionAngle),
-                Math.toDegrees(ball.getAngle()),
-                Math.toDegrees(angleDiff) );
         if (angleDiff >= 0 && angleDiff <= (float)Math.PI) {
             ball.setAngle( 2f*deflectionAngle-ball.getAngle() );
-            System.out.printf("New angle = %.1f deg.\n",
-                    Math.toDegrees(ball.getAngle()) );
         }
-        else {
-            System.out.println( "DIRECTION UNCHANGED" );
+        while (Collision.estimateTimeSingleBallCollision(this, ball) < 0.01f) {
+            ball.move(0.01f);   // Move out of collision range after angle changed.
         }
+
     }
 
     public void notifyBallExitBoard(Ball ball) {
