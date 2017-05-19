@@ -15,8 +15,8 @@ public class Pad {
     private RectangleBody body;
     private float originX;
     private float originY;
-    private float vectorX;
-    private float vectorY;
+    private float xRotated;
+    private float yRotated;
 
     private float scalex;
     private float scaley;
@@ -101,24 +101,57 @@ public class Pad {
 
     //Method: Moves by incrementing the x and y pos with it's speed
     public void padMoveRight() {
-        vectorX = body.getX()-originX;
-        vectorY = body.getY()-originY;
-        body.setX(vectorX - (float) Math.cos(0.5f));
+
+        float x = body.getX();
+        float y = body.getY();
+
+        //float angle = (float)Math.acos();
+
+        double rot = -1.0/180.0*Math.PI;
+        double cs = Math.cos(rot);
+        double sn = Math.sin(rot);
+
+        double translated_x = x - originX;
+        double translated_y = y - originY;
+
+        double result_x = translated_x * cs - translated_y * sn;
+        double result_y = translated_x * sn + translated_y * cs;
+
+        result_x += originX;
+        result_y += originY;
+
+        body.setX((float)result_x);
         //padXPos = padXPos + padSpeed;
-        body.setY(vectorY + (float)Math.sin(0.5f) );
-        //padYPos = padYPos + padSpeed;
+        body.setY((float)result_y);
 
 
     }
 
     public void padMoveLeft() {
-        vectorX = body.getX()-originX;
-        vectorY = body.getY()-originY;
-        
+        //float x = body.getX()-originX;
+        //float y = body.getY()-originY;
 
-        body.setX(vectorX + (float)Math.cos(0.5f));
+        float x = body.getX();
+        float y = body.getY();
+
+        //float angle = (float)Math.acos();
+
+        double rot = 1.0/180.0*Math.PI;
+        double cs = Math.cos(rot);
+        double sn = Math.sin(rot);
+
+        double translated_x = x - originX;
+        double translated_y = y - originY;
+
+        double result_x = translated_x * cs - translated_y * sn;
+        double result_y = translated_x * sn + translated_y * cs;
+
+        result_x += originX;
+        result_y += originY;
+
+        body.setX((float)result_x);
         //padXPos = padXPos + padSpeed;
-        body.setY(vectorY - (float)Math.sin(0.5f) );
+        body.setY((float)result_y);
         //padYPos = padYPos + padSpeed;
     }
 
