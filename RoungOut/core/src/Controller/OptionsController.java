@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by Alex on 2017-05-15.
  */
-public class OptionsController extends ClickListener implements IController{
+public class OptionsController extends ClickListener implements IControllerHandeling {
 
     //List that contains the views that this controller interacts with
     private ArrayList<IViews> viewSubscribers = new ArrayList<IViews>();

@@ -1,7 +1,7 @@
 package prototype.src.desktop;
 
 import Controller.ControllerHandler;
-import Controller.IController;
+import Controller.IControllerHandeling;
 import Controller.GameController;
 
 import Controller.IControllerWithRequest;
@@ -50,7 +50,7 @@ public class Roungout extends Game  {
         ControllerHandler handler = new ControllerHandler();
 
         GameController gameController = new GameController(viewers,players.get(0),players.get(1),handler);
-        ArrayList<IController> controllers = new ArrayList<IController>();
+        ArrayList<IControllerHandeling> controllers = new ArrayList<IControllerHandeling>();
 
         controllers.add(gameController);
         //Init the handler with the controllers
@@ -79,7 +79,7 @@ public class Roungout extends Game  {
         gameController = new GameController(viewers,players.get(0),players.get(1),handler);
 
         Gdx.input.setInputProcessor(gameController);
-        ArrayList<IController> controllers = new ArrayList<IController>();
+        ArrayList<IControllerHandeling> controllers = new ArrayList<IControllerHandeling>();
         controllers.add(gameController);
         //Init the handler with the controllers
         handler.setControllers(controllers);

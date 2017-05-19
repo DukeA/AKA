@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by Alex on 2017-04-28.
  */
-public class GameController extends ClickListener implements IController, IControllerWithRequest {
+public class GameController extends ClickListener implements IControllerHandeling, IControllerWithRequest {
     //The list will only contain unique subscribers and this is guaranteed by the
     //addListener and removeListener methods
 

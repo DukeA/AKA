@@ -9,14 +9,14 @@ public class ControllerHandler implements IHandler {
 
    ArrayList<EnumIndexes> enums = new ArrayList<EnumIndexes>();
 
-    private ArrayList<IController> controllers = new ArrayList<IController>();
+    private ArrayList<IControllerHandeling> controllers = new ArrayList<IControllerHandeling>();
 
 
-    public void addControllerIndex(int index, IController controller){
+    public void addControllerIndex(int index, IControllerHandeling controller){
         controllers.add(index,controller);
     }
 
-    public void addController (IController controller) {controllers.add(controller);}
+    public void addController (IControllerHandeling controller) {controllers.add(controller);}
 
     @Override
     public void callSetNewInput(EnumIndexes controllerEnum) {
@@ -32,11 +32,11 @@ public class ControllerHandler implements IHandler {
         }
     }
 
-    public ArrayList<IController> getcontrollers (){
+    public ArrayList<IControllerHandeling> getcontrollers (){
         return controllers;
     }
 
-    public void setControllers (ArrayList<IController> newControllers){
+    public void setControllers (ArrayList<IControllerHandeling> newControllers){
         controllers = newControllers;
     }
 
@@ -45,7 +45,7 @@ public class ControllerHandler implements IHandler {
     //Constructors
     public ControllerHandler(){}
 
-    public ControllerHandler(ArrayList<IController> controllers) {
+    public ControllerHandler(ArrayList<IControllerHandeling> controllers) {
         this.controllers = controllers;
     }
 }

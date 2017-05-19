@@ -80,7 +80,7 @@ public class OptionView implements Screen {
         box[0].addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-
+            System.out.println("Pressed 1980 option");
             }
         });
 
@@ -89,6 +89,7 @@ public class OptionView implements Screen {
         box[1].addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
+                System.out.println("Pressed 720 option");
 
             }
         });
@@ -97,7 +98,7 @@ public class OptionView implements Screen {
         box[2].addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-
+                System.out.println("Pressed 1280 option");
             }
         });
 
@@ -113,7 +114,7 @@ public class OptionView implements Screen {
         muteBox[0].addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-
+                System.out.println("Pressed Yes");
             }
         });
 
@@ -122,7 +123,7 @@ public class OptionView implements Screen {
         muteBox[1].addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-
+                System.out.println("Pressed No");
             }
         });
 
