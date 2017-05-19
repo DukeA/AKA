@@ -3,7 +3,8 @@ package Controller;
 import java.util.ArrayList;
 
 /**
- * Created by Alex on 2017-05-12.
+ * @author  Alex
+ * @since 2017-05-12.
  */
 public class ControllerHandler implements IHandler {
 
@@ -11,7 +12,10 @@ public class ControllerHandler implements IHandler {
 
     private ArrayList<IController> controllers = new ArrayList<IController>();
 
-
+    /** Adds a controller to the list ControllerHandler Handles
+     *  @param index This is the index the IController wil be stored
+     *  @param controller This is the IController that goes to the list
+     */
     public void addControllerIndex(int index, IController controller){
         controllers.add(index,controller);
     }
