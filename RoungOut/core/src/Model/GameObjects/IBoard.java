@@ -1,6 +1,5 @@
 package Model.GameObjects;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -15,7 +14,7 @@ public interface IBoard {
 
     public Set<Ball> getBalls();
     public Set<Brick> getBricks();
-    public List<Player> getPlayers();
+    public Set<Player> getPlayers();
 
     public void update( float delta);
 

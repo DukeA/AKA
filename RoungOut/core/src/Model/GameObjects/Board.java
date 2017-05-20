@@ -1,9 +1,7 @@
 package Model.GameObjects;
 
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,7 +17,7 @@ public class Board implements IBoard, IPowerUp {
 
     private Set<Ball> balls;
     private Set<Brick> bricks;
-    private List<Player> players;
+    private Set<Player> players;
 
     public Board(int Width, int Height) {
         xPos = Width / 2;
@@ -27,7 +25,7 @@ public class Board implements IBoard, IPowerUp {
         radius = (float) Math.sqrt(Math.pow((Width / 4), 2) + Math.pow((Height / 4), 2));
         balls = new HashSet<Ball>();
         bricks = new HashSet<Brick>();
-        players = new ArrayList<Player>();
+        players = new HashSet<Player>();
         createSampleBoard(Width, Height);
 
     }
@@ -52,7 +50,7 @@ public class Board implements IBoard, IPowerUp {
         return this.bricks;
     }
 
-    public List<Player> getPlayers() {
+    public Set<Player> getPlayers() {
         return this.players;
     }
 

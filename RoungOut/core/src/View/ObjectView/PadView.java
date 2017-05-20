@@ -1,10 +1,10 @@
 package View.ObjectView;
 
+import IViews.IViews;
 import Model.GameObjects.Board;
-import Model.GameObjects.IPlayer;
 import Model.GameObjects.Player;
-import Utils.Vector;
 import com.badlogic.gdx.graphics.Color;
+<<<<<<< HEAD
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.PolygonRegion;
@@ -15,6 +15,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.EarClippingTriangulator;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.utils.ShortArray;
+=======
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+>>>>>>> a8a8ef02fc3238f6ec807975a74404c31ab89bbe
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +28,15 @@ import java.util.List;
 public class PadView implements IViews {
 
     private Board Pads;
+<<<<<<< HEAD
     private PolygonSpriteBatch polygonSpriteBatch;
     private Texture solidTexture;
     private PolygonSprite polySprite;
 
+=======
+    private ShapeRenderer shapeRenderer;
+    private  ShapeRenderer shapeRenderer2;
+>>>>>>> a8a8ef02fc3238f6ec807975a74404c31ab89bbe
     private int WIDTH;
     private int HEIGHT;
 
@@ -42,6 +50,7 @@ public class PadView implements IViews {
     }
 
     public void render(float delta) {
+<<<<<<< HEAD
         drawPad();
     }
 
@@ -82,6 +91,34 @@ public class PadView implements IViews {
             polygonSpriteBatch.end();
 
         }
+=======
+        List<Player> p = new ArrayList<Player>(Pads.getPlayers());
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.BLUE);
+        shapeRenderer.rect(p.get(0).getPad().getPadXPos(),
+                p.get(0).getPad().getPadYPos(),
+                p.get(0).getPad().getOriginX(),
+                p.get(0).getPad().getOriginY(),
+                p.get(0).getPad().getWidth(),
+                p.get(0).getPad().getLength(),
+                1,1,
+                p.get(0).getPad().getAngle());
+        shapeRenderer.end();
+
+
+        shapeRenderer2.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer2.setColor(Color.LIME);
+        shapeRenderer2.rect(
+                p.get(1).getPad().getPadXPos(),
+                p.get(1).getPad().getPadYPos(),
+                p.get(1).getPad().getOriginX(),
+                p.get(1).getPad().getOriginY(),
+                p.get(1).getPad().getWidth(),
+                p.get(1).getPad().getLength(),
+                1,1,
+                p.get(1).getPad().getAngle());
+        shapeRenderer2.end();
+>>>>>>> a8a8ef02fc3238f6ec807975a74404c31ab89bbe
     }
 
 

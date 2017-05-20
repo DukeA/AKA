@@ -44,6 +44,7 @@ public class Vector {
     /**
      * The Normalization of a Vector
      */
+<<<<<<< HEAD
     public Vector normalization() {
         double length = Math.sqrt(Math.pow(this.xPos, 2) + Math.pow(this.yPos, 2));
         return new Vector((float) (this.xPos / length), (float) (this.yPos / length)
@@ -69,5 +70,12 @@ public class Vector {
     }
     public float getzPos() {
         return this.zPos;
+=======
+
+    public Vector Nomalize(Vector vector) {
+        double length = Math.sqrt(Math.pow(vector.xPos, 2) + Math.pow(vector.xPos, 2));
+        return new Vector((float) (vector.xPos / length), (float) (vector.yPos / length));
+>>>>>>> a8a8ef02fc3238f6ec807975a74404c31ab89bbe
     }
+
 }

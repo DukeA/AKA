@@ -1,10 +1,9 @@
 package View.ObjectView;
 
+import IViews.IViews;
 import Model.GameObjects.Board;
 import Model.GameObjects.IBoard;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -12,8 +11,6 @@ import com.badlogic.gdx.graphics.g2d.PolygonSprite;
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import prototype.src.desktop.Roungout;
 
 import java.util.ArrayList;
@@ -73,9 +70,9 @@ public class BoardView  implements IViews,Screen {
         batch.begin();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.ellipse(HEIGHT/2,0,
-                board.getRadius()*(WIDTH/2)/(HEIGHT/2)
-                , (board.getRadius()*(WIDTH/2)/(HEIGHT/2)));
+        shapeRenderer.ellipse(WIDTH/4,5,
+                board.getRadius()*(WIDTH/4)/(HEIGHT/4)
+                , (board.getRadius()*(WIDTH/4)/(HEIGHT/4)));
         shapeRenderer.end();
         batch.end();
         for (int i =0; i<views.size(); i++) {

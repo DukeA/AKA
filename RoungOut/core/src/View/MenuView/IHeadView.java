@@ -11,6 +11,5 @@ import prototype.src.desktop.Roungout;
  */
 public interface IHeadView {
     public BoardView createBoardView(int HEIGHT, int WIDTH,Roungout game);
-    public OptionView createOptionView(int HEIGHT, int WIDTH, Roungout game
-    );
+    public OptionView createOptionView(int HEIGHT, int WIDTH, Roungout game);
 }
