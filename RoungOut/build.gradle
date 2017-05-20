@@ -5,8 +5,6 @@ buildscript {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         jcenter()
     }
-    dependencies {
-    }
 }
 
 allprojects {
@@ -66,4 +64,8 @@ project(":core") {
 
 tasks.eclipse.doLast {
     delete ".project"
+}
+
+dependencies {
+    testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.0-M4'
 }

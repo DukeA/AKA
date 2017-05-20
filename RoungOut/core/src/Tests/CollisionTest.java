@@ -1,10 +1,11 @@
 package Tests;
 
-import Model.Collsion.Collision;
+import Model.Collision.Collision;
 import Model.GameObjects.Ball;
-import Model.GameObjects.Physics.RectangleBody;
 import Model.GameObjects.Board;
+import Model.GameObjects.Brick;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,101 +15,132 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class CollisionTest {
 
-    private final static float THRESHOLD = 0.0001f;
+    //
+    private static final int BOARD_SIZE = 1000;
+    private static final float THRESHOLD = 0.0001f;
 
-    private final static float BALL_RADIUS = 10f;
-    private final static float BOARD_RADIUS = 1000f;
+    private static final float BALL1_XPOS =   -50f + BOARD_SIZE/2;
+    private static final float BALL1_YPOS =     5f + BOARD_SIZE/2;
+    private static final float BALL1_RADIUS =  10f;
+    private static final float BALL1_ANGLE =    0f; // Right
+    private static final float BALL1_SPEED =    1f;
 
-    private Collision collision;
-    private RectangleBody rect;
+    private static final float BALL2_XPOS =     0f + BOARD_SIZE/2;
+    private static final float BALL2_YPOS =    10f + BOARD_SIZE/2;
+    private static final float BALL2_RADIUS =  20f;
+    private static final float BALL2_ANGLE = (float)Math.PI;    // Left
+    private static final float BALL2_SPEED = 5f;
+
+    private Board board;
     private Ball ball;
+    private Ball ball2;
+    private Brick brick;
+
+    @BeforeEach
+    public void beforeEach() {
+        board = new Board(BOARD_SIZE, BOARD_SIZE);
+        ball =  new Ball(BALL1_XPOS, BALL1_YPOS, BALL1_RADIUS, BALL1_ANGLE, BALL1_SPEED);
+        ball2 = new Ball(BALL2_XPOS, BALL2_YPOS, BALL2_RADIUS, BALL2_ANGLE, BALL2_SPEED);
+    }
 
     @Test
-    void isCollisionBallRectangle() {
-        collision = new Collision();
-        ball = new Ball(60f, 100f, 10f, 0f, 1f);
-        rect = new RectangleBody(100f,100f,40f,20f);
-        double expectedDistance1 = 1f;
-        double expectedDistance0 = 0f;
+    public void estimateNoBrickCollisions_0_270deg() {
+        // Place a brick just barely right and below the ball, around 271-359 degrees.
+        brick = new Brick(BALL1_XPOS + 100f, BALL1_YPOS - 100f, 30f, 30f );
+        ball = new Ball( BALL1_XPOS, BALL1_YPOS, BALL1_RADIUS, BALL2_ANGLE, BALL2_SPEED );
 
-        float recW = rect.getWidth();
-        float recH = rect.getHeight();
-        float recX = rect.getX();
-        float recY = rect.getY();
-
-        //System.out.println(ball.distance(rect));
-
-        // Trace ball along small fixed distance from all sides of the rectangle, no collision expected.
-        for (float s = -1f; s <= 1f; s+=0.05f) {
-            // Left edge
-            ball.setPosition(recX - recW/2f - BALL_RADIUS - 1f, recY + s*recH/2 );
-            Assertions.assertFalse( collision.isCollision(ball.getBody(), rect) );
-
-            // Right edge
-            ball.setPosition(recX + recW/2f + BALL_RADIUS + 1f, recY + s*recH/2f );
-            Assertions.assertFalse( collision.isCollision(ball.getBody(), rect) );
-
-            // Top edge
-            ball.setPosition(recX + s*recW/2f, recY - recH/2f - BALL_RADIUS - 1f );
-            Assertions.assertFalse( collision.isCollision(ball.getBody(), rect) );
-
-            // Bottom edge
-            ball.setPosition(recX + s*recW/2f, recY + recH/2f + BALL_RADIUS + 1f );
-            Assertions.assertFalse( collision.isCollision(ball.getBody(), rect) );
-        }
-
-        // Test collision where ball tangent or intersect rectagle. Collision expected.
-        float dw = recW/2f-BALL_RADIUS;
-        float dh = recH/2f-BALL_RADIUS;
-        for (float py = recY-dh; py <= recY+dh; py++) {
-            for (float px = recX-dw; px <= recX+dw; px++) {
-                ball.setPosition(px, py);
-                Assertions.assertTrue( collision.isCollision(ball.getBody(), rect) );
+        // Expect no collisions from 0..270 degrees.
+        int collisions = 0;
+        for (int a = 0; a < 270; a++) {
+            ball.setAngle( (float)Math.toRadians(a) );
+            if ( !Float.isNaN(Collision.estimateBrickCollision(ball, brick)) ) {
+                System.out.println(a + " " + Collision.estimateBrickCollision(ball, brick));
+                collisions++;
             }
         }
+        Assertions.assertTrue( collisions == 0 );
+    }
 
-        // Test collision where ball tangent rectangle corners. Collision expected.
-        float minDistCircle = (float) Math.sqrt(2*BALL_RADIUS/2f*BALL_RADIUS/2f);
-        ball.setPosition(recX-recW/2f-minDistCircle, recY-recH/2f-minDistCircle);     // Top left corner
-        Assertions.assertTrue( collision.isCollision(ball.getBody(), rect) );
-        ball.setPosition(recX+recW/2f+minDistCircle, recY-recH/2f-minDistCircle);     // Top right corner
-        Assertions.assertTrue( collision.isCollision(ball.getBody(), rect) );
-        ball.setPosition(recX-recW/2f-minDistCircle, recY+recH/2f-minDistCircle);     // Bottom left corner
-        Assertions.assertTrue( collision.isCollision(ball.getBody(), rect) );
-        ball.setPosition(recX+recW/2f+minDistCircle, recY+recH/2f-minDistCircle);     // Bottom right corner
-        Assertions.assertTrue( collision.isCollision(ball.getBody(), rect) );
+    @Test
+    public void estimateBrickCollisions_271_359deg() {
+        // Place a brick just barely right and below the ball, around 271-359 degrees.
+        brick = new Brick(BALL1_XPOS + 100f, BALL1_YPOS - 100f, 30f, 30f );
+        ball = new Ball( BALL1_XPOS, BALL1_YPOS, BALL1_RADIUS, BALL2_ANGLE, BALL2_SPEED );
 
-        // Test collision where ball almost tangent rectangle corners. No collision expected.
-        minDistCircle += 0.1f;
-        ball.setPosition(recX-recW/2f-minDistCircle, recY-recH/2f-minDistCircle);     // Top left corner
-        Assertions.assertFalse( collision.isCollision(ball.getBody(), rect) );
-        ball.setPosition(recX+recW/2f+minDistCircle, recY-recH/2f-minDistCircle);     // Top right corner
-        Assertions.assertFalse( collision.isCollision(ball.getBody(), rect) );
-        ball.setPosition(recX-recW/2f-minDistCircle, recY+recH/2f+minDistCircle);     // Bottom left corner
-        Assertions.assertFalse( collision.isCollision(ball.getBody(), rect) );
-        ball.setPosition(recX+recW/2f+minDistCircle, recY+recH/2f+minDistCircle);     // Bottom right corner
-        Assertions.assertFalse( collision.isCollision(ball.getBody(), rect) );
+        // Expect collisions 271..359 degrees.
+        int collisions = 0;
+        for (int a = 271; a < 359; a++) {
+            ball.setAngle( (float)Math.toRadians(a) );
+            if ( !Float.isNaN(Collision.estimateBrickCollision(ball, brick)) ) {
+                collisions++;
+            }
+        }
+        Assertions.assertTrue( collisions > 0 );
+    }
+
+    @Test
+    public void estimateCorrectBrickCollision() {
+        // Place a brick just barely right and below the ball, around 271-359 degrees.
+        brick = new Brick(BALL1_XPOS + 100f, BALL1_YPOS - 100f, 30f, 30f );
+        ball = new Ball( BALL1_XPOS, BALL1_YPOS, BALL1_RADIUS, BALL2_ANGLE, BALL2_SPEED );
+
+        boolean atleastOneCollisionFound = false;
+        for (int a = 271; a < 359; a++) {
+            ball.setAngle( (float)Math.toRadians(a) );
+            ball.setPosition( BALL1_XPOS, BALL1_YPOS );     // Reset position each iteration.
+
+            float timeUntilCollision = Collision.estimateBrickCollision(ball, brick);
+            if ( !Float.isNaN(timeUntilCollision) ) {
+                atleastOneCollisionFound = true;
+
+                // Found a collision angle. Expect no collision before move.
+                Assertions.assertTrue( ball.distance(brick.getBody()) > 0);
+
+                // Move ball close to brick, expect no collision.
+                ball.move(timeUntilCollision - 1f);
+                Assertions.assertTrue( ball.distance(brick.getBody()) > 0);
+
+                // Move ball close enough for a collision to occur.
+                ball.setPosition( BALL1_XPOS, BALL1_YPOS );     // Reset position each iteration.
+                ball.move(timeUntilCollision);
+                Assertions.assertTrue( ball.distance(brick.getBody()) < 0.01f);
+            }
+
+        }
+
+        // Expect at least one collision course found during the test.
+        Assertions.assertTrue( atleastOneCollisionFound );
 
     }
 
     @Test
-    void isBodyOutsideRange() {
-        ball = new Ball(0f, 0f, BALL_RADIUS, 0f, 0f);
-        collision = new Collision();
-        float range = BOARD_RADIUS + 100f;
-        for (float py = -range; py < range; py+= 50f) {
-            for (float px = -range; px < range; px+= 50f) {
-                ball.setPosition(px, py);
-                boolean actualResult = collision.isOutsideBoardRange(ball, BOARD_RADIUS);
-                boolean expectedResult = (Math.sqrt(px*px+py*py) - BALL_RADIUS >= BOARD_RADIUS);
+    public void checkBoardCollision() {
+        // Test all angles from (0..2*PI)
+        ball.setSpeed(10f);
+        for (float a = 0; a < 2f*Math.PI; a+=0.1f) {
+            // Reset position and set angle at each iteration.
+            ball.setPosition(BALL1_XPOS, BALL1_YPOS);
+            ball.setAngle(a);
 
-                if (expectedResult != actualResult) {
-                    System.out.printf("(%.0f, %.0f)   expected=%b   actual=%b\n",
-                           px, py, expectedResult, actualResult);
-                    //It's ok not to test this if case ;)
-                }
-                Assertions.assertTrue(expectedResult == actualResult);
-            }
+            // Estimate time until ball exit board.
+            float time = Collision.estimateBallGone(board, ball);
+
+            // Make sure ball inside board before move.
+            Assertions.assertTrue( time > 0);
+            Assertions.assertFalse( Collision.isBallOutsideBoard(board, ball) );
+
+            // Move ball very close to the board edge and check if still inside.
+            ball.move(time - 1f);
+            Assertions.assertFalse( Collision.isBallOutsideBoard(board, ball) );
+
+            // Move ball slightly and see see if ball now outside board.
+            ball.move(1f);
+            Assertions.assertTrue( Collision.isBallOutsideBoard(board, ball) );
+
         }
+
     }
+
+
+
 }

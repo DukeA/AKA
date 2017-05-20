@@ -3,6 +3,9 @@ package Model.GameObjects;
 import Model.GameObjects.Physics.Body;
 import Model.GameObjects.Physics.CircleBody;
 
+import java.util.HashSet;
+import java.util.Set;
+
 
 /**
  * @author Ken Bäcklund
@@ -17,7 +20,11 @@ public class Ball implements IBall {
     }
 
     public Ball(float xPos, float yPos, float radius) {
-        body = new CircleBody(xPos, yPos, radius, 0f, 0f);
+        this(xPos, yPos, radius, 0f, 0f);
+    }
+
+    public Ball(Ball ball) {
+        this(ball.getX(), ball.getY(), ball.getRadius(), ball.getAngle(), ball.getSpeed());
     }
 
     public float getX() {
@@ -26,6 +33,14 @@ public class Ball implements IBall {
 
     public float getY() {
         return body.getY();
+    }
+
+    public float getDeltaX() {
+        return body.getDeltaX();
+    }
+
+    public float getDeltaY() {
+        return body.getDeltaY();
     }
 
     public float getAngle() {
@@ -64,11 +79,11 @@ public class Ball implements IBall {
         body.setMaxSpeed(maxSpeed);
     }
 
-    public double distance(Body otherBody) {
+    public float distance(Body otherBody) {
         return body.distance(otherBody);
     }
 
-    public double distance(float xPos, float yPos) {
+    public float distance(float xPos, float yPos) {
         return body.distance(xPos, yPos);
     }
 
@@ -78,8 +93,8 @@ public class Ball implements IBall {
 
     public Body getBody(){return body;}
 
-    @Override
     public CircleBody getball() {
         return this.body;
     }
+
 }

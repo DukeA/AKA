@@ -7,34 +7,35 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Created by DukeA on 2017-04-29.
+ * @author DukeA
+ * @author Ken
  */
 public class BoardTest {
 
-    IBoard board;
+    Board board;
 
-      int Width = 100;
-      int Height =100;
+    public static final int WIDTH =  1000;
+    public static final int HEIGHT = 1000;
 
     @BeforeEach
     public void beforeEach(){
-        board = new Board(Width,Height);
+        board = new Board(WIDTH, HEIGHT);
     }
 
     @Test
     public void getters() {
-        Assertions.assertEquals(board.getXPos(),Width/2);
-        Assertions.assertEquals(board.getYPos(),Height/2);
+        Assertions.assertEquals(board.getXPos(), WIDTH /2);
+        Assertions.assertEquals(board.getYPos(), HEIGHT /2);
         Assertions.assertEquals(board.getRadius(),
                 //this seems to be a faulty formula
-                //(float) (Height/2 + Math.pow(Width,2)/8*Height));
-        (float) Math.sqrt(Math.pow((Width),2)+Math.pow((Height),2))/4);
+                //(float) (HEIGHT/2 + Math.pow(WIDTH,2)/8*HEIGHT));
+                (float) Math.sqrt(Math.pow((WIDTH),2)+Math.pow((HEIGHT),2))/4);
     }
     @Test
     public void boardTest(){
-        Assertions.assertEquals(board.getYPos(),Width/2);
-        Assertions.assertEquals(board.getXPos(),Height/2);
-        IBoard nboard = new Board(Width,Height);
+        Assertions.assertEquals(board.getYPos(), WIDTH /2);
+        Assertions.assertEquals(board.getXPos(), HEIGHT /2);
+        IBoard nboard = new Board(WIDTH, HEIGHT);
         Assertions.assertNotSame(board,nboard);
         Assertions.assertEquals(board.getXPos(),nboard.getXPos());
         Assertions.assertEquals(board.getYPos(),nboard.getYPos());
@@ -44,4 +45,6 @@ public class BoardTest {
         Assertions.assertEquals(board.getRadius()< board.getXPos()/2,
                 board.getRadius()<board.getYPos()/2);
     }
+
+
 }

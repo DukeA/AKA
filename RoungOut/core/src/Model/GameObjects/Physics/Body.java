@@ -8,6 +8,8 @@ public interface Body {
 
     float getX();
     float getY();
+    float getDeltaX();
+    float getDeltaY();
     float getAngle();
     float getSpeed();
     float getWidth();

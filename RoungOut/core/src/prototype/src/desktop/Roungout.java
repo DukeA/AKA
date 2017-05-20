@@ -38,7 +38,7 @@ public class Roungout extends Game  {
     private Board board;
 
 
-    public void inintControllers() {
+    public void initControllers() {
         List<IPlayer> players = new ArrayList<IPlayer>(board.getPlayers());
         boardView = new BoardView(WIDTH, HEIGHT, this);
         viewers.add(boardView);
@@ -69,6 +69,7 @@ public class Roungout extends Game  {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, WIDTH, HEIGHT);
         board = new Board(WIDTH, HEIGHT);
+        board.createSampleBoard(WIDTH, HEIGHT);         // Sample board creation here. Otherwise BoardTest is screwed up.
         view = new BoardView(WIDTH, HEIGHT,this);
         this.setScreen(splashScreen);
 
