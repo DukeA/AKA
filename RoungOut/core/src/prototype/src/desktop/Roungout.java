@@ -1,14 +1,14 @@
 package prototype.src.desktop;
 
 import Controller.ControllerHandler;
-import Controller.IControllerHandeling;
+import Controller.IControllHandeling;
 import Controller.GameController;
 
-import Controller.IControllerWithRequest;
+import Controller.IController;
 import Model.GameObjects.*;
 import View.MenuView.SplashView;
 import View.ObjectView.BoardView;
-import View.ObjectView.IViews;
+import IViews.IViews;
 import Model.GameObjects.IPlayer;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -31,7 +31,7 @@ public class Roungout extends Game  {
     public OrthographicCamera camera;
     public IViews boardView;
 
-    public IControllerWithRequest gameController;
+    public IController gameController;
 
 
     private ArrayList<IViews> viewers = new ArrayList<IViews>();
@@ -50,7 +50,7 @@ public class Roungout extends Game  {
         ControllerHandler handler = new ControllerHandler();
 
         GameController gameController = new GameController(viewers,players.get(0),players.get(1),handler);
-        ArrayList<IControllerHandeling> controllers = new ArrayList<IControllerHandeling>();
+        ArrayList<IControllHandeling> controllers = new ArrayList<IControllHandeling>();
 
         controllers.add(gameController);
         //Init the handler with the controllers
@@ -79,7 +79,7 @@ public class Roungout extends Game  {
         gameController = new GameController(viewers,players.get(0),players.get(1),handler);
 
         Gdx.input.setInputProcessor(gameController);
-        ArrayList<IControllerHandeling> controllers = new ArrayList<IControllerHandeling>();
+        ArrayList<IControllHandeling> controllers = new ArrayList<IControllHandeling>();
         controllers.add(gameController);
         //Init the handler with the controllers
         handler.setControllers(controllers);

@@ -1,12 +1,10 @@
 package View.ObjectView;
 
+import IViews.IViews;
 import Model.GameObjects.Board;
-import Model.GameObjects.IPlayer;
 import Model.GameObjects.Player;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.PolygonSprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Polygon;
 
 import java.util.ArrayList;
 import java.util.List;

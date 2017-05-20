@@ -1,13 +1,11 @@
 package View.ObjectView;
 
+import IViews.IViews;
 import Model.GameObjects.Board;
-import Model.GameObjects.IBoard;
-import Model.GameObjects.IPlayer;
 import Model.GameObjects.Player;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import prototype.src.desktop.Roungout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +13,7 @@ import java.util.List;
 /**
  * Created by DukeA on 2017-05-06.
  */
-public class ScoreView implements  IViews{
+public class ScoreView implements IViews {
 
     private final int WIDTH;
     private final int HEIGHT;

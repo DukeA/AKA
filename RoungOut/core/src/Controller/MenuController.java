@@ -1,6 +1,6 @@
 package Controller;
 
-import View.ObjectView.IViews;
+import IViews.IViews;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by Alex on 2017-05-13.
  */
-public class MenuController extends ClickListener implements IControllerHandeling {
+public class MenuController extends ClickListener implements IControllHandeling {
 
     ClickListener tmp = new ClickListener();
     //List that contains the views that this controller interacts with

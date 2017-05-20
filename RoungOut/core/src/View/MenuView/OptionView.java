@@ -19,7 +19,7 @@ import prototype.src.desktop.Roungout;
 /**
  * Created by DukeA on 2017-05-05.
  */
-public class OptionView implements Screen {
+public class OptionView implements Screen{
 
     private int WIDTH;
     private int HEIGHT;
