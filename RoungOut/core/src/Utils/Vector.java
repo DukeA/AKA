@@ -11,39 +11,63 @@ public class Vector {
 
     private float xPos;
     private float yPos;
+    private float zPos;
 
 
     public Vector(float xPos, float yPos, float xPos2, float yPos2) {
         this.xPos = xPos - xPos2;
         this.yPos = yPos - yPos2;
+        this.zPos = 0;
 
     }
 
-    public Vector(float xPos, float yPos) {
+    public Vector(float xPos, float yPos, float zPos) {
         this.xPos = xPos;
         this.yPos = yPos;
+        this.zPos = zPos;
     }
 
     public Vector(Vector vector) {
         this.xPos = vector.xPos;
         this.yPos = vector.yPos;
+        this.zPos = vector.zPos;
     }
     /**
      * The following two classes are to calculate the crossProudct
     */
-    public float crossProudct(Vector vector1, Vector vector2) {
-        return (vector1.xPos * vector2.yPos) - (vector1.yPos * vector2.xPos);
+    public Vector crossProudct() {
+        Vector vectorZ = new Vector(0,0,1);
+        return new Vector(this.yPos*vectorZ.zPos - this.zPos*vectorZ.yPos,
+                        this.zPos*vectorZ.xPos-this.xPos*vectorZ.zPos,
+                        this.xPos*vectorZ.yPos-this.yPos*vectorZ.xPos);
     }
-
-    public Vector crossProudct(Vector vector) {
-        return new Vector(vector.yPos, -vector.xPos);
-    }
-
     /**
      * The Normalization of a Vector
      */
-    public Vector Normalization(Vector vector) {
-        double length = Math.sqrt(Math.pow(vector.xPos, 2) + Math.pow(vector.yPos, 2));
-        return new Vector((float) (vector.xPos / length), (float) (vector.yPos / length));
+    public Vector normalization() {
+        double length = Math.sqrt(Math.pow(this.xPos, 2) + Math.pow(this.yPos, 2));
+        return new Vector((float) (this.xPos / length), (float) (this.yPos / length)
+                , (float) (this.zPos/length));
+    }
+    public Vector vectorLength(float length) {
+        return new Vector(this.xPos*length/2,
+                this.yPos*length/2,
+                this.zPos*length/2);
+    }
+
+    public Vector vectorWidth(float width) {
+        return  new Vector(this.xPos*width/2,
+                            this.yPos*width/2,
+                            this.zPos*width/2);
+    }
+
+    public float getxPos() {
+        return this.xPos;
+    }
+    public float getyPos() {
+        return this.yPos;
+    }
+    public float getzPos() {
+        return this.zPos;
     }
 }

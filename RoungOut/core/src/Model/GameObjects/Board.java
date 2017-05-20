@@ -104,9 +104,9 @@ public class Board implements IBoard, IPowerUp {
         float BrickWidth =30f;
         float BrickLength =30f;
         this.addPlayer(new Player(PadLength, PadWidth, WIDTH/2,HEIGHT/2,
-                WIDTH / 2 - 350+PadWidth/2, HEIGHT / 2-PadLength/2, 1));
+                WIDTH / 2 - 350, HEIGHT / 2, 1));
         this.addPlayer(new Player(PadLength, PadWidth,WIDTH/2,HEIGHT/2,
-                WIDTH / 2 - 450+PadWidth/2, HEIGHT / 2-PadLength/2, 1));
+                WIDTH / 2 - 450, HEIGHT / 2, 1));
         this.addBrick(new Brick(WIDTH / 2 - 40+BrickWidth/2, HEIGHT / 2-BrickLength/2
                 , BrickWidth, BrickLength));
         this.addBrick(new Brick(WIDTH / 2+BrickWidth/2, HEIGHT / 2-BrickLength/2

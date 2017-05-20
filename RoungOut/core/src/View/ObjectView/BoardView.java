@@ -8,6 +8,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.PolygonSprite;
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -25,6 +27,7 @@ public class BoardView  implements IViews,Screen {
     private IBoard board;
     private ShapeRenderer shapeRenderer;
     private SpriteBatch batch;
+    private PolygonSpriteBatch polygonSprite;
     private Roungout game;
 
     //private IPlayerController controller;
@@ -38,12 +41,13 @@ public class BoardView  implements IViews,Screen {
         this.HEIGHT = HEIGHT;
         this.game = game;
         batch = new SpriteBatch();
+        polygonSprite = new PolygonSpriteBatch();
         shapeRenderer = new ShapeRenderer();
 
         this.board=game.getBoard();
         //this.board = new Board(WIDTH,HEIGHT); //
                views = new ArrayList<IViews>();
-        views.add(0,createPad(WIDTH,HEIGHT,shapeRenderer,(Board)board));
+        views.add(0,createPad(WIDTH,HEIGHT,polygonSprite,(Board)board));
         views.add(1,createBall(WIDTH,HEIGHT,shapeRenderer,(Board)board));
         views.add(2,createBricks(WIDTH,HEIGHT,shapeRenderer,(Board)board));
         views.add(3,createScorePad(WIDTH,HEIGHT,batch,(Board)board));
@@ -127,7 +131,7 @@ public class BoardView  implements IViews,Screen {
     public BallView createBall(int xPos, int yPos,  ShapeRenderer renderer, Board board) {
         return new BallView(WIDTH,HEIGHT,renderer,board);
     }
-    public PadView createPad(int xPos, int yPos, ShapeRenderer renderer,Board board) {
+    public PadView createPad(int xPos, int yPos, PolygonSpriteBatch renderer,Board board) {
 
         return new PadView(WIDTH,HEIGHT,renderer,board);
     }
