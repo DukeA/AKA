@@ -32,50 +32,48 @@ public class Vector {
         this.yPos = vector.yPos;
         this.zPos = vector.zPos;
     }
+
     /**
      * The following two classes are to calculate the crossProudct
-    */
+     */
     public Vector crossProudct() {
-        Vector vectorZ = new Vector(0,0,1);
-        return new Vector(this.yPos*vectorZ.zPos - this.zPos*vectorZ.yPos,
-                        this.zPos*vectorZ.xPos-this.xPos*vectorZ.zPos,
-                        this.xPos*vectorZ.yPos-this.yPos*vectorZ.xPos);
+        Vector vectorZ = new Vector(0, 0, 1);
+        return new Vector(this.yPos * vectorZ.zPos - this.zPos * vectorZ.yPos,
+                this.zPos * vectorZ.xPos - this.xPos * vectorZ.zPos,
+                this.xPos * vectorZ.yPos - this.yPos * vectorZ.xPos);
     }
     /**
      * The Normalization of a Vector
      */
-<<<<<<< HEAD
+
     public Vector normalization() {
         double length = Math.sqrt(Math.pow(this.xPos, 2) + Math.pow(this.yPos, 2));
         return new Vector((float) (this.xPos / length), (float) (this.yPos / length)
-                , (float) (this.zPos/length));
+                , (float) (this.zPos / length));
     }
+
     public Vector vectorLength(float length) {
-        return new Vector(this.xPos*length/2,
-                this.yPos*length/2,
-                this.zPos*length/2);
+        return new Vector(this.xPos * length / 2,
+                this.yPos * length / 2,
+                this.zPos * length / 2);
     }
 
     public Vector vectorWidth(float width) {
-        return  new Vector(this.xPos*width/2,
-                            this.yPos*width/2,
-                            this.zPos*width/2);
+        return new Vector(this.xPos * width / 2,
+                this.yPos * width / 2,
+                this.zPos * width / 2);
     }
 
     public float getxPos() {
         return this.xPos;
     }
+
     public float getyPos() {
         return this.yPos;
     }
+
     public float getzPos() {
         return this.zPos;
-=======
 
-    public Vector Nomalize(Vector vector) {
-        double length = Math.sqrt(Math.pow(vector.xPos, 2) + Math.pow(vector.xPos, 2));
-        return new Vector((float) (vector.xPos / length), (float) (vector.yPos / length));
->>>>>>> a8a8ef02fc3238f6ec807975a74404c31ab89bbe
     }
-
 }
