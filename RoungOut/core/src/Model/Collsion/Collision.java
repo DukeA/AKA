@@ -35,44 +35,48 @@ public class Collision {
     // Helper methods /////////////////////////////////////////////////////////
     public static float estimateTimeSingleBallCollision(Board board, Ball ball) {
         float time = Float.MAX_VALUE;        // Default time is "never".
+        float estTime;
 
         // Shortest time until ball(s) exit board.
         time = Math.min(time, estimateBallGone(board, ball));
 
         // Shortest time until ball(s) hit a brick.
         for (Brick brick : board.getBricks()) {
-            time = Math.min(time, estimateBrickCollision(ball, brick));
+            estTime = estimateBrickCollision(ball, brick);
+            time = Float.isNaN(estTime)
+                    ? Float.MAX_VALUE : Math.min(time, estTime);
         }
 
         // Shortest time until ball(s) collide with any other ball
         for (Ball otherBall : board.getBalls()) {
             if (!ball.equals(otherBall)) {
-                time = Math.min(time, estimateBallCollision(ball, otherBall));
+                estTime = estimateBallCollision(ball, otherBall);
+                time = Float.isNaN(estTime)
+                        ? Float.MAX_VALUE : Math.min(time, estTime);
             }
         }
 
         // Shortest time until ball(s) collide with any pad
         for (Player player : board.getPlayers()) {
-            time = Math.min(time, estimatePadCollision(ball, player.getPad()));
+            estTime = estimatePadCollision(ball, player.getPad());
+            time = Float.isNaN(estTime)
+                    ? Float.MAX_VALUE : Math.min(time, estTime);
         }
 
         return time;
     }
 
-
     // Shortest deltaTime until ball(s) collide with any other ball
     public static float estimateBallCollision(Ball b1, Ball b2) {
-        float t = estimateCircleCollisions(
+        return estimateCircleCollisions(
                 b1.getX() - b2.getX(),
                 b1.getY() - b2.getY(),
                 b1.getDeltaX() - b2.getDeltaX(),
                 b1.getDeltaY() - b2.getDeltaY(),
                 b1.getRadius() + b2.getRadius());
-        return Float.isNaN(t) ? Float.MAX_VALUE : t;  // if no collision course, return max time.
     }
 
-    // Shortest deltaTime until ball(s) hit a brick.
-    // TODO Testing
+    // Shortest deltaTime until ball(s) hit a brick. Return NaN if not on a collision course.
     public static float estimateBrickCollision(Ball ball, Brick brick) {
         return estimateRectCollision(ball, brick.getBody());
     }
@@ -94,7 +98,7 @@ public class Collision {
         }
     }
 
-    // Shortest deltaTime until ball(s) hit a pad.
+    // Shortest deltaTime until ball(s) hit a pad. Return NaN if no collision course.
     public static float estimatePadCollision(Ball ball, Pad pad) {
         return estimateRectCollision(ball,
                 new RectangleBody(pad.getPadXPos(),pad.getPadYPos(), pad.getWidth(), pad.getLength()));
@@ -117,36 +121,25 @@ public class Collision {
 
         float t1 = (-b + (float) Math.sqrt(d)) / (2 * a);
         float t2 = (-b - (float) Math.sqrt(d)) / (2 * a);
+        if (t1 < 0 && t2 < 0)
+            return Float.NaN;
         if (t1 < 0 || t2 < 0)
             return Math.max(t1, t2);
         else
             return Math.min(t1, t2);
     }
 
-    public static float estimateRectCollision(Ball ball, RectangleBody rect) {
-        List<Float> tValues = new ArrayList<Float>();
-        if (ball.getDeltaX() != 0) {
-            tValues.add((rect.getX() - ball.getX() + (rect.getWidth() / 2f + ball.getRadius())) / ball.getDeltaX());
-            tValues.add((rect.getX() - ball.getX() - (rect.getWidth() / 2f + ball.getRadius())) / ball.getDeltaX());
-        }
-        if (ball.getDeltaY() != 0) {
-            tValues.add((rect.getY() - ball.getY() + (rect.getHeight() / 2f + ball.getRadius())) / ball.getDeltaY());
-            tValues.add((rect.getY() - ball.getY() - (rect.getHeight() / 2f + ball.getRadius())) / ball.getDeltaY());
-        }
-        Collections.sort(tValues);
+    public static float estimateRectCollision(Ball b, RectangleBody r) {
+        // Find nearest edge of rectangle
+        float px = r.getX() + Math.min(r.getWidth()/2f, Math.max(-r.getWidth()/2f, b.getX() - r.getX()));
+        float py = r.getY() + Math.min(r.getHeight()/2f, Math.max(-r.getHeight()/2f, b.getY() - r.getY()));
 
-        for (float t : tValues) {
-            if (t < 0) {
-                continue;
-            }
-            float dz = rect.distance( ball.getX() + t * ball.getDeltaX(),
-                    ball.getY() + t * ball.getDeltaY() ) - ball.getRadius();
-            if (Math.abs(dz) < 0.001f ) {
-                return t;
-            }
-
-        }
-
-        return Float.MAX_VALUE;
+        // Now we can use circle estimation method towards a set point.
+        return estimateCircleCollisions(
+                b.getX() - px,
+                b.getY() - py,
+                b.getDeltaX(),
+                b.getDeltaY(),
+                b.getRadius());
     }
 }
