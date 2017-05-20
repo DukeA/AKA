@@ -69,9 +69,9 @@ public class BoardView  implements IViews,Screen {
         batch.begin();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.ellipse(WIDTH/4,5,
-                board.getRadius()*(WIDTH/4)/(HEIGHT/4)
-                , (board.getRadius()*(WIDTH/4)/(HEIGHT/4)));
+        shapeRenderer.ellipse(HEIGHT/2,0,
+                board.getRadius()*(WIDTH/2)/(HEIGHT/2)
+                , (board.getRadius()*(WIDTH/2)/(HEIGHT/2)));
         shapeRenderer.end();
         batch.end();
         for (int i =0; i<views.size(); i++) {

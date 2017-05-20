@@ -108,7 +108,7 @@ public class Pad {
 
         //float angle = (float)Math.acos();
 
-        double rot = -1.0/180.0*Math.PI;
+        double rot = 1.0/180.0*Math.PI;
         double cs = Math.cos(rot);
         double sn = Math.sin(rot);
 
@@ -139,7 +139,7 @@ public class Pad {
 
         //float angle = (float)Math.acos();
 
-        double rot = 1.0/180.0*Math.PI;
+        double rot = -1.0/180.0*Math.PI;
         double cs = Math.cos(rot);
         double sn = Math.sin(rot);
 
@@ -151,6 +151,7 @@ public class Pad {
 
         result_x += originX;
         result_y += originY;
+
 
 
         body.setX((float)result_x);
