@@ -4,7 +4,9 @@ import Model.GameObjects.Board;
 import Model.GameObjects.IPlayer;
 import Model.GameObjects.Player;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.PolygonSprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Polygon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,17 +17,23 @@ import java.util.List;
 public class PadView implements IViews {
 
     private Board Pads;
-    private ShapeRenderer shapeRenderer2;
     private ShapeRenderer shapeRenderer;
+    private  ShapeRenderer shapeRenderer2;
+    private Polygon polygon;
     private int WIDTH;
     private int HEIGHT;
 
+    float[] vertices = new float[] {
 
-    public PadView(int width, int height, ShapeRenderer renderer, Board board) {
+    };
+
+
+    public PadView(int width, int height,ShapeRenderer shapeRenderer, Board board) {
         this.WIDTH = width;
         this.HEIGHT = height;
-        this.shapeRenderer2 = renderer;
-        this.shapeRenderer = renderer;
+        this.shapeRenderer = shapeRenderer;
+        this.shapeRenderer2 = shapeRenderer;
+        this.polygon = new Polygon();
         this.Pads = board;
 
     }

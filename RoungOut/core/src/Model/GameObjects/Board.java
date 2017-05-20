@@ -99,19 +99,30 @@ public class Board implements IBoard, IPowerUp {
     public void createSampleBoard(int WIDTH, int HEIGHT) {
         float PadLength =80f;
         float PadWidth =30f;
+        float BrickWidth =30f;
+        float BrickLength =30f;
         this.addPlayer(new Player(PadLength, PadWidth, WIDTH/2,HEIGHT/2,
-                WIDTH / 2 - 350-PadWidth/2, HEIGHT / 2+PadLength/2, 1));
-        this.addPlayer(new Player(80f, 30f,WIDTH/2,HEIGHT/2,
-                WIDTH / 2 - 450-PadWidth/2, HEIGHT / 2+PadLength/2, 1));
-        this.addBrick(new Brick(WIDTH / 2 - 40, HEIGHT / 2, 30, 30));
-        this.addBrick(new Brick(WIDTH / 2, HEIGHT / 2, 30, 30));
-        this.addBrick(new SDownBrick(WIDTH / 2 + 40, HEIGHT / 2, 30, 30));
-        this.addBrick(new Brick(WIDTH / 2 - 40, HEIGHT / 2 - 40, 30, 30));
-        this.addBrick(new Brick(WIDTH / 2, HEIGHT / 2 - 40, 30, 30));
-        this.addBrick(new Brick(WIDTH / 2 + 40, HEIGHT / 2 - 40, 30, 30));
-        this.addBrick(new SUpBrick(WIDTH / 2 - 40, HEIGHT / 2 + 40, 30, 30));
-        this.addBrick(new Brick(WIDTH / 2, HEIGHT / 2 + 40, 30, 30));
-        this.addBrick(new Brick(WIDTH / 2 + 40, HEIGHT / 2 + 40, 30, 30));
+                WIDTH / 2 - 350+PadWidth/2, HEIGHT / 2-PadLength/2, 1));
+        this.addPlayer(new Player(PadLength, PadWidth,WIDTH/2,HEIGHT/2,
+                WIDTH / 2 - 450+PadWidth/2, HEIGHT / 2-PadLength/2, 1));
+        this.addBrick(new Brick(WIDTH / 2 - 40+BrickWidth/2, HEIGHT / 2-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2+BrickWidth/2, HEIGHT / 2-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new SDownBrick(WIDTH / 2 + 40+BrickWidth/2, HEIGHT / 2-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2 - 40+BrickWidth/2, HEIGHT / 2 - 40-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2+BrickWidth/2, HEIGHT / 2 - 40-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2 + 40+BrickWidth/2, HEIGHT / 2 - 40-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new SUpBrick(WIDTH / 2 - 40+BrickWidth/2, HEIGHT / 2 + 40-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2+BrickWidth/2, HEIGHT / 2 + 40-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2 + 40+BrickWidth/2, HEIGHT / 2 + 40-BrickLength/2
+                , BrickWidth, BrickLength));
         this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 30f, 1, 100));
     }
 

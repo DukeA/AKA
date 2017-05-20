@@ -105,6 +105,7 @@ public class Pad {
         float x = body.getX();
         float y = body.getY();
 
+
         //float angle = (float)Math.acos();
 
         double rot = -1.0/180.0*Math.PI;
@@ -119,6 +120,8 @@ public class Pad {
 
         result_x += originX;
         result_y += originY;
+
+
 
         body.setX((float)result_x);
         //padXPos = padXPos + padSpeed;
@@ -148,6 +151,7 @@ public class Pad {
 
         result_x += originX;
         result_y += originY;
+
 
         body.setX((float)result_x);
         //padXPos = padXPos + padSpeed;
