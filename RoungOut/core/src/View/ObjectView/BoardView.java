@@ -1,5 +1,6 @@
 package View.ObjectView;
 
+import AbstractGame.AGame;
 import IViews.IViews;
 import Model.GameObjects.Board;
 import Model.GameObjects.IBoard;
@@ -7,11 +8,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.PolygonSprite;
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import prototype.src.desktop.Roungout;
 
 import java.util.ArrayList;
 
@@ -25,7 +24,7 @@ public class BoardView  implements IViews,Screen {
     private ShapeRenderer shapeRenderer;
     private SpriteBatch batch;
     private PolygonSpriteBatch polygonSprite;
-    private Roungout game;
+    private AGame game;
 
     //private IPlayerController controller;
 
@@ -33,7 +32,7 @@ public class BoardView  implements IViews,Screen {
     private final int HEIGHT;
 
 
-    public BoardView(int WIDTH,int HEIGHT, Roungout game) {
+    public BoardView(int WIDTH,int HEIGHT, AGame game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
         this.game = game;
@@ -53,7 +52,7 @@ public class BoardView  implements IViews,Screen {
 
     @Override
     public void show() {
-    Gdx.input.setInputProcessor(game.gameController);
+    Gdx.input.setInputProcessor(game.getGameController());
         //GIVE BACK CONTROLLER HERE
     }
 
@@ -117,7 +116,7 @@ public class BoardView  implements IViews,Screen {
 
     @Override
     public void update(float delta) {
-        game.gameController.atRequest();
+        game.getGameController().atRequest();
         board.update(delta);
 
         for (IViews views: views) {

@@ -1,9 +1,7 @@
 package View.MenuView;
 
-import Controller.MenuController;
-import Model.GameObjects.Board;
+import AbstractGame.AGame;
 import View.ObjectView.BoardView;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -12,14 +10,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import prototype.src.desktop.Roungout;
-
-import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.actor;
 
 /**
  * Created by DukeA on 2017-04-28.
@@ -30,7 +24,7 @@ public class MenuView  implements IHeadView, Screen {
     private int HEIGHT;
     private BoardView view;
     private OptionView optionView;
-    private Roungout game;
+    private AGame game;
     private OrthographicCamera camera;
     private Stage stage;
     private SpriteBatch batch;
@@ -43,7 +37,7 @@ public class MenuView  implements IHeadView, Screen {
     private Skin skin;
 
 
-    public MenuView(int WIDTH, int HEIGHT, Roungout game) {
+    public MenuView(int WIDTH, int HEIGHT, AGame game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
         this.game = game;
@@ -75,7 +69,7 @@ public class MenuView  implements IHeadView, Screen {
             public void clicked(InputEvent event, float x, float y){
                 game.getScreen().hide();
                 game.getScreen().dispose();
-                view = new BoardView(WIDTH,HEIGHT,game);
+                view = new BoardView(WIDTH,HEIGHT, game);
                 game.setScreen(view);
             }
 
@@ -169,13 +163,13 @@ public class MenuView  implements IHeadView, Screen {
         batch.dispose();
     }
 
-    @Override
-    public BoardView createBoardView(int HEIGHT, int WIDTH, Roungout game) {
+    //@Override
+    public BoardView createBoardView(int HEIGHT, int WIDTH, AGame game) {
 
         return new BoardView(WIDTH, HEIGHT, game);
     }
 
-    public OptionView createOptionView(int HEIGHT, int WIDTH ,Roungout game) {
+    public OptionView createOptionView(int HEIGHT, int WIDTH ,AGame game) {
 
         return new OptionView(WIDTH, HEIGHT, game);
     }

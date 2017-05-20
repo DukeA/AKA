@@ -1,20 +1,16 @@
 package View.MenuView;
 
-import com.badlogic.gdx.Game;
+import AbstractGame.AGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import prototype.src.desktop.Roungout;
 
 /**
  * Created by DukeA on 2017-05-05.
@@ -32,14 +28,14 @@ public class OptionView implements Screen{
     private Label label;
     private Stage stage;
     private BitmapFont font;
-    private Roungout game;
+    private AGame game;
 
     private MenuView menuView;
 
     private CheckBox[] box;
     private CheckBox[] muteBox;
 
-    public OptionView(int WIDTH, int HEIGHT , Roungout game) {
+    public OptionView(int WIDTH, int HEIGHT , AGame game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
         this.game = game;

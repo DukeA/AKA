@@ -5,6 +5,7 @@ import Controller.IControllHandeling;
 import Controller.GameController;
 
 import Controller.IController;
+import AbstractGame.AGame;
 import Model.GameObjects.*;
 import View.MenuView.SplashView;
 import View.ObjectView.BoardView;
@@ -14,10 +15,11 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.TimeUtils;
 import java.util.ArrayList;
+
 import java.util.List;
 
 
-public class Roungout extends Game  {
+public class Roungout extends AGame {
 
     public static final String TITLE = "Roungout";
     public static final float VERSION = 0.3f;
@@ -43,6 +45,9 @@ public class Roungout extends Game  {
     public Board getBoard(){
         return board;
     }
+    public IController getGameController(){
+        return gameController;
+    }
 
     public void inintControllers() {
         List<IPlayer> players = new ArrayList<IPlayer>(board.getPlayers());
@@ -63,7 +68,6 @@ public class Roungout extends Game  {
 
         //board = board.getBoard() // needed inorder to update the board
 
-        //TODO MAKE GAME LOOP
         startTime = TimeUtils.millis() * 100;
         splashScreen = new SplashView(WIDTH, HEIGHT, this); //set input
         camera = new OrthographicCamera();
