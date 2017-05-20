@@ -1,6 +1,6 @@
 package Tests;
 
-import Model.Collsion.Collision;
+import Model.Collision.Collision;
 import Model.GameObjects.Ball;
 import Model.GameObjects.Board;
 import Model.GameObjects.Brick;

@@ -1,9 +1,12 @@
 package Model.GameObjects;
 
 
+import Model.Collision.Collision;
+import Model.Collision.CollisionObserver;
 import Model.GameObjects.Physics.Body;
 import Model.GameObjects.Physics.CircleBody;
-import Model.Collsion.*;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,7 +16,7 @@ import java.util.Set;
  */
 public class Board implements IBoard, IPowerUp {
 
-    private static float ADJUST_COLLISION_DISTANCE = 0.01f;
+    private static float DISTANCE_TOLERANCE = 0.01f;
 
     protected final int WIDTH;
     protected final int HEIGHT;
@@ -22,31 +25,28 @@ public class Board implements IBoard, IPowerUp {
     private Ball lastBallSpawned;
     private float nextCollisionTime;
 
+
     private float xPos;
     private float yPos;
     private float radius;
 
     private Set<Ball> balls;
     private Set<Brick> bricks;
-    private Set<Player> players;
+    private ArrayList<Player> players;
     private Set<CollisionObserver> observers;
-
-    private static final float PIx2 = (float)Math.PI*2f;
 
     public Board(int width, int height) {
         this.WIDTH = width;
         this.HEIGHT = height;
-
         xPos = width / 2;
         yPos = height / 2;
         radius = (float) Math.sqrt(Math.pow((width / 4), 2) + Math.pow((height / 4), 2));
         balls = new HashSet<Ball>();
         bricks = new HashSet<Brick>();
-        players = new HashSet<Player>();
-
+        players = new ArrayList<Player>();
         observers = new HashSet<CollisionObserver>();
         nextCollisionTime = Collision.estimateNextCollision(this);
-
+        createSampleBoard(WIDTH, HEIGHT);
     }
 
     // TODO Temporary mock data
@@ -63,6 +63,11 @@ public class Board implements IBoard, IPowerUp {
         this.addBrick(new Brick(WIDTH / 2, HEIGHT / 2 + 40, 30, 30));
         this.addBrick(new Brick(WIDTH / 2 + 40, HEIGHT / 2 + 40, 30, 30));
         this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 30f, (float)Math.PI, 1));
+    }
+
+    private float correctAngle(float radians) {
+        while (radians < 0) radians += Math.PI * 2f;
+        return radians % (float)(Math.PI * 2f);
     }
 
     public float getXPos() {
@@ -82,11 +87,11 @@ public class Board implements IBoard, IPowerUp {
     }
 
     public Set<Brick> getBricks() {
-        return this.bricks;
+        return bricks;
     }
 
-    public Set<Player> getPlayers() {
-        return this.players;
+    public ArrayList<Player> getPlayers() {
+        return players;
     }
 
     public void update(float deltaTime) {
@@ -111,7 +116,7 @@ public class Board implements IBoard, IPowerUp {
             this.balls.add(ball);
             lastBallSpawned = new Ball(ball);
             nextCollisionTime = Collision.estimateNextCollision(this);
-            if (nextCollisionTime < ADJUST_COLLISION_DISTANCE) {
+            if (nextCollisionTime < DISTANCE_TOLERANCE) {
                 throw new IllegalArgumentException(String.format(
                         "Placing ball at (%.3f, %.3f) cause an immediate collision.",
                         ball.getX(), ball.getY()) );
@@ -175,25 +180,24 @@ public class Board implements IBoard, IPowerUp {
                 respawnBall(ball);
             }
             for (Brick brick : bricks) {
-                if ( ball.distance(brick.getBody()) < ADJUST_COLLISION_DISTANCE ) {
+                if ( ball.distance(brick.getBody()) < DISTANCE_TOLERANCE) {
                     notifyBallHitBrick(ball, brick);
-                    bounceBall(ball, getRectDeflectionAngle(
-                            ball, brick.getX(), brick.getY(), brick.getWidth(), brick.getHeight()));
+                    bounceBall(ball, Collision.getRectDeflectionAngle(
+                            ball.getX(), ball.getY(), brick.getX(), brick.getY(), brick.getWidth(), brick.getHeight()));
                 }
             }
             for (Player player : players) {
-                if ( ball.distance(player.getPad().getBody()) < ADJUST_COLLISION_DISTANCE ) {
-
+                if ( ball.distance(player.getPad().getBody()) < DISTANCE_TOLERANCE) {
                     notifyBallHitPlayerPad(ball, player);
                     Pad pad = player.getPad();
-                    bounceBall(ball, getRectDeflectionAngle(
-                            ball, pad.getPadXPos(), pad.getPadYPos(), pad.getWidth(), pad.getLength()));
+                    bounceBall(ball, Collision.getRectDeflectionAngle(
+                            ball.getX(), ball.getY(), pad.getPadXPos(), pad.getPadYPos(), pad.getWidth(), pad.getLength()));
                 }
             }
             for (Ball otherBall : balls) {
-                if (!ball.equals(otherBall) && ball.distance(otherBall.getBody()) < ADJUST_COLLISION_DISTANCE ) {
+                if (!ball.equals(otherBall) && ball.distance(otherBall.getBody()) < DISTANCE_TOLERANCE) {
                     notifyBallHitBall(ball, otherBall);
-                    bounceBall(ball, getCircleDeflectionAngle(ball, otherBall.getX(), otherBall.getY()));
+                    bounceBall(ball, Collision.getCircleDeflectionAngle(ball.getX(), ball.getY(), otherBall.getX(), otherBall.getY()));
                 }
             }
         }
@@ -206,27 +210,19 @@ public class Board implements IBoard, IPowerUp {
         addBall(newBall);
     }
 
-    public float getCircleDeflectionAngle(Ball b1, float cirX, float cirY) {
-        return (float)(Math.atan2( b1.getY() - cirY, b1.getX() - cirX ) + Math.PI/2f);
-    }
-
-    public float getRectDeflectionAngle(Ball ball, float recX, float recY, float recW, float recH) {
-        float px = recX + Math.min(recW/2f, Math.max(-recW/2f, ball.getX() - recX));
-        float py = recY + Math.min(recH/2f, Math.max(-recH/2f, ball.getY() - recY));
-        float pAngle = (float)(Math.atan2( ball.getY() - py, ball.getX() - px ) + Math.PI/2f);
-        return pAngle;
-    }
-
     public void bounceBall(Ball ball, float deflectionAngle) {
-
-        float angleDiff = (ball.getAngle() - deflectionAngle + PIx2) % PIx2;
-        if (angleDiff >= 0 && angleDiff <= (float)Math.PI) {
-            ball.setAngle( 2f*deflectionAngle-ball.getAngle() );
-        }
+        // Move ball out of collision range before bounce in reverse direction.
         while (Collision.estimateTimeSingleBallCollision(this, ball) < 0.01f) {
-            ball.move(0.01f);   // Move out of collision range after angle changed.
+            ball.move(-0.01f);
         }
 
+        // Check if ball and deflection angle are less than 180.
+        deflectionAngle = correctAngle(deflectionAngle);
+        float aDiff = deflectionAngle - ball.getAngle();
+        if (aDiff > 0 || aDiff < -Math.PI) {
+            // If ball is deflected, set a new angle.
+            ball.setAngle( ball.getAngle() + 2f * aDiff );
+        }
     }
 
     public void notifyBallExitBoard(Ball ball) {

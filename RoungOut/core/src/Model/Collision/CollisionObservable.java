@@ -1,7 +1,7 @@
-package Model.Collsion;
+package Model.Collision;
 
 /**
- * Created by kendu on 2017-05-15.
+ * @author Ken Bäcklund
  */
 public interface CollisionObservable {
 

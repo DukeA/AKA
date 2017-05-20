@@ -1,11 +1,11 @@
-package Model.Collsion;
+package Model.Collision;
 
 import Model.GameObjects.Ball;
 import Model.GameObjects.Brick;
 import Model.GameObjects.Player;
 
 /**
- * Interface for all things collidable
+ * Interface for observing collisions
  *
  * @author Ken Bäcklund
  */

@@ -17,7 +17,7 @@ public class RectangleBody implements Body {
         this.width=width;
         this.height = height;
 
-        // shape = new RectangleShape(width, height);
+        // shape = new RectangleShape(WIDTH, HEIGHT);
     }
 
     public RectangleBody(float xPos, float yPos, float width, float height) {
