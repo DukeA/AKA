@@ -3,7 +3,6 @@ package View.ObjectView;
 import IViews.IViews;
 import Model.GameObjects.Board;
 import Model.GameObjects.Player;
-import Utils.Vector;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -18,7 +17,6 @@ public class PadView implements IViews {
     private Board Pads;
     private ShapeRenderer shapeRenderer;
     private  ShapeRenderer shapeRenderer2;
-    private Vector vector;
     private int WIDTH;
     private int HEIGHT;
 
@@ -34,22 +32,32 @@ public class PadView implements IViews {
     }
 
     public void render(float delta) {
-        drawPad();
+        List<Player> p = new ArrayList<Player>(Pads.getPlayers());
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.BLUE);
+        shapeRenderer.rect(p.get(0).getPad().getPadXPos(),
+                p.get(0).getPad().getPadYPos(),
+                p.get(0).getPad().getOriginX(),
+                p.get(0).getPad().getOriginY(),
+                p.get(0).getPad().getWidth(),
+                p.get(0).getPad().getLength(),
+                1,1,
+                p.get(0).getPad().getAngle());
+        shapeRenderer.end();
 
 
-
-
-    }
-    public void drawPad() {
-        for(Player player: Pads.getPlayers()) {
-            Vector vector1 = new Vector(player.getPad().getPadXPos()
-                                        ,player.getPad().getPadYPos()
-                                        ,player.getPad().getOriginX()
-                                        ,player.getPad().getOriginY());
-        }
-
-
-
+        shapeRenderer2.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer2.setColor(Color.LIME);
+        shapeRenderer2.rect(
+                p.get(1).getPad().getPadXPos(),
+                p.get(1).getPad().getPadYPos(),
+                p.get(1).getPad().getOriginX(),
+                p.get(1).getPad().getOriginY(),
+                p.get(1).getPad().getWidth(),
+                p.get(1).getPad().getLength(),
+                1,1,
+                p.get(1).getPad().getAngle());
+        shapeRenderer2.end();
     }
 
 
