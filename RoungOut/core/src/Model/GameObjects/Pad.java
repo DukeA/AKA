@@ -100,7 +100,7 @@ public class Pad {
     }
 
     //Method: Moves by incrementing the x and y pos with it's speed
-    public void padMoveRight() {
+    public void padMoveLeft() {
 
         float x = body.getX();
         float y = body.getY();
@@ -130,7 +130,7 @@ public class Pad {
 
     }
 
-    public void padMoveLeft() {
+    public void padMoveRight() {
         //float x = body.getX()-originX;
         //float y = body.getY()-originY;
 

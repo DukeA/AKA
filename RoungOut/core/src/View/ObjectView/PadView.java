@@ -29,7 +29,7 @@ public class PadView implements IViews {
     private PolygonSpriteBatch polygonSpriteBatch;
     private Texture solidTexture;
     private PolygonSprite polySprite;
-    private  PolygonSprite polySprite2;
+
     private int WIDTH;
     private int HEIGHT;
 
