@@ -67,12 +67,13 @@ public class BoardView  implements IViews,Screen {
 
         Gdx.gl.glLineWidth(16);
 
+        float Width =board.getRadius()*(WIDTH/2)/(HEIGHT/2);
+        float Height =board.getRadius()*(WIDTH/2)/(HEIGHT/2);
         batch.begin();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.ellipse(WIDTH/4,5,
-                board.getRadius()*(WIDTH/4)/(HEIGHT/4)
-                , (board.getRadius()*(WIDTH/4)/(HEIGHT/4)));
+        shapeRenderer.ellipse(WIDTH/2-Width/2,HEIGHT/2-Height/2,
+                Width, Height);
         shapeRenderer.end();
         batch.end();
         for (int i =0; i<views.size(); i++) {

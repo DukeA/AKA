@@ -33,7 +33,7 @@ public class BrickView implements IViews {
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             shapeRenderer.setColor(Color.DARK_GRAY);
             shapeRenderer.rect((float)brick.getX(),(float)brick.getY(),
-                    30f,30f);
+                    brick.getWidth(),brick.getHeight());
             shapeRenderer.end();
         }
     }

@@ -2,6 +2,7 @@ package View.ObjectView;
 
 import IViews.IViews;
 import Model.GameObjects.Board;
+import Model.GameObjects.Pad;
 import Model.GameObjects.Player;
 import Utils.Vector;
 import com.badlogic.gdx.graphics.Color;
@@ -12,7 +13,11 @@ import com.badlogic.gdx.graphics.g2d.PolygonSprite;
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.EarClippingTriangulator;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ShortArray;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -24,6 +29,7 @@ public class PadView implements IViews {
     private PolygonSpriteBatch polygonSpriteBatch;
     private Texture solidTexture;
     private PolygonSprite polySprite;
+    private  PolygonSprite polySprite2;
     private int WIDTH;
     private int HEIGHT;
 
@@ -37,32 +43,33 @@ public class PadView implements IViews {
     }
 
     public void render(float delta) {
-        drawPad();
+        List<Player> players = new ArrayList<Player>(Pads.getPlayers());
+        drawPad(players.get(0),Color.BLUE);
+        drawPad(players.get(1),Color.LIME);
     }
 
-    public void drawPad() {
-        for (Player player : Pads.getPlayers()) {
-            Vector vector1 = new Vector(player.getPad().getPadXPos()
-                    , player.getPad().getPadYPos()
-                    , player.getPad().getOriginX()
-                    , player.getPad().getOriginY());
+    public void drawPad(Player p, Color color) {
+            Vector vector1 = new Vector(p.getPad().getPadXPos()
+                    , p.getPad().getPadYPos()
+                    , p.getPad().getOriginX()
+                    , p.getPad().getOriginY());
             Vector vector2 = vector1.crossProudct();
             vector2 = vector2.normalization();
-            Vector vectorLength = vector2.vectorLength(player.getPad().getLength());
+            Vector vectorLength = vector2.vectorLength(p.getPad().getLength());
             vector1 = vector1.normalization();
-            Vector vectorWidth = vector1.vectorWidth(player.getPad().getWidth());
+            Vector vectorWidth = vector1.vectorWidth(p.getPad().getWidth());
             float[] shape = {
-                    player.getPad().getPadXPos() + vectorLength.getxPos() + vectorWidth.getxPos(),
-                    player.getPad().getPadYPos() + vectorLength.getyPos() + vectorWidth.getyPos(),
-                    player.getPad().getPadXPos() + vectorLength.getxPos() - vectorWidth.getxPos(),
-                    player.getPad().getPadYPos() + vectorLength.getyPos() - vectorWidth.getyPos(),
-                    player.getPad().getPadXPos() - vectorLength.getxPos() - vectorWidth.getxPos(),
-                    player.getPad().getPadYPos() - vectorLength.getyPos() - vectorWidth.getyPos(),
-                    player.getPad().getPadXPos() - vectorLength.getxPos() + vectorWidth.getxPos(),
-                    player.getPad().getPadYPos() - vectorLength.getyPos() + vectorWidth.getyPos(),
+                    p.getPad().getPadXPos() + vectorLength.getxPos() + vectorWidth.getxPos(),
+                    p.getPad().getPadYPos() + vectorLength.getyPos() + vectorWidth.getyPos(),
+                    p.getPad().getPadXPos() + vectorLength.getxPos() - vectorWidth.getxPos(),
+                    p.getPad().getPadYPos() + vectorLength.getyPos() - vectorWidth.getyPos(),
+                    p.getPad().getPadXPos() - vectorLength.getxPos() - vectorWidth.getxPos(),
+                    p.getPad().getPadYPos() - vectorLength.getyPos() - vectorWidth.getyPos(),
+                    p.getPad().getPadXPos() - vectorLength.getxPos() + vectorWidth.getxPos(),
+                    p.getPad().getPadYPos() - vectorLength.getyPos() + vectorWidth.getyPos(),
             };
             Pixmap pixmap = new Pixmap(1,1,Pixmap.Format.RGB888);
-            pixmap.setColor(Color.BLUE);
+            pixmap.setColor(color);
             pixmap.fill();
             solidTexture = new Texture(pixmap);
             TextureRegion textureRegion = new TextureRegion(solidTexture);
@@ -76,8 +83,10 @@ public class PadView implements IViews {
             polySprite.draw(polygonSpriteBatch);
             polygonSpriteBatch.end();
 
-        }
     }
+
+
+
 
 
     public void reSize(int width, int height) {

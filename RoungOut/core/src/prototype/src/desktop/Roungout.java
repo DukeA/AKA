@@ -21,15 +21,14 @@ public class Roungout extends Game  {
 
     public static final String TITLE = "Roungout";
     public static final float VERSION = 0.3f;
-    public static int WIDTH = 1980;
-    public static int HEIGHT = 1080;
+    public static int WIDTH = 1680;
+    public static int HEIGHT = 1050;
     public static boolean RESIZE = true;
     public static boolean FULLSCREEN = false;
 
-    private long startTime;
     private SplashView splashScreen;
     public OrthographicCamera camera;
-    public IViews boardView;
+
 
     public IController gameController;
 
@@ -64,7 +63,6 @@ public class Roungout extends Game  {
         //board = board.getBoard() // needed inorder to update the board
 
         //TODO MAKE GAME LOOP
-        startTime = TimeUtils.millis() * 100;
         splashScreen = new SplashView(WIDTH, HEIGHT, this); //set input
         camera = new OrthographicCamera();
         camera.setToOrtho(false, WIDTH, HEIGHT);

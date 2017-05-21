@@ -25,6 +25,12 @@ public class Brick implements IModel {
         body = new RectangleBody(xPos, yPos, width, height, 0f, 0f);
         brickvalue = BrickType.NORMAL;
     }
+    public float getWidth(){
+        return body.getWidth();
+    }
+    public float getHeight() {
+        return body.getHeight();
+    }
 
     public float getX() {
         return body.getX();

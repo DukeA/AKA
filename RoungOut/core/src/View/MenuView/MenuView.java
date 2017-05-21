@@ -97,7 +97,7 @@ public class MenuView  implements IHeadView, Screen {
 
         });
 
-        exitButton = new TextButton("Quiet",
+        exitButton = new TextButton("Exit",
                 skin, "default");
         exitButton.setWidth(200f);
         exitButton.setHeight(20f);
