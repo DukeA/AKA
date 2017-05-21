@@ -1,6 +1,6 @@
 package View.MenuView;
 
-import com.badlogic.gdx.Game;
+import AbstractGame.AGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.TimeUtils;
-import prototype.src.desktop.Roungout;
 
 /**
  * Created by DukeA on 2017-05-09.
@@ -19,14 +18,14 @@ public class SplashView implements Screen {
     private int WIDTH;
     private int HEIGHT;
     private long startTime;
-    private Game game;
+    private AGame game;
     private Stage stage;
     private MenuView view;
     private Texture splashtexture;
     private Sprite sprite;
     private SpriteBatch batch;
 
-    public SplashView(int WIDTH, int HEIGHT, Game game) {
+    public SplashView(int WIDTH, int HEIGHT, AGame game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
         this.game = game;

@@ -1,13 +1,17 @@
 package Model.GameObjects;
 
 
+<<<<<<< HEAD
 import Model.Collision.Collision;
 import Model.Collision.CollisionObserver;
 import Model.GameObjects.Physics.Body;
 import Model.GameObjects.Physics.CircleBody;
 
+=======
+>>>>>>> OptionsAndButtons
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -33,6 +37,7 @@ public class Board implements IBoard, IPowerUp {
     private Set<Ball> balls;
     private Set<Brick> bricks;
     private ArrayList<Player> players;
+<<<<<<< HEAD
     private Set<CollisionObserver> observers;
 
     public Board(int width, int height) {
@@ -64,6 +69,17 @@ public class Board implements IBoard, IPowerUp {
         this.addBrick(new Brick(WIDTH / 2 + 40, HEIGHT / 2 + 40, 30, 30));
         this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 30f, (float)Math.PI, 1));
     }
+=======
+
+    public Board(int Width, int Height) {
+        xPos = Width / 2;
+        yPos = Height / 2;
+        radius = Height/2+100;
+        balls = new HashSet<Ball>();
+        bricks = new HashSet<Brick>();
+        players = new ArrayList<Player>();
+        createSampleBoard(Width, Height);
+>>>>>>> OptionsAndButtons
 
     private float correctAngle(float radians) {
         while (radians < 0) radians += Math.PI * 2f;
@@ -91,6 +107,7 @@ public class Board implements IBoard, IPowerUp {
     }
 
     public ArrayList<Player> getPlayers() {
+<<<<<<< HEAD
         return players;
     }
 
@@ -108,6 +125,14 @@ public class Board implements IBoard, IPowerUp {
                     throw new UnknownError("Estimating collision time is faulty.");
                 }
             }
+=======
+        return this.players;
+    }
+
+    public void update(float deltaTime) {
+        for (Ball ball : balls) {
+            ball.move(deltaTime);
+>>>>>>> OptionsAndButtons
         }
     }
 
@@ -169,8 +194,44 @@ public class Board implements IBoard, IPowerUp {
         }
     }
 
+<<<<<<< HEAD
     public float distance(Body body) {
         return board.distance(body);
+=======
+    public void createSampleBoard(int WIDTH, int HEIGHT) {
+        float PadLength =80f;
+        float PadWidth =30f;
+        float BrickWidth =30f;
+        float BrickLength =30f;
+        this.addPlayer(new Player(PadLength, PadWidth, WIDTH/2,HEIGHT/2,
+                WIDTH / 2 - 350, HEIGHT / 2, 1));
+        this.addPlayer(new Player(PadLength, PadWidth,WIDTH/2,HEIGHT/2,
+                WIDTH / 2 - 450, HEIGHT / 2, 1));
+
+
+        this.addBrick(new Brick(WIDTH / 2 - 40-BrickWidth/2, HEIGHT / 2-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2 - 40-BrickWidth/2, HEIGHT / 2-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2-BrickWidth/2, HEIGHT / 2-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new SDownBrick(WIDTH / 2 + 40-BrickWidth/2, HEIGHT / 2-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2 - 40-BrickWidth/2, HEIGHT / 2 - 40-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2-BrickWidth/2, HEIGHT / 2 - 40-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2 + 40-BrickWidth/2, HEIGHT / 2 - 40-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new SUpBrick(WIDTH / 2 - 40-BrickWidth/2, HEIGHT / 2 + 40-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2-BrickWidth/2, HEIGHT / 2 + 40-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2 + 40-BrickWidth/2, HEIGHT / 2 + 40-BrickLength/2
+                , BrickWidth, BrickLength));
+
+        this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 30f, 1, 100));
+>>>>>>> OptionsAndButtons
     }
 
     public void handleCollisions() {

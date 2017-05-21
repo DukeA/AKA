@@ -1,9 +1,10 @@
 package Controller;
 
-import View.ObjectView.IViews;
+import IViews.IViews;
 import Model.GameObjects.IPlayer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by Alex on 2017-04-28.
  */
-public class GameController implements IController{
+public class GameController extends ClickListener implements IController, IControllHandeling {
     //The list will only contain unique subscribers and this is guaranteed by the
     //addListener and removeListener methods
 
@@ -55,28 +56,28 @@ public class GameController implements IController{
 
         if (keycode== P1Left){
             isP1LeftDown=true;
-
+            System.out.println(Input.Keys.toString(keycode));
             Player1.moveLeft();
             updateAllViews(Gdx.graphics.getDeltaTime());
         }
 
         if (keycode== P1Right){
             isP1RightDown = true;
-
+            System.out.println(Input.Keys.toString(keycode));
             Player1.moveRight();
             updateAllViews(Gdx.graphics.getDeltaTime());
         }
 
         if (keycode== P2Left){
             isP2LeftDown = true;
-
+            System.out.println(Input.Keys.toString(keycode));
             Player2.moveLeft();
             updateAllViews(Gdx.graphics.getDeltaTime());
         }
 
         if (keycode== P2Right){
             isP2RightDown = true;
-
+            System.out.println(Input.Keys.toString(keycode));
             Player2.moveRight();
             updateAllViews(Gdx.graphics.getDeltaTime());
         }
@@ -96,7 +97,7 @@ public class GameController implements IController{
          *  UPDATE2: Decided that the controller should send explicit calls to the objects listening to the controller
          *
          */
-        return true;
+        return false;
     }
 
     //Helper method, code reuse
@@ -110,14 +111,14 @@ public class GameController implements IController{
     @Override
     public void changeInputProcessor() {
         Gdx.input.setInputProcessor(this);
-        isGameRunning = true;
-        gameLoop();
+        //isGameRunning = true;
+        //gameLoop();
     }
 
     @Override
     public EnumIndexes getTypeOfMenu(){ return typeOfMenu;}
 
-    //We don't need these inputs
+
     @Override
     public boolean keyUp(int keycode) {
         if (keycode== P1Left){
@@ -136,11 +137,11 @@ public class GameController implements IController{
             isP2RightDown = false;
         }
 
-        return true;
+        return false;
     }
-
+    //Dont need these inputs
     @Override
-    public boolean keyTyped(char character) { return false; }
+    public boolean keyTyped(char character) { return false;}
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) { return false; }
     @Override
@@ -161,7 +162,7 @@ public class GameController implements IController{
     }
     //End of these inputs
 
-    void movePlayers(){
+    private void movePlayers(){
     //Help function, checks if the key is being held down and if so, move accordingly
         if (isP1LeftDown){
             Player1.moveLeft();
@@ -181,7 +182,13 @@ public class GameController implements IController{
 
     }
 
-
+    @Override
+    public void atRequest() {
+        //Since we update the model from the view (due to framework's implementation of rendering things)
+        //we need the loop to be a renderer, thus we would like to see which buttons are
+        // being held down at each frame so we can move the players
+        movePlayers();
+    }
 
     //GameLoopThe thing that makes the game run
     private volatile boolean isGameRunning;

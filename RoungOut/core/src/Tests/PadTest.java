@@ -14,13 +14,15 @@ public class PadTest {
     //Values that is used in these test cases
     float padL=20;
     float padW=10;
+    float originX =0;
+    float originY =0;
     float padXPos=100;
     float padYPos=100;
     float padSpd=100;
     @BeforeEach
     public void beforeEach() {
 
-         pad = new Pad(padL,padW,padXPos,padYPos,padSpd);
+         pad = new Pad(padL,padW,originX,originY,padXPos,padYPos,padSpd);
     }
 
     @Test

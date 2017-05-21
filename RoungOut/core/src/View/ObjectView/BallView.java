@@ -1,12 +1,10 @@
 package View.ObjectView;
 
+import IViews.IViews;
 import Model.GameObjects.Ball;
 import Model.GameObjects.Board;
-import Model.GameObjects.IBall;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-
-import java.util.ArrayList;
 
 /**
  * Created by DukeA on 2017-04-28.

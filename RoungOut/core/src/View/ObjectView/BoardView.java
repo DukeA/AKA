@@ -1,21 +1,16 @@
 package View.ObjectView;
 
-
-
-
-
+import AbstractGame.AGame;
+import IViews.IViews;
 import Model.GameObjects.Board;
 import Model.GameObjects.IBoard;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 
 import java.util.ArrayList;
 
@@ -28,7 +23,8 @@ public class BoardView  implements IViews,Screen {
     private IBoard board;
     private ShapeRenderer shapeRenderer;
     private SpriteBatch batch;
-    private Game game;
+    private PolygonSpriteBatch polygonSprite;
+    private AGame game;
 
     //private IPlayerController controller;
 
@@ -36,15 +32,18 @@ public class BoardView  implements IViews,Screen {
     private final int HEIGHT;
 
 
-    public BoardView(int WIDTH,int HEIGHT, Game game) {
+    public BoardView(int WIDTH,int HEIGHT, AGame game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
         this.game = game;
         batch = new SpriteBatch();
+        polygonSprite = new PolygonSpriteBatch();
         shapeRenderer = new ShapeRenderer();
-        this.board = new Board(WIDTH,HEIGHT);
+
+        this.board=game.getBoard();
+        //this.board = new Board(WIDTH,HEIGHT); //
                views = new ArrayList<IViews>();
-        views.add(0,createPad(WIDTH,HEIGHT,shapeRenderer,(Board)board));
+        views.add(0,createPad(WIDTH,HEIGHT,polygonSprite,(Board)board));
         views.add(1,createBall(WIDTH,HEIGHT,shapeRenderer,(Board)board));
         views.add(2,createBricks(WIDTH,HEIGHT,shapeRenderer,(Board)board));
         views.add(3,createScorePad(WIDTH,HEIGHT,batch,(Board)board));
@@ -53,23 +52,27 @@ public class BoardView  implements IViews,Screen {
 
     @Override
     public void show() {
-
+    Gdx.input.setInputProcessor(game.getGameController());
+        //GIVE BACK CONTROLLER HERE
     }
 
     @Override
     public void render(float delta) {
+        //Clear the screen, and add background
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         update(delta);
 
         Gdx.gl.glLineWidth(16);
 
+        float Width =board.getRadius()*(WIDTH/2)/(HEIGHT/2);
+        float Height =board.getRadius()*(WIDTH/2)/(HEIGHT/2);
         batch.begin();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.ellipse(WIDTH/4,5,
-                board.getRadius()*(WIDTH/4)/(HEIGHT/4)
-                , (board.getRadius()*(WIDTH/4)/(HEIGHT/4)));
+        shapeRenderer.ellipse(WIDTH/2-Width/2,HEIGHT/2-Height/2,
+                Width, Height);
         shapeRenderer.end();
         batch.end();
         for (int i =0; i<views.size(); i++) {
@@ -114,6 +117,9 @@ public class BoardView  implements IViews,Screen {
 
     @Override
     public void update(float delta) {
+        game.getGameController().atRequest();
+        board.update(delta);
+
         for (IViews views: views) {
             views.update(delta);
         }
@@ -122,7 +128,7 @@ public class BoardView  implements IViews,Screen {
     public BallView createBall(int xPos, int yPos,  ShapeRenderer renderer, Board board) {
         return new BallView(WIDTH,HEIGHT,renderer,board);
     }
-    public PadView createPad(int xPos, int yPos, ShapeRenderer renderer,Board board) {
+    public PadView createPad(int xPos, int yPos, PolygonSpriteBatch renderer,Board board) {
 
         return new PadView(WIDTH,HEIGHT,renderer,board);
     }

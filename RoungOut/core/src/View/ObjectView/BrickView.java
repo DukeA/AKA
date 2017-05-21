@@ -1,19 +1,15 @@
 package View.ObjectView;
 
-import Model.GameObjects.Ball;
+import IViews.IViews;
 import Model.GameObjects.Board;
 import Model.GameObjects.Brick;
-import Model.GameObjects.Physics.RectangleBody;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-
-import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Created by DukeA on 2017-05-06.
  */
-public class BrickView implements  IViews {
+public class BrickView implements IViews {
 
     private Board board;
     private int WIDTH;
@@ -37,7 +33,7 @@ public class BrickView implements  IViews {
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             shapeRenderer.setColor(Color.DARK_GRAY);
             shapeRenderer.rect((float)brick.getX(),(float)brick.getY(),
-                    30f,30f);
+                    brick.getWidth(),brick.getHeight());
             shapeRenderer.end();
         }
     }

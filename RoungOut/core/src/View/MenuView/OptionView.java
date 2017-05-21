@@ -1,24 +1,21 @@
 package View.MenuView;
 
-import com.badlogic.gdx.Game;
+import AbstractGame.AGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
  * Created by DukeA on 2017-05-05.
  */
-public class OptionView implements Screen {
+public class OptionView implements Screen{
 
     private int WIDTH;
     private int HEIGHT;
@@ -31,12 +28,14 @@ public class OptionView implements Screen {
     private Label label;
     private Stage stage;
     private BitmapFont font;
-    private Game game;
+    private AGame game;
+
+    private MenuView menuView;
 
     private CheckBox[] box;
     private CheckBox[] muteBox;
 
-    public OptionView(int WIDTH, int HEIGHT , Game game) {
+    public OptionView(int WIDTH, int HEIGHT , AGame game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
         this.game = game;
@@ -62,7 +61,7 @@ public class OptionView implements Screen {
 
 
         table.add(label).padTop(150);
-        label.setFontScale(4);
+        label.setFontScale(1);
         label.setEllipsis(true);
         table.row();
         table.add(resArea).padTop(100).width(400).height(100);
@@ -77,7 +76,7 @@ public class OptionView implements Screen {
         box[0].addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-
+            System.out.println("Pressed 1980 option");
             }
         });
 
@@ -86,6 +85,7 @@ public class OptionView implements Screen {
         box[1].addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
+                System.out.println("Pressed 720 option");
 
             }
         });
@@ -94,7 +94,7 @@ public class OptionView implements Screen {
         box[2].addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-
+                System.out.println("Pressed 1280 option");
             }
         });
 
@@ -110,7 +110,7 @@ public class OptionView implements Screen {
         muteBox[0].addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-
+                System.out.println("Pressed Yes");
             }
         });
 
@@ -119,11 +119,9 @@ public class OptionView implements Screen {
         muteBox[1].addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-
+                System.out.println("Pressed No");
             }
         });
-
-
 
 
 
@@ -146,6 +144,11 @@ public class OptionView implements Screen {
         stage.act();
         stage.draw();
         batch.end();
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            menuView = new MenuView(WIDTH,HEIGHT, game);
+            game.setScreen(menuView);
+        }
 
     }
 

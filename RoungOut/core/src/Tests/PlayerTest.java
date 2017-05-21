@@ -19,12 +19,14 @@ public class PlayerTest {
     //Values used for  these tests
     float PadLength = 12;
     float PadWidth = 30;
+    float originX =0;
+    float originY =0;
     float PadXPos = 100;
     float PadYPos = 100;
     float PadSpeed = 30;
 
     @BeforeEach
-    void setUp(){ player = new Player(PadLength,PadWidth, PadXPos,PadYPos, PadSpeed);}
+    void setUp(){ player = new Player(PadLength,PadWidth,originX,originY, PadXPos,PadYPos, PadSpeed);}
 
    @Test
     public void playerMoveTest() {
@@ -88,7 +90,7 @@ public class PlayerTest {
         Assertions.assertEquals(player.getPoints(),21); //10 + 1 + 10
     }
     @Test void setPad(){
-        Pad awesomePad = new Pad(100,10,42,42,100);
+        Pad awesomePad = new Pad(100,10,0,0,42,42,100);
         player.setPad(awesomePad);
 
         Assertions.assertEquals(player.getPad(), awesomePad);
