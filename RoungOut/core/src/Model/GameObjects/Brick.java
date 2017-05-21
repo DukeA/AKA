@@ -40,14 +40,6 @@ public class Brick implements IModel {
         return body.getY();
     }
 
-    public float getWidth() {
-        return body.getWidth();
-    }
-
-    public float getHeight() {
-        return body.getHeight();
-    }
-
     public float getAngle() {
         return body.getAngle();
     }
