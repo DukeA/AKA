@@ -59,7 +59,7 @@ public class SplashView implements Screen {
             batch.end();
 
 
-            if (TimeUtils.timeSinceMillis(startTime) > 10){
+            if (TimeUtils.timeSinceMillis(startTime) > 1000){
               game.setScreen(view);
             }
 

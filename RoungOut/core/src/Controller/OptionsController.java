@@ -3,6 +3,7 @@ package Controller;
 import IViews.IViews;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 public class OptionsController extends ClickListener implements IControllHandeling {
 
     //List that contains the views that this controller interacts with
-    private ArrayList<IViews> viewSubscribers = new ArrayList<IViews>();
+    private  IViews OptionsView;
 
     //The handler that handles the switching of input processor
     private IHandler handler;
@@ -48,9 +49,11 @@ public class OptionsController extends ClickListener implements IControllHandeli
     //Helper method, code reuse
     private void updateAllViews() {
         //Call update to all views
-        for (IViews view : viewSubscribers) {
-            view.update(Gdx.graphics.getDeltaTime());
-        }
+        OptionsView.update(Gdx.graphics.getDeltaTime());
+    }
+    @Override
+    public void clicked(InputEvent event, float x, float y) {
+
     }
 
     @Override
@@ -89,11 +92,13 @@ public class OptionsController extends ClickListener implements IControllHandeli
     //End of these inputs
 
 
-    public OptionsController(ArrayList<IViews> viewSubscribers, IHandler handler) {
-        this.viewSubscribers = viewSubscribers;
+    public OptionsController( IHandler handler) {
 
         this.handler = handler;
 
+
+    }
+    public OptionsController() {
 
     }
 }

@@ -1,8 +1,10 @@
 package Controller;
 
 import IViews.IViews;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import java.util.ArrayList;
@@ -28,6 +30,9 @@ public class MenuController extends ClickListener implements IControllHandeling 
     {
         //Used for debug
         return latestKey;
+    }
+    public void clicked(InputEvent event, float x , float y) {
+
     }
 
     @Override
@@ -90,11 +95,13 @@ public class MenuController extends ClickListener implements IControllHandeling 
     //End of these inputs
 
 
-    public MenuController(ArrayList<IViews> viewSubscribers, IHandler handler) {
-        this.viewSubscribers = viewSubscribers;
+    public MenuController( IHandler handler) {
 
         this.handler = handler;
 
+
+    }
+    public MenuController() {
 
     }
 }

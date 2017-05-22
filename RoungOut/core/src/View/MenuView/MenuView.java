@@ -1,6 +1,7 @@
 package View.MenuView;
 
 import AbstractGame.AGame;
+import Controller.MenuController;
 import View.ObjectView.BoardView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -35,6 +36,8 @@ public class MenuView  implements IHeadView, Screen {
     private TextButton exitButton;
     private TextureRegion Texture;
     private Skin skin;
+    private MenuController menuController;
+    private InputEvent event;
 
 
     public MenuView(int WIDTH, int HEIGHT, AGame game) {
@@ -45,6 +48,8 @@ public class MenuView  implements IHeadView, Screen {
         this.font = new BitmapFont();
         this.stage = new Stage();
         this.camera = new OrthographicCamera(WIDTH, HEIGHT);
+        menuController = new MenuController();
+        event = new InputEvent();
     }
 
     @Override
@@ -64,46 +69,23 @@ public class MenuView  implements IHeadView, Screen {
         playButton.setWidth(200f);
         playButton.setHeight(30f);
         playButton.setPosition(WIDTH / 2, HEIGHT / 2);
-        playButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                game.getScreen().hide();
-                game.getScreen().dispose();
-                view = new BoardView(WIDTH,HEIGHT, game);
-                game.setScreen(view);
-            }
+        playButton.addListener( menuController.clicked(,event.getStageX(),event.getStageY()));
 
-        });
+
 
         optionsButton = new TextButton("Options"
                 , skin, "default");
         optionsButton.setWidth(200f);
         optionsButton.setHeight(20f);
         optionsButton.setPosition(WIDTH / 2, HEIGHT / 2);
-        optionsButton.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                game.getScreen().hide();
-                game.getScreen().dispose();
-                optionView = new OptionView(WIDTH,HEIGHT,game);
-                game.setScreen(optionView);
-            }
-
-        });
+        optionsButton.addListener(menuController.clicked(,event.getStageX(),event.getStageY()));
 
         exitButton = new TextButton("Exit",
                 skin, "default");
         exitButton.setWidth(200f);
         exitButton.setHeight(20f);
         exitButton.setPosition(WIDTH / 2, HEIGHT / 2);
-        exitButton.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                Gdx.app.exit();
-            }
-
-
-        });
+        exitButton.addListener(menuController.clicked(,event.getStageX(),event.getStageY()));
 
         table.add(image).width(700).height(400);
         table.row();

@@ -1,6 +1,7 @@
 package View.MenuView;
 
 import AbstractGame.AGame;
+import Controller.OptionsController;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -31,6 +32,8 @@ public class OptionView implements Screen{
     private AGame game;
 
     private MenuView menuView;
+    private OptionsController controller;
+    private  InputEvent event;
 
     private CheckBox[] box;
     private CheckBox[] muteBox;
@@ -43,6 +46,8 @@ public class OptionView implements Screen{
         font = new BitmapFont();
         stage = new Stage();
         batch = new SpriteBatch();
+        controller = new OptionsController();
+        event = new InputEvent();
 
     }
 
@@ -73,30 +78,14 @@ public class OptionView implements Screen{
             resArea.add(box[i]);
         }
         box[0].setText("1980 X 1080");
-        box[0].addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-            System.out.println("Pressed 1980 option");
-            }
-        });
+        box[0].addListener(controller.clicked());
 
 
         box[1].setText("720 X 420");
-        box[1].addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                System.out.println("Pressed 720 option");
-
-            }
-        });
+        box[1].addListener(controller.clicked());
 
         box[2].setText("1280 X 720");
-        box[2].addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                System.out.println("Pressed 1280 option");
-            }
-        });
+        box[2].addListener(controller.clicked());
 
 
         table.row();
@@ -107,21 +96,11 @@ public class OptionView implements Screen{
             muteArea.add(muteBox[i]);
         }
         muteBox[0].setText("Yes");
-        muteBox[0].addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                System.out.println("Pressed Yes");
-            }
-        });
+        muteBox[0].addListener(controller.clicked());
 
 
         muteBox[1].setText("No");
-        muteBox[1].addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                System.out.println("Pressed No");
-            }
-        });
+        muteBox[1].addListener(controller.clicked());
 
 
 
@@ -154,7 +133,6 @@ public class OptionView implements Screen{
 
     @Override
     public void resize(int width, int height) {
-
     }
 
     @Override

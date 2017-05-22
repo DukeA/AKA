@@ -41,6 +41,7 @@ public class Board implements IBoard, IPowerUp {
         xPos = width / 2;
         yPos = height / 2;
         radius = height/2+100;
+        board = new CircleBody(xPos,yPos,radius);
         balls = new HashSet<Ball>();
         bricks = new HashSet<Brick>();
         players = new ArrayList<Player>();
