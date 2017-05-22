@@ -31,9 +31,9 @@ public class MenuView  implements IHeadView, Screen {
     private SpriteBatch batch;
     private BitmapFont font;
     private Table table;
-    private TextButton playButton;
-    private TextButton optionsButton;
-    private TextButton exitButton;
+    private Button playButton;
+    private Button optionsButton;
+    private Button exitButton;
     private TextureRegion Texture;
     private Skin skin;
     private MenuController menuController;
@@ -48,7 +48,6 @@ public class MenuView  implements IHeadView, Screen {
         this.font = new BitmapFont();
         this.stage = new Stage();
         this.camera = new OrthographicCamera(WIDTH, HEIGHT);
-        menuController = new MenuController();
         event = new InputEvent();
     }
 
@@ -69,8 +68,7 @@ public class MenuView  implements IHeadView, Screen {
         playButton.setWidth(200f);
         playButton.setHeight(30f);
         playButton.setPosition(WIDTH / 2, HEIGHT / 2);
-        playButton.addListener( menuController.clicked(,event.getStageX(),event.getStageY()));
-
+        playButton.addListener( menuController = new MenuController());
 
 
         optionsButton = new TextButton("Options"
@@ -78,14 +76,14 @@ public class MenuView  implements IHeadView, Screen {
         optionsButton.setWidth(200f);
         optionsButton.setHeight(20f);
         optionsButton.setPosition(WIDTH / 2, HEIGHT / 2);
-        optionsButton.addListener(menuController.clicked(,event.getStageX(),event.getStageY()));
+        optionsButton.addListener(menuController = new MenuController());
 
         exitButton = new TextButton("Exit",
                 skin, "default");
         exitButton.setWidth(200f);
         exitButton.setHeight(20f);
         exitButton.setPosition(WIDTH / 2, HEIGHT / 2);
-        exitButton.addListener(menuController.clicked(,event.getStageX(),event.getStageY()));
+        exitButton.addListener(menuController = new MenuController());
 
         table.add(image).width(700).height(400);
         table.row();
@@ -113,10 +111,16 @@ public class MenuView  implements IHeadView, Screen {
 
         batch.begin();
         stage.draw();
-
-
         batch.end();
-
+        if (playButton.isPressed()){
+            menuController.playButtonIsPressed(WIDTH,HEIGHT,game);
+        }
+        if (optionsButton.isPressed()){
+            menuController.optionsButtonIsPressed(WIDTH,HEIGHT,game);
+        }
+        if (exitButton.isPressed()) {
+            menuController.exitButtonIsPressed();
+        }
     }
 
     @Override

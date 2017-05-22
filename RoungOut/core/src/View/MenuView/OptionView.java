@@ -78,14 +78,14 @@ public class OptionView implements Screen{
             resArea.add(box[i]);
         }
         box[0].setText("1980 X 1080");
-        box[0].addListener(controller.clicked());
+        box[0].addListener(controller = new OptionsController());
 
 
         box[1].setText("720 X 420");
-        box[1].addListener(controller.clicked());
+        box[1].addListener(controller = new OptionsController());
 
         box[2].setText("1280 X 720");
-        box[2].addListener(controller.clicked());
+        box[2].addListener(controller = new OptionsController());
 
 
         table.row();
@@ -96,20 +96,17 @@ public class OptionView implements Screen{
             muteArea.add(muteBox[i]);
         }
         muteBox[0].setText("Yes");
-        muteBox[0].addListener(controller.clicked());
+        muteBox[0].addListener(controller = new OptionsController());
 
 
         muteBox[1].setText("No");
-        muteBox[1].addListener(controller.clicked());
+        muteBox[1].addListener(controller = new OptionsController());
 
 
 
         table.row();
         table.add(keyArea).width(400).height(100);
         stage.addActor(table);
-
-
-
 
     }
 
@@ -123,10 +120,19 @@ public class OptionView implements Screen{
         stage.act();
         stage.draw();
         batch.end();
+        for (int i =0; i<box.length; i++) {
+            if (box[i].isPressed()) {
+                controller.boxClicked(WIDTH,HEIGHT);
+            }
+        }
+        for (int i =0; i<muteBox.length; i++) {
+            if (muteBox[i].isPressed()) {
+                controller.muteBoxClicked(WIDTH, HEIGHT);
+            }
+        }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            menuView = new MenuView(WIDTH,HEIGHT, game);
-            game.setScreen(menuView);
+            controller.escapeClicked(WIDTH,HEIGHT,game);
         }
 
     }

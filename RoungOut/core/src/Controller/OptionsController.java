@@ -1,6 +1,8 @@
 package Controller;
 
+import AbstractGame.AGame;
 import IViews.IViews;
+import View.MenuView.MenuView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -51,9 +53,15 @@ public class OptionsController extends ClickListener implements IControllHandeli
         //Call update to all views
         OptionsView.update(Gdx.graphics.getDeltaTime());
     }
-    @Override
-    public void clicked(InputEvent event, float x, float y) {
+    public void boxClicked(int WIDTH, int HEIGHT) {
 
+    }
+    public  void muteBoxClicked(int WIDTH, int HEIGHT) {
+
+    }
+    public void escapeClicked( int Width, int Height,AGame game) {
+        MenuView view = new MenuView(Width,Height,game);
+        game.setScreen(view);
     }
 
     @Override

@@ -1,10 +1,12 @@
 package Controller;
 
+import AbstractGame.AGame;
 import IViews.IViews;
+import View.MenuView.OptionView;
+import View.ObjectView.BoardView;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import java.util.ArrayList;
@@ -31,10 +33,17 @@ public class MenuController extends ClickListener implements IControllHandeling 
         //Used for debug
         return latestKey;
     }
-    public void clicked(InputEvent event, float x , float y) {
-
+    public void playButtonIsPressed(int Width, int Height, AGame game){
+        BoardView view = new BoardView(Width, Height,game);
+        game.setScreen(view);
     }
-
+    public void optionsButtonIsPressed( int Width, int Height,AGame game) {
+        OptionView view  = new OptionView(Width, Height,game);
+        game.setScreen(view);
+    }
+    public void exitButtonIsPressed() {
+        Gdx.app.exit();
+    }
     @Override
     public boolean keyDown(int keycode) {
         /**
