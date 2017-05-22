@@ -77,6 +77,7 @@ public class OptionView implements Screen{
             @Override
             public void clicked(InputEvent event, float x, float y){
             System.out.println("Pressed 1980 option");
+
             }
         });
 

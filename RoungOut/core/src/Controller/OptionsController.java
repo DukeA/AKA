@@ -3,6 +3,7 @@ package Controller;
 import IViews.IViews;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import java.util.ArrayList;
@@ -10,16 +11,22 @@ import java.util.ArrayList;
 /**
  * Created by Alex on 2017-05-15.
  */
-public class OptionsController extends ClickListener implements IControllHandeling {
+public class OptionsController implements IControllHandeling {
 
     //List that contains the views that this controller interacts with
     private ArrayList<IViews> viewSubscribers = new ArrayList<IViews>();
-
     //The handler that handles the switching of input processor
     private IHandler handler;
-
     //the enum that decides the typ of menu this is
     private final EnumIndexes typeOfMenu = EnumIndexes.OPTIONS_CONTOLLER;
+
+
+    public ClickListener res1980x1080 = new ClickListener(){
+        @Override
+        public void clicked(InputEvent event, float x, float y){
+
+        }
+    };
 
 
     private String latestKey = " ";//init with blank
@@ -91,9 +98,6 @@ public class OptionsController extends ClickListener implements IControllHandeli
 
     public OptionsController(ArrayList<IViews> viewSubscribers, IHandler handler) {
         this.viewSubscribers = viewSubscribers;
-
         this.handler = handler;
-
-
     }
 }

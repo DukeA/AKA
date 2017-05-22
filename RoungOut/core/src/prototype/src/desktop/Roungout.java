@@ -1,10 +1,7 @@
 package prototype.src.desktop;
 
-import Controller.ControllerHandler;
-import Controller.IControllHandeling;
-import Controller.GameController;
+import Controller.*;
 
-import Controller.IController;
 import AbstractGame.AGame;
 import Model.GameObjects.*;
 import View.MenuView.SplashView;
@@ -13,6 +10,8 @@ import IViews.IViews;
 import Model.GameObjects.IPlayer;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+
+import java.awt.*;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -30,8 +29,10 @@ public class Roungout extends AGame {
     private SplashView splashScreen;
     public OrthographicCamera camera;
 
-
-    public IController gameController;
+    //create controllers
+    public GameController gameController;
+    public OptionsController optionsController;
+    public MenuController menuController;
 
 
     private ArrayList<IViews> viewers = new ArrayList<IViews>();
@@ -43,11 +44,13 @@ public class Roungout extends AGame {
     public Board getBoard(){
         return board;
     }
-    public IController getGameController(){
+    public GameController getGameController(){
         return gameController;
     }
+    public OptionsController getOptionsController() {return optionsController;}
+    public MenuController getMenuController () {return menuController;}
 
-    public void initControllers() {
+   /* public void initControllers() {
         List<IPlayer> players = new ArrayList<IPlayer>(board.getPlayers());
 
         ControllerHandler handler = new ControllerHandler();
@@ -58,7 +61,7 @@ public class Roungout extends AGame {
         controllers.add(gameController);
         //Init the handler with the controllers
         handler.setControllers(controllers);
-    }
+    }*/
 
 
     @Override
@@ -75,11 +78,15 @@ public class Roungout extends AGame {
 
 
         //InitControllers
-        List<IPlayer> players = new ArrayList<IPlayer>(board.getPlayers());
+        //Init handler
         ControllerHandler handler = new ControllerHandler();
+
+        //init gameController
+        List<IPlayer> players = new ArrayList<IPlayer>(board.getPlayers());
         gameController = new GameController(viewers,players.get(0),players.get(1),handler);
 
-        Gdx.input.setInputProcessor(gameController);
+
+        //put all controllers in a list to the handler
         ArrayList<IControllHandeling> controllers = new ArrayList<IControllHandeling>();
         controllers.add(gameController);
         //Init the handler with the controllers
@@ -87,6 +94,7 @@ public class Roungout extends AGame {
 
         //Sets the input processor to this index (GAME CONTROLLER)
         handler.getcontrollers().get(0).changeInputProcessor();
+
 
         this.setScreen(splashScreen);
     }
