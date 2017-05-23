@@ -62,8 +62,8 @@ public class OptionView implements Screen{
         resArea = new Window("Resolution",skin);
         muteArea = new Window("Mute",skin);
         keyArea = new Window("Key Change",skin);
-        box = new ArrayList<CheckBox>(4);
-        muteBox = new ArrayList<CheckBox>(2);
+        box = new ArrayList<CheckBox>();
+        muteBox = new ArrayList<CheckBox>();
         label = new Label("Options",skin);
 
 
@@ -75,7 +75,7 @@ public class OptionView implements Screen{
         resArea.setMovable(false);
         keyArea.setMovable(false);
         muteArea.setMovable(false);
-        for (int i =0; i<box.size(); i++) {
+        for (int i =0; i<4; i++) {
             box.add(new CheckBox("",skin));
             resArea.add(box.get(i));
         }
@@ -94,8 +94,8 @@ public class OptionView implements Screen{
 
         table.row();
         table.add(muteArea).width(400).height(100);
-        for (int i =0; i<muteBox.size(); i++) {
-            box.add(new CheckBox("",skin));
+        for (int i =0; i<2; i++) {
+            muteBox.add(new CheckBox("",skin));
             muteArea.add(muteBox.get(i));
         }
         muteBox.get(0).setText("Yes");
@@ -124,12 +124,12 @@ public class OptionView implements Screen{
         batch.end();
         for (int i =0; i<box.size(); i++) {
             if (box.get(i).isPressed()) {
-                controller.boxClicked(WIDTH,HEIGHT,box.get(i),AGame game);
+                controller.boxClicked(WIDTH,HEIGHT,box.get(i), game);
             }
         }
         for (int i =0; i<muteBox.size(); i++) {
             if (muteBox.get(i).isPressed()) {
-                controller.muteBoxClicked(WIDTH, HEIGHT,muteBox.get(i), AGame game);
+                controller.muteBoxClicked(muteBox.get(i), game);
             }
         }
 

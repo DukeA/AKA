@@ -7,7 +7,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import jdk.nashorn.internal.ir.IfNode;
 
 import java.util.ArrayList;
 
@@ -55,11 +57,24 @@ public class OptionsController extends ClickListener implements IControllHandeli
         OptionsView.update(Gdx.graphics.getDeltaTime());
     }
     public void boxClicked(int WIDTH, int HEIGHT, CheckBox box, AGame game) {
-
+        Label value = box.getLabel();
+        String width = String.valueOf(value.getText());
+        String[] values = width.split("X");
+        WIDTH =Integer.valueOf(values[0].trim());
+        HEIGHT = Integer.valueOf(values[1].trim());
+        game.resize(WIDTH,HEIGHT);
 
     }
-    public  void muteBoxClicked(int WIDTH, int HEIGHT,CheckBox box,AGame game) {
-
+    public  boolean muteBoxClicked(CheckBox box,AGame game) {
+       boolean muteValue;
+       Label value =  box.getLabel();
+       String buttonValue = String.valueOf(value);
+       if (buttonValue.equals("yes")) {
+           muteValue = true;
+       }else{
+           muteValue = false;
+       }
+        return  muteValue;
     }
     public void escapeClicked( int Width, int Height,AGame game) {
         MenuView view = new MenuView(Width,Height,game);
