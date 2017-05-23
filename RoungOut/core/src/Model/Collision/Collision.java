@@ -40,7 +40,6 @@ public class Collision {
             time = Math.min(time, estimateTimeSingleBallCollision(board, ball));
         }
         // Shortest time estimated. Best to save/decrement this value from deltaTime.
-        //System.out.println(time);
         return time;
     }
 
@@ -56,7 +55,7 @@ public class Collision {
         for (Brick brick : board.getBricks()) {
             estTime = estimateBrickCollision(ball, brick);
             time = Float.isNaN(estTime)
-                    ? Float.MAX_VALUE : Math.min(time, estTime);
+                    ? time : Math.min(time, estTime);
         }
 
         // Shortest time until ball(s) collide with any other ball
@@ -64,7 +63,7 @@ public class Collision {
             if (!ball.equals(otherBall)) {
                 estTime = estimateBallCollision(ball, otherBall);
                 time = Float.isNaN(estTime)
-                        ? Float.MAX_VALUE : Math.min(time, estTime);
+                        ? time : Math.min(time, estTime);
             }
         }
 
@@ -72,7 +71,7 @@ public class Collision {
         for (Player player : board.getPlayers()) {
             estTime = estimatePadCollision(ball, player.getPad());
             time = Float.isNaN(estTime)
-                    ? Float.MAX_VALUE : Math.min(time, estTime);
+                    ? time : Math.min(time, estTime);
         }
 
         return time;
@@ -95,6 +94,7 @@ public class Collision {
 
     // Estimate deltaTime until a ball exits board.
     public static float estimateBallGone(Board board, Ball ball) {
+        //System.out.printf("estimateBallGone: Ball at (x=%.2f, y=%.2f)\n",ball.getX(), ball.getY());
         float t = estimateCircleCollisions(
                 ball.getX() - board.getXPos(),
                 ball.getY() - board.getYPos(),

@@ -6,9 +6,8 @@ import Model.Collision.CollisionObserver;
 import Model.GameObjects.Physics.Body;
 import Model.GameObjects.Physics.CircleBody;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.lang.reflect.Array;
+import java.util.*;
 
 /**
  * Created by Adam on 2017-03-29.
@@ -45,8 +44,8 @@ public class Board implements IBoard, IPowerUp {
         bricks = new HashSet<Brick>();
         players = new ArrayList<Player>();
         observers = new HashSet<CollisionObserver>();
-        nextCollisionTime = Collision.estimateNextCollision(this);
         createSampleBoard(WIDTH, HEIGHT);
+        nextCollisionTime = 0;
     }
 
     // TODO Temporary mock data
@@ -82,7 +81,7 @@ public class Board implements IBoard, IPowerUp {
         this.addBrick(new Brick(WIDTH / 2 + 40-BrickWidth/2, HEIGHT / 2 + 40-BrickLength/2
                 , BrickWidth, BrickLength));
 
-        this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 30f, 1, 100));
+        this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 30f, 0, 50));
     }
 
     private float correctAngle(float radians) {
@@ -103,7 +102,7 @@ public class Board implements IBoard, IPowerUp {
     }
 
     public Set<Ball> getBalls() {
-        return this.balls;
+        return balls;
     }
 
     public Set<Brick> getBricks() {
@@ -121,12 +120,10 @@ public class Board implements IBoard, IPowerUp {
                 ball.move(minTime);
             }
             deltaTime -= minTime;
+            nextCollisionTime -= minTime;
             if (deltaTime > 0) {
                 handleCollisions();
                 nextCollisionTime = Collision.estimateNextCollision(this);
-                if (nextCollisionTime < 0.001f) {
-                    throw new UnknownError("Estimating collision time is faulty.");
-                }
             }
         }
     }
