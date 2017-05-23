@@ -100,8 +100,6 @@ class RectangleBodyTest {
         RectangleBody other = new RectangleBody(0f, 0f, otherWidth, otherHeight);
         body.setPosition(0f, 0f);
 
-        System.out.printf("%.2f   %.2f\n", body.distance(other), other.distance(body));
-
         for (float ry = -range; ry < range; ry++) {
             for (float rx = -range; rx < range; rx++) {
                 other.setPosition(rx, ry);

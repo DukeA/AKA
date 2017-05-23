@@ -30,7 +30,7 @@ public class Collision {
         float dx = ball.getX() - board.getXPos();
         float dy = ball.getY() - board.getYPos();
         float dz = (float) Math.sqrt(dx * dx + dy * dy) - (ball.getRadius() + board.getRadius());
-        return dz >= -0.0001f;  // That's close enough.
+        return Math.abs(dz) <= 0.01f;  // That's close enough.
     }
 
     // Estimate min deltaTime until any form of collision occurs.
@@ -101,7 +101,6 @@ public class Collision {
                 ball.getDeltaX(),
                 ball.getDeltaY(),
                 ball.getRadius() + board.getRadius());
-        System.out.println(t);
         if (Float.isNaN(t)) {
             return 0;   // No collision course, ball must be outside board
         } else if (Math.abs(t) < 0.01f) {

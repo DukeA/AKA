@@ -104,8 +104,6 @@ class CircleBodyTest {
                 float relDy = body.getY() - someBody.getY();
                 float centerDistance = (float) Math.sqrt(relDx*relDx + relDy*relDy);
                 float expectedDistance = Math.max(0, centerDistance - RADIUS - otherRadius);
-                System.out.print("Expected: " + expectedDistance +" ");
-                System.out.println("Reality: " + body.distance(someBody));
                 Assertions.assertEquals(expectedDistance, body.distance(someBody));
 
             }

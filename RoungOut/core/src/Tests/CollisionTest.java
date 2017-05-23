@@ -54,7 +54,6 @@ class CollisionTest {
         for (int a = 0; a < 270; a++) {
             ball.setAngle( (float)Math.toRadians(a) );
             if ( !Float.isNaN(Collision.estimateBrickCollision(ball, brick)) ) {
-                System.out.println(a + " " + Collision.estimateBrickCollision(ball, brick));
                 collisions++;
             }
         }
