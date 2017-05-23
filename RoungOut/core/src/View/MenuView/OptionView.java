@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import java.util.ArrayList;
+
 /**
  * Created by DukeA on 2017-05-05.
  */
@@ -35,8 +37,8 @@ public class OptionView implements Screen{
     private OptionsController controller;
     private  InputEvent event;
 
-    private CheckBox[] box;
-    private CheckBox[] muteBox;
+    private ArrayList<CheckBox> box;
+    private ArrayList<CheckBox>muteBox;
 
     public OptionView(int WIDTH, int HEIGHT , AGame game) {
         this.WIDTH = WIDTH;
@@ -60,8 +62,8 @@ public class OptionView implements Screen{
         resArea = new Window("Resolution",skin);
         muteArea = new Window("Mute",skin);
         keyArea = new Window("Key Change",skin);
-        box = new CheckBox [3];
-        muteBox = new CheckBox[2];
+        box = new ArrayList<CheckBox>(4);
+        muteBox = new ArrayList<CheckBox>(2);
         label = new Label("Options",skin);
 
 
@@ -73,34 +75,34 @@ public class OptionView implements Screen{
         resArea.setMovable(false);
         keyArea.setMovable(false);
         muteArea.setMovable(false);
-        for (int i =0; i<box.length; i++) {
-            box[i] = new CheckBox("",skin);
-            resArea.add(box[i]);
+        for (int i =0; i<box.size(); i++) {
+            box.add(new CheckBox("",skin));
+            resArea.add(box.get(i));
         }
-        box[0].setText("1980 X 1080");
-        box[0].addListener(controller = new OptionsController());
+        box.get(0).setText("1950 X 1080");
+        box.get(0).addListener(controller = new OptionsController());
 
 
-        box[1].setText("720 X 420");
-        box[1].addListener(controller = new OptionsController());
+        box.get(1).setText("720 X 420");
+        box.get(1).addListener(controller = new OptionsController());
 
-        box[2].setText("1280 X 720");
-        box[2].addListener(controller = new OptionsController());
+        box.get(2).setText("1280 X 720");
+        box.get(2).addListener(controller = new OptionsController());
 
+        box.get(3).setText("1680 X 1050");
+        box.get(3).addListener(controller = new OptionsController());
 
         table.row();
         table.add(muteArea).width(400).height(100);
-        muteArea.add(muteBox);
-        for (int i =0; i<muteBox.length; i++) {
-            muteBox[i] = new CheckBox("",skin);
-            muteArea.add(muteBox[i]);
+        for (int i =0; i<muteBox.size(); i++) {
+            box.add(new CheckBox("",skin));
+            muteArea.add(muteBox.get(i));
         }
-        muteBox[0].setText("Yes");
-        muteBox[0].addListener(controller = new OptionsController());
+        muteBox.get(0).setText("Yes");
+        muteBox.get(0).addListener(controller = new OptionsController());
 
-
-        muteBox[1].setText("No");
-        muteBox[1].addListener(controller = new OptionsController());
+        muteBox.get(1).setText("No");
+        muteBox.get(1).addListener(controller = new OptionsController());
 
 
 
@@ -120,14 +122,14 @@ public class OptionView implements Screen{
         stage.act();
         stage.draw();
         batch.end();
-        for (int i =0; i<box.length; i++) {
-            if (box[i].isPressed()) {
-                controller.boxClicked(WIDTH,HEIGHT);
+        for (int i =0; i<box.size(); i++) {
+            if (box.get(i).isPressed()) {
+                controller.boxClicked(WIDTH,HEIGHT,box.get(i),AGame game);
             }
         }
-        for (int i =0; i<muteBox.length; i++) {
-            if (muteBox[i].isPressed()) {
-                controller.muteBoxClicked(WIDTH, HEIGHT);
+        for (int i =0; i<muteBox.size(); i++) {
+            if (muteBox.get(i).isPressed()) {
+                controller.muteBoxClicked(WIDTH, HEIGHT,muteBox.get(i), AGame game);
             }
         }
 
