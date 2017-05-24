@@ -226,6 +226,7 @@ public class Board implements IBoard, IPowerUp {
                     bounceBall(ball, Collision.getCircleDeflectionAngle(ball.getX(), ball.getY(), otherBall.getX(), otherBall.getY()));
                 }
             }
+            ball.move(0.01f);
         }
     }
 

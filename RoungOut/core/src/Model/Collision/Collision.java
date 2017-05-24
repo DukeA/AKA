@@ -36,7 +36,8 @@ public class Collision {
         float dx = ball.getX() - board.getXPos();
         float dy = ball.getY() - board.getYPos();
         float dz = (float) Math.sqrt(dx * dx + dy * dy) - (ball.getRadius() + board.getRadius());
-        return Math.abs(dz) <= 0.01f;  // That's close enough.
+        float t = Math.abs(dz);
+        return t <= 0.01f;  // That's close enough.
     }
 
     // Estimate min deltaTime until any form of collision occurs.
@@ -138,25 +139,25 @@ public class Collision {
 
         float t1 = (-b + (float) Math.sqrt(d)) / (2 * a);
         float t2 = (-b - (float) Math.sqrt(d)) / (2 * a);
-        if (t1 < 0 && t2 < 0)
+        if (t1 < 0 && t2 < 0) {
             return Float.NaN;
-        if (t1 < 0 || t2 < 0)
-            return Math.max(t1, t2);
-        else
+        }
+        if (t1 > 0 && t2 > 0)
             return Math.min(t1, t2);
+        else
+            return Math.max(t1, t2);
     }
 
     public static float estimateRectCollision(Ball b, RectangleBody r) {
         // Find nearest edge of rectangle
         float px = r.getX() + Math.min(r.getWidth()/2f, Math.max(-r.getWidth()/2f, b.getX() - r.getX()));
         float py = r.getY() + Math.min(r.getHeight()/2f, Math.max(-r.getHeight()/2f, b.getY() - r.getY()));
-
-        // Now we can use circle estimation method towards a set point.
-        return estimateCircleCollisions(
+        float t = estimateCircleCollisions(
                 b.getX() - px,
                 b.getY() - py,
                 b.getDeltaX(),
                 b.getDeltaY(),
                 b.getRadius());
+        return t;
     }
 }
