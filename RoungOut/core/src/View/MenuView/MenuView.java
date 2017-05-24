@@ -1,8 +1,10 @@
 package View.MenuView;
 
+import AbstractController.AController;
 import AbstractGame.AGame;
 import Controller.MenuController;
 import View.ObjectView.BoardView;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -36,7 +38,6 @@ public class MenuView  implements IHeadView, Screen {
     private Button exitButton;
     private TextureRegion Texture;
     private Skin skin;
-    private MenuController menuController;
     private InputEvent event;
 
 
@@ -68,7 +69,7 @@ public class MenuView  implements IHeadView, Screen {
         playButton.setWidth(200f);
         playButton.setHeight(30f);
         playButton.setPosition(WIDTH / 2, HEIGHT / 2);
-        playButton.addListener( menuController = new MenuController());
+        //playButton.addListener(  );
 
 
         optionsButton = new TextButton("Options"
@@ -76,14 +77,14 @@ public class MenuView  implements IHeadView, Screen {
         optionsButton.setWidth(200f);
         optionsButton.setHeight(20f);
         optionsButton.setPosition(WIDTH / 2, HEIGHT / 2);
-        optionsButton.addListener(menuController = new MenuController());
+        //optionsButton.addListener();
 
         exitButton = new TextButton("Exit",
                 skin, "default");
         exitButton.setWidth(200f);
         exitButton.setHeight(20f);
         exitButton.setPosition(WIDTH / 2, HEIGHT / 2);
-        exitButton.addListener(menuController = new MenuController());
+        //exitButton.addListener();
 
         table.add(image).width(700).height(400);
         table.row();
@@ -113,13 +114,13 @@ public class MenuView  implements IHeadView, Screen {
         stage.draw();
         batch.end();
         if (playButton.isPressed()){
-            menuController.playButtonIsPressed(WIDTH,HEIGHT,game);
+
         }
         if (optionsButton.isPressed()){
-            menuController.optionsButtonIsPressed(WIDTH,HEIGHT,game);
+
         }
         if (exitButton.isPressed()) {
-            menuController.exitButtonIsPressed();
+
         }
     }
 

@@ -1,5 +1,6 @@
 package Controller;
 
+import AbstractController.AController;
 import AbstractGame.AGame;
 import IViews.IViews;
 import View.MenuView.OptionView;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 /**
  * Created by Alex on 2017-05-13.
  */
-public class MenuController extends ClickListener implements IControllHandeling {
+public class MenuController extends ClickListener implements IControllHandeling  {
 
     ClickListener tmp = new ClickListener();
     //List that contains the views that this controller interacts with
@@ -25,6 +26,12 @@ public class MenuController extends ClickListener implements IControllHandeling 
 
     //the enum that decides the typ of menu this is
     private final EnumIndexes typeOfMenu = EnumIndexes.MENU_CONTROLLER;
+
+
+
+    public MenuController getMenuController(){
+        return this;
+    }
 
 
     private String latestKey = " ";//init with blank
@@ -113,4 +120,5 @@ public class MenuController extends ClickListener implements IControllHandeling 
     public MenuController() {
 
     }
+
 }

@@ -33,8 +33,7 @@ public class OptionView implements Screen{
     private BitmapFont font;
     private AGame game;
 
-    private MenuView menuView;
-    private OptionsController controller;
+
     private  InputEvent event;
 
     private ArrayList<CheckBox> box;
@@ -48,7 +47,6 @@ public class OptionView implements Screen{
         font = new BitmapFont();
         stage = new Stage();
         batch = new SpriteBatch();
-        controller = new OptionsController();
         event = new InputEvent();
 
     }
@@ -80,17 +78,16 @@ public class OptionView implements Screen{
             resArea.add(box.get(i));
         }
         box.get(0).setText("1950 X 1080");
-        box.get(0).addListener(controller = new OptionsController());
-
+        //box.get(0).addListener();
 
         box.get(1).setText("720 X 420");
-        box.get(1).addListener(controller = new OptionsController());
+        //box.get(1).addListener();
 
         box.get(2).setText("1280 X 720");
-        box.get(2).addListener(controller = new OptionsController());
+        //box.get(2).addListener();
 
         box.get(3).setText("1680 X 1050");
-        box.get(3).addListener(controller = new OptionsController());
+        //box.get(3).addListener();
 
         table.row();
         table.add(muteArea).width(400).height(100);
@@ -99,10 +96,10 @@ public class OptionView implements Screen{
             muteArea.add(muteBox.get(i));
         }
         muteBox.get(0).setText("Yes");
-        muteBox.get(0).addListener(controller = new OptionsController());
+        //muteBox.get(0).addListener();
 
         muteBox.get(1).setText("No");
-        muteBox.get(1).addListener(controller = new OptionsController());
+        //muteBox.get(1).addListener();
 
 
 
@@ -124,17 +121,17 @@ public class OptionView implements Screen{
         batch.end();
         for (int i =0; i<box.size(); i++) {
             if (box.get(i).isPressed()) {
-                controller.boxClicked(WIDTH,HEIGHT,box.get(i), game);
+
             }
         }
         for (int i =0; i<muteBox.size(); i++) {
             if (muteBox.get(i).isPressed()) {
-                controller.muteBoxClicked(muteBox.get(i), game);
+
             }
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            controller.escapeClicked(WIDTH,HEIGHT,game);
+
         }
 
     }

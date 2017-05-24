@@ -9,5 +9,5 @@ import com.badlogic.gdx.Game;
  */
 public abstract class AGame extends Game {
     public abstract Board getBoard ();
-    public abstract IController getGameController();
+    //public abstract IController getGameController();
 }
