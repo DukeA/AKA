@@ -23,7 +23,8 @@ public class Collision {
     public static float getRectDeflectionAngle(float px, float py, float recX, float recY, float recW, float recH) {
         float xCollision = recX + Math.min(recW/2f, Math.max(-recW/2f, px - recX));
         float yCollision = recY + Math.min(recH/2f, Math.max(-recH/2f, py - recY));
-        return (float)(Math.atan2( py - yCollision, px - xCollision ) + Math.PI/2f);
+        float angle = (float)( (Math.atan2( py - yCollision, px - xCollision ) + Math.PI/2f)%(2f*Math.PI) );
+        return angle;
     }
 
     public static boolean isBallOutsideBoard(Board board, Ball ball) {
@@ -40,7 +41,7 @@ public class Collision {
             time = Math.min(time, estimateTimeSingleBallCollision(board, ball));
         }
         // Shortest time estimated. Best to save/decrement this value from deltaTime.
-        return time;
+        return (time < 0) ? 0 : time;
     }
 
     // Helper methods /////////////////////////////////////////////////////////
@@ -74,7 +75,7 @@ public class Collision {
                     ? time : Math.min(time, estTime);
         }
 
-        return time;
+        return (time < 0) ? 0 : time;
     }
 
     // Shortest deltaTime until ball(s) collide with any other ball
@@ -103,7 +104,7 @@ public class Collision {
                 ball.getRadius() + board.getRadius());
         if (Float.isNaN(t)) {
             return 0;   // No collision course, ball must be outside board
-        } else if (Math.abs(t) < 0.01f) {
+        } else if (Math.abs(t) < 0.02f) {
             return 0;   // Close enough to border, consider it gone.
         } else {
             return t;   // Else, give estimated time until ball outside board.
