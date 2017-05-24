@@ -23,7 +23,12 @@ public class Collision {
     public static float getRectDeflectionAngle(float px, float py, float recX, float recY, float recW, float recH) {
         float xCollision = recX + Math.min(recW/2f, Math.max(-recW/2f, px - recX));
         float yCollision = recY + Math.min(recH/2f, Math.max(-recH/2f, py - recY));
-        float angle = (float)( (Math.atan2( py - yCollision, px - xCollision ) + Math.PI/2f)%(2f*Math.PI) );
+        float angle = (float)( (Math.atan2( yCollision-py, xCollision-px ) + Math.PI/2f)%(2f*Math.PI) );
+        /*System.out.printf("P(x=%.3f, y=%.3f), R(x1=%.3f, y1=%.3f, x2=%.3f, y2=h%.3f), angle=%.3f\n",
+                px, py,
+                recX - recW/2, recY - recH/2,
+                recX + recW/2, recY + recH/2,
+                Math.toDegrees(angle) ); */
         return angle;
     }
 

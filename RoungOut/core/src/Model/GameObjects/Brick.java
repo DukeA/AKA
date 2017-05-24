@@ -6,14 +6,14 @@ import Model.GameObjects.Physics.*;
 /**
  * @author Ken Bäcklund
  */
-public class Brick implements IModel {
+public class Brick implements IModel, IBrick {
 
     public enum BrickType {
-        NORMAL, SPEED_UP_BALL, SLOW_DOWN_BALL
+        NORMAL, DESTROYED, SPEED_UP_BALL, SLOW_DOWN_BALL
     }
 
     private RectangleBody body;
-    private Enum brickvalue;
+    private BrickType brickvalue;
 
 
     public Brick(float xPos, float yPos, float width, float height, float angle, float speed) {
@@ -30,6 +30,18 @@ public class Brick implements IModel {
     }
     public float getHeight() {
         return body.getHeight();
+    }
+
+    public BrickType getBrickType() {
+        return brickvalue;
+    }
+
+    public void markDestroyed() {
+        brickvalue = BrickType.DESTROYED;
+    }
+
+    public boolean isDestroyed() {
+        return brickvalue == BrickType.DESTROYED;
     }
 
     public float getX() {

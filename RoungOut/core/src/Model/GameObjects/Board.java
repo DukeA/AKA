@@ -51,37 +51,37 @@ public class Board implements IBoard, IPowerUp {
 
     // TODO Temporary mock data
     public void createSampleBoard(int WIDTH, int HEIGHT) {
-        float PadLength =80f;
-        float PadWidth =30f;
-        float BrickWidth =30f;
-        float BrickLength =30f;
-        this.addPlayer(new Player(PadLength, PadWidth, WIDTH/2,HEIGHT/2,
+        float padLength =80f;
+        float padWidth =30f;
+        float brickWidth =30f;
+        float brickHeight =30f;
+        this.addPlayer(new Player(padLength, padWidth, WIDTH/2,HEIGHT/2,
                 WIDTH / 2 - 350, HEIGHT / 2, 1));
-        this.addPlayer(new Player(PadLength, PadWidth,WIDTH/2,HEIGHT/2,
+        this.addPlayer(new Player(padLength, padWidth,WIDTH/2,HEIGHT/2,
                 WIDTH / 2 - 450, HEIGHT / 2, 1));
 
-        this.addBrick(new Brick(WIDTH / 2 - 40-BrickWidth/2, HEIGHT / 2-BrickLength/2
-                , BrickWidth, BrickLength));
-        this.addBrick(new Brick(WIDTH / 2 - 40-BrickWidth/2, HEIGHT / 2-BrickLength/2
-                , BrickWidth, BrickLength));
-        this.addBrick(new Brick(WIDTH / 2-BrickWidth/2, HEIGHT / 2-BrickLength/2
-                , BrickWidth, BrickLength));
-        this.addBrick(new SDownBrick(WIDTH / 2 + 40-BrickWidth/2, HEIGHT / 2-BrickLength/2
-                , BrickWidth, BrickLength));
-        this.addBrick(new Brick(WIDTH / 2 - 40-BrickWidth/2, HEIGHT / 2 - 40-BrickLength/2
-                , BrickWidth, BrickLength));
-        this.addBrick(new Brick(WIDTH / 2-BrickWidth/2, HEIGHT / 2 - 40-BrickLength/2
-                , BrickWidth, BrickLength));
-        this.addBrick(new Brick(WIDTH / 2 + 40-BrickWidth/2, HEIGHT / 2 - 40-BrickLength/2
-                , BrickWidth, BrickLength));
-        this.addBrick(new SUpBrick(WIDTH / 2 - 40-BrickWidth/2, HEIGHT / 2 + 40-BrickLength/2
-                , BrickWidth, BrickLength));
-        this.addBrick(new Brick(WIDTH / 2-BrickWidth/2, HEIGHT / 2 + 40-BrickLength/2
-                , BrickWidth, BrickLength));
-        this.addBrick(new Brick(WIDTH / 2 + 40-BrickWidth/2, HEIGHT / 2 + 40-BrickLength/2
-                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2 - 40-brickWidth/2, HEIGHT / 2-brickHeight/2
+                , brickWidth, brickHeight));
+        this.addBrick(new Brick(WIDTH / 2 - 40-brickWidth/2, HEIGHT / 2-brickHeight/2
+                , brickWidth, brickHeight));
+        this.addBrick(new Brick(WIDTH / 2-brickWidth/2, HEIGHT / 2-brickHeight/2
+                , brickWidth, brickHeight));
+        this.addBrick(new SDownBrick(WIDTH / 2 + 40-brickWidth/2, HEIGHT / 2-brickHeight/2
+                , brickWidth, brickHeight));
+        this.addBrick(new Brick(WIDTH / 2 - 40-brickWidth/2, HEIGHT / 2 - 40-brickHeight/2
+                , brickWidth, brickHeight));
+        this.addBrick(new Brick(WIDTH / 2-brickWidth/2, HEIGHT / 2 - 40-brickHeight/2
+                , brickWidth, brickHeight));
+        this.addBrick(new Brick(WIDTH / 2 + 40-brickWidth/2, HEIGHT / 2 - 40-brickHeight/2
+                , brickWidth, brickHeight));
+        this.addBrick(new SUpBrick(WIDTH / 2 - 40-brickWidth/2, HEIGHT / 2 + 40-brickHeight/2
+                , brickWidth, brickHeight));
+        this.addBrick(new Brick(WIDTH / 2-brickWidth/2, HEIGHT / 2 + 40-brickHeight/2
+                , brickWidth, brickHeight));
+        this.addBrick(new Brick(WIDTH / 2 + 40-brickWidth/2, HEIGHT / 2 + 40-brickHeight/2
+                , brickWidth, brickHeight));
 
-        this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 30f, 0, 50));
+        this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 30f, 0.05f, 100));
     }
 
     private float correctAngle(float radians) {
@@ -165,6 +165,7 @@ public class Board implements IBoard, IPowerUp {
         }
     }
 
+    /*
     public void removeBall(Ball ball) {
         if (ball != null) {
             this.balls.remove(ball);
@@ -185,32 +186,10 @@ public class Board implements IBoard, IPowerUp {
             nextCollisionTime = Collision.estimateNextCollision(this);
         }
     }
+    */
 
     public float distance(Body body) {
         return board.distance(body);
-    }
-
-    public void debugInfo(Ball ball, Brick brick) {
-        RectangleBody r = brick.getBody();
-        float cx = ball.getX();
-        float cy = ball.getY();
-        float cr = ball.getRadius();
-        float ca = (float)Math.toDegrees(ball.getAngle());
-        float rx = r.getX() + Math.min(r.getWidth()/2f, Math.max(-r.getWidth()/2f, cx - r.getX()));
-        float ry = r.getY() + Math.min(r.getHeight()/2f, Math.max(-r.getHeight()/2f, cy - r.getY()));
-        float distance = (float)Math.sqrt((cx-rx)*(cx-rx)+(cy-ry)*(cy-ry)) - cr;
-        /*System.out.printf("Ball: x=%.2f y=%.2f r=%.2f a=%.2f   Brick: x1=%.2f y1=%.2f x2=%.2f y2=%.2f   Edge: x1=%.2f y1=%.2f   Dist: %.2f\n",
-                cx,
-                cy,
-                cr,
-                ca,
-                brick.getX() - brick.getWidth()/2f,
-                brick.getY() - brick.getHeight()/2f,
-                brick.getX() + brick.getWidth()/2f,
-                brick.getY() + brick.getHeight()/2f,
-                rx,
-                ry,
-                distance ); */
     }
 
     public void handleCollisions() {
@@ -220,16 +199,21 @@ public class Board implements IBoard, IPowerUp {
                 respawnBall(ball);
             }
             for (Brick brick : bricks) {
+                if (brick.isDestroyed()) {
+                    continue;
+                }
                 if ( ball.distance(brick.getBody()) < DISTANCE_TOLERANCE) {
                     notifyBallHitBrick(ball, brick);
-                    debugInfo(ball, brick);
+                    untangleBall(ball);
                     bounceBall(ball, Collision.getRectDeflectionAngle(
                             ball.getX(), ball.getY(), brick.getX(), brick.getY(), brick.getWidth(), brick.getHeight()));
+                    brick.markDestroyed();
                 }
             }
             for (Player player : players) {
                 if ( ball.distance(player.getPad().getBody()) < DISTANCE_TOLERANCE) {
                     notifyBallHitPlayerPad(ball, player);
+                    untangleBall(ball);
                     Pad pad = player.getPad();
                     bounceBall(ball, Collision.getRectDeflectionAngle(
                             ball.getX(), ball.getY(), pad.getPadXPos(), pad.getPadYPos(), pad.getWidth(), pad.getLength()));
@@ -238,6 +222,7 @@ public class Board implements IBoard, IPowerUp {
             for (Ball otherBall : balls) {
                 if (!ball.equals(otherBall) && ball.distance(otherBall.getBody()) < DISTANCE_TOLERANCE) {
                     notifyBallHitBall(ball, otherBall);
+                    untangleBall(ball);
                     bounceBall(ball, Collision.getCircleDeflectionAngle(ball.getX(), ball.getY(), otherBall.getX(), otherBall.getY()));
                 }
             }
@@ -251,14 +236,14 @@ public class Board implements IBoard, IPowerUp {
         addBall(newBall);
     }
 
-    public void bounceBall(Ball ball, float deflectionAngle) {
+    // Untangle ball after a collision occurred.
+    public void untangleBall(Ball ball) {
         // Move ball out of collision range before bounce in reverse direction.
         //System.out.printf("Adjusting position before bounce. Ball at x%.4f y%.4f\n", ball.getX(), ball.getY());
-        do {
-            ball.move(-0.01f);
-            //System.out.printf("                                       -> x%.4f y%.4f\n", ball.getX(), ball.getY());
-        } while (Math.abs(Collision.estimateTimeSingleBallCollision(this, ball)) < 0.01f);
+        ball.move(-0.05f);
+    }
 
+    public void bounceBall(Ball ball, float deflectionAngle) {
         // Check if ball and deflection angle are less than 180.
         deflectionAngle = correctAngle(deflectionAngle);
         float aDiff = deflectionAngle - ball.getAngle();
@@ -267,7 +252,7 @@ public class Board implements IBoard, IPowerUp {
         if (aDiff > 0 || aDiff < -Math.PI) {
             // If ball is deflected, set a new angle.
             ball.setAngle( ball.getAngle() + 2f * aDiff );
-            System.out.printf("Ball deflected from %.3f to %.3f degrees\n", a1, a2);
+            //System.out.printf("Ball deflected from %.3f to %.3f degrees\n", a1, a2);
         }
         else {
             //System.out.printf("Ball at %.3f degrees, not deflected (deflection angle = %.3f)\n", a1, Math.toDegrees(deflectionAngle));
