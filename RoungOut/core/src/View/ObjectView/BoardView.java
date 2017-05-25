@@ -52,7 +52,7 @@ public class BoardView  implements IViews,Screen {
 
     @Override
     public void show() {
-   // Gdx.input.setInputProcessor(game.getGameController());
+    Gdx.input.setInputProcessor(game.getGameController());
         //GIVE BACK CONTROLLER HERE
     }
 
@@ -117,7 +117,7 @@ public class BoardView  implements IViews,Screen {
 
     @Override
     public void update(float delta) {
-        //game.getGameController().atRequest();
+        game.getGameController().atRequest();
         board.update(delta);
 
         for (IViews views: views) {
