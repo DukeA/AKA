@@ -3,10 +3,8 @@ package Model.Collision;
 import Model.GameObjects.*;
 import Model.GameObjects.Physics.RectangleBody;
 
-import java.util.*;
-
 /**
- * Static collision methods between board, ball, bricks, and pads.
+ * Collision methods between board, ball, bricks, and pads.
  *
  * @author Ken Bäcklund
  */
