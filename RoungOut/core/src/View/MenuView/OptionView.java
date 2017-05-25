@@ -46,11 +46,11 @@ public class OptionView implements Screen{
         this.HEIGHT = HEIGHT;
         this.game = game;
         this.skin = new Skin(Gdx.files.internal("uiskin.json"));
-        font = new BitmapFont();
-        stage = new Stage();
-        batch = new SpriteBatch();
-        event = new InputEvent();
-       // controller = new OptionsController();
+        this.font = new BitmapFont();
+        this.stage = new Stage();
+        this.batch = new SpriteBatch();
+        this.event = new InputEvent();
+        this.controller = game.getOptionsController();
 
     }
 

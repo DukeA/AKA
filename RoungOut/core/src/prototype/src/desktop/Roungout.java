@@ -1,5 +1,8 @@
 package prototype.src.desktop;
 
+import AbstractController.AGameController;
+import AbstractController.AMenuController;
+import AbstractController.AOptionsController;
 import Controller.*;
 
 import AbstractGame.AGame;
@@ -30,20 +33,24 @@ public class Roungout extends AGame {
     private ArrayList<IViews> menuControllerViewers = new ArrayList<IViews>();
     private ArrayList<IViews> optionsControllerViewers = new ArrayList<IViews>();
 
-    private BoardView view;
+    private BoardView BoardView;
     private Board board;
 
-    public IController gameController;
-    public MenuController menuController;
-    public OptionsController optionsController;
+    private GameController gameController;
+    private MenuController menuController;
+    private OptionsController optionsController;
 
     public Board getBoard(){
         return board;
     }
-    public IController getGameController(){
+    @Override
+    public AGameController getGameController(){
         return gameController;
     }
-
+    @Override
+    public AMenuController getMenuController() {return menuController;}
+    @Override
+    public AOptionsController getOptionsController() {return optionsController;}
 
     @Override
     public void create() {
@@ -54,8 +61,8 @@ public class Roungout extends AGame {
         camera.setToOrtho(false, WIDTH, HEIGHT);
         board = new Board(WIDTH, HEIGHT);
         board.createSampleBoard(WIDTH, HEIGHT);         // Sample board creation here. Otherwise BoardTest is screwed up.
-        view = new BoardView(WIDTH, HEIGHT,this);
-        gameControllerViewers.add(view);
+        BoardView = new BoardView(WIDTH, HEIGHT,this);
+        gameControllerViewers.add(BoardView);
 
 
         //InitControllers

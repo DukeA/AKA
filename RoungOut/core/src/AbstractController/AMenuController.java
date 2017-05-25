@@ -8,8 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  */
 public abstract class AMenuController  extends ClickListener {
     public abstract void playButtonIsPressed(int Width, int Height, AGame game);
-
     public abstract void optionsButtonIsPressed(int Width, int Height, AGame game);
-
     public abstract void exitButtonIsPressed();
 }

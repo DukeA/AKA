@@ -1,5 +1,6 @@
 package Controller;
 
+import AbstractController.AGameController;
 import IViews.IViews;
 import Model.GameObjects.IPlayer;
 import com.badlogic.gdx.Gdx;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by Alex on 2017-04-28.
  */
-public class GameController extends ClickListener implements IController, IControllHandeling {
+public class GameController extends AGameController implements IControllHandeling {
     //The list will only contain unique subscribers and this is guaranteed by the
     //addListener and removeListener methods
 

@@ -108,5 +108,6 @@ public class MenuController extends AMenuController implements IControllHandelin
 
     public MenuController(ArrayList<IViews> views, IHandler handler) {
         this.handler = handler;
+        this.viewSubscribers=views;
     }
 }

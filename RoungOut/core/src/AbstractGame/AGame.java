@@ -1,6 +1,8 @@
 package AbstractGame;
 
-import Controller.IController;
+import AbstractController.AGameController;
+import AbstractController.AMenuController;
+import AbstractController.AOptionsController;
 import Model.GameObjects.Board;
 import com.badlogic.gdx.Game;
 
@@ -9,5 +11,7 @@ import com.badlogic.gdx.Game;
  */
 public abstract class AGame extends Game {
     public abstract Board getBoard ();
-    public abstract IController getGameController();
+    public abstract AGameController getGameController();
+    public abstract AMenuController getMenuController();
+    public abstract AOptionsController getOptionsController();
 }
