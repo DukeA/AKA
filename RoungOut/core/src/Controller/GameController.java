@@ -1,11 +1,10 @@
 package Controller;
 
-import AbstractController.AGameController;
+import AbstractGameComponents.AGameController;
 import IViews.IViews;
 import Model.GameObjects.IPlayer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import java.util.ArrayList;
 

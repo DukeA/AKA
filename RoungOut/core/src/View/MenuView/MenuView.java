@@ -1,10 +1,7 @@
 package View.MenuView;
 
-import AbstractController.AMenuController;
-import AbstractController.AOptionsController;
-import AbstractGame.AGame;
-import Controller.MenuController;
-import Controller.OptionsController;
+import AbstractGameComponents.AMenuController;
+import AbstractGameComponents.AGame;
 import View.ObjectView.BoardView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;

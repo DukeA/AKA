@@ -1,11 +1,11 @@
 package prototype.src.desktop;
 
-import AbstractController.AGameController;
-import AbstractController.AMenuController;
-import AbstractController.AOptionsController;
+import AbstractGameComponents.AGameController;
+import AbstractGameComponents.AMenuController;
+import AbstractGameComponents.AOptionsController;
 import Controller.*;
 
-import AbstractGame.AGame;
+import AbstractGameComponents.AGame;
 import Model.GameObjects.*;
 import View.MenuView.SplashView;
 import View.ObjectView.BoardView;
@@ -56,7 +56,6 @@ public class Roungout extends AGame {
     public void create() {
 
         //board = board.getBoard() // needed inorder to update the board
-        splashScreen = new SplashView(WIDTH, HEIGHT, this); //set input
         camera = new OrthographicCamera();
         camera.setToOrtho(false, WIDTH, HEIGHT);
         board = new Board(WIDTH, HEIGHT);
@@ -65,30 +64,30 @@ public class Roungout extends AGame {
         gameControllerViewers.add(BoardView);
 
 
+
         //InitControllers
         List<IPlayer> players = new ArrayList<IPlayer>(board.getPlayers());
         ControllerHandler handler = new ControllerHandler();
         gameController = new GameController(gameControllerViewers,players.get(0),players.get(1),handler);
-        menuController = new MenuController(menuControllerViewers,handler);//here
-        optionsController = new OptionsController(optionsControllerViewers,handler);//here
+        menuController = new MenuController(menuControllerViewers,handler);
+        optionsController = new OptionsController(optionsControllerViewers,handler);
 
 
         Gdx.input.setInputProcessor(gameController);
         ArrayList<IControllHandeling> controllers = new ArrayList<IControllHandeling>();
         controllers.add(gameController);
+        controllers.add(menuController);
+        controllers.add(optionsController);
         //Init the handler with the controllers
         handler.setControllers(controllers);
 
-        //Sets the input processor to this index (GAME CONTROLLER)
-        handler.getcontrollers().get(0).changeInputProcessor();
-
+        splashScreen = new SplashView(WIDTH, HEIGHT, this); //set input
         this.setScreen(splashScreen);
     }
 
 
     public void render() {
         super.render();
-
     }
 
     public void dispose() {

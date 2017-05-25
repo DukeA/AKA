@@ -1,6 +1,6 @@
 package View.MenuView;
 
-import AbstractGame.AGame;
+import AbstractGameComponents.AGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;

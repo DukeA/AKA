@@ -1,6 +1,5 @@
-package AbstractController;
+package AbstractGameComponents;
 
-import AbstractGame.AGame;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 

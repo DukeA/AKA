@@ -1,8 +1,5 @@
-package AbstractGame;
+package AbstractGameComponents;
 
-import AbstractController.AGameController;
-import AbstractController.AMenuController;
-import AbstractController.AOptionsController;
 import Model.GameObjects.Board;
 import com.badlogic.gdx.Game;
 

@@ -1,4 +1,4 @@
-package AbstractController;
+package AbstractGameComponents;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;

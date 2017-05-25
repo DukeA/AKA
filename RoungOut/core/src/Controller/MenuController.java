@@ -1,7 +1,7 @@
 package Controller;
 
-import AbstractController.AMenuController;
-import AbstractGame.AGame;
+import AbstractGameComponents.AMenuController;
+import AbstractGameComponents.AGame;
 import IViews.IViews;
 import View.MenuView.OptionView;
 import View.ObjectView.BoardView;

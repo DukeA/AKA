@@ -1,16 +1,13 @@
 package Controller;
 
-import AbstractController.AOptionsController;
-import AbstractGame.AGame;
+import AbstractGameComponents.AOptionsController;
+import AbstractGameComponents.AGame;
 import IViews.IViews;
 import View.MenuView.MenuView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import jdk.nashorn.internal.ir.IfNode;
 
 import java.util.ArrayList;
 
