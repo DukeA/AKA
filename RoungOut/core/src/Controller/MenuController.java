@@ -35,18 +35,15 @@ public class MenuController extends AMenuController implements IControllHandelin
         return latestKey;
     }
     public void playButtonIsPressed(int Width, int Height, AGame game){
-        MenuController control = new MenuController();
         BoardView view = new BoardView(Width, Height,game);
         game.setScreen(view);
 
     }
     public void optionsButtonIsPressed( int Width, int Height,AGame game) {
-        MenuController control = new MenuController();
         OptionView view  = new OptionView(Width, Height,game);
         game.setScreen(view);
     }
     public void exitButtonIsPressed() {
-        MenuController control = new MenuController();
         Gdx.app.exit();
     }
     @Override

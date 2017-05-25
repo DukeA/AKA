@@ -1,7 +1,6 @@
 package AbstractController;
 
 import AbstractGame.AGame;
-import Controller.MenuController;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**

@@ -50,6 +50,7 @@ public class OptionView implements Screen{
         stage = new Stage();
         batch = new SpriteBatch();
         event = new InputEvent();
+        controller = new OptionsController();
 
     }
 
@@ -122,13 +123,17 @@ public class OptionView implements Screen{
 
         for (CheckBox box: box) {
             if (box.isPressed()) {
-
+                controller.boxClicked(WIDTH,HEIGHT,box,game);
             }
         }
         for (CheckBox muteBox : muteBox) {
             if (muteBox.isPressed()) {
+                controller.muteBoxClicked(muteBox,game);
 
             }
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            controller.escapeClicked(WIDTH,HEIGHT,game);
         }
 
     }

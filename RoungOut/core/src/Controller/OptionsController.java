@@ -53,11 +53,6 @@ public class OptionsController extends AOptionsController implements IControllHa
     }
 
 
-    @Override
-    public void clicked(InputEvent event, float x, float y) {
-
-    }
-
 
     //Helper method, code reuse
     private void updateAllViews() {
@@ -141,10 +136,7 @@ public class OptionsController extends AOptionsController implements IControllHa
 
 
     public OptionsController(IHandler handler) {
-
         this.handler = handler;
-
-
     }
 
     public OptionsController() {
