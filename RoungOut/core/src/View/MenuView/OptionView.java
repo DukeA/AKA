@@ -50,7 +50,7 @@ public class OptionView implements Screen{
         stage = new Stage();
         batch = new SpriteBatch();
         event = new InputEvent();
-        controller = new OptionsController();
+       // controller = new OptionsController();
 
     }
 

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class OptionsController extends AOptionsController implements IControllHandeling {
 
     //List that contains the views that this controller interacts with
-    private IViews OptionsView;
+    private ArrayList<IViews> optionsSubscribers = new ArrayList<IViews>();
 
     //The handler that handles the switching of input processor
     private IHandler handler;
@@ -57,7 +57,9 @@ public class OptionsController extends AOptionsController implements IControllHa
     //Helper method, code reuse
     private void updateAllViews() {
         //Call update to all views
-        OptionsView.update(Gdx.graphics.getDeltaTime());
+        for (IViews view : optionsSubscribers) {
+            view.update(Gdx.graphics.getDeltaTime());
+        }
     }
 
     public void boxClicked(int WIDTH, int HEIGHT, CheckBox box, AGame game) {
@@ -135,12 +137,8 @@ public class OptionsController extends AOptionsController implements IControllHa
     //End of these inputs
 
 
-    public OptionsController(IHandler handler) {
+    public OptionsController(ArrayList<IViews> views,IHandler handler) {
         this.handler = handler;
-    }
-
-    public OptionsController() {
-
     }
 
 }

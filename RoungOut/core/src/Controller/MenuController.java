@@ -46,6 +46,7 @@ public class MenuController extends AMenuController implements IControllHandelin
     public void exitButtonIsPressed() {
         Gdx.app.exit();
     }
+
     @Override
     public boolean keyDown(int keycode) {
         /**
@@ -105,15 +106,7 @@ public class MenuController extends AMenuController implements IControllHandelin
     }
     //End of these inputs
 
-
-    public MenuController( IHandler handler) {
-
+    public MenuController(ArrayList<IViews> views, IHandler handler) {
         this.handler = handler;
-
-
     }
-    public MenuController() {
-
-    }
-
 }

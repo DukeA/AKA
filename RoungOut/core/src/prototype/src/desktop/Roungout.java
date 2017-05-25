@@ -1,10 +1,7 @@
 package prototype.src.desktop;
 
-import Controller.ControllerHandler;
-import Controller.IControllHandeling;
-import Controller.GameController;
+import Controller.*;
 
-import Controller.IController;
 import AbstractGame.AGame;
 import Model.GameObjects.*;
 import View.MenuView.SplashView;
@@ -29,35 +26,22 @@ public class Roungout extends AGame {
 
     private SplashView splashScreen;
     public OrthographicCamera camera;
-
-
-    public IController gameController;
-
-
-    private ArrayList<IViews> viewers = new ArrayList<IViews>();
-
+    private ArrayList<IViews> gameControllerViewers = new ArrayList<IViews>();
+    private ArrayList<IViews> menuControllerViewers = new ArrayList<IViews>();
+    private ArrayList<IViews> optionsControllerViewers = new ArrayList<IViews>();
 
     private BoardView view;
     private Board board;
+
+    public IController gameController;
+    public MenuController menuController;
+    public OptionsController optionsController;
 
     public Board getBoard(){
         return board;
     }
     public IController getGameController(){
         return gameController;
-    }
-
-    public void initControllers() {
-        List<IPlayer> players = new ArrayList<IPlayer>(board.getPlayers());
-
-        ControllerHandler handler = new ControllerHandler();
-
-        GameController gameController = new GameController(viewers,players.get(0),players.get(1),handler);
-        ArrayList<IControllHandeling> controllers = new ArrayList<IControllHandeling>();
-
-        controllers.add(gameController);
-        //Init the handler with the controllers
-        handler.setControllers(controllers);
     }
 
 
@@ -71,13 +55,16 @@ public class Roungout extends AGame {
         board = new Board(WIDTH, HEIGHT);
         board.createSampleBoard(WIDTH, HEIGHT);         // Sample board creation here. Otherwise BoardTest is screwed up.
         view = new BoardView(WIDTH, HEIGHT,this);
-        viewers.add(view);
+        gameControllerViewers.add(view);
 
 
         //InitControllers
         List<IPlayer> players = new ArrayList<IPlayer>(board.getPlayers());
         ControllerHandler handler = new ControllerHandler();
-        gameController = new GameController(viewers,players.get(0),players.get(1),handler);
+        gameController = new GameController(gameControllerViewers,players.get(0),players.get(1),handler);
+        menuController = new MenuController(menuControllerViewers,handler);//here
+        optionsController = new OptionsController(optionsControllerViewers,handler);//here
+
 
         Gdx.input.setInputProcessor(gameController);
         ArrayList<IControllHandeling> controllers = new ArrayList<IControllHandeling>();

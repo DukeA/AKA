@@ -46,9 +46,8 @@ public class MenuView  implements IHeadView, Screen {
         this.font = new BitmapFont();
         this.stage = new Stage();
         this.camera = new OrthographicCamera(WIDTH, HEIGHT);
-        controller = new MenuController();
-
-
+        //controller =
+                //game.getGameController();
     }
 
     @Override
