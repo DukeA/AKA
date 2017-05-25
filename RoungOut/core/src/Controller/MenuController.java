@@ -1,11 +1,10 @@
 package Controller;
 
-import AbstractController.AController;
+import AbstractController.AMenuController;
 import AbstractGame.AGame;
 import IViews.IViews;
 import View.MenuView.OptionView;
 import View.ObjectView.BoardView;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by Alex on 2017-05-13.
  */
-public class MenuController extends ClickListener implements IControllHandeling  {
+public class MenuController extends AMenuController implements IControllHandeling  {
 
     ClickListener tmp = new ClickListener();
     //List that contains the views that this controller interacts with
@@ -29,11 +28,6 @@ public class MenuController extends ClickListener implements IControllHandeling 
 
 
 
-    public MenuController getMenuController(){
-        return this;
-    }
-
-
     private String latestKey = " ";//init with blank
     public String latestKeyPressed()
     {
@@ -41,14 +35,18 @@ public class MenuController extends ClickListener implements IControllHandeling 
         return latestKey;
     }
     public void playButtonIsPressed(int Width, int Height, AGame game){
+        MenuController control = new MenuController();
         BoardView view = new BoardView(Width, Height,game);
         game.setScreen(view);
+
     }
     public void optionsButtonIsPressed( int Width, int Height,AGame game) {
+        MenuController control = new MenuController();
         OptionView view  = new OptionView(Width, Height,game);
         game.setScreen(view);
     }
     public void exitButtonIsPressed() {
+        MenuController control = new MenuController();
         Gdx.app.exit();
     }
     @Override

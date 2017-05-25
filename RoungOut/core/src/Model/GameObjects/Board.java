@@ -56,6 +56,7 @@ public class Board implements IBoard, IPowerUp {
         float PadWidth =30f;
         float BrickWidth =30f;
         float BrickLength =30f;
+        float BallRdius = 30f;
         this.addPlayer(new Player(PadLength, PadWidth, WIDTH/2,HEIGHT/2,
                 WIDTH / 2 - 350, HEIGHT / 2, 1));
         this.addPlayer(new Player(PadLength, PadWidth,WIDTH/2,HEIGHT/2,
@@ -83,7 +84,8 @@ public class Board implements IBoard, IPowerUp {
         this.addBrick(new Brick(WIDTH / 2 + 40-BrickWidth/2, HEIGHT / 2 + 40-BrickLength/2
                 , BrickWidth, BrickLength));
 
-        this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 30f, 1, 100));
+        this.addBall(new Ball(WIDTH / 2 - 250-BallRdius/2, HEIGHT / 2 + 20-BallRdius/2
+                , BallRdius, 1, 100));
     }
 
     private float correctAngle(float radians) {

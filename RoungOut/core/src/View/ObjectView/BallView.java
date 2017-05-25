@@ -33,8 +33,8 @@ public class BallView implements IViews {
             shapeRenderer.setColor(Color.RED);
             shapeRenderer.ellipse(ball.getX()
                     , ball.getY()
-                    , ball.getRadius() * ((WIDTH / 4) / (HEIGHT / 4))
-                    , ball.getRadius() * ((WIDTH / 4) / (HEIGHT / 4)));
+                    , ball.getRadius() * ((WIDTH / 2) / (HEIGHT / 2))
+                    , ball.getRadius() * ((WIDTH / 2) / (HEIGHT / 2)));
             shapeRenderer.end();
         }
     }

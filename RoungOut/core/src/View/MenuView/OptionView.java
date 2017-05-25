@@ -1,5 +1,6 @@
 package View.MenuView;
 
+import AbstractController.AOptionsController;
 import AbstractGame.AGame;
 import Controller.OptionsController;
 import com.badlogic.gdx.Gdx;
@@ -32,6 +33,7 @@ public class OptionView implements Screen{
     private Stage stage;
     private BitmapFont font;
     private AGame game;
+    private AOptionsController controller;
 
 
     private  InputEvent event;
@@ -78,16 +80,15 @@ public class OptionView implements Screen{
             resArea.add(box.get(i));
         }
         box.get(0).setText("1950 X 1080");
-        //box.get(0).addListener();
+
 
         box.get(1).setText("720 X 420");
-        //box.get(1).addListener();
 
         box.get(2).setText("1280 X 720");
-        //box.get(2).addListener();
+
 
         box.get(3).setText("1680 X 1050");
-        //box.get(3).addListener();
+
 
         table.row();
         table.add(muteArea).width(400).height(100);
@@ -96,10 +97,9 @@ public class OptionView implements Screen{
             muteArea.add(muteBox.get(i));
         }
         muteBox.get(0).setText("Yes");
-        //muteBox.get(0).addListener();
+
 
         muteBox.get(1).setText("No");
-        //muteBox.get(1).addListener();
 
 
 
@@ -119,19 +119,16 @@ public class OptionView implements Screen{
         stage.act();
         stage.draw();
         batch.end();
-        for (int i =0; i<box.size(); i++) {
-            if (box.get(i).isPressed()) {
+
+        for (CheckBox box: box) {
+            if (box.isPressed()) {
 
             }
         }
-        for (int i =0; i<muteBox.size(); i++) {
-            if (muteBox.get(i).isPressed()) {
+        for (CheckBox muteBox : muteBox) {
+            if (muteBox.isPressed()) {
 
             }
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-
         }
 
     }
