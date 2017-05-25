@@ -6,7 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 /**
  * Created by Alex on 2017-05-12.
  */
-public interface IControllHandeling extends InputProcessor{
+public interface IControllHandeling{
     void changeInputProcessor();
     EnumIndexes getTypeOfMenu();
 

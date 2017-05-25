@@ -41,7 +41,7 @@ public class OptionsController extends AOptionsController implements IControllHa
         latestKey = Input.Keys.toString(keycode);
 
         if (keycode == Input.Keys.ESCAPE) {
-            handler.callSetNewInput(EnumIndexes.GAME_CONTROLLER);
+            handler.callSetNewInput(EnumIndexes.MENU_CONTROLLER);
             //IF ESC -> Go back to the game
             updateAllViews();
         }
@@ -59,14 +59,17 @@ public class OptionsController extends AOptionsController implements IControllHa
         }
     }
 
-    public void boxClicked(int WIDTH, int HEIGHT, CheckBox box, AGame game) {
+    public ArrayList<Integer> boxClicked(int WIDTH, int HEIGHT, CheckBox box, AGame game) {
+        ArrayList<Integer> newWH = new ArrayList<Integer>();
         Label value = box.getLabel();
         String width = String.valueOf(value.getText());
         String[] values = width.split("X");
         WIDTH = Integer.valueOf(values[0].trim());
         HEIGHT = Integer.valueOf(values[1].trim());
         game.resize(WIDTH, HEIGHT);
-
+        newWH.add(WIDTH);
+        newWH.add(HEIGHT);
+        return newWH;
     }
 
     public boolean muteBoxClicked(CheckBox box, AGame game) {

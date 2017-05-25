@@ -55,9 +55,8 @@ public class MenuController extends AMenuController implements IControllHandelin
         latestKey = Input.Keys.toString(keycode);
 
         if (keycode== Input.Keys.ESCAPE){
-            handler.callSetNewInput(EnumIndexes.GAME_CONTROLLER);
             //IF ESC -> Go back to the game
-            updateAllViews();
+            Gdx.app.exit();
         }
 
         return true;
