@@ -5,9 +5,7 @@ import Model.Collision.Collision;
 import Model.Collision.CollisionObserver;
 import Model.GameObjects.Physics.Body;
 import Model.GameObjects.Physics.CircleBody;
-import Model.GameObjects.Physics.RectangleBody;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -24,7 +22,7 @@ public class Board implements IBoard, IPowerUp {
     private CircleBody board;
     private Ball lastBallSpawned;
     private float nextCollisionTime;
-
+    private Collision collision = new Collision();
 
     private float xPos;
     private float yPos;
@@ -123,7 +121,7 @@ public class Board implements IBoard, IPowerUp {
             nextCollisionTime -= minTime;
             if (deltaTime > 0) {
                 handleCollisions();
-                nextCollisionTime = Collision.estimateNextCollision(this);
+                nextCollisionTime = collision.estimateNextCollision(this);
             }
         }
     }
@@ -132,7 +130,7 @@ public class Board implements IBoard, IPowerUp {
         if (ball != null) {
             this.balls.add(ball);
             lastBallSpawned = new Ball(ball);
-            nextCollisionTime = Collision.estimateNextCollision(this);
+            nextCollisionTime = collision.estimateNextCollision(this);
             if (nextCollisionTime < DISTANCE_TOLERANCE) {
                 throw new IllegalArgumentException(String.format(
                         "Placing ball at (%.3f, %.3f) cause an immediate collision.",
@@ -144,7 +142,7 @@ public class Board implements IBoard, IPowerUp {
     public void addBrick(Brick brick) {
         if (brick != null) {
             this.bricks.add(brick);
-            nextCollisionTime = Collision.estimateNextCollision(this);
+            nextCollisionTime = collision.estimateNextCollision(this);
             if (nextCollisionTime < 0.0001f) {
                 throw new IllegalArgumentException(String.format(
                         "Placing brick at (%.3f, %.3f) cause an immediate collision.",
@@ -156,7 +154,7 @@ public class Board implements IBoard, IPowerUp {
     public void addPlayer(Player player) {
         if (player != null) {
             this.players.add(player);
-            nextCollisionTime = Collision.estimateNextCollision(this);
+            nextCollisionTime = collision.estimateNextCollision(this);
             if (nextCollisionTime < 0.0001f) {
                 throw new IllegalArgumentException(String.format(
                         "Placing player at (%.3f, %.3f) cause an immediate collision.",
@@ -194,7 +192,7 @@ public class Board implements IBoard, IPowerUp {
 
     public void handleCollisions() {
         for (Ball ball : balls) {
-            if (Collision.isBallOutsideBoard(this, ball)) {
+            if (collision.isBallOutsideBoard(this, ball)) {
                 notifyBallExitBoard(ball);
                 respawnBall(ball);
             }
@@ -205,7 +203,7 @@ public class Board implements IBoard, IPowerUp {
                 if ( ball.distance(brick.getBody()) < DISTANCE_TOLERANCE) {
                     notifyBallHitBrick(ball, brick);
                     untangleBall(ball);
-                    bounceBall(ball, Collision.getRectDeflectionAngle(
+                    bounceBall(ball, collision.getRectDeflectionAngle(
                             ball.getX(), ball.getY(), brick.getX(), brick.getY(), brick.getWidth(), brick.getHeight()));
                     brick.markDestroyed();
                 }
@@ -215,7 +213,7 @@ public class Board implements IBoard, IPowerUp {
                     notifyBallHitPlayerPad(ball, player);
                     untangleBall(ball);
                     Pad pad = player.getPad();
-                    bounceBall(ball, Collision.getRectDeflectionAngle(
+                    bounceBall(ball, collision.getRectDeflectionAngle(
                             ball.getX(), ball.getY(), pad.getPadXPos(), pad.getPadYPos(), pad.getWidth(), pad.getLength()));
                 }
             }
@@ -223,7 +221,7 @@ public class Board implements IBoard, IPowerUp {
                 if (!ball.equals(otherBall) && ball.distance(otherBall.getBody()) < DISTANCE_TOLERANCE) {
                     notifyBallHitBall(ball, otherBall);
                     untangleBall(ball);
-                    bounceBall(ball, Collision.getCircleDeflectionAngle(ball.getX(), ball.getY(), otherBall.getX(), otherBall.getY()));
+                    bounceBall(ball, collision.getCircleDeflectionAngle(ball.getX(), ball.getY(), otherBall.getX(), otherBall.getY()));
                 }
             }
             ball.move(0.01f);

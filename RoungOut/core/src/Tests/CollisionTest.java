@@ -31,6 +31,8 @@ class CollisionTest {
     private static final float BALL2_ANGLE = (float)Math.PI;    // Left
     private static final float BALL2_SPEED = 5f;
 
+    private Collision collision = new Collision();
+
     private Board board;
     private Ball ball;
     private Ball ball2;
@@ -53,7 +55,7 @@ class CollisionTest {
         int collisions = 0;
         for (int a = 0; a < 270; a++) {
             ball.setAngle( (float)Math.toRadians(a) );
-            if ( !Float.isNaN(Collision.estimateBrickCollision(ball, brick)) ) {
+            if ( !Float.isNaN(collision.estimateBrickCollision(ball, brick)) ) {
                 collisions++;
             }
         }
@@ -70,7 +72,7 @@ class CollisionTest {
         int collisions = 0;
         for (int a = 271; a < 359; a++) {
             ball.setAngle( (float)Math.toRadians(a) );
-            if ( !Float.isNaN(Collision.estimateBrickCollision(ball, brick)) ) {
+            if ( !Float.isNaN(collision.estimateBrickCollision(ball, brick)) ) {
                 collisions++;
             }
         }
@@ -88,7 +90,7 @@ class CollisionTest {
             ball.setAngle( (float)Math.toRadians(a) );
             ball.setPosition( BALL1_XPOS, BALL1_YPOS );     // Reset position each iteration.
 
-            float timeUntilCollision = Collision.estimateBrickCollision(ball, brick);
+            float timeUntilCollision = collision.estimateBrickCollision(ball, brick);
             if ( !Float.isNaN(timeUntilCollision) ) {
                 atleastOneCollisionFound = true;
 
@@ -122,19 +124,19 @@ class CollisionTest {
             ball.setAngle(a);
 
             // Estimate time until ball exit board.
-            float time = Collision.estimateBallGone(board, ball);
+            float time = collision.estimateBallGone(board, ball);
 
             // Make sure ball inside board before move.
             Assertions.assertTrue( time > 0);
-            Assertions.assertFalse( Collision.isBallOutsideBoard(board, ball) );
+            Assertions.assertFalse( collision.isBallOutsideBoard(board, ball) );
 
             // Move ball very close to the board edge and check if still inside.
             ball.move(time - 1f);
-            Assertions.assertFalse( Collision.isBallOutsideBoard(board, ball) );
+            Assertions.assertFalse( collision.isBallOutsideBoard(board, ball) );
 
             // Move ball slightly and see see if ball now outside board.
             ball.move(1f);
-            Assertions.assertTrue( Collision.isBallOutsideBoard(board, ball) );
+            Assertions.assertTrue( collision.isBallOutsideBoard(board, ball) );
 
         }
 
