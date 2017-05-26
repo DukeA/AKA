@@ -1,6 +1,10 @@
 package Controller;
 
+import AbstractGameComponents.AMenuController;
+import AbstractGameComponents.AGame;
 import IViews.IViews;
+import View.MenuView.OptionView;
+import View.ObjectView.BoardView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -10,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by Alex on 2017-05-13.
  */
-public class MenuController extends ClickListener implements IControllHandeling {
+public class MenuController extends AMenuController implements IControllHandeling  {
 
     ClickListener tmp = new ClickListener();
     //List that contains the views that this controller interacts with
@@ -23,11 +27,24 @@ public class MenuController extends ClickListener implements IControllHandeling 
     private final EnumIndexes typeOfMenu = EnumIndexes.MENU_CONTROLLER;
 
 
+
     private String latestKey = " ";//init with blank
     public String latestKeyPressed()
     {
         //Used for debug
         return latestKey;
+    }
+    public void playButtonIsPressed(int Width, int Height, AGame game){
+        BoardView view = new BoardView(Width, Height,game);
+        game.setScreen(view);
+
+    }
+    public void optionsButtonIsPressed( int Width, int Height,AGame game) {
+        OptionView view  = new OptionView(Width, Height,game);
+        game.setScreen(view);
+    }
+    public void exitButtonIsPressed() {
+        Gdx.app.exit();
     }
 
     @Override
@@ -38,9 +55,8 @@ public class MenuController extends ClickListener implements IControllHandeling 
         latestKey = Input.Keys.toString(keycode);
 
         if (keycode== Input.Keys.ESCAPE){
-            handler.callSetNewInput(EnumIndexes.GAME_CONTROLLER);
             //IF ESC -> Go back to the game
-            updateAllViews();
+            Gdx.app.exit();
         }
 
         return true;
@@ -89,12 +105,8 @@ public class MenuController extends ClickListener implements IControllHandeling 
     }
     //End of these inputs
 
-
-    public MenuController(ArrayList<IViews> viewSubscribers, IHandler handler) {
-        this.viewSubscribers = viewSubscribers;
-
+    public MenuController(ArrayList<IViews> views, IHandler handler) {
         this.handler = handler;
-
-
+        this.viewSubscribers=views;
     }
 }

@@ -4,6 +4,8 @@ package Model.GameObjects;
 import Model.Collision.Collision;
 import Model.Collision.CollisionObserver;
 import Model.GameObjects.Physics.Body;
+import Model.GameObjects.Physics.CircleBody;
+
 import java.util.*;
 
 /**
@@ -23,7 +25,7 @@ public class Board implements IBoard, IPowerUp {
     private final Collision collision;
     private final float xPos;
     private final float yPos;
-
+    private CircleBody board;
     // Last ball added serves as a model for new balls spawned.
     private Ball lastBallSpawned;
 
@@ -52,13 +54,62 @@ public class Board implements IBoard, IPowerUp {
         xPos = width / 2;
         yPos = height / 2;
         radius = height/2+100;
+        board = new CircleBody(xPos,yPos,radius);
         balls = new HashSet<Ball>();
         bricks = new HashSet<Brick>();
         players = new ArrayList<Player>();
         collision = new Collision();
         observers = new HashSet<CollisionObserver>();
+//<<<<<<< HEAD
         createSampleBoard();
         nextCollisionTime = collision.estimateNextCollision(this);
+/*=======
+        nextCollisionTime = Collision.estimateNextCollision(this);
+        createSampleBoard(WIDTH, HEIGHT);
+    }
+
+    // TODO Temporary mock data
+    public void createSampleBoard(int WIDTH, int HEIGHT) {
+        float PadLength =80f;
+        float PadWidth =30f;
+        float BrickWidth =30f;
+        float BrickLength =30f;
+        float BallRdius = 30f;
+        this.addPlayer(new Player(PadLength, PadWidth, WIDTH/2,HEIGHT/2,
+                WIDTH / 2 - 350, HEIGHT / 2, 1));
+        this.addPlayer(new Player(PadLength, PadWidth,WIDTH/2,HEIGHT/2,
+                WIDTH / 2 - 450, HEIGHT / 2, 1));
+
+
+        this.addBrick(new Brick(WIDTH / 2 - 40-BrickWidth/2, HEIGHT / 2-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2 - 40-BrickWidth/2, HEIGHT / 2-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2-BrickWidth/2, HEIGHT / 2-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new SDownBrick(WIDTH / 2 + 40-BrickWidth/2, HEIGHT / 2-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2 - 40-BrickWidth/2, HEIGHT / 2 - 40-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2-BrickWidth/2, HEIGHT / 2 - 40-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2 + 40-BrickWidth/2, HEIGHT / 2 - 40-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new SUpBrick(WIDTH / 2 - 40-BrickWidth/2, HEIGHT / 2 + 40-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2-BrickWidth/2, HEIGHT / 2 + 40-BrickLength/2
+                , BrickWidth, BrickLength));
+        this.addBrick(new Brick(WIDTH / 2 + 40-BrickWidth/2, HEIGHT / 2 + 40-BrickLength/2
+                , BrickWidth, BrickLength));
+
+        this.addBall(new Ball(WIDTH / 2 - 250-BallRdius/2, HEIGHT / 2 + 20-BallRdius/2
+                , BallRdius, 1, 100));
+    }
+
+    private float correctAngle(float radians) {
+        while (radians < 0) radians += Math.PI * 2f;
+        return radians % (float)(Math.PI * 2f);
+>>>>>>> Change_Controller*/
     }
 
     /**

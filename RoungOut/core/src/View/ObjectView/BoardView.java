@@ -1,6 +1,6 @@
 package View.ObjectView;
 
-import AbstractGame.AGame;
+import AbstractGameComponents.AGame;
 import IViews.IViews;
 import Model.GameObjects.Board;
 import Model.GameObjects.IBoard;

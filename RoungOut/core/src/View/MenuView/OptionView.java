@@ -1,6 +1,7 @@
 package View.MenuView;
 
-import AbstractGame.AGame;
+import AbstractGameComponents.AOptionsController;
+import AbstractGameComponents.AGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -10,7 +11,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
+import java.util.ArrayList;
 
 /**
  * Created by DukeA on 2017-05-05.
@@ -29,20 +31,24 @@ public class OptionView implements Screen{
     private Stage stage;
     private BitmapFont font;
     private AGame game;
+    private AOptionsController controller;
 
-    private MenuView menuView;
 
-    private CheckBox[] box;
-    private CheckBox[] muteBox;
+    private  InputEvent event;
+
+    private ArrayList<CheckBox> box;
+    private ArrayList<CheckBox>muteBox;
 
     public OptionView(int WIDTH, int HEIGHT , AGame game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
         this.game = game;
         this.skin = new Skin(Gdx.files.internal("uiskin.json"));
-        font = new BitmapFont();
-        stage = new Stage();
-        batch = new SpriteBatch();
+        this.font = new BitmapFont();
+        this.stage = new Stage();
+        this.batch = new SpriteBatch();
+        this.event = new InputEvent();
+        this.controller = game.getOptionsController();
 
     }
 
@@ -55,8 +61,8 @@ public class OptionView implements Screen{
         resArea = new Window("Resolution",skin);
         muteArea = new Window("Mute",skin);
         keyArea = new Window("Key Change",skin);
-        box = new CheckBox [3];
-        muteBox = new CheckBox[2];
+        box = new ArrayList<CheckBox>();
+        muteBox = new ArrayList<CheckBox>();
         label = new Label("Options",skin);
 
 
@@ -68,10 +74,11 @@ public class OptionView implements Screen{
         resArea.setMovable(false);
         keyArea.setMovable(false);
         muteArea.setMovable(false);
-        for (int i =0; i<box.length; i++) {
-            box[i] = new CheckBox("",skin);
-            resArea.add(box[i]);
+        for (int i =0; i<4; i++) {
+            box.add(new CheckBox("",skin));
+            resArea.add(box.get(i));
         }
+/*<<<<<<< HEAD
         box[0].setText("1980 X 1080");
         box[0].addListener(new ClickListener(){
             @Override
@@ -80,58 +87,35 @@ public class OptionView implements Screen{
 
             }
         });
+=======*/
+        box.get(0).setText("1950 X 1080");
+//>>>>>>> Change_Controller
 
 
-        box[1].setText("720 X 420");
-        box[1].addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                System.out.println("Pressed 720 option");
+        box.get(1).setText("720 X 420");
 
-            }
-        });
+        box.get(2).setText("1280 X 720");
 
-        box[2].setText("1280 X 720");
-        box[2].addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                System.out.println("Pressed 1280 option");
-            }
-        });
+
+        box.get(3).setText("1680 X 1050");
 
 
         table.row();
         table.add(muteArea).width(400).height(100);
-        muteArea.add(muteBox);
-        for (int i =0; i<muteBox.length; i++) {
-            muteBox[i] = new CheckBox("",skin);
-            muteArea.add(muteBox[i]);
+        for (int i =0; i<2; i++) {
+            muteBox.add(new CheckBox("",skin));
+            muteArea.add(muteBox.get(i));
         }
-        muteBox[0].setText("Yes");
-        muteBox[0].addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                System.out.println("Pressed Yes");
-            }
-        });
+        muteBox.get(0).setText("Yes");
 
 
-        muteBox[1].setText("No");
-        muteBox[1].addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                System.out.println("Pressed No");
-            }
-        });
+        muteBox.get(1).setText("No");
 
 
 
         table.row();
         table.add(keyArea).width(400).height(100);
         stage.addActor(table);
-
-
-
 
     }
 
@@ -146,16 +130,25 @@ public class OptionView implements Screen{
         stage.draw();
         batch.end();
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            menuView = new MenuView(WIDTH,HEIGHT, game);
-            game.setScreen(menuView);
+        for (CheckBox box: box) {
+            if (box.isPressed()) {
+                controller.boxClicked(WIDTH,HEIGHT,box,game);
+            }
+        }
+        for (CheckBox muteBox : muteBox) {
+            if (muteBox.isPressed()) {
+                controller.muteBoxClicked(muteBox,game);
+
+            }
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            controller.escapeClicked(WIDTH,HEIGHT,game);
         }
 
     }
 
     @Override
     public void resize(int width, int height) {
-
     }
 
     @Override

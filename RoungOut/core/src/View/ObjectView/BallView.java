@@ -40,11 +40,18 @@ public class BallView implements IViews {
             }
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             shapeRenderer.setColor(Color.RED);
+//<<<<<<< HEAD
             shapeRenderer.ellipse(
                     ball.getX() - drawRadius,
                     ball.getY() - drawRadius,
                     drawRadius * 2,
                     drawRadius * 2);
+/*=======
+            shapeRenderer.ellipse(ball.getX()
+                    , ball.getY()
+                    , ball.getRadius() * ((WIDTH / 2) / (HEIGHT / 2))
+                    , ball.getRadius() * ((WIDTH / 2) / (HEIGHT / 2)));
+>>>>>>> Change_Controller*/
             shapeRenderer.end();
         }
     }

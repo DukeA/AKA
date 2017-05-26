@@ -1,6 +1,7 @@
 package View.MenuView;
 
-import AbstractGame.AGame;
+import AbstractGameComponents.AMenuController;
+import AbstractGameComponents.AGame;
 import View.ObjectView.BoardView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -10,10 +11,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
  * Created by DukeA on 2017-04-28.
@@ -22,18 +21,17 @@ public class MenuView  implements IHeadView, Screen {
 
     private int WIDTH;
     private int HEIGHT;
-    private BoardView view;
-    private OptionView optionView;
     private AGame game;
     private OrthographicCamera camera;
     private Stage stage;
     private SpriteBatch batch;
     private BitmapFont font;
     private Table table;
-    private TextButton playButton;
-    private TextButton optionsButton;
-    private TextButton exitButton;
+    private Button playButton;
+    private Button optionsButton;
+    private Button exitButton;
     private TextureRegion Texture;
+    private AMenuController controller;
     private Skin skin;
 
 
@@ -45,6 +43,7 @@ public class MenuView  implements IHeadView, Screen {
         this.font = new BitmapFont();
         this.stage = new Stage();
         this.camera = new OrthographicCamera(WIDTH, HEIGHT);
+        this.controller = game.getMenuController();
     }
 
     @Override
@@ -64,46 +63,25 @@ public class MenuView  implements IHeadView, Screen {
         playButton.setWidth(200f);
         playButton.setHeight(30f);
         playButton.setPosition(WIDTH / 2, HEIGHT / 2);
-        playButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                game.getScreen().hide();
-                game.getScreen().dispose();
-                view = new BoardView(WIDTH,HEIGHT, game);
-                game.setScreen(view);
-            }
+        //playButton.addListener();
 
-        });
+
 
         optionsButton = new TextButton("Options"
                 , skin, "default");
         optionsButton.setWidth(200f);
         optionsButton.setHeight(20f);
         optionsButton.setPosition(WIDTH / 2, HEIGHT / 2);
-        optionsButton.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                game.getScreen().hide();
-                game.getScreen().dispose();
-                optionView = new OptionView(WIDTH,HEIGHT,game);
-                game.setScreen(optionView);
-            }
+        //optionsButton.addListener();
 
-        });
 
         exitButton = new TextButton("Exit",
                 skin, "default");
         exitButton.setWidth(200f);
         exitButton.setHeight(20f);
         exitButton.setPosition(WIDTH / 2, HEIGHT / 2);
-        exitButton.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                Gdx.app.exit();
-            }
+        //exitButton.addListener();
 
-
-        });
 
         table.add(image).width(700).height(400);
         table.row();
@@ -131,10 +109,17 @@ public class MenuView  implements IHeadView, Screen {
 
         batch.begin();
         stage.draw();
-
-
         batch.end();
 
+        if (playButton.isPressed()) {
+            controller.playButtonIsPressed(WIDTH,HEIGHT,game);
+        }
+        if (optionsButton.isPressed()) {
+            controller.optionsButtonIsPressed(WIDTH,HEIGHT,game);
+        }
+        if (exitButton.isPressed()) {
+            controller.exitButtonIsPressed();
+        }
     }
 
     @Override

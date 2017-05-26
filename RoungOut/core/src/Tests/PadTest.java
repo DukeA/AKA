@@ -54,14 +54,32 @@ public class PadTest {
         float oldX = pad.getPadXPos();
         float oldY = pad.getPadYPos();
 
+        double rot = 1.0/180.0*Math.PI;
+        double cs = Math.cos(rot);
+        double sn = Math.sin(rot);
+
+        double translated_x = oldX - originX;
+        double translated_y = oldY - originY;
+
+        double result_x = translated_x * cs - translated_y * sn;
+        double result_y = translated_x * sn + translated_y * cs;
+
+        result_x += originX;
+        result_y += originY;
+
+
+
         // Get the next X and Y coordinate
-        float newX = pad.getPadXPos() + pad.getPadSpeed(); //Verifying the next position
-        float newY = pad.getPadYPos() + pad.getPadSpeed();
+        float newX = (float) result_x; //Verifying the next position
+        float newY = (float) result_y;
 
         pad.padMoveRight(); //move the pad with regards to the speed variable
         //Check that the pad has moved
         Assertions.assertEquals(pad.getPadXPos() , newX);
         Assertions.assertEquals(pad.getPadYPos() , newY);
+
+        
+
 
         pad.padMoveLeft(); //move the otherway
         Assertions.assertEquals(pad.getPadXPos() , oldX);
