@@ -124,14 +124,14 @@ class CollisionTest {
             ball.setAngle(a);
 
             // Estimate time until ball exit board.
-            float time = collision.estimateBallGone(board, ball);
+            double time = collision.estimateBallGone(board, ball);
 
             // Make sure ball inside board before move.
             Assertions.assertTrue( time > 0);
             Assertions.assertFalse( collision.isBallOutsideBoard(board, ball) );
 
             // Move ball very close to the board edge and check if still inside.
-            ball.move(time - 1f);
+            ball.move((float)time - 1f);
             Assertions.assertFalse( collision.isBallOutsideBoard(board, ball) );
 
             // Move ball slightly and see see if ball now outside board.
