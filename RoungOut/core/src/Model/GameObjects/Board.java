@@ -80,7 +80,7 @@ public class Board implements IBoard, IPowerUp {
         this.addBrick(new Brick(WIDTH / 2 + 40-brickWidth/2, HEIGHT / 2 + 40-brickHeight/2
                 , brickWidth, brickHeight));
 
-        this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 20f, -0.05f, 300));
+        this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 20f, (float)Math.random()-0.5f, 300));
     }
 
     private float correctAngle(float radians) {
@@ -123,6 +123,10 @@ public class Board implements IBoard, IPowerUp {
             if (deltaTime > 0) {
                 handleCollisions();
                 nextCollisionTime = collision.estimateNextCollision(this);
+
+                if (nextCollisionTime < 0.001f) {
+                    untangleBalls();
+                }
             }
         }
     }
@@ -226,15 +230,38 @@ public class Board implements IBoard, IPowerUp {
                     bounceBall(ball, (float)collision.getCircleDeflectionAngle(ball.getX(), ball.getY(), otherBall.getX(), otherBall.getY()));
                 }
             }
-            ball.move(0.01f);
+            //ball.move(0.01f);
         }
+    }
+
+    public void untangleBalls() {
+        for (Ball ball : balls) {
+            ball.move(0.05f);
+        }
+    }
+
+    public void moveBallRandomly(Ball ball, float distance) {
+
+        double a = 2*Math.PI + Math.random();
+        ball.setPosition(
+                xPos + distance * (float)Math.cos(a),
+                yPos + distance * (float)Math.sin(a));
+
+        ball.setAngle((float)(a + Math.PI + Math.random() - 0.5f));
+    }
+
+    public float distanceFromCenter(Ball ball) {
+        double dx = ball.getX() - xPos;
+        double dy = ball.getY() - yPos;
+        return (float)Math.sqrt(dx*dx+dy*dy);
     }
 
     public void respawnBall(Ball oldBall) {
         Ball newBall = new Ball(lastBallSpawned);
-        newBall.setAngle(lastBallSpawned.getAngle() + (float)Math.random());
+        moveBallRandomly(newBall, radius * 0.5f);
         balls.remove(oldBall);
         addBall(newBall);
+        nextCollisionTime = collision.estimateNextCollision(this);
     }
 
     // Untangle ball after a collision occurred.
@@ -255,14 +282,11 @@ public class Board implements IBoard, IPowerUp {
         if (aDiff > 0 || aDiff < -Math.PI) {
             // If ball is deflected, set a new angle.
             ball.setAngle( ball.getAngle() + 2f * aDiff );
-            System.out.printf("Ball deflected from %.3f to %.3f degrees\n", a1, a2);
-        }
-        else {
-            System.out.printf("Ball at %.3f degrees, not deflected (deflection angle = %.3f)\n", a1, Math.toDegrees(deflectionAngle));
         }
     }
 
     public void notifyBallExitBoard(Ball ball) {
+        System.out.println("Notify: Ball gone");
         for (CollisionObserver observer : observers) {
             observer.onBallExitBoard(ball);
         }

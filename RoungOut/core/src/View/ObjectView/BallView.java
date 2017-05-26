@@ -11,31 +11,40 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
  */
 public class BallView implements IViews {
 
-    private Board ball;
+    private Board board;
     private ShapeRenderer shapeRenderer;
     private int WIDTH;
     private int HEIGHT;
 
+    float maxBallDistance;
 
     public BallView(int WIDTH, int HEIGHT, ShapeRenderer renderer,Board board) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
         this.shapeRenderer = renderer;
-        ball = board;
-
+        this.board = board;
+        maxBallDistance = board.getRadius() * 0.75f;
     }
 
     @Override
     public void render(float delta) {
-        for (Ball ball: ball.getBalls()) {
+        for (Ball ball: board.getBalls()) {
             update(delta);
+
+            // Default draw radius is ball's radius.
+            float drawRadius = ball.getRadius();
+            float distance = board.distanceFromCenter(ball);
+            if (distance > maxBallDistance) {
+                // If ball past a certain distance, reduce it's size.
+                drawRadius = ball.getRadius() * (float)Math.pow(maxBallDistance / distance, 2);
+            }
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             shapeRenderer.setColor(Color.RED);
             shapeRenderer.ellipse(
-                    ball.getX() - ball.getRadius(),
-                    ball.getY() - ball.getRadius(),
-                    ball.getRadius() * 2,
-                    ball.getRadius() * 2);
+                    ball.getX() - drawRadius,
+                    ball.getY() - drawRadius,
+                    drawRadius * 2,
+                    drawRadius * 2);
             shapeRenderer.end();
         }
     }
