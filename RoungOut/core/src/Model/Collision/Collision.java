@@ -267,7 +267,7 @@ public class Collision {
      * @param totalRadius the total added radius of the circles.
      * @return estimated time until collision. NaN if no collision course.
      */
-    public double estimateCircleCollisions(double relX, double relY,
+    private double estimateCircleCollisions(double relX, double relY,
                                            double dx, double dy,
                                            double totalRadius) {
         // Look up quadratic formula for the calculations below.
