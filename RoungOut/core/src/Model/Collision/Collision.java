@@ -20,11 +20,11 @@ public class Collision {
      * @param circleY2 center Y position of second circle.
      * @return angle of deflection between closest points of both circles.
      */
-    public double getCircleDeflectionAngle(float circleX1, float circleY1,
-                                           float circleX2, float circleY2) {
+    public double getCircleDeflectionAngle(double circleX1, double circleY1,
+                                           double circleX2, double circleY2) {
         // Calculate angle of deflection. Assuming circles do not intersect.
         return (Math.atan2( circleY1 - circleY2, circleX1 - circleX2 )
-                + Math.PI/2)%(2*Math.PI);
+                + 5*Math.PI/2)%(2*Math.PI);
     }
 
     /**
@@ -46,9 +46,8 @@ public class Collision {
         double recEdgeY = recY + Math.min(recH/2,
                                           Math.max(-recH/2, pY - recY));
         // Calculate angle of deflection.
-        double angle = (Math.atan2( recEdgeY-pY, recEdgeX-pX )
-                + Math.PI/2)%(2*Math.PI);
-        return angle;
+        return (Math.atan2( recEdgeY-pY, recEdgeX-pX )
+                + 5*Math.PI/2)%(2*Math.PI);
     }
 
     /**
