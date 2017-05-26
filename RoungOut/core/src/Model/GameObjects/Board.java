@@ -363,13 +363,13 @@ public class Board implements IBoard, IPowerUp {
     private void bounceBall(Ball ball, float deflectionAngle) {
         // Check if ball and deflection angle are less than 180.
         deflectionAngle = correctAngle(deflectionAngle);
-        float aDiff = deflectionAngle - ball.getAngle();
-        float a1 = (float)Math.toDegrees(ball.getAngle());
-        float a2 = (float)Math.toDegrees(  (ball.getAngle() + 2f * aDiff) % (2f*Math.PI) );
+        float aDiff = deflectionAngle - ball.getDirection();
+        float a1 = (float)Math.toDegrees(ball.getDirection());
+        float a2 = (float)Math.toDegrees(  (ball.getDirection() + 2f * aDiff) % (2f*Math.PI) );
         // Only bounce if the angle diffrence are within a given range.
         if (aDiff > 0 || aDiff < -Math.PI) {
             // If ball is deflected, set a new angle.
-            ball.setAngle( ball.getAngle() + 2f * aDiff );
+            ball.setDirection( ball.getDirection() + 2f * aDiff );
         }
     }
 
@@ -454,7 +454,7 @@ public class Board implements IBoard, IPowerUp {
                 xPos + distance * (float)Math.cos(a),
                 yPos + distance * (float)Math.sin(a));
         // Set a random direction heading back towards the board.
-        ball.setAngle((float)(a + Math.PI + Math.random() - 0.5f));
+        ball.setDirection((float)(a + Math.PI + Math.random() - 0.5f));
     }
 
     /**

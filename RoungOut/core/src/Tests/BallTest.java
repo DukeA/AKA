@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * Created by kendu on 2017-04-29.
  */
@@ -34,7 +32,7 @@ class BallTest {
 
         //GetAngle
         double expectedAngle = (ANGLE + 8f*Math.PI) % (2f*Math.PI);
-        Assertions.assertEquals(expectedAngle, ball.getAngle(), THRESHOLD);
+        Assertions.assertEquals(expectedAngle, ball.getDirection(), THRESHOLD);
 
         //GetSpeed
         Assertions.assertEquals(SPEED, ball.getSpeed(), THRESHOLD);
@@ -59,8 +57,8 @@ class BallTest {
         float minAngle = -maxAngle;
         for (float a = minAngle; a < maxAngle; a += maxAngle/64f) {
             float expectedAngle = (float) ((a + 8f*Math.PI) % (2f*Math.PI));
-            ball.setAngle(a);
-            Assertions.assertEquals(expectedAngle, ball.getAngle(), THRESHOLD);
+            ball.setDirection(a);
+            Assertions.assertEquals(expectedAngle, ball.getDirection(), THRESHOLD);
         }
     }
 

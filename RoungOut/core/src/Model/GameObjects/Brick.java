@@ -1,6 +1,5 @@
 package Model.GameObjects;
 
-import Model.GameObjects.IModel;
 import Model.GameObjects.Physics.*;
 
 /**
@@ -53,7 +52,7 @@ public class Brick implements IModel, IBrick {
     }
 
     public float getAngle() {
-        return body.getAngle();
+        return body.getDirection();
     }
 
     public float getSpeed() {
@@ -77,7 +76,7 @@ public class Brick implements IModel, IBrick {
     }
 
     public void setAngle(float radians) {
-        body.setAngle(radians);
+        body.setDirection(radians);
     }
 
     public void setSpeed(float speed) {

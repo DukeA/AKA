@@ -127,7 +127,7 @@ class CollisionTest {
         for (double angle=0; angle < 2*Math.PI; angle+=Math.PI/32) {
             // Reset position and set angle at each iteration.
             ball.setPosition(BALL1_XPOS, BALL1_YPOS);
-            ball.setAngle((float)angle);
+            ball.setDirection((float)angle);
 
             // Estimate time until ball exit board.
             double time = collision.estimateBallGone(board, ball);
@@ -177,7 +177,7 @@ class CollisionTest {
 
             int collisions = 0;
             for (int a = fromAngle; a < toAngle; a += steps) {
-                ball.setAngle((float) Math.toRadians(a));
+                ball.setDirection((float) Math.toRadians(a));
                 if (!Double.isNaN(collision.estimateBrickCollision(ball, brick))) {
                     collisions++;
                 }
@@ -207,7 +207,7 @@ class CollisionTest {
             boolean atleastOneCollisionFound = false;
             for (int a = 271; a < 359; a++) {
                 // Reset ball angle and position each iteration.
-                ball.setAngle((float) Math.toRadians(a));
+                ball.setDirection((float) Math.toRadians(a));
                 ball.setPosition(BALL1_XPOS, BALL1_YPOS);
 
                 // Estimate time until next collision,
