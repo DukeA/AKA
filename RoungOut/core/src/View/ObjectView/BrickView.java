@@ -31,6 +31,7 @@ public class BrickView implements IViews {
         for (Brick brick : board.getBricks()) {
 
             if (brick.isDestroyed()) {
+                /*
                 shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
                 shapeRenderer.setColor(Color.LIGHT_GRAY);
                 shapeRenderer.rect(
@@ -39,6 +40,7 @@ public class BrickView implements IViews {
                         brick.getWidth(),
                         brick.getHeight());
                 shapeRenderer.end();
+                */
             }
             else {
                 shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
