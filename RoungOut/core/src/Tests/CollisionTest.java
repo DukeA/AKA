@@ -237,4 +237,55 @@ class CollisionTest {
         }
     }
 
+    @Test
+    @DisplayName("Test collision between moving balls")
+    public void movingBallCollisions() {
+        // Test moving both balls in various angles
+
+        int collisionCount = 0;
+        for (double angle1=0; angle1 < 2*Math.PI; angle1++) {
+            for (double angle2=0; angle2 < 2*Math.PI; angle2++) {
+
+                // Reset ball positions each iteration.
+                ball.setPosition(BALL1_XPOS, BALL1_YPOS);
+                ball2.setPosition(BALL2_XPOS, BALL2_YPOS);
+
+                // Get estimated collision time.
+                // Only test when we have an actual estimation, != NaN.
+                double time = collision.estimateBallCollision(ball, ball2);
+                if (Double.isNaN(time))
+                    continue;
+
+                collisionCount++;
+                ball.move((float)time);
+                ball2.move((float)time);
+
+                // Calculate circle distance.
+                double dx = ball.getX() - ball2.getX();
+                double dy = ball.getY() - ball2.getY();
+                double totRadius = ball.getRadius() + ball2.getRadius();
+                double distance = Math.sqrt(dx*dx+dy*dy)-totRadius;
+
+                // Expect distance to be (close enough to) zero.
+                Assertions.assertTrue( distance < THRESHOLD);
+
+            }
+        }
+        // Expect at least one collision being tested above.
+        Assertions.assertTrue( collisionCount > 0);
+    }
+
+    @Nested
+    @DisplayName("Test pad collisions")
+    class PadCollisons {
+
+        @Test
+        @DisplayName("NOT YET IMPLEMENTED - Estimate pad collision distance")
+        public void estimatePadDistance() {
+
+            Assertions.fail("Not yet implemented");
+
+        }
+
+    }
 }
