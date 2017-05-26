@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * @author Ken Bäcklund
  */
@@ -37,7 +35,7 @@ class RectangleBodyTest {
         Assertions.assertEquals(WIDTH, body.getWidth(), THRESHOLD);
         Assertions.assertEquals(HEIGHT, body.getHeight(), THRESHOLD);
         double expectedAngle = (ANGLE + 8f*Math.PI) % (2f*Math.PI);
-        Assertions.assertEquals(expectedAngle, body.getAngle(), THRESHOLD);
+        Assertions.assertEquals(expectedAngle, body.getDirection(), THRESHOLD);
         Assertions.assertEquals(SPEED, body.getSpeed(), THRESHOLD);
     }
 
@@ -73,8 +71,8 @@ class RectangleBodyTest {
         float minAngle = -maxAngle;
         for (float a = minAngle; a < maxAngle; a += maxAngle/32f) {
             double expectedAngle = (a + 8f*Math.PI) % (2f*Math.PI);
-            body.setAngle(a);
-            Assertions.assertEquals(expectedAngle, body.getAngle(), THRESHOLD);
+            body.setDirection(a);
+            Assertions.assertEquals(expectedAngle, body.getDirection(), THRESHOLD);
         }
     }
 

@@ -27,7 +27,7 @@ public class CircleBody implements Body {
 
     //Clone constructor
     public CircleBody(CircleBody c) {
-        this(c.getX(), c.getY(), c.getRadius(), c.getAngle(), c.getSpeed());
+        this(c.getX(), c.getY(), c.getRadius(), c.getDirection(), c.getSpeed());
     }
     // Getters ////////////////////////////////////////////////////////////////
     @Override
@@ -49,7 +49,7 @@ public class CircleBody implements Body {
     }
 
     @Override
-    public float getAngle() {
+    public float getDirection() {
         return location.getAngle();
     }
 
@@ -91,7 +91,7 @@ public class CircleBody implements Body {
     }
 
     @Override
-    public void setAngle(float radians) {
+    public void setDirection(float radians) {
         location.setAngle(radians);
     }
 

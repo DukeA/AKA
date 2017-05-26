@@ -3,8 +3,6 @@ package Model.GameObjects;
 
 import Model.GameObjects.Physics.Body;
 import Model.GameObjects.Physics.RectangleBody;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector;
 
 
 /**
@@ -57,7 +55,7 @@ public class Pad {
         return body.getSpeed();
     }
 
-    public float getAngle(){return body.getAngle();}
+    public float getAngle(){return body.getDirection();}
 
     public Body getBody() {
         return body;
@@ -96,7 +94,7 @@ public class Pad {
         this.body.setSpeed(padSpeed);
         this.originY = originY;
         this.originX =originX;
-        this.body.setAngle(0);
+        this.body.setDirection(0);
     }
 
     //Method: Moves by incrementing the x and y pos with it's speed

@@ -75,7 +75,7 @@ public class RectangleBody implements Body {
     }
 
     @Override
-    public float getAngle() {
+    public float getDirection() {
         return location.getAngle();
     }
 
@@ -111,7 +111,7 @@ public class RectangleBody implements Body {
     }
 
     @Override
-    public void setAngle(float radians) {
+    public void setDirection(float radians) {
         location.setAngle(radians);
     }
 

@@ -31,17 +31,25 @@ public class BrickView implements IViews {
         for (Brick brick : board.getBricks()) {
 
             if (brick.isDestroyed()) {
+                /*
                 shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
                 shapeRenderer.setColor(Color.LIGHT_GRAY);
-                shapeRenderer.rect((float)brick.getX(),(float)brick.getY(),
-                        brick.getWidth(),brick.getHeight());
+                shapeRenderer.rect(
+                        brick.getX() - brick.getWidth()/2,
+                        brick.getY() - brick.getHeight()/2,
+                        brick.getWidth(),
+                        brick.getHeight());
                 shapeRenderer.end();
+                */
             }
             else {
                 shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
                 shapeRenderer.setColor(Color.DARK_GRAY);
-                shapeRenderer.rect((float)brick.getX(),(float)brick.getY(),
-                        brick.getWidth(),brick.getHeight());
+                shapeRenderer.rect(
+                        brick.getX() - brick.getWidth()/2,
+                        brick.getY() - brick.getHeight()/2,
+                        brick.getWidth(),
+                        brick.getHeight());
                 shapeRenderer.end();
             }
 
