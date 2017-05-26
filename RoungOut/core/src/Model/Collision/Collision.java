@@ -3,6 +3,8 @@ package Model.Collision;
 import Model.GameObjects.*;
 import Model.GameObjects.Physics.RectangleBody;
 
+import java.util.Collection;
+
 /**
  * Collision methods between board, ball, bricks, and pads.
  *
@@ -12,69 +14,114 @@ public class Collision {
 
     // Public methods /////////////////////////////////////////////////////////
 
-    public float getCircleDeflectionAngle(float circleX1, float circleY1, float circleX2, float circleY2) {
-        return (float)(Math.atan2(
-                circleY1 - circleY2, circleX1 - circleX2 ) + Math.PI/2f);
+    /**
+     * Get the deflection angle between two circles
+     * @param circleX1 center X position of first circle.
+     * @param circleY1 center Y position of first circle.
+     * @param circleX2 center X position of second circle.
+     * @param circleY2 center Y position of second circle.
+     * @return angle of deflection between closest points of both circles.
+     */
+    public double getCircleDeflectionAngle(float circleX1, float circleY1,
+                                           float circleX2, float circleY2) {
+        // Calculate angle of deflection. Assuming circles do not intersect.
+        return (Math.atan2( circleY1 - circleY2, circleX1 - circleX2 )
+                + Math.PI/2)%(2*Math.PI);
     }
 
-    public float getRectDeflectionAngle(float px, float py, float recX, float recY, float recW, float recH) {
-        float xCollision = recX + Math.min(recW/2f, Math.max(-recW/2f, px - recX));
-        float yCollision = recY + Math.min(recH/2f, Math.max(-recH/2f, py - recY));
-        float angle = (float)( (Math.atan2( yCollision-py, xCollision-px ) + Math.PI/2f)%(2f*Math.PI) );
-        /*System.out.printf("P(x=%.3f, y=%.3f), R(x1=%.3f, y1=%.3f, x2=%.3f, y2=h%.3f), angle=%.3f\n",
-                px, py,
-                recX - recW/2, recY - recH/2,
-                recX + recW/2, recY + recH/2,
-                Math.toDegrees(angle) ); */
+    /**
+     * Get the deflection angle between a point and a rectangle.
+     * @param pX X position of a point.
+     * @param pY Y position of a point.
+     * @param recX rectangle's center X position.
+     * @param recY rectangle's center Y position.
+     * @param recW width of the rectangle.
+     * @param recH height of the rectangle.
+     * @return angle of deflection between point and edge of the rectangle.
+     */
+    public double getRectangleDeflectionAngle(float pX, float pY,
+                                             float recX, float recY,
+                                             float recW, float recH) {
+        // Find nearest edge towards the point.
+        double recEdgeX = recX + Math.min(recW/2,
+                                          Math.max(-recW/2, pX - recX));
+        double recEdgeY = recY + Math.min(recH/2,
+                                          Math.max(-recH/2, pY - recY));
+        // Calculate angle of deflection.
+        double angle = (Math.atan2( recEdgeY-pY, recEdgeX-pX )
+                + Math.PI/2)%(2*Math.PI);
         return angle;
     }
 
+    /**
+     * Return true if the ball is outside the board radius.
+     * @param board the board ball must stay within.
+     * @param ball the ball to check against the board.
+     * @return true if ball is outside board's circle radius.
+     */
     public boolean isBallOutsideBoard(Board board, Ball ball) {
-        float dx = ball.getX() - board.getXPos();
-        float dy = ball.getY() - board.getYPos();
-        float dz = (float) Math.sqrt(dx * dx + dy * dy) - (ball.getRadius() + board.getRadius());
-        float t = Math.abs(dz);
-        return t <= 0.01f;  // That's close enough.
+        // Get delta position between ball and board.
+        double dX = ball.getX() - board.getXPos();
+        double dY = ball.getY() - board.getYPos();
+        double totalRadius = ball.getRadius() + board.getRadius();
+        // Calculate distance between center of circles minus total radius.
+        double dz = (dX*dX + dY*dY) - totalRadius*totalRadius;
+        // Return true of the distance is positive (no intersection).
+        return dz >= 0;
     }
 
-    // Estimate min deltaTime until any form of collision occurs.
-    public float estimateNextCollision(Board board) {
-        float time = Float.MAX_VALUE;        // Default time is "never".
+    /**
+     * Estimate the time (movement units) until any collision occurs.
+     * @param board the board to check.
+     * @return time (movement units) until next estimated collision.
+     */
+    public double estimateNextCollision(Board board) {
+        double time = Double.MAX_VALUE;      // Default time is "never".
         for (Ball ball : board.getBalls()) {
-            time = Math.min(time, estimateTimeSingleBallCollision(board, ball));
+            // Get the shortest time between each ball.
+            time = Math.min(time,
+                    estimateNextCollision(board, ball));
         }
-        // Shortest time estimated. Best to save/decrement this value from deltaTime.
-        return (time < 0) ? 0 : time;
+        // Return shortest time. time < 0, assume immediate collision.
+        return Math.max(0, time);
     }
 
-    // Helper methods /////////////////////////////////////////////////////////
-    public float estimateTimeSingleBallCollision(Board board, Ball ball) {
-        float time = Float.MAX_VALUE;        // Default time is "never".
-        float estTime;
+    /**
+     * Estimate the time (movement units) until a ball collision.
+     * @param board the board to check.
+     * @param ball the ball to check against the board.
+     * @return time (movement units) until next estimated collision.
+     */
+    public double estimateNextCollision(Board board, Ball ball) {
+        double time = Double.MAX_VALUE;    // Default time is "never".
+        double estTime;
 
         // Shortest time until ball(s) exit board.
         time = Math.min(time, estimateBallGone(board, ball));
 
-        // Shortest time until ball(s) hit a brick.
+        //TODO Separation of Concerns
+        // Shortest time until ball(s) collide with any brick
         for (Brick brick : board.getBricks()) {
             estTime = estimateBrickCollision(ball, brick);
-            time = Float.isNaN(estTime)
+            time = Double.isNaN(estTime)
                     ? time : Math.min(time, estTime);
         }
 
+        //TODO Separation of Concerns
         // Shortest time until ball(s) collide with any other ball
         for (Ball otherBall : board.getBalls()) {
             if (!ball.equals(otherBall)) {
                 estTime = estimateBallCollision(ball, otherBall);
-                time = Float.isNaN(estTime)
+                time = Double.isNaN(estTime)
                         ? time : Math.min(time, estTime);
             }
         }
 
+        // TODO Separation of Concerns
         // Shortest time until ball(s) collide with any pad
         for (Player player : board.getPlayers()) {
             estTime = estimatePadCollision(ball, player.getPad());
-            time = Float.isNaN(estTime)
+            time = Double.isNaN(estTime)
                     ? time : Math.min(time, estTime);
         }
 
@@ -91,8 +138,26 @@ public class Collision {
                 b1.getRadius() + b2.getRadius());
     }
 
+    /**
+     * Find shortest time (movement units) until a ball collide with bricks.
+     * @param ball the ball to check against.
+     * @param bricks iterable collection of bricks.
+     * @return the shortest time until next collision. NaN if no collision.
+     */
+    public double estimateBrickCollision(Ball ball, Iterable<Brick> bricks) {
+        // Iterate through each brick to find the shortest time left.
+        double minTime = Double.MAX_VALUE; // Default is "never"
+        for (Brick brick : bricks) {
+            double time = estimateBrickCollision(ball, brick);
+            minTime = Double.isNaN(time)
+                    ? time : Math.min(time, minTime);
+        }
+        // Return shortest time found.
+        return minTime;
+    }
+
     // Shortest deltaTime until ball(s) hit a brick. Return NaN if not on a collision course.
-    public float estimateBrickCollision(Ball ball, Brick brick) {
+    public double estimateBrickCollision(Ball ball, Brick brick) {
         return estimateRectCollision(ball, brick.getBody());
     }
 

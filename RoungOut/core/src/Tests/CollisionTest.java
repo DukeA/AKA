@@ -55,7 +55,7 @@ class CollisionTest {
         int collisions = 0;
         for (int a = 0; a < 270; a++) {
             ball.setAngle( (float)Math.toRadians(a) );
-            if ( !Float.isNaN(collision.estimateBrickCollision(ball, brick)) ) {
+            if ( !Double.isNaN(collision.estimateBrickCollision(ball, brick)) ) {
                 collisions++;
             }
         }
@@ -72,7 +72,7 @@ class CollisionTest {
         int collisions = 0;
         for (int a = 271; a < 359; a++) {
             ball.setAngle( (float)Math.toRadians(a) );
-            if ( !Float.isNaN(collision.estimateBrickCollision(ball, brick)) ) {
+            if ( !Double.isNaN(collision.estimateBrickCollision(ball, brick)) ) {
                 collisions++;
             }
         }
@@ -90,20 +90,20 @@ class CollisionTest {
             ball.setAngle( (float)Math.toRadians(a) );
             ball.setPosition( BALL1_XPOS, BALL1_YPOS );     // Reset position each iteration.
 
-            float timeUntilCollision = collision.estimateBrickCollision(ball, brick);
-            if ( !Float.isNaN(timeUntilCollision) ) {
+            double timeUntilCollision = collision.estimateBrickCollision(ball, brick);
+            if ( !Double.isNaN(timeUntilCollision) ) {
                 atleastOneCollisionFound = true;
 
                 // Found a collision angle. Expect no collision before move.
                 Assertions.assertTrue( ball.distance(brick.getBody()) > 0);
 
                 // Move ball close to brick, expect no collision.
-                ball.move(timeUntilCollision - 1f);
+                ball.move((float)timeUntilCollision - 1f);
                 Assertions.assertTrue( ball.distance(brick.getBody()) > 0);
 
                 // Move ball close enough for a collision to occur.
                 ball.setPosition( BALL1_XPOS, BALL1_YPOS );     // Reset position each iteration.
-                ball.move(timeUntilCollision);
+                ball.move((float)timeUntilCollision);
                 Assertions.assertTrue( ball.distance(brick.getBody()) < 0.01f);
             }
 

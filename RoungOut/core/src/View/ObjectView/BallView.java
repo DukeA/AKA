@@ -31,10 +31,11 @@ public class BallView implements IViews {
             update(delta);
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             shapeRenderer.setColor(Color.RED);
-            shapeRenderer.ellipse(ball.getX()
-                    , ball.getY()
-                    , ball.getRadius() * ((WIDTH / 4) / (HEIGHT / 4))
-                    , ball.getRadius() * ((WIDTH / 4) / (HEIGHT / 4)));
+            shapeRenderer.ellipse(
+                    ball.getX() - ball.getRadius(),
+                    ball.getY() - ball.getRadius(),
+                    ball.getRadius() * 2,
+                    ball.getRadius() * 2);
             shapeRenderer.end();
         }
     }

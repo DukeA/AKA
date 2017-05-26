@@ -21,8 +21,8 @@ public class Board implements IBoard, IPowerUp {
 
     private CircleBody board;
     private Ball lastBallSpawned;
-    private float nextCollisionTime;
-    private Collision collision = new Collision();
+    private double nextCollisionTime;
+    private Collision collision;
 
     private float xPos;
     private float yPos;
@@ -42,6 +42,7 @@ public class Board implements IBoard, IPowerUp {
         balls = new HashSet<Ball>();
         bricks = new HashSet<Brick>();
         players = new ArrayList<Player>();
+        collision = new Collision();
         observers = new HashSet<CollisionObserver>();
         createSampleBoard(WIDTH, HEIGHT);
         nextCollisionTime = 0;
@@ -79,7 +80,7 @@ public class Board implements IBoard, IPowerUp {
         this.addBrick(new Brick(WIDTH / 2 + 40-brickWidth/2, HEIGHT / 2 + 40-brickHeight/2
                 , brickWidth, brickHeight));
 
-        this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 30f, 0.05f, 100));
+        this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 20f, -0.05f, 300));
     }
 
     private float correctAngle(float radians) {
@@ -113,7 +114,7 @@ public class Board implements IBoard, IPowerUp {
 
     public void update(float deltaTime) {
         while (deltaTime > 0) {
-            float minTime = Math.min( deltaTime, nextCollisionTime);
+            float minTime = (float)Math.min( deltaTime, nextCollisionTime);
             for (Ball ball : balls) {
                 ball.move(minTime);
             }
@@ -193,6 +194,7 @@ public class Board implements IBoard, IPowerUp {
     public void handleCollisions() {
         for (Ball ball : balls) {
             if (collision.isBallOutsideBoard(this, ball)) {
+                System.out.println("Ball outside board");
                 notifyBallExitBoard(ball);
                 respawnBall(ball);
             }
@@ -202,8 +204,8 @@ public class Board implements IBoard, IPowerUp {
                 }
                 if ( ball.distance(brick.getBody()) < DISTANCE_TOLERANCE) {
                     notifyBallHitBrick(ball, brick);
-                    untangleBall(ball);
-                    bounceBall(ball, collision.getRectDeflectionAngle(
+                    untangleBall(ball, brick.getBody());
+                    bounceBall(ball, (float)collision.getRectangleDeflectionAngle(
                             ball.getX(), ball.getY(), brick.getX(), brick.getY(), brick.getWidth(), brick.getHeight()));
                     brick.markDestroyed();
                 }
@@ -211,17 +213,17 @@ public class Board implements IBoard, IPowerUp {
             for (Player player : players) {
                 if ( ball.distance(player.getPad().getBody()) < DISTANCE_TOLERANCE) {
                     notifyBallHitPlayerPad(ball, player);
-                    untangleBall(ball);
                     Pad pad = player.getPad();
-                    bounceBall(ball, collision.getRectDeflectionAngle(
+                    untangleBall(ball, pad.getBody());
+                    bounceBall(ball, (float)collision.getRectangleDeflectionAngle(
                             ball.getX(), ball.getY(), pad.getPadXPos(), pad.getPadYPos(), pad.getWidth(), pad.getLength()));
                 }
             }
             for (Ball otherBall : balls) {
                 if (!ball.equals(otherBall) && ball.distance(otherBall.getBody()) < DISTANCE_TOLERANCE) {
                     notifyBallHitBall(ball, otherBall);
-                    untangleBall(ball);
-                    bounceBall(ball, collision.getCircleDeflectionAngle(ball.getX(), ball.getY(), otherBall.getX(), otherBall.getY()));
+                    untangleBall(ball, otherBall.getBody());
+                    bounceBall(ball, (float)collision.getCircleDeflectionAngle(ball.getX(), ball.getY(), otherBall.getX(), otherBall.getY()));
                 }
             }
             ball.move(0.01f);
@@ -236,10 +238,12 @@ public class Board implements IBoard, IPowerUp {
     }
 
     // Untangle ball after a collision occurred.
-    public void untangleBall(Ball ball) {
+    public void untangleBall(Ball ball, Body body) {
         // Move ball out of collision range before bounce in reverse direction.
         //System.out.printf("Adjusting position before bounce. Ball at x%.4f y%.4f\n", ball.getX(), ball.getY());
-        ball.move(-0.05f);
+        while (ball.distance(body) <= 0) {
+            ball.move(-0.05f);
+        }
     }
 
     public void bounceBall(Ball ball, float deflectionAngle) {
@@ -251,10 +255,10 @@ public class Board implements IBoard, IPowerUp {
         if (aDiff > 0 || aDiff < -Math.PI) {
             // If ball is deflected, set a new angle.
             ball.setAngle( ball.getAngle() + 2f * aDiff );
-            //System.out.printf("Ball deflected from %.3f to %.3f degrees\n", a1, a2);
+            System.out.printf("Ball deflected from %.3f to %.3f degrees\n", a1, a2);
         }
         else {
-            //System.out.printf("Ball at %.3f degrees, not deflected (deflection angle = %.3f)\n", a1, Math.toDegrees(deflectionAngle));
+            System.out.printf("Ball at %.3f degrees, not deflected (deflection angle = %.3f)\n", a1, Math.toDegrees(deflectionAngle));
         }
     }
 
