@@ -6,7 +6,6 @@ import Model.Collision.CollisionObserver;
 import Model.GameObjects.Physics.Body;
 import Model.GameObjects.Physics.CircleBody;
 
-import java.awt.*;
 import java.util.*;
 
 /**
@@ -26,9 +25,10 @@ public class Board implements IBoard {
     private final Collision collision;
     private final float xPos;
     private final float yPos;
-    private CircleBody board;
     // Last ball added serves as a model for new balls spawned.
     private Ball lastBallSpawned;
+    private float innerPlayerDistance;
+    private float outerPlayerDistance;
 
     // Estimated collision time, based on balls and obstacles.
     private double nextCollisionTime;
@@ -56,12 +56,13 @@ public class Board implements IBoard {
         xPos = width / 2;
         yPos = height / 2;
         radius = height/2+100;
-        board = new CircleBody(xPos,yPos,radius);
         balls = new HashSet<Ball>();
         bricks = new HashSet<Brick>();
         players = new ArrayList<Player>();
         collision = new Collision();
         observers = new HashSet<CollisionObserver>();
+        innerPlayerDistance = radius * 0.75f;
+        outerPlayerDistance = radius * 0.65f;
         createSampleBoard();
         nextCollisionTime = collision.estimateNextCollision(this);
     }
@@ -136,7 +137,11 @@ public class Board implements IBoard {
                 }
                 for (Player player : players) {
                     if (collision.isPLayerPadHit(this, player.getPad(), ball)) {
+                        if (!isBricksLeft()) {
+                            spawnBricks(WIDTH/2, HEIGHT/2, 30f, 30f, 5f);
+                        }
                         bounceBall(ball, player.getPad().getRotation()+(float)Math.PI/2);
+                        movePlayerOuterRing(player);
                     }
                 }
             }
@@ -292,7 +297,35 @@ public class Board implements IBoard {
         }
     }
 
+    public void spawnBricks(float centerX, float centerY, float brickWidth, float brickHeight, float brickMargin) {
+        Set<Brick> newBricks = new HashSet<Brick>();
+        float brickDist = Math.max(brickWidth, brickHeight) + brickMargin;
 
+        for (float dy=-brickDist; dy<=brickDist; dy+=brickDist) {
+            for (float dx=-brickDist; dx<=brickDist; dx+=brickDist) {
+                if (Math.random() >= 0.1) {
+                    // 90% chance of a normal brick.
+                    Brick brick = new Brick(centerX+dx, centerY+dy, brickWidth, brickHeight);
+                    newBricks.add(brick);
+                }
+                else if (Math.random() < 0.5) {
+                    // 5% of Speed Up Ball brick.
+                    BrickSpeedUpBall brick = new BrickSpeedUpBall(centerX+dx, centerY+dy, brickWidth, brickHeight);
+                    addCollisionObserver(brick);
+                    newBricks.add(brick);
+                }
+                else {
+                    // 5% chance of a Slow Down Ball brick
+                    BrickSlowDownBall brick =
+                            new BrickSlowDownBall(centerX+dx, centerY+dy, brickWidth, brickHeight);
+                    addCollisionObserver(brick);
+                    newBricks.add(brick);
+                }
+            }
+        }
+        this.bricks = newBricks;
+
+    }
 
     // Private helper methods /////////////////////////////////////////////////
 
@@ -433,41 +466,19 @@ public class Board implements IBoard {
         float padHeight =   80f;
         float padWidth =    30f;
         float brickWidth =  30f;
-        float brickHeight = 30f;
-        float brickDist = 40f;
+        float brickHeight =  30f;
+        float brickMargin = 5f;
 
         // Mock players
         this.addPlayer( new Player(
                 padHeight, padWidth, WIDTH/2,HEIGHT/2,
-                WIDTH / 2 - 350, HEIGHT / 2, 1));
+                WIDTH / 2 - innerPlayerDistance, HEIGHT / 2, 1));
         this.addPlayer( new Player(
                 padHeight, padWidth,WIDTH/2,HEIGHT/2,
-                WIDTH / 2 - 450, HEIGHT / 2, 1));
+                WIDTH / 2 - outerPlayerDistance, HEIGHT / 2, 1));
 
         // Mock Bricks
-        for (float dy=-brickDist; dy<=brickDist; dy+=brickDist) {
-            for (float dx=-brickDist; dx<=brickDist; dx+=brickDist) {
-                if (Math.random() >= 0.1) {
-                    // 90% chance of a normal brick.
-                    Brick brick = new Brick(this.xPos + dx, this.yPos + dy, brickWidth, brickHeight);
-                    this.addBrick(brick);
-                }
-                else if (Math.random() < 0.5) {
-                    // 5% of Speed Up Ball brick.
-                    BrickSpeedUpBall brick =
-                            new BrickSpeedUpBall(this.xPos + dx, this.yPos + dy, brickWidth, brickHeight);
-                    addCollisionObserver(brick);
-                    this.addBrick(brick);
-                }
-                else {
-                    // 5% chance of a Slow Down Ball brick
-                    BrickSlowDownBall brick =
-                            new BrickSlowDownBall(this.xPos + dx, this.yPos + dy, brickWidth, brickHeight);
-                    addCollisionObserver(brick);
-                    this.addBrick(brick);
-                }
-            }
-        }
+        spawnBricks(WIDTH/2, HEIGHT/2, brickWidth, brickHeight, brickMargin);
 
         // Mock ball
         this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 20f, (float)Math.random()-0.5f, 150));
@@ -490,6 +501,24 @@ public class Board implements IBoard {
         if (winner != null) {
             winner.setPoints(winner.getPoints() + 1);
         }
+    }
+
+    private void movePlayerOuterRing(Player playerHit) {
+        for (Player player : players) {
+            float distance = playerHit.equals(player) ? innerPlayerDistance : outerPlayerDistance;
+            Pad pad = player.getPad();
+            pad.setPadXPos((float) (pad.getOriginX() + distance * Math.cos(pad.getRotation())));
+            pad.setPadYPos((float) (pad.getOriginY() + distance * Math.sin(pad.getRotation())));
+        }
+    }
+
+    private boolean isBricksLeft() {
+        for (Brick brick : bricks) {
+            if (brick.getBrickType() != Brick.BrickType.DESTROYED) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
