@@ -27,7 +27,8 @@ public class CircleBody implements Body {
 
     //Clone constructor
     public CircleBody(CircleBody c) {
-        this(c.getX(), c.getY(), c.getRadius(), c.getDirection(), c.getSpeed());
+        this.location = new Location(c.getLoc());
+        this.radius = c.getRadius();
     }
     // Getters ////////////////////////////////////////////////////////////////
     @Override
@@ -46,16 +47,6 @@ public class CircleBody implements Body {
 
     public float getDeltaY() {
         return location.getDeltaY();
-    }
-
-    @Override
-    public float getDirection() {
-        return location.getAngle();
-    }
-
-    @Override
-    public float getSpeed() {
-        return location.getSpeed();
     }
 
     @Override
@@ -91,16 +82,6 @@ public class CircleBody implements Body {
     }
 
     @Override
-    public void setDirection(float radians) {
-        location.setAngle(radians);
-    }
-
-    @Override
-    public void setSpeed(float speed) {
-        location.setSpeed(speed);
-    }
-
-    @Override
     public void setWidth(float width) {
         this.radius=Math.abs(width/2);
     }
@@ -108,11 +89,6 @@ public class CircleBody implements Body {
     @Override
     public void setHeight(float height) {
         this.radius=Math.abs(height/2);
-    }
-
-    @Override
-    public void setMaxSpeed(float maxSpeed) {
-        location.setMaxSpeed(maxSpeed);
     }
 
     // Other methods //////////////////////////////////////////////////////////
@@ -129,8 +105,4 @@ public class CircleBody implements Body {
         return Math.max(0, (dToOther + dFromOther)- dCenterPoints);
     }
 
-    @Override
-    public void move(float deltaTime) {
-        location.move(deltaTime);
-    }
 }

@@ -1,6 +1,7 @@
 package Tests;
 
 import Model.GameObjects.Physics.CircleBody;
+import Model.GameObjects.Physics.LineSegment;
 import Model.GameObjects.Physics.RectangleBody;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,15 +29,16 @@ class CircleBodyTest {
 
     @Test
     void getters() {
+
         Assertions.assertEquals(XPOS, body.getX(), THRESHOLD);
         Assertions.assertEquals(YPOS, body.getY(), THRESHOLD);
 
         Assertions.assertEquals(RADIUS, body.getRadius(), THRESHOLD);
 
         double expectedAngle = (ANGLE + 8f*Math.PI) % (2f*Math.PI);
-        Assertions.assertEquals(expectedAngle, body.getDirection(), THRESHOLD);
+        Assertions.assertEquals(expectedAngle, body.getLoc().getDirection(), THRESHOLD);
 
-        Assertions.assertEquals(SPEED, body.getSpeed(), THRESHOLD);
+        Assertions.assertEquals(SPEED, body.getLoc().getSpeed(), THRESHOLD);
     }
 
     @Test
@@ -55,36 +57,11 @@ class CircleBodyTest {
     }
 
     @Test
-    void setAngle() {
-        float maxAngle = (float) (2f*Math.PI);
-        float minAngle = -maxAngle;
-        for (float a = minAngle; a < maxAngle; a += maxAngle/32f) {
-            float expectedAngle = (float) ((a + 8f*Math.PI) % (2f*Math.PI));
-            body.setDirection(a);
-            Assertions.assertEquals(expectedAngle, body.getDirection(), THRESHOLD);
-        }
-    }
-
-    @Test
-    void setSpeeds() {
-        float expectedSpeed = SPEED + 100f;
-        body.setSpeed(expectedSpeed);
-        Assertions.assertEquals(expectedSpeed, body.getSpeed(), THRESHOLD);
-
-        //Test so we can't go over our max speed
-        body.setMaxSpeed(SPEED);
-        body.setSpeed(SPEED + 10f);
-        Assertions.assertEquals(SPEED, body.getSpeed(), THRESHOLD);
-    }
-
-    @Test
     void setRadius() {
         float expectedRadius = RADIUS + 1f;
         body.setWidth(expectedRadius*2); //setWidth on a circleBody is equvivalent to seting the diameter
         Assertions.assertEquals(expectedRadius, body.getRadius(), THRESHOLD);
     }
-
-
 
     @Test
     void distanceTwoCircles() {
@@ -130,17 +107,6 @@ class CircleBodyTest {
                 Assertions.assertEquals(expectedDistance, rec.distance(cir), THRESHOLD);
 
             }
-        }
-    }
-
-    @Test
-    void move() {
-        for (double a = -2f*Math.PI; a < 2f*Math.PI; a += Math.PI/64f) {
-            double expectedX = body.getX() + Math.cos(ANGLE) * SPEED;
-            double expectedY = body.getY() + Math.sin(ANGLE) * SPEED;
-            body.move(1);
-            Assertions.assertEquals(expectedX, body.getX(), THRESHOLD);
-            Assertions.assertEquals(expectedY, body.getY(), THRESHOLD);
         }
     }
 

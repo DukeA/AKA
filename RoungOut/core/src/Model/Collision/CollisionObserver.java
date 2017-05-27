@@ -32,8 +32,8 @@ public interface CollisionObserver {
     void onBallHitBrick(Ball ball, Brick brick);
 
     /**
-     * Observer method for listening to when a ball hits a player (and it's related pad).
-     * @param ball the ball that hit the player pad.
+     * Observer method for listening to when a ball hits a player/pad.
+     * @param ball the ball that hit the player (and related pad).
      * @param player the player and it's related pad that got hit.
      */
     void onBallHitPlayerPad(Ball ball, Player player);

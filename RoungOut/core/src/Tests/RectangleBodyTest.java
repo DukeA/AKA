@@ -34,9 +34,6 @@ class RectangleBodyTest {
         Assertions.assertEquals(YPOS, body.getY(), THRESHOLD);
         Assertions.assertEquals(WIDTH, body.getWidth(), THRESHOLD);
         Assertions.assertEquals(HEIGHT, body.getHeight(), THRESHOLD);
-        double expectedAngle = (ANGLE + 8f*Math.PI) % (2f*Math.PI);
-        Assertions.assertEquals(expectedAngle, body.getDirection(), THRESHOLD);
-        Assertions.assertEquals(SPEED, body.getSpeed(), THRESHOLD);
     }
 
     @Test
@@ -66,28 +63,6 @@ class RectangleBodyTest {
     }
 
     @Test
-    void setAngle() {
-        float maxAngle = (float)(2f*Math.PI);
-        float minAngle = -maxAngle;
-        for (float a = minAngle; a < maxAngle; a += maxAngle/32f) {
-            double expectedAngle = (a + 8f*Math.PI) % (2f*Math.PI);
-            body.setDirection(a);
-            Assertions.assertEquals(expectedAngle, body.getDirection(), THRESHOLD);
-        }
-    }
-
-    @Test
-    void setSpeeds() {
-        float expectedSpeed = SPEED + 100f;
-        body.setSpeed(expectedSpeed);
-        Assertions.assertEquals(expectedSpeed, body.getSpeed(), THRESHOLD);
-
-        body.setMaxSpeed(SPEED);
-        body.setSpeed(SPEED + 10f);
-        Assertions.assertEquals(SPEED, body.getSpeed(), THRESHOLD);
-    }
-
-    @Test
     void distanceTwoRectangles() {
 
         float otherWidth = HEIGHT;     // Same dimensions with a 90 degree turn
@@ -112,17 +87,6 @@ class RectangleBodyTest {
         // TODO:  Measure distance to Body of different type (ie. CircleBody)
         // CircleBody cBody = new CircleBody(cXPos, cYPos, cRadius, cAngle, cSpeed);
         //fail("Tests.distanceCircleRectangle() not yet implemented.");
-    }
-
-    @Test
-    void move() {
-        for (double a = -2f*Math.PI; a < 2f*Math.PI; a += Math.PI/64f) {
-            double expectedX = body.getX() + Math.cos(ANGLE) * SPEED;
-            double expectedY = body.getY() + Math.sin(ANGLE) * SPEED;
-            body.move(1);
-            Assertions.assertEquals(expectedX, body.getX(), THRESHOLD);
-            Assertions.assertEquals(expectedY, body.getY(), THRESHOLD);
-        }
     }
 
 }

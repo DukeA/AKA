@@ -17,10 +17,10 @@ public class Location {
     private float deltaX;
     private float deltaY;
 
-    public Location(float xPos, float yPos, float angle, float speed, float maxSpeed) {
+    public Location(float xPos, float yPos, float radians, float speed, float maxSpeed) {
         setMaxSpeed(maxSpeed);
         setPosition(xPos, yPos);
-        setAngle(angle);
+        setDirection(radians);
         setSpeed(speed);
     }
     public Location(float xPos, float yPos, float angle, float speed) {
@@ -28,7 +28,7 @@ public class Location {
     }
 
     public Location(Location loc) {
-        this(loc.getX(), loc.getY(), loc.getAngle(), loc.getSpeed(), loc.getMaxSpeed());
+        this(loc.getX(), loc.getY(), loc.getDirection(), loc.getSpeed(), loc.getMaxSpeed());
     }
 
     // Location(double xPos, double yPos) { this(xPos, yPos, 0f, 0f); }
@@ -68,7 +68,7 @@ public class Location {
         return speed;
     }
 
-    public float getAngle() {
+    public float getDirection() {
         return angle;
     }
 
@@ -112,7 +112,7 @@ public class Location {
         enforceSpeed();
     }
 
-    public void setAngle(float radians) {
+    public void setDirection(float radians) {
         this.angle = radians;
         limitAngle();
         updateDeltaValues();

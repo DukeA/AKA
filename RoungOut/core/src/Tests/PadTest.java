@@ -38,7 +38,7 @@ public class PadTest {
         Assertions.assertEquals(pad.getBody().getWidth(),padW);
         Assertions.assertEquals(pad.getBody().getX(),padXPos);
         Assertions.assertEquals(pad.getBody().getY(),padYPos);
-        Assertions.assertEquals(pad.getBody().getSpeed(),padSpd);
+        Assertions.assertEquals(pad.getSpeed(),padSpd);
     }
     @Test
     public void padMoveTest() {

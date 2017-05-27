@@ -3,6 +3,8 @@ package View.ObjectView;
 import IViews.IViews;
 import Model.GameObjects.Board;
 import Model.GameObjects.Brick;
+import Model.GameObjects.BrickSlowDownBall;
+import Model.GameObjects.BrickSpeedUpBall;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -30,21 +32,21 @@ public class BrickView implements IViews {
     public void render(float delta) {
         for (Brick brick : board.getBricks()) {
 
-            if (brick.isDestroyed()) {
-                /*
+            if (!brick.isDestroyed()) {
                 shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-                shapeRenderer.setColor(Color.LIGHT_GRAY);
-                shapeRenderer.rect(
-                        brick.getX() - brick.getWidth()/2,
-                        brick.getY() - brick.getHeight()/2,
-                        brick.getWidth(),
-                        brick.getHeight());
-                shapeRenderer.end();
-                */
-            }
-            else {
-                shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-                shapeRenderer.setColor(Color.DARK_GRAY);
+                if (brick.getBrickType() == Brick.BrickType.SPEED_UP_BALL) {
+                    // BrickSpeedUp
+                    shapeRenderer.setColor(Color.GREEN);
+                }
+                else if (brick.getBrickType() == Brick.BrickType.SLOW_DOWN_BALL) {
+                    // BrickSlowDown
+                    shapeRenderer.setColor(Color.RED);
+                }
+                else {
+                    // Regular Brick
+                    shapeRenderer.setColor(Color.DARK_GRAY);
+                }
+
                 shapeRenderer.rect(
                         brick.getX() - brick.getWidth()/2,
                         brick.getY() - brick.getHeight()/2,

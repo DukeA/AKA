@@ -6,9 +6,9 @@ package Model.GameObjects.Physics;
  */
 public class RectangleBody implements Body {
 
-    private Location location;
-    private float width;
-    private float height;
+    protected Location location;
+    protected float width;
+    protected float height;
     //private RectangleShape shape;
 
     // Constructors ///////////////////////////////////////////////////////////
@@ -21,19 +21,15 @@ public class RectangleBody implements Body {
     }
 
     public RectangleBody(float xPos, float yPos, float width, float height) {
-        location = new Location(xPos,yPos,0,0);
-        this.width=width;
-        this.height=height;
+        this(xPos, yPos, width, height, 0, 0);
     }
 
     public RectangleBody(float width, float height) {
-        location = new Location(0f, 0f , 0f, 0f);
-        this.width=width;
-        this.height=height;
+        this(0, 0, width, height, 0, 0);
     }
 
     public RectangleBody(RectangleBody r) {
-        location = r.getLoc();
+        this.location = new Location(r.getLoc());
         this.width=r.getWidth();
         this.height=r.getHeight();
     }
@@ -56,14 +52,6 @@ public class RectangleBody implements Body {
         return location.getY();
     }
 
-    public float getDeltaX() {
-        return location.getDeltaX();
-    }
-
-    public float getDeltaY() {
-        return location.getDeltaY();
-    }
-
     @Override
     public float getWidth() {
         return this.width;
@@ -72,16 +60,6 @@ public class RectangleBody implements Body {
     @Override
     public float getHeight() {
         return this.height;
-    }
-
-    @Override
-    public float getDirection() {
-        return location.getAngle();
-    }
-
-    @Override
-    public float getSpeed() {
-        return location.getSpeed();
     }
 
     // Setters ////////////////////////////////////////////////////////////////
@@ -111,28 +89,11 @@ public class RectangleBody implements Body {
     }
 
     @Override
-    public void setDirection(float radians) {
-        location.setAngle(radians);
-    }
-
-    @Override
-    public void setSpeed(float speed) {
-        location.setSpeed(speed);
-    }
-
-    @Override
-    public void setMaxSpeed(float maxSpeed) {
-        location.setMaxSpeed(maxSpeed);
-    }
-
-
-    @Override
     public Location getLoc() {
         return location;
     }
 
     // Other methods //////////////////////////////////////////////////////////
-    @Override
     public float distance(Body body) {
         float dCenterPoints = location.distance(body.getX(), body.getY());
         float dToOther = distance(body.getX(), body.getY());
@@ -140,15 +101,10 @@ public class RectangleBody implements Body {
         return Math.max(0, (dToOther + dFromOther)- dCenterPoints);
     }
 
-    @Override
     public float distance(float xPos, float yPos) {
         float dx = lineDistance(location.getX(), xPos, getWidth());
         float dy = lineDistance(location.getY(), yPos, getHeight());
         return (float) Math.sqrt(dx*dx+dy*dy);
     }
 
-    @Override
-    public void move(float deltaTime) {
-        location.move(deltaTime);
-    }
 }
