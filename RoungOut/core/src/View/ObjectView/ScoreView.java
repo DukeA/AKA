@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by DukeA on 2017-05-06.
+ * @author DukeA
+ * Created on 2017-05-06.
  */
 public class ScoreView implements IViews {
 
@@ -22,6 +23,13 @@ public class ScoreView implements IViews {
     private BitmapFont font;
     private BitmapFont font2;
 
+    /**
+     * Constructor
+     * @param Width Width if the screen
+     * @param Height Height of the screen
+     * @param spriteBatch Part of the framework, used to bunch data into one batch
+     * @param board The board we are using
+     */
     public ScoreView(int Width, int Height,SpriteBatch spriteBatch,Board board) {
         this.WIDTH = Width;
         this.HEIGHT = Height;
@@ -31,11 +39,12 @@ public class ScoreView implements IViews {
         font.setColor(Color.BLACK);
         this.font2 = new BitmapFont();
         font2.setColor(Color.BLACK);
-
-
-
-
     }
+
+    /**
+     * Used by BoardView to render the visual in this view
+     * @param delta time between frames, comes from interface
+     */
     public void render(float delta) {
         List<Player> players = new ArrayList<Player>(player.getPlayers());
 
@@ -53,26 +62,32 @@ public class ScoreView implements IViews {
 
     }
 
+    /**
+     * @param width width on screen
+     * @param height height on screen
+     */
     @Override
     public void reSize(int width, int height) {
 
     }
+    public void dispose() {}
 
-    public void dispose() {
-
-    }
-
+    /**
+     * Update
+     * @param delta time between frames, comes from interface
+     */
     @Override
-    public void update(float delta) {
-
-    }
-
-    public void resize(int width, int height) {
+    public void update(float delta) {}
 
 
-    }
+    public void resize(int width, int height) {}
+
+    /**
+     * Getter, gets the score of the player
+     * @param player
+     * @return The score of the player
+     */
     public int getScore(Player player) {
         return player.getPoints();
     }
-
 }

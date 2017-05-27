@@ -17,8 +17,13 @@ public class BrickView implements IViews {
     private ShapeRenderer shapeRenderer;
 
 
-
-
+    /**
+     * Constructor
+     * @param Width Width of the screen
+     * @param Height Height of the screen
+     * @param renderer the Renderer we want to use to render with (par of framework)
+     * @param board The board we are using
+     */
     public BrickView(int Width, int Height, ShapeRenderer renderer,Board board) {
         this.WIDTH = Width;
         this.HEIGHT = Height;
@@ -27,6 +32,10 @@ public class BrickView implements IViews {
 
     }
 
+    /**
+     * Used by BoardView to render the visual in this view
+     * @param delta time between frames, comes from interface
+     */
     public void render(float delta) {
         for (Brick brick : board.getBricks()) {
 
@@ -58,19 +67,18 @@ public class BrickView implements IViews {
 
 
     @Override
-    public void reSize(int width, int height) {
+    public void reSize(int width, int height) {}
 
-    }
-
+    /**
+     * Disposes the shape renderer
+     */
     @Override
     public void dispose() {
         shapeRenderer.dispose();
-
     }
 
 
     @Override
     public void update(float delta) {
-
     }
 }
