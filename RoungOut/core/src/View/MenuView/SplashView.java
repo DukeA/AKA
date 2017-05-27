@@ -11,7 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.TimeUtils;
 
 /**
- * Created by DukeA on 2017-05-09.
+ * @author Adam
+ * Created on 2017-05-09.
  */
 public class SplashView implements Screen {
 
@@ -24,6 +25,16 @@ public class SplashView implements Screen {
     private Texture splashtexture;
     private Sprite sprite;
     private SpriteBatch batch;
+
+
+    /**
+     * The Splash screen is the Constructor for the SplashView
+     * which takes in as in parameter the value of the WIDTH and HEIGHT
+     * of the screen ,It also takes the referance of the game.
+     * @param WIDTH
+     * @param HEIGHT
+     * @param game
+     */
 
     public SplashView(int WIDTH, int HEIGHT, AGame game) {
         this.WIDTH = WIDTH;
@@ -42,10 +53,14 @@ public class SplashView implements Screen {
     @Override
     public void show() {
 
-
-
-
     }
+
+    /**
+     * The clss render the screen render the screen in delta time until 10's
+     * When it sudenly is going to change the view
+     * ,when the time for the Screen times out
+     * @param delta
+     */
 
     @Override
     public void render(float delta) {

@@ -16,7 +16,8 @@ import java.util.ArrayList;
 
 
 /**
- * Created by DukeA on 2017-04-28.
+ * @author Adam
+ * Created on 2017-04-28.
  */
 public class BoardView  implements IViews,Screen {
    private ArrayList<IViews> views;
@@ -31,7 +32,15 @@ public class BoardView  implements IViews,Screen {
     private final int WIDTH;
     private final int HEIGHT;
 
-
+    /**
+     * The constructor of the BoardView
+     * is the head View Class for the View.
+     * The Board View takes the in parameter Width and height of the screen
+     * , it also takes the referance of game
+     * @param WIDTH
+     * @param HEIGHT
+     * @param game
+     */
     public BoardView(int WIDTH,int HEIGHT, AGame game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
@@ -50,12 +59,19 @@ public class BoardView  implements IViews,Screen {
 
     }
 
+    /**
+     * The show class addes in controller to the view
+     */
     @Override
     public void show() {
     Gdx.input.setInputProcessor(game.getGameController());
         //GIVE BACK CONTROLLER HERE
     }
 
+    /**
+     * THe following method Renders out all the board different values 
+     * @param delta
+     */
     @Override
     public void render(float delta) {
         //Clear the screen, and add background

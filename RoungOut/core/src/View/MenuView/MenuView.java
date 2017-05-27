@@ -15,9 +15,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 
 /**
- * Created by DukeA on 2017-04-28.
+ * @author Adam
+ * Created on 2017-04-28.
  */
-public class MenuView  implements IHeadView, Screen {
+public class MenuView  implements Screen {
 
     private int WIDTH;
     private int HEIGHT;
@@ -34,7 +35,14 @@ public class MenuView  implements IHeadView, Screen {
     private AMenuController controller;
     private Skin skin;
 
-
+    /**
+     * The Constructor class for  MenuView which
+     * uses the inParameter of width and height of the screen
+     *  and a referance of the game
+     * @param WIDTH
+     * @param HEIGHT
+     * @param game
+     */
     public MenuView(int WIDTH, int HEIGHT, AGame game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
@@ -46,6 +54,10 @@ public class MenuView  implements IHeadView, Screen {
         this.controller = game.getMenuController();
     }
 
+    /**
+     *  The show Class uses all the graphical variables
+     *  that you can see on the screen.
+     */
     @Override
     public void show() {
     Gdx.input.setInputProcessor(stage);
@@ -101,6 +113,11 @@ public class MenuView  implements IHeadView, Screen {
 
     }
 
+    /**
+     * The render class is the screen value which each time
+     * anything happens on the screen updates the value.
+     * @param delta
+     */
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(1f, 0f, 0f, 1f);
@@ -148,15 +165,5 @@ public class MenuView  implements IHeadView, Screen {
         batch.dispose();
     }
 
-    //@Override
-    public BoardView createBoardView(int HEIGHT, int WIDTH, AGame game) {
-
-        return new BoardView(WIDTH, HEIGHT, game);
-    }
-
-    public OptionView createOptionView(int HEIGHT, int WIDTH ,AGame game) {
-
-        return new OptionView(WIDTH, HEIGHT, game);
-    }
 
 }
