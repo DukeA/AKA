@@ -28,9 +28,9 @@ public class ScoreView implements IViews {
         this.player = board;
         this.spriteBatch = spriteBatch;
         this.font =  new BitmapFont();
-        font.setColor(Color.BLACK);
+        font.setColor(Color.BLUE);
         this.font2 = new BitmapFont();
-        font2.setColor(Color.BLACK);
+        font2.setColor(Color.GREEN);
 
 
 

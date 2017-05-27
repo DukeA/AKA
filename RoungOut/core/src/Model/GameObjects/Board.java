@@ -130,6 +130,7 @@ public class Board implements IBoard {
                 // Ball outside board? Notify observer and respawn ball.
 
                 if (collision.isBallOutsideBoard(this, ball)) {
+                    givePointToOuterPlayer();
                     notifyBallExitBoard(ball);
                     respawnBall(ball);
                 }
@@ -475,6 +476,20 @@ public class Board implements IBoard {
     private double distanceFromCenter(double xPos, double yPos) {
         return Math.sqrt(
                 Math.pow(xPos - this.xPos, 2) + Math.pow(yPos - this.yPos, 2));
+    }
+
+    private void givePointToOuterPlayer() {
+        Player winner = null;
+        float distance = 0;
+        for (Player player : players) {
+            if (player.getPad().getDistance() > distance) {
+                winner = player;
+                distance = player.getPad().getDistance();
+            }
+        }
+        if (winner != null) {
+            winner.setPoints(winner.getPoints() + 1);
+        }
     }
 
 }
