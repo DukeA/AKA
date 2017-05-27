@@ -2,6 +2,8 @@ package Model.GameObjects;
 
 import Model.GameObjects.Physics.*;
 
+import java.awt.*;
+
 /**
  * @author Ken Bäcklund
  */
@@ -11,8 +13,8 @@ public class Brick implements IModel, IBrick {
         NORMAL, DESTROYED, SPEED_UP_BALL, SLOW_DOWN_BALL
     }
 
-    private RectangleBody body;
-    private BrickType brickvalue;
+    protected RectangleBody body;
+    protected BrickType brickvalue;
 
 
     public Brick(float xPos, float yPos, float width, float height, float angle, float speed) {
@@ -51,14 +53,6 @@ public class Brick implements IModel, IBrick {
         return body.getY();
     }
 
-    public float getAngle() {
-        return body.getDirection();
-    }
-
-    public float getSpeed() {
-        return body.getSpeed();
-    }
-
     public RectangleBody getBody() {
         return body;
     }
@@ -73,18 +67,6 @@ public class Brick implements IModel, IBrick {
 
     public void setPosition(float xPos, float yPos) {
         body.setPosition(xPos, yPos);
-    }
-
-    public void setAngle(float radians) {
-        body.setDirection(radians);
-    }
-
-    public void setSpeed(float speed) {
-        body.setSpeed(speed);
-    }
-
-    public void setMaxSpeed(float maxSpeed) {
-        body.setMaxSpeed(maxSpeed);
     }
 
     public double distance(Body otherBody) {

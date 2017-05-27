@@ -33,7 +33,7 @@ class LocationTest {
         Assertions.assertEquals(SPEED, loc.getSpeed(), THRESHOLD);
 
         double expectedAngle = (ANGLE + 8f*Math.PI) % (2f*Math.PI);
-        Assertions.assertEquals(expectedAngle, loc.getAngle(), THRESHOLD);
+        Assertions.assertEquals(expectedAngle, loc.getDirection(), THRESHOLD);
 
         double expectedDX = SPEED * Math.cos(ANGLE);
         Assertions.assertEquals(expectedDX, loc.getDeltaX(), THRESHOLD);
@@ -92,8 +92,8 @@ class LocationTest {
         double minAngle = -maxAngle;
         for (float a = (float) minAngle; a < maxAngle; a += maxAngle/64f) {
             double expectedAngle = (a + 8f*Math.PI) % (2f*Math.PI);
-            loc.setAngle(a);
-            Assertions.assertEquals(expectedAngle, loc.getAngle(), THRESHOLD);
+            loc.setDirection(a);
+            Assertions.assertEquals(expectedAngle, loc.getDirection(), THRESHOLD);
         }
     }
 

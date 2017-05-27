@@ -8,7 +8,7 @@ import Model.GameObjects.Physics.RectangleBody;
 /**
  * Created by Alex on 2017-04-01.
  */
-public class Pad {
+public class Pad implements IMovable {
 
     private RectangleBody body;
     private float originX;
@@ -19,8 +19,7 @@ public class Pad {
     private float scalex;
     private float scaley;
 
-
-    //Completly revamped, barely needed since a body is a pad
+    //Completely revamped, barely needed since a body is a pad
 
     //Getters
     public float getScalex() {
@@ -52,13 +51,24 @@ public class Pad {
     }
 
     public float getPadSpeed() {
-        return body.getSpeed();
+        return body.getLoc().getSpeed();
     }
 
-    public float getAngle(){return body.getDirection();}
+    public float getAngle(){return body.getLoc().getDirection();}
 
     public Body getBody() {
         return body;
+    }
+
+    public float getRotation() {
+        float a =(float)Math.atan2(body.getY() - originY, body.getX() - originX);
+        return (a<0) ? a+(float)Math.PI*2 : a;
+    }
+
+    public float getDistance() {
+        float dx = body.getX() - originX;
+        float dy = body.getY() - originY;
+        return (float)Math.sqrt(dx*dx+dy*dy);
     }
 
     public void setScalex(float scalex) {
@@ -84,17 +94,47 @@ public class Pad {
         body.setY(padYPos);
     }
 
+    public float getSpeed() {
+        return body.getLoc().getSpeed();
+    }
+
+    @Override
+    public float getDirection() {
+        return body.getLoc().getDirection();
+    }
+
+    @Override
+    public float getDeltaX() {
+        return body.getLoc().getDeltaX();
+    }
+
+    @Override
+    public float getDeltaY() {
+        return body.getLoc().getDeltaY();
+    }
+
     public void setSpeed(float speed) {
-        body.setSpeed(speed);
+        body.getLoc().setSpeed(speed);
+    }
+
+    public void setMaxSpeed(float maxSpeed) {
+        body.getLoc().setMaxSpeed(maxSpeed);
+    }
+
+    public void setDirection(float radians) {
+        body.getLoc().setDirection(radians);
+    }
+
+    public void move(float deltaTime) {
+        body.getLoc().move(deltaTime);
     }
 
     //Constructor
     public Pad(float length, float width, float originX, float originY, float padXPos, float padYPos, float padSpeed) {
         this.body = new RectangleBody(padXPos, padYPos, width, length);
-        this.body.setSpeed(padSpeed);
+        this.body.getLoc().setSpeed(padSpeed);
         this.originY = originY;
         this.originX =originX;
-        this.body.setDirection(0);
     }
 
     //Method: Moves by incrementing the x and y pos with it's speed
@@ -118,8 +158,6 @@ public class Pad {
 
         result_x += originX;
         result_y += originY;
-
-
 
         body.setX((float)result_x);
         //padXPos = padXPos + padSpeed;
@@ -149,7 +187,6 @@ public class Pad {
 
         result_x += originX;
         result_y += originY;
-
 
         body.setX((float)result_x);
         //padXPos = padXPos + padSpeed;

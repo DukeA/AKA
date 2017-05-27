@@ -9,7 +9,7 @@ import Model.GameObjects.Physics.CircleBody;
  * @author Ken Bäcklund
  * Modified by Alex 07-05-17
  */
-public class Ball implements IBall {
+public class Ball implements IBall, IMovable {
 
     // The CircleBody interface, which essentially is the ball.
     private CircleBody body;
@@ -28,6 +28,8 @@ public class Ball implements IBall {
      */
     public Ball(float xPos, float yPos, float radius, float angle, float speed) {
         body = new CircleBody(xPos, yPos, radius, angle, speed);
+        // Max speed 400% of original speed.
+        setMaxSpeed(speed * 4);
     }
 
     /**
@@ -88,7 +90,7 @@ public class Ball implements IBall {
      * @return the ball movement direction in radians.
      */
     public float getDirection() {
-        return body.getDirection();
+        return body.getLoc().getDirection();
     }
 
     /**
@@ -96,7 +98,7 @@ public class Ball implements IBall {
      * @return the ball's speed.
      */
     public float getSpeed() {
-        return body.getSpeed();
+        return body.getLoc().getSpeed();
     }
 
     /**
@@ -141,7 +143,7 @@ public class Ball implements IBall {
      * @param radians the ball's movement direction in radians. 0=right, PI=left.
      */
     public void setDirection(float radians) {
-        body.setDirection(radians);
+        body.getLoc().setDirection(radians);
     }
 
     /**
@@ -149,7 +151,7 @@ public class Ball implements IBall {
      * @param speed the ball's speed to set.
      */
     public void setSpeed(float speed) {
-        body.setSpeed(speed);
+        body.getLoc().setSpeed(speed);
     }
 
     /**
@@ -157,7 +159,7 @@ public class Ball implements IBall {
      * @param maxSpeed the ball's max speed.
      */
     public void setMaxSpeed(float maxSpeed) {
-        body.setMaxSpeed(maxSpeed);
+        body.getLoc().setMaxSpeed(maxSpeed);
     }
 
     /**
@@ -185,7 +187,7 @@ public class Ball implements IBall {
      * @param deltaTime the deltaTime on how far to move the ball. Multiplied into the speed.
      */
     public void move(float deltaTime) {
-        body.move(deltaTime);
+        body.getLoc().move(deltaTime);
     }
 
     /**
