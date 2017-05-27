@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class OptionsController extends AOptionsController implements IControllHandeling {
 
     //List that contains the views that this controller interacts with
-    
+
     private ArrayList<IViews> optionsSubscribers = new ArrayList<IViews>();
 
     //The handler that handles the switching of input processor
@@ -111,7 +111,7 @@ public class OptionsController extends AOptionsController implements IControllHa
     }
 
     /**
-     * If we clikc the esc-button we return to the main menu
+     * If we click the esc-button we return to the main menu
      * @param Width Width of the screen
      * @param Height Height od the screen
      * @param game the game we are currently using
