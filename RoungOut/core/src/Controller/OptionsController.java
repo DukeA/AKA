@@ -7,21 +7,20 @@ import View.MenuView.MenuView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 import java.util.ArrayList;
 
 /**
- * Created by Alex on 2017-05-15.
+ * @author Alex Created on 2017-05-15.
+ * Updated by Adam on 2017-05-25
  */
 
 public class OptionsController extends AOptionsController implements IControllHandeling {
 
     //List that contains the views that this controller interacts with
+    
     private ArrayList<IViews> optionsSubscribers = new ArrayList<IViews>();
 
     //The handler that handles the switching of input processor
@@ -30,21 +29,23 @@ public class OptionsController extends AOptionsController implements IControllHa
     private final EnumIndexes typeOfMenu = EnumIndexes.OPTIONS_CONTOLLER;
 
 
-    /*public ClickListener res1980x1080 = new ClickListener(){
-        @Override
-        public void clicked(InputEvent event, float x, float y){
-
-        }
-    };*/
-
-
     private String latestKey = " ";//init with blank
 
+    /**
+     * Used for debug purposes
+     * @return return the latest key pressed
+     */
     public String latestKeyPressed() {
         //Used for debug
         return latestKey;
     }
 
+    /**
+     *  This will be called when a key is pressed down (keyboard) by libgdx's InputProcessor
+     * @param keycode the key that was pressed down on the keyboard
+     * @return returns a boolean, this is used in the framework to toggle if it should propagate upwards thus
+     * we return false
+     */
     @Override
     public boolean keyDown(int keycode) {
         /**
@@ -71,6 +72,13 @@ public class OptionsController extends AOptionsController implements IControllHa
         }
     }
 
+    /**
+     * when a box i clicked, th wiev calls this method, this method changes the screen size
+     * @param WIDTH Width of the screen
+     * @param HEIGHT Height od the screen
+     * @param box the box that was clicked
+     * @param game the game we are currently using
+     */
     public void boxClicked(int WIDTH, int HEIGHT, CheckBox box, AGame game) {
         ArrayList<Integer> newWH = new ArrayList<Integer>();
         Label value = box.getLabel();
@@ -84,6 +92,12 @@ public class OptionsController extends AOptionsController implements IControllHa
         Gdx.graphics.setWindowedMode(newWH.get(0),newWH.get(1));
     }
 
+    /**
+     * Mute method, called when the mute button is pressed
+     * @param box The mox that corresponds to the mute mox
+     * @param game the game we are currently using
+     * @return The boolean that toggles the mute
+     */
     public boolean muteBoxClicked(CheckBox box, AGame game) {
         boolean muteValue;
         Label value = box.getLabel();
@@ -96,6 +110,12 @@ public class OptionsController extends AOptionsController implements IControllHa
         return muteValue;
     }
 
+    /**
+     * If we clikc the esc-button we return to the main menu
+     * @param Width Width of the screen
+     * @param Height Height od the screen
+     * @param game the game we are currently using
+     */
     public void escapeClicked(int Width, int Height, AGame game) {
         MenuView view = new MenuView(Width, Height, game);
         game.setScreen(view);
@@ -149,7 +169,11 @@ public class OptionsController extends AOptionsController implements IControllHa
     //End of these inputs
 
 
-
+    /**
+     * Constructor
+     * @param views List of views to the controller
+     * @param handler The handler that this controller obeys to
+     */
     public OptionsController(ArrayList<IViews> views,IHandler handler) {
         this.optionsSubscribers = views;
         this.handler = handler;
