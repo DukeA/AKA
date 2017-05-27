@@ -1,7 +1,8 @@
 package Model.GameObjects;
 
 /**
- * Created by Alex on 2017-05-01.
+ * @author Alex
+ * Created on 2017-05-01.
  */
 public interface IPlayer {
     int getPoints();

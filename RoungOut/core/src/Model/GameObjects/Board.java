@@ -53,20 +53,17 @@ public class Board implements IBoard, IPowerUp {
         this.HEIGHT = height;
         xPos = width / 2;
         yPos = height / 2;
-        radius = height/2+100;
-        board = new CircleBody(xPos,yPos,radius);
+        radius = height / 2 + 100;
+        board = new CircleBody(xPos, yPos, radius);
         balls = new HashSet<Ball>();
         bricks = new HashSet<Brick>();
         players = new ArrayList<Player>();
         collision = new Collision();
         observers = new HashSet<CollisionObserver>();
-//<<<<<<< HEAD
         createSampleBoard();
         nextCollisionTime = collision.estimateNextCollision(this);
-/*=======
-        nextCollisionTime = Collision.estimateNextCollision(this);
-        createSampleBoard(WIDTH, HEIGHT);
     }
+    /*
 
     // TODO Temporary mock data
     public void createSampleBoard(int WIDTH, int HEIGHT) {
@@ -109,8 +106,7 @@ public class Board implements IBoard, IPowerUp {
     private float correctAngle(float radians) {
         while (radians < 0) radians += Math.PI * 2f;
         return radians % (float)(Math.PI * 2f);
->>>>>>> Change_Controller*/
-    }
+    }*/
 
     /**
      * Get board X position.
@@ -530,7 +526,7 @@ public class Board implements IBoard, IPowerUp {
         }
     }
 
-    /**
+    /*
      * Mock sample data to generate a playable board.
      * FIXME We might have to move this to another class.
      */

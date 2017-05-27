@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.Set;
 
 /**
- * Created by Adam on 2017-03-30.
- * Update by Ken on 2017-05-12
+ * @author Adam
+ * Created on 2017-03-30.
+ * Updated by Ken on 2017-05-12
  *
  */
 public interface IBoard {

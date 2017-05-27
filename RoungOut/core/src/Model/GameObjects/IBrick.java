@@ -1,9 +1,8 @@
 package Model.GameObjects;
 
-import java.util.Set;
-
 /**
- * Created by kendu on 2017-05-09.
+ * @author Ken
+ * Created on 2017-05-09.
  */
 public interface IBrick {
     public float getX();

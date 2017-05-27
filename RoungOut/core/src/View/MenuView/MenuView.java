@@ -17,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 /**
  * Created by DukeA on 2017-04-28.
  */
-public class MenuView  implements IHeadView, Screen {
+public class MenuView  implements Screen {
 
     private int WIDTH;
     private int HEIGHT;

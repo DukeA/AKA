@@ -1,9 +1,7 @@
 package Model.GameObjects;
-
-import Model.GameObjects.Physics.RectangleBody;
-
 /**
- * Created by DukeA on 2017-05-12.
+ * @author DukeA
+ * Created on 2017-05-12.
  */
 public class SUpBrick extends Brick {
 
@@ -11,18 +9,32 @@ public class SUpBrick extends Brick {
     private  float SpeedValue;
 
 
+    /**
+     * Constructor
+     * @param xPos X-Position
+     * @param yPos Y-Position
+     * @param width Width of the brick
+     * @param height Height of the brick
+     */
     public SUpBrick(float xPos, float yPos, float width, float height) {
         super(xPos, yPos, width, height);
         this.value = BrickType.SPEED_UP_BALL;
     }
 
+    /**
+     * Setter, increments the speedValue by 10
+     */
     public void setSpeed() {
         if (this.equals(null)) {
-            this.SpeedValue=+100;
+            this.SpeedValue=+10;
         }
     }
-    public float getSpeedValue() {
+
+    /**
+     * Getter, gets the speed
+     * @return The Speed
+     */
+    public float getSpeed() {
         return this.SpeedValue;
     }
-    //TODO What else needs to be here?
 }
