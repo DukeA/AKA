@@ -469,7 +469,7 @@ public class Board implements IBoard {
         }
 
         // Mock ball
-        this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 20f, (float)Math.random()-0.5f, 300));
+        this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 20f, (float)Math.random()-0.5f, 150));
     }
 
     private double distanceFromCenter(double xPos, double yPos) {
