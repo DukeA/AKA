@@ -1,33 +1,34 @@
 package Model.GameObjects;
-
-
 import Model.GameObjects.Physics.Body;
 import Model.GameObjects.Physics.RectangleBody;
 
 
 /**
- * Created by Alex on 2017-04-01.
+ * @author Alex
+ * Created on 2017-04-01.
+ * @author Adam
+ * Heavly modified on 2017-05-21
  */
 public class Pad implements IMovable {
 
     private RectangleBody body;
     private float originX;
     private float originY;
-    private float xRotated;
-    private float yRotated;
 
-    private float scalex;
-    private float scaley;
+    //Completly revamped, barely needed since a body is a pad
 
-    //Completely revamped, barely needed since a body is a pad
-
-    //Getters
-    public float getScalex() {
-        return scalex;
-    }
-    public float getScaley() {
-        return  scaley;
-    }
+    /**
+     * Getters for
+     * X-Origin
+     * Y-Origin (X&Y Origin is the point the pad rotates around)
+     * Length (Reality Height, relic from first weeks of project)
+     * Width
+     * X-Position
+     * Y-Position
+     * Speed
+     * Angle (Angle of direction)
+     * Body
+     */
     public float getOriginX(){
         return originX;
     }
@@ -71,21 +72,12 @@ public class Pad implements IMovable {
         return (float)Math.sqrt(dx*dx+dy*dy);
     }
 
-    public void setScalex(float scalex) {
-        this.scalex = scalex;
-    }
-    public void setScaley(float scaley) {
-        this.scaley = scaley;
-    }
+    /**Setters(mainly used in testing) exists for:
+     * X-Position
+     * Y-Position
+     * Speed
+     */
 
-    public void setOriginX(float padXPos)  {
-        this.originX =padXPos;
-    }
-    public void setOriginY(float padYPos) {
-        this.originY = padYPos;
-    }
-
-    //Setters, mainly used in testing
     public void setPadXPos(float padXPos) {
         body.setX(padXPos);
     }
@@ -129,7 +121,16 @@ public class Pad implements IMovable {
         body.getLoc().move(deltaTime);
     }
 
-    //Constructor
+    /**
+     * Constructor
+     * @param length Length of the pad
+     * @param width Width of the pad
+     * @param originX X-Position of the point to circles around
+     * @param originY Y-Position of the point to circles around
+     * @param padXPos X-Position of the pad
+     * @param padYPos Y-Position of the pad
+     * @param padSpeed Speed of the pad
+     */
     public Pad(float length, float width, float originX, float originY, float padXPos, float padYPos, float padSpeed) {
         this.body = new RectangleBody(padXPos, padYPos, width, length);
         this.body.getLoc().setSpeed(padSpeed);
@@ -137,7 +138,10 @@ public class Pad implements IMovable {
         this.originX =originX;
     }
 
-    //Method: Moves by incrementing the x and y pos with it's speed
+    /**
+     * Moves left by incrementing the x and y pos with it's speed
+     *
+     */
     public void padMoveLeft() {
 
         float x = body.getX();
@@ -166,6 +170,9 @@ public class Pad implements IMovable {
 
     }
 
+    /**
+     * Moves right by incrementing the x and y pos with it's speed
+     */
     public void padMoveRight() {
         //float x = body.getX()-originX;
         //float y = body.getY()-originY;
@@ -195,6 +202,12 @@ public class Pad implements IMovable {
     }
 
     //Overloaded Method: This simply sets the X and Y pos to the given values
+
+    /**
+     * Sets the X&Y Position (name is a relic from early weeks of the project)
+     * @param xPos
+     * @param yPos
+     */
     public void padMove(float xPos, float yPos) {
         setPadXPos(xPos);
         setPadYPos(yPos);

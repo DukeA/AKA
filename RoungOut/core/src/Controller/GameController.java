@@ -10,20 +10,18 @@ import java.util.ArrayList;
 
 
 /**
- * Created by Alex on 2017-04-28.
+ *  @author Alex
+ *  Created on 2017-04-28.
  */
 public class GameController extends AGameController implements IControllHandeling {
     //The list will only contain unique subscribers and this is guaranteed by the
     //addListener and removeListener methods
-
     private ArrayList<IViews> viewSubscribers = new ArrayList<IViews>();
-
-    //    private ArrayList<IModel> modelSubscribers = new ArrayList<IModel>();
-   // private ArrayList<ISwitchController> controllers = new ArrayList<ISwitchController>();
 
     private final EnumIndexes typeOfMenu = EnumIndexes.GAME_CONTROLLER; //Static Enum
     private IHandler handler;
 
+    //The Players
     private IPlayer Player1;
     private IPlayer Player2;
 
@@ -40,18 +38,25 @@ public class GameController extends AGameController implements IControllHandelin
     private boolean isP2LeftDown;
 
     private String latestKey = " ";//init with blank
+
+    /**
+     * Used for debugging purposes
+     * @return Return the latest key pressed
+     */
     public String latestKeyPressed()
     {
         //Used for debug
         return latestKey;
     }
 
-
+    /**
+     *  This will be called when a key is pressed down (keyboard) by libgdx's InputProcessor
+     * @param keycode the key that was pressed down on the keyboard
+     * @return returns a boolean, this is used in the framework to toggle if it should propagate upwards thus
+     * we return false
+     */
     @Override
     public boolean keyDown(int keycode) {
-        /**
-         *  This will be called when a key is pressed down (keyboard) by libgdx's InputProcessor
-         */
         latestKey = Input.Keys.toString(keycode);
 
         if (keycode== P1Left){
@@ -84,12 +89,14 @@ public class GameController extends AGameController implements IControllHandelin
 
         if (keycode== Input.Keys.ESCAPE){
             handler.callSetNewInput(EnumIndexes.MENU_CONTROLLER);
-            isGameRunning =false;
             //if ESC -> Set the menu Controller to active input via handler
+            //it's here we would say that the game should go to the main menu and stop the game, however this is not
+            //implemented yet
         }
 
         System.out.println(latestKey);
-        /**
+        /*
+         *  Work comments
          *
          *  It would be much simpler if the return value of the interfaced could be an int and
          *  simply import the "com.badlogic.gdx.Input" library to reach the Inputs.Keys field
@@ -100,7 +107,7 @@ public class GameController extends AGameController implements IControllHandelin
         return false;
     }
 
-    //Helper method, code reuse
+    //Helper method, call "update" on all subscribed views code reuse
     private void updateAllViews(float deltaTime) {
         //Call update to all views
         for (IViews view : viewSubscribers) {
@@ -108,6 +115,9 @@ public class GameController extends AGameController implements IControllHandelin
         }
     }
 
+    /**
+     * Changes the input processor to this controller
+     */
     @Override
     public void changeInputProcessor() {
         Gdx.input.setInputProcessor(this);
@@ -115,10 +125,19 @@ public class GameController extends AGameController implements IControllHandelin
         //gameLoop();
     }
 
+    /**
+     * Getter, gets the enum that defines the controller's type
+     * @return A Enum that defines the controller's type
+     */
     @Override
     public EnumIndexes getTypeOfMenu(){ return typeOfMenu;}
 
-
+    /**
+     *  This will be called when a key is released(on the keyboard) by libgdx's InputProcessor
+     * @param keycode the key that was pressed down on the keyboard
+     * @return returns a boolean, this is used in the framework to toggle if it should propagate upwards thus
+     * we return false
+     */
     @Override
     public boolean keyUp(int keycode) {
         if (keycode== P1Left){
@@ -162,8 +181,8 @@ public class GameController extends AGameController implements IControllHandelin
     }
     //End of these inputs
 
-    private void movePlayers(){
     //Help function, checks if the key is being held down and if so, move accordingly
+    private void movePlayers(){
         if (isP1LeftDown){
             Player1.moveLeft();
         }
@@ -182,31 +201,27 @@ public class GameController extends AGameController implements IControllHandelin
 
     }
 
+    /**
+     * Since we update the model from the view (due to framework's implementation of rendering things)
+     * we need the loop to be a renderer, thus we would like to see which buttons are
+     * being held down at each frame so we can move the players
+     */
     @Override
     public void atRequest() {
-        //Since we update the model from the view (due to framework's implementation of rendering things)
-        //we need the loop to be a renderer, thus we would like to see which buttons are
-        // being held down at each frame so we can move the players
         movePlayers();
     }
 
-    //GameLoopThe thing that makes the game run
-    private volatile boolean isGameRunning;
-    private void gameLoop(){
-        float deltaTime;
-        while (isGameRunning){
-            deltaTime = Gdx.graphics.getDeltaTime();
-            movePlayers(); //moves the players
-            //board.update(deltaTime); //not receiving a board as of now
-            updateAllViews(deltaTime);
-        }
-    }
-
-
+    /**
+     * Constructor
+     * @param views the list of views that the controller should send updates to
+     * @param P1 Player 1
+     * @param P2 Player 2
+     * @param handler The handler that this controller should obey to
+     */
     public GameController(ArrayList<IViews> views, IPlayer P1, IPlayer P2, IHandler handler) {
 
         Gdx.input.setInputProcessor(this);
-        //This is the only Controller that claims the inputProcessor
+        //This is the only Controller type that claims the inputProcessor
 
         this.handler = handler;
 
@@ -223,13 +238,6 @@ public class GameController extends AGameController implements IControllHandelin
         this.isP2RightDown = false;
         this.isP2LeftDown = false;
 
-        //this.controllers=controllerList;
-        //this.modelSubscribers=models;
         this.viewSubscribers=views;
-        //Makes it so LibGdx sends calls to this controller
-        //(Adds the created PlayerController as a listener for LibGdx)
-
-
-        this.isGameRunning =false;
     }
 }

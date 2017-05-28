@@ -33,7 +33,13 @@ public class PadView implements IViews {
     private int WIDTH;
     private int HEIGHT;
 
-
+    /**
+     * Constructor
+     * @param width Width if the screen
+     * @param height Height of the screen
+     * @param polygonSpriteBatch Part of the framework, used to bunch data into one batch
+     * @param board The board we are using
+     */
     public PadView(int width, int height, PolygonSpriteBatch polygonSpriteBatch, Board board) {
         this.WIDTH = width;
         this.HEIGHT = height;
@@ -42,12 +48,21 @@ public class PadView implements IViews {
 
     }
 
+    /***
+     * Used by BoardView to render the visual in this view
+     * @param delta time between frames, comes from interface
+     */
     public void render(float delta) {
         List<Player> players = new ArrayList<Player>(Pads.getPlayers());
         drawPad(players.get(0),Color.BLUE);
         drawPad(players.get(1),Color.LIME);
     }
 
+    /**
+     * Draws the player's pad
+     * @param p The player
+     * @param color The color of the pad
+     */
     public void drawPad(Player p, Color color) {
             Vector vector1 = new Vector(p.getPad().getPadXPos()
                     , p.getPad().getPadYPos()
@@ -58,6 +73,8 @@ public class PadView implements IViews {
             Vector vectorLength = vector2.vectorLength(p.getPad().getLength());
             vector1 = vector1.normalization();
             Vector vectorWidth = vector1.vectorWidth(p.getPad().getWidth());
+
+            //The shape is putting all the corners of the pad into a array
             float[] shape = {
                     p.getPad().getPadXPos() + vectorLength.getxPos() + vectorWidth.getxPos(),
                     p.getPad().getPadYPos() + vectorLength.getyPos() + vectorWidth.getyPos(),
@@ -68,6 +85,7 @@ public class PadView implements IViews {
                     p.getPad().getPadXPos() - vectorLength.getxPos() + vectorWidth.getxPos(),
                     p.getPad().getPadYPos() - vectorLength.getyPos() + vectorWidth.getyPos(),
             };
+
             Pixmap pixmap = new Pixmap(1,1,Pixmap.Format.RGB888);
             pixmap.setColor(color);
             pixmap.fill();
@@ -89,17 +107,15 @@ public class PadView implements IViews {
 
 
 
-    public void reSize(int width, int height) {
+    public void reSize(int width, int height) {}
 
-    }
-
+    /**
+     * Disposes the sprite batch
+     */
     public void dispose() {
         polygonSpriteBatch.dispose();
     }
 
     @Override
-    public void update(float delta) {
-
-    }
-
+    public void update(float delta) {}
 }

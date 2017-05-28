@@ -1,21 +1,13 @@
 package Controller;
 
 /**
- * Created by Alex on 2017-05-12.
+ * @author Alex
+ * Created on 2017-05-12.
+ *
+ * A set of enums used to identify the diffrent contollers
  */
 public enum EnumIndexes {
-
     GAME_CONTROLLER,
     MENU_CONTROLLER,
     OPTIONS_CONTOLLER;
-
-    /*    private final int index;
-
-    private EnumIndexes(int index) {
-        this.index = index;
-    }
-
-    public int getIndexvalue(){
-        return index;
-    }*/
 }

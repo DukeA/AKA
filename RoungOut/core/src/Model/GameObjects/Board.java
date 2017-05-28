@@ -29,6 +29,7 @@ public class Board implements IBoard {
     private Ball lastBallSpawned;
     private float innerPlayerDistance;
     private float outerPlayerDistance;
+    //private CircleBody board;
 
     // Estimated collision time, based on balls and obstacles.
     private double nextCollisionTime;
@@ -55,7 +56,9 @@ public class Board implements IBoard {
         this.HEIGHT = height;
         xPos = width / 2;
         yPos = height / 2;
-        radius = height/2+100;
+
+        radius = height / 2 + 100;
+//        board = new CircleBody(xPos, yPos, radius);
         balls = new HashSet<Ball>();
         bricks = new HashSet<Brick>();
         players = new ArrayList<Player>();
@@ -66,7 +69,6 @@ public class Board implements IBoard {
         createSampleBoard();
         nextCollisionTime = collision.estimateNextCollision(this);
     }
-
     /**
      * Get board X position.
      * @return the board X position.
@@ -458,7 +460,7 @@ public class Board implements IBoard {
         }
     }
 
-    /**
+    /*
      * Mock sample data to generate a playable board.
      * FIXME We might have to move this to another class.
      */
