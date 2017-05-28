@@ -29,7 +29,7 @@ public class BoardTest {
         Assertions.assertEquals(board.getRadius(),
                 //this seems to be a faulty formula
                 //(float) (HEIGHT/2 + Math.pow(WIDTH,2)/8*HEIGHT));
-                HEIGHT/2+100);
+                HEIGHT/2+50);
     }
     @Test
     public void boardTest(){

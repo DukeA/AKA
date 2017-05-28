@@ -597,7 +597,6 @@ public class Board implements IBoard {
      * FIXME We might have to move this to another class.
      */
     private void createSampleBoard() {
-//<<<<<<< HEAD
         float padHeight =   80f;
         float padWidth =    30f;
         float brickWidth =  30f;
@@ -655,49 +654,7 @@ public class Board implements IBoard {
         }
         return false;
     }
-/*=======
-        float padHeight = 80;
-        //80
-        float padWidth = 30;
-        //30
-        float brickWidth = 30;
-        //30
-        float brickHeight = 30;
-        //30
-        // Mock players
-        this.addPlayer(new Player(
-                padHeight, padWidth, WIDTH / 2, HEIGHT / 2,
-                WIDTH / 2 - 350, HEIGHT / 2, 1));
-        this.addPlayer(new Player(
-                padHeight, padWidth, WIDTH / 2, HEIGHT / 2,
-                WIDTH / 2 - 450, HEIGHT / 2, 1));
 
-        // Mock Bricks
-        this.addBrick(new Brick(
-                WIDTH / 2 - 40 - brickWidth / 2, HEIGHT / 2 - brickHeight / 2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2 - 40 - brickWidth / 2, HEIGHT / 2 - brickHeight / 2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2 - brickWidth / 2, HEIGHT / 2 - brickHeight / 2,
-                brickWidth, brickHeight));
-        this.addBrick(new SDownBrick(WIDTH / 2 + 40 - brickWidth / 2, HEIGHT / 2 - brickHeight / 2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2 - 40 - brickWidth / 2, HEIGHT / 2 - 40 - brickHeight / 2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2 - brickWidth / 2, HEIGHT / 2 - 40 - brickHeight / 2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2 + 40 - brickWidth / 2, HEIGHT / 2 - 40 - brickHeight / 2,
-                brickWidth, brickHeight));
-        this.addBrick(new SUpBrick(WIDTH / 2 - 40 - brickWidth / 2, HEIGHT / 2 + 40 - brickHeight / 2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2 - brickWidth / 2, HEIGHT / 2 + 40 - brickHeight / 2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2 + 40 - brickWidth / 2, HEIGHT / 2 + 40 - brickHeight / 2,
-                brickWidth, brickHeight));
-
-        // Mock ball
-        this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 20f, (float) Math.random() - 0.5f, 300));
-    }*/
 
     /**
      * The method creates the ball and Pad
@@ -744,9 +701,8 @@ public class Board implements IBoard {
         this.addBrick(new Brick(WIDTH / 2 + 40 - brickWidth / 2, HEIGHT / 2 + 40 - brickHeight / 2,
                 brickWidth, brickHeight));
 
-        // Mock ball
         this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, ballRadie, (float) Math.random() - 0.5f, 300));
-//>>>>>>> DocViews
+
     }
 
 }
