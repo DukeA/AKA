@@ -273,18 +273,4 @@ class CollisionTest {
         // Expect at least one collision being tested above.
         Assertions.assertTrue( collisionCount > 0);
     }
-
-    @Nested
-    @DisplayName("Test pad collisions")
-    class PadCollisons {
-
-        @Test
-        @DisplayName("NOT YET IMPLEMENTED - Estimate pad collision distance")
-        public void estimatePadDistance() {
-
-            Assertions.fail("Not yet implemented");
-
-        }
-
-    }
 }

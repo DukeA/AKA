@@ -226,8 +226,7 @@ public class Collision {
      * @param players iterable collection of players (and their pads).
      * @return the shortest time until next collision. NaN if no collision.
      */
-    public double estimatePlayerCollision(Ball ball,
-                                          Iterable<Player> players) {
+    public double estimatePlayerCollision(Ball ball, Iterable<Player> players) {
         double minTime = Double.MAX_VALUE; // Default is "never"
         // Iterate through each player's pad to find the shortest time left.
         for (Player player : players) {
