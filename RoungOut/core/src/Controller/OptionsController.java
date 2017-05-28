@@ -178,6 +178,9 @@ public class OptionsController extends AOptionsController implements IControllHa
      * @param handler The handler that this controller obeys to
      */
     public OptionsController(ArrayList<IViews> views,IHandler handler) {
+        this.setSize = new ArrayList<Integer>();
+        setSize.add(0,1680);
+        setSize.add(1,1050);
         this.optionsSubscribers = views;
         this.handler = handler;
     }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -79,13 +80,24 @@ public class BoardView  implements IViews,Screen {
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        update(delta);
+        //update(delta);
+        try {
+            update(delta);
+        }catch (IllegalArgumentException e){
+            batch.begin();
+            BitmapFont font = new BitmapFont();
+            font.draw(batch,e.getMessage(),WIDTH/2,HEIGHT/2+300);
+            font.getData().setScale(.25f,.25f);
+            font.setColor(Color.BLUE);
+            batch.end();
+        }
 
+
+        batch.begin();
         Gdx.gl.glLineWidth(16);
 
         float Width =board.getRadius()*(WIDTH/2)/(HEIGHT/2);
         float Height =board.getRadius()*(WIDTH/2)/(HEIGHT/2);
-        batch.begin();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.BLACK);
         shapeRenderer.ellipse(WIDTH/2-Width/2,HEIGHT/2-Height/2,
