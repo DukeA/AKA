@@ -67,8 +67,6 @@ public class Roungout extends AGame {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
         create();
-        resizes(WIDTH, HEIGHT);
-        Gdx.graphics.setWindowedMode(WIDTH, HEIGHT);
     }
     public Roungout() {
 

@@ -503,13 +503,14 @@ public class Board implements IBoard, IPowerUp {
         float padHeightRes = 30*100/boardHeight;
         float brickWidthRes = 30*100/boardWidth;
         float brickHeightRes = 30*100/boardHeight;
-        float ballRadie = 20 *100/boardWidth/boardHeight;
+        float ballRadieW = 20 *100/boardWidth;
+
 
         float valueForPadW = boardWidth/100 *padWidthRes;
         float valForPadH = boardHeight/100 *padHeightRes;
         float valForBrickW = boardWidth/100 * brickWidthRes;
         float valForBrickH = boardHeight/100* brickHeightRes;
-        float valForBall =   boardWidth/boardHeight/100*ballRadie;
+        float valForBall =   boardWidth/100*ballRadieW;
 
         boardShapes.add(0,valueForPadW);
         boardShapes.add(1,valForPadH);
@@ -579,13 +580,9 @@ public class Board implements IBoard, IPowerUp {
         if (WIDTH == 1680 && HEIGHT == 1050){
             ArrayList<Float> board = setBoardSize(WIDTH,HEIGHT);
             float padHeight =  board.get(0);
-            //80
             float padWidth =    board.get(1);
-            //30
             float brickWidth =  board.get(2);
-            //30
             float brickHeight = board.get(3);
-            //30
             float ballRadie = board.get(4);
             // Mock players
             this.addPlayer( new Player(
@@ -621,7 +618,45 @@ public class Board implements IBoard, IPowerUp {
             this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, ballRadie, (float)Math.random()-0.5f, 300));
         }
         else {
+            ArrayList<Float> board = setBoardSize(WIDTH,HEIGHT);
+            float padHeight =  board.get(0);
+            float padWidth =    board.get(1);
+            float brickWidth =  board.get(2);
+            float brickHeight = board.get(3);
+            float ballRadie = board.get(4);
 
+
+            this.addPlayer( new Player(
+                    padHeight, padWidth, WIDTH/2,HEIGHT/2,
+                    WIDTH / 2 - 350, HEIGHT / 2, 1));
+            this.addPlayer( new Player(
+                    padHeight, padWidth,WIDTH/2,HEIGHT/2,
+                    WIDTH / 2 - 450, HEIGHT / 2, 1));
+            // Mock Bricks
+            this.addBrick(new Brick(
+                    WIDTH / 2 - 40-brickWidth/2, HEIGHT / 2-brickHeight/2,
+                    brickWidth, brickHeight));
+            this.addBrick(new Brick(WIDTH / 2 - 40-brickWidth/2, HEIGHT / 2-brickHeight/2,
+                    brickWidth, brickHeight));
+            this.addBrick(new Brick(WIDTH / 2-brickWidth/2, HEIGHT / 2-brickHeight/2,
+                    brickWidth, brickHeight));
+            this.addBrick(new SDownBrick(WIDTH / 2 + 40-brickWidth/2, HEIGHT / 2-brickHeight/2,
+                    brickWidth, brickHeight));
+            this.addBrick(new Brick(WIDTH / 2 - 40-brickWidth/2, HEIGHT / 2 - 40-brickHeight/2,
+                    brickWidth, brickHeight));
+            this.addBrick(new Brick(WIDTH / 2-brickWidth/2, HEIGHT / 2 - 40-brickHeight/2,
+                    brickWidth, brickHeight));
+            this.addBrick(new Brick(WIDTH / 2 + 40-brickWidth/2, HEIGHT / 2 - 40-brickHeight/2,
+                    brickWidth, brickHeight));
+            this.addBrick(new SUpBrick(WIDTH / 2 - 40-brickWidth/2, HEIGHT / 2 + 40-brickHeight/2,
+                    brickWidth, brickHeight));
+            this.addBrick(new Brick(WIDTH / 2-brickWidth/2, HEIGHT / 2 + 40-brickHeight/2,
+                    brickWidth, brickHeight));
+            this.addBrick(new Brick(WIDTH / 2 + 40-brickWidth/2, HEIGHT / 2 + 40-brickHeight/2,
+                    brickWidth, brickHeight));
+
+            // Mock ball
+            this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, ballRadie, (float)Math.random()-0.5f, 300));
 
         }
 
