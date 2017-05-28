@@ -86,16 +86,15 @@ public class BoardView  implements IViews,Screen {
         }catch (IllegalArgumentException e){
             batch.begin();
             BitmapFont font = new BitmapFont();
+            font.getData().setScale(2f,2f);
+            font.setColor(Color.BLACK);
             font.draw(batch,e.getMessage(),WIDTH/2,HEIGHT/2+300);
-            font.getData().setScale(.25f,.25f);
-            font.setColor(Color.BLUE);
             batch.end();
         }
 
 
         batch.begin();
         Gdx.gl.glLineWidth(16);
-
         float Width =board.getRadius()*(WIDTH/2)/(HEIGHT/2);
         float Height =board.getRadius()*(WIDTH/2)/(HEIGHT/2);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
