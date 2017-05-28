@@ -30,12 +30,6 @@ public class OptionsController extends AOptionsController implements IControllHa
     private final EnumIndexes typeOfMenu = EnumIndexes.OPTIONS_CONTOLLER;
 
 
-    /*public ClickListener res1980x1080 = new ClickListener(){
-        @Override
-        public void clicked(InputEvent event, float x, float y){
-
-        }
-    };*/
 
 
     private String latestKey = " ";//init with blank
@@ -79,9 +73,9 @@ public class OptionsController extends AOptionsController implements IControllHa
         WIDTH = Integer.valueOf(values[0].trim());
         HEIGHT = Integer.valueOf(values[1].trim());
         game.resize(WIDTH, HEIGHT);
-        newWH.add(WIDTH);
-        newWH.add(HEIGHT);
-        Gdx.graphics.setWindowedMode(newWH.get(0),newWH.get(1));
+        newWH.add(0,WIDTH);
+        newWH.add(1,HEIGHT);
+        game.getRoungout(newWH.get(0),newWH.get(1));
     }
 
     public boolean muteBoxClicked(CheckBox box, AGame game) {

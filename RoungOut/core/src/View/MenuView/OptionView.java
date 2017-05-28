@@ -6,11 +6,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 
@@ -88,16 +90,15 @@ public class OptionView implements Screen{
         resArea.setMovable(false);
         keyArea.setMovable(false);
         muteArea.setMovable(false);
-        for (int i =0; i<3; i++) {
+        for (int i =0; i<2; i++) {
             box.add(new CheckBox("",skin));
             resArea.add(box.get(i));
         }
 
         box.get(0).setText("1950 X 1080");
 
-        box.get(1).setText("1280 X 720");
 
-        box.get(2).setText("1680 X 1050");
+        box.get(1).setText("1680 X 1050");
 
 
         table.row();
@@ -139,6 +140,7 @@ public class OptionView implements Screen{
         for (CheckBox box: box) {
             if (box.isPressed()) {
                 controller.boxClicked(WIDTH,HEIGHT,box,game);
+                resize(WIDTH,HEIGHT);
             }
         }
         for (CheckBox muteBox : muteBox) {
@@ -158,6 +160,7 @@ public class OptionView implements Screen{
      */
     @Override
     public void resize(int width, int height) {
+
     }
 
     @Override

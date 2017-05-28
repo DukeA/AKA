@@ -53,7 +53,12 @@ public class Board implements IBoard, IPowerUp {
         this.HEIGHT = height;
         xPos = width / 2;
         yPos = height / 2;
-        radius = height/2+100;
+        if (width ==1680 && height == 1050) {
+            radius = height/2+100;
+        }
+        else {
+            radius = height/2 +300;
+        }
         board = new CircleBody(xPos,yPos,radius);
         balls = new HashSet<Ball>();
         bricks = new HashSet<Brick>();
@@ -62,7 +67,6 @@ public class Board implements IBoard, IPowerUp {
         observers = new HashSet<CollisionObserver>();
         createSampleBoard(WIDTH,HEIGHT);
         nextCollisionTime = collision.estimateNextCollision(this);
-
     }
 
     /**
@@ -572,49 +576,55 @@ public class Board implements IBoard, IPowerUp {
      * @param HEIGHT
      */
     private void createSampleBoard(int WIDTH,int HEIGHT) {
-        ArrayList<Float> board = setBoardSize(WIDTH,HEIGHT);
-        float padHeight =  board.get(0);
-        //80
-        float padWidth =    board.get(1);
-        //30
-        float brickWidth =  board.get(2);
-        //30
-        float brickHeight = board.get(3);
-        //30
-        float ballRadie = board.get(4);
+        if (WIDTH == 1680 && HEIGHT == 1050){
+            ArrayList<Float> board = setBoardSize(WIDTH,HEIGHT);
+            float padHeight =  board.get(0);
+            //80
+            float padWidth =    board.get(1);
+            //30
+            float brickWidth =  board.get(2);
+            //30
+            float brickHeight = board.get(3);
+            //30
+            float ballRadie = board.get(4);
+            // Mock players
+            this.addPlayer( new Player(
+                    padHeight, padWidth, WIDTH/2,HEIGHT/2,
+                    WIDTH / 2 - 350, HEIGHT / 2, 1));
+            this.addPlayer( new Player(
+                    padHeight, padWidth,WIDTH/2,HEIGHT/2,
+                    WIDTH / 2 - 450, HEIGHT / 2, 1));
+            // Mock Bricks
+            this.addBrick(new Brick(
+                    WIDTH / 2 - 40-brickWidth/2, HEIGHT / 2-brickHeight/2,
+                    brickWidth, brickHeight));
+            this.addBrick(new Brick(WIDTH / 2 - 40-brickWidth/2, HEIGHT / 2-brickHeight/2,
+                    brickWidth, brickHeight));
+            this.addBrick(new Brick(WIDTH / 2-brickWidth/2, HEIGHT / 2-brickHeight/2,
+                    brickWidth, brickHeight));
+            this.addBrick(new SDownBrick(WIDTH / 2 + 40-brickWidth/2, HEIGHT / 2-brickHeight/2,
+                    brickWidth, brickHeight));
+            this.addBrick(new Brick(WIDTH / 2 - 40-brickWidth/2, HEIGHT / 2 - 40-brickHeight/2,
+                    brickWidth, brickHeight));
+            this.addBrick(new Brick(WIDTH / 2-brickWidth/2, HEIGHT / 2 - 40-brickHeight/2,
+                    brickWidth, brickHeight));
+            this.addBrick(new Brick(WIDTH / 2 + 40-brickWidth/2, HEIGHT / 2 - 40-brickHeight/2,
+                    brickWidth, brickHeight));
+            this.addBrick(new SUpBrick(WIDTH / 2 - 40-brickWidth/2, HEIGHT / 2 + 40-brickHeight/2,
+                    brickWidth, brickHeight));
+            this.addBrick(new Brick(WIDTH / 2-brickWidth/2, HEIGHT / 2 + 40-brickHeight/2,
+                    brickWidth, brickHeight));
+            this.addBrick(new Brick(WIDTH / 2 + 40-brickWidth/2, HEIGHT / 2 + 40-brickHeight/2,
+                    brickWidth, brickHeight));
 
-        // Mock players
-        this.addPlayer( new Player(
-                padHeight, padWidth, WIDTH/2,HEIGHT/2,
-                WIDTH / 2 - 350, HEIGHT / 2, 1));
-        this.addPlayer( new Player(
-                padHeight, padWidth,WIDTH/2,HEIGHT/2,
-                WIDTH / 2 - 450, HEIGHT / 2, 1));
+            // Mock ball
+            this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, ballRadie, (float)Math.random()-0.5f, 300));
+        }
+        else {
 
-        // Mock Bricks
-        this.addBrick(new Brick(
-                WIDTH / 2 - 40-brickWidth/2, HEIGHT / 2-brickHeight/2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2 - 40-brickWidth/2, HEIGHT / 2-brickHeight/2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2-brickWidth/2, HEIGHT / 2-brickHeight/2,
-                brickWidth, brickHeight));
-        this.addBrick(new SDownBrick(WIDTH / 2 + 40-brickWidth/2, HEIGHT / 2-brickHeight/2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2 - 40-brickWidth/2, HEIGHT / 2 - 40-brickHeight/2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2-brickWidth/2, HEIGHT / 2 - 40-brickHeight/2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2 + 40-brickWidth/2, HEIGHT / 2 - 40-brickHeight/2,
-                brickWidth, brickHeight));
-        this.addBrick(new SUpBrick(WIDTH / 2 - 40-brickWidth/2, HEIGHT / 2 + 40-brickHeight/2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2-brickWidth/2, HEIGHT / 2 + 40-brickHeight/2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2 + 40-brickWidth/2, HEIGHT / 2 + 40-brickHeight/2,
-                brickWidth, brickHeight));
 
-        // Mock ball
-        this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 20f, (float)Math.random()-0.5f, 300));
+        }
+
+
     }
 }
