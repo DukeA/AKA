@@ -12,5 +12,5 @@ public abstract class AGame extends Game {
     public abstract AGameController getGameController();
     public abstract AMenuController getMenuController();
     public abstract AOptionsController getOptionsController();
-    public abstract Roungout getRoungout(int Width, int Height);
+    public abstract Roungout getRoungout(int Width, int Height,AGame game);
 }

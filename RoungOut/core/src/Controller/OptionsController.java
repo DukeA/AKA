@@ -65,7 +65,7 @@ public class OptionsController extends AOptionsController implements IControllHa
         }
     }
 
-    public void boxClicked(int WIDTH, int HEIGHT, CheckBox box, AGame game) {
+    public AGame boxClicked(int WIDTH, int HEIGHT, CheckBox box, AGame game) {
         ArrayList<Integer> newWH = new ArrayList<Integer>();
         Label value = box.getLabel();
         String width = String.valueOf(value.getText());
@@ -75,7 +75,7 @@ public class OptionsController extends AOptionsController implements IControllHa
         game.resize(WIDTH, HEIGHT);
         newWH.add(0,WIDTH);
         newWH.add(1,HEIGHT);
-        game.getRoungout(newWH.get(0),newWH.get(1));
+        return game = game.getRoungout(newWH.get(0),newWH.get(1),game);
     }
 
     public boolean muteBoxClicked(CheckBox box, AGame game) {

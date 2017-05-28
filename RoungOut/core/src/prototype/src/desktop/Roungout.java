@@ -58,14 +58,14 @@ public class Roungout extends AGame {
     public AOptionsController getOptionsController() {return optionsController;}
 
     @Override
-    public Roungout getRoungout(int Width, int Height) {
-        return new Roungout(Width,Height);
+    public Roungout getRoungout(int Width, int Height,AGame game) {
+        return new Roungout(Width,Height, game);
     }
 
-
-    public Roungout(int WIDTH,int HEIGHT) {
+    public Roungout(int WIDTH,int HEIGHT, AGame game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
+        Gdx.graphics.setWindowedMode(WIDTH,HEIGHT);
         create();
     }
     public Roungout() {
