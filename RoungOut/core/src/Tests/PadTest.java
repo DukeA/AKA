@@ -6,7 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Created by Alex on 2017-04-24.
+ * @author Alex
+ * Created on 2017-04-24.
  * Bases on MovePadTest created by DukeA on 2017-04-04
  */
 public class PadTest {

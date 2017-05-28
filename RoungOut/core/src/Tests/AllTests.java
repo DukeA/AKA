@@ -1,7 +1,8 @@
 package Tests;
 
 /**
- * Created by Alex on 2017-04-07.
+ * @autor Alex
+ * Created on 2017-04-07.
  * Updated by Ken on 2017-04-12.
  */
 import org.junit.jupiter.api.BeforeAll;

@@ -9,9 +9,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 /**
- * Created by Alex on 2017-04-24.
- * <p>
- * This is more of a player test than it is a pad test actually
+ * @author Alex
+ * Created on 2017-04-24.
  */
 public class PlayerTest {
 

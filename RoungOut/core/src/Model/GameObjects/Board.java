@@ -4,7 +4,7 @@ package Model.GameObjects;
 import Model.Collision.Collision;
 import Model.Collision.CollisionObserver;
 import Model.GameObjects.Physics.Body;
-import Model.GameObjects.Physics.CircleBody;
+
 
 import java.util.*;
 
@@ -324,97 +324,33 @@ public class Board implements IBoard {
         Set<Brick> newBricks = new HashSet<Brick>();
         float brickDist = Math.max(brickWidth, brickHeight) + brickMargin;
 
-//<<<<<<< HEAD
         for (float dy=-brickDist; dy<=brickDist; dy+=brickDist) {
             for (float dx=-brickDist; dx<=brickDist; dx+=brickDist) {
-                if (Math.random() >= 0.1) {
-                    // 90% chance of a normal brick.
+                double random = Math.random();
+                if (random >= 0.3) {
+                    // 70% chance of a normal brick.
                     Brick brick = new Brick(centerX+dx, centerY+dy, brickWidth, brickHeight);
                     newBricks.add(brick);
                 }
-                else if (Math.random() < 0.5) {
-                    // 5% of Speed Up Ball brick.
+                else if (random > 0.15) {
+                    // 15% of Speed Up Ball brick.
                     BrickSpeedUpBall brick = new BrickSpeedUpBall(centerX+dx, centerY+dy, brickWidth, brickHeight);
                     addCollisionObserver(brick);
                     newBricks.add(brick);
                 }
                 else {
-                    // 5% chance of a Slow Down Ball brick
+                    // 15% chance of a Slow Down Ball brick
                     BrickSlowDownBall brick =
                             new BrickSlowDownBall(centerX+dx, centerY+dy, brickWidth, brickHeight);
                     addCollisionObserver(brick);
                     newBricks.add(brick);
                 }
-/*=======
-    public void pSpeedUP() {
-        for (Ball ball : balls) {
-            for (Player pad : players) {
-                ball.setSpeed(ball.getSpeed()
-                        + getPspeedUp());
-                pad.getPad().setSpeed(
-                        pad.getPad().getPadSpeed()
-                                + getPspeedUp());
-            }
 
-        }
-    }
-
-
-    public void pSpeedDown() {
-        for (Ball ball : balls) {
-            for (Player pad : players) {
-                ball.setSpeed(ball.getSpeed() + getPspeedDown());
-
-                pad.getPad().setSpeed(
-                        pad.getPad().getPadSpeed() + getPspeedDown());
-            }
-
-        }
-    }
-
-
-    @Override
-    public void effectOver() {
-        for (Ball ball : balls) {
-            for (Player pad : players) {
-                ball.setSpeed(ball.getSpeed() - getPspeedUp() + getPspeedDown());
-                pad.getPad().setSpeed(
-                        pad.getPad().getPadSpeed() - getPspeedUp() + getPspeedDown());
-            }
-        }
-    }
-
-
-    @Override
-    public float getPspeedUp() {
-        float brickspeed = 0;
-        for (Brick brick : bricks) {
-            if (brick.getClass() == SUpBrick.class
-                    && brick.equals(null)) {
-                brickspeed = brick.getSpeed();
->>>>>>> DocViews*/
             }
         }
         this.bricks = newBricks;
-
-//<<<<<<< HEAD
     }
 
-/*=======
-    @Override
-    public float getPspeedDown() {
-        float brickspeed = 0;
-        for (Brick brick : bricks) {
-            if (brick.getClass() == SDownBrick.class &&
-                    brick.equals(null)) {
-                brickspeed = brick.getSpeed();
-            }
-        }
-        return brickspeed;
-    }
-
-
->>>>>>> DocViews*/
     // Private helper methods /////////////////////////////////////////////////
 
     /**
@@ -475,22 +411,6 @@ public class Board implements IBoard {
                 }
             }
             // If a player pad is hit, notify observers and bounce ball.
-//<<<<<<< HEAD
-            /*for (Player player : players) {
-                if ( ball.distance(player.getPad().getBody()) < DISTANCE_TOLERANCE) {
-=======
-            // TODO Add score?
-            for (Player player : players) {
-                if (ball.distance(player.getPad().getBody()) < DISTANCE_TOLERANCE) {
->>>>>>> DocViews
-                    notifyBallHitPlayerPad(ball, player);
-                    Pad pad = player.getPad();
-                    untangleBall(ball, pad.getBody());
-                    bounceBall(ball, (float) collision.getRectangleDeflectionAngle(
-                            ball.getX(), ball.getY(), pad.getPadXPos(), pad.getPadYPos(), pad.getWidth(), pad.getLength()));
-                }
-            }*/
-            // If another ball hit, notify observers and bounce the ball.
             for (Ball otherBall : balls) {
                 if (!ball.equals(otherBall) && ball.distance(otherBall.getBody()) < DISTANCE_TOLERANCE) {
                     notifyBallHitBall(ball, otherBall);
@@ -592,37 +512,6 @@ public class Board implements IBoard {
         return boardShapes;
     }
 
-    /**
-     * Mock sample data to generate a playable board.
-     * FIXME We might have to move this to another class.
-     */
-    private void createSampleBoard() {
-        float padHeight =   80f;
-        float padWidth =    30f;
-        float brickWidth =  30f;
-        float brickHeight =  30f;
-        float brickMargin = 5f;
-
-        // Mock players
-        this.addPlayer( new Player(
-                padHeight, padWidth, WIDTH/2,HEIGHT/2,
-                WIDTH / 2 - innerPlayerDistance, HEIGHT / 2, 1));
-        this.addPlayer( new Player(
-                padHeight, padWidth,WIDTH/2,HEIGHT/2,
-                WIDTH / 2 - outerPlayerDistance, HEIGHT / 2, 1));
-
-        // Mock Bricks
-        spawnBricks(WIDTH/2, HEIGHT/2, brickWidth, brickHeight, brickMargin);
-
-        // Mock ball
-        this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, 20f, (float)Math.random()-0.5f, 150));
-    }
-
-    private double distanceFromCenter(double xPos, double yPos) {
-        return Math.sqrt(
-                Math.pow(xPos - this.xPos, 2) + Math.pow(yPos - this.yPos, 2));
-    }
-
     private void givePointToOuterPlayer() {
         Player winner = null;
         float distance = 0;
@@ -655,7 +544,6 @@ public class Board implements IBoard {
         return false;
     }
 
-
     /**
      * The method creates the ball and Pad
      * from the values of which WIDTH and HEIGHT
@@ -679,31 +567,9 @@ public class Board implements IBoard {
                 padHeight, padWidth, WIDTH / 2, HEIGHT / 2,
                 WIDTH / 2 - 450, HEIGHT / 2, 1));
         // Mock Bricks
-        this.addBrick(new Brick(
-                WIDTH / 2 - 40 - brickWidth / 2, HEIGHT / 2 - brickHeight / 2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2 - 40 - brickWidth / 2, HEIGHT / 2 - brickHeight / 2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2 - brickWidth / 2, HEIGHT / 2 - brickHeight / 2,
-                brickWidth, brickHeight));
-        this.addBrick(new SDownBrick(WIDTH / 2 + 40 - brickWidth / 2, HEIGHT / 2 - brickHeight / 2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2 - 40 - brickWidth / 2, HEIGHT / 2 - 40 - brickHeight / 2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2 - brickWidth / 2, HEIGHT / 2 - 40 - brickHeight / 2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2 + 40 - brickWidth / 2, HEIGHT / 2 - 40 - brickHeight / 2,
-                brickWidth, brickHeight));
-        this.addBrick(new SUpBrick(WIDTH / 2 - 40 - brickWidth / 2, HEIGHT / 2 + 40 - brickHeight / 2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2 - brickWidth / 2, HEIGHT / 2 + 40 - brickHeight / 2,
-                brickWidth, brickHeight));
-        this.addBrick(new Brick(WIDTH / 2 + 40 - brickWidth / 2, HEIGHT / 2 + 40 - brickHeight / 2,
-                brickWidth, brickHeight));
+        spawnBricks(WIDTH/2, HEIGHT/2, brickWidth, brickHeight, 5f);
 
         this.addBall(new Ball(WIDTH / 2 - 250, HEIGHT / 2 + 20, ballRadie, (float) Math.random() - 0.5f, 300));
-
     }
-
 }
 

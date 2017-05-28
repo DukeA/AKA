@@ -6,10 +6,9 @@ import Model.GameObjects.Board;
 import Model.GameObjects.Brick;
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 /**
- * Created by kendu on 2017-04-30.
+ * @autor Ken
+ * Created on 2017-04-30.
  */
 class CollisionTest {
 

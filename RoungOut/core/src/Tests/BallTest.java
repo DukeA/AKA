@@ -6,7 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Created by kendu on 2017-04-29.
+ * @author Ken
+ * Created on 2017-04-29.
  */
 class BallTest {
 
