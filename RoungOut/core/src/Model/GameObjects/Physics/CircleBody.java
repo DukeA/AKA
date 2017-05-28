@@ -57,7 +57,6 @@ public class CircleBody implements Body {
      * Getter, gets X-position
      * @return X-Position
      */
-    @Override
     public float getX() {
         return location.getX();
     }
@@ -66,7 +65,6 @@ public class CircleBody implements Body {
      * Getter, gets Y-Pos
      * @return Y-Position
      */
-    @Override
     public float getY() {
         return location.getY();
     }
@@ -91,7 +89,6 @@ public class CircleBody implements Body {
      * Getter, gets the width of the circle
      * @return the width of the circle
      */
-    @Override
     public float getWidth() {
         return radius*2;
     }
@@ -100,19 +97,17 @@ public class CircleBody implements Body {
      * Getter, gets the height of the circle
      * @return the height of the circle
      */
-    @Override
     public float getHeight() {
         return radius*2;
     }
 
     /**
      * Getter, gets the location data
-     * @return Location data
+     * @return the Location instance
      */
-    @Override
     public Location getLoc() {return location;}
 
-    //Used here (dunno if its only here or used somewhere else)
+
 
     /**
      * Getter, gets the radius
@@ -120,73 +115,70 @@ public class CircleBody implements Body {
      */
     public float getRadius(){return radius;}
 
+
+
     // Setters ////////////////////////////////////////////////////////////////
 
     /**
      * Setter, sets X-Position
-     * @param xPos X-Position
+     * @param xPos the X-Position
      */
-    @Override
     public void setX(float xPos) {
         location.setX(xPos);
     }
 
     /**
      * Setter, sets Y-Position
-     * @param yPos Y-Position
+     * @param yPos the Y-Position
      */
-    @Override
     public void setY(float yPos) {
         location.setY(yPos);
     }
 
     /**
      * Setter, sets X&Y position
-     * @param xPos X-Position
-     * @param yPos Y-Position
+     * @param xPos the X-Position
+     * @param yPos the Y-Position
      */
-    @Override
     public void setPosition(float xPos, float yPos) {
         location.setPosition(xPos, yPos);
     }
 
     /**
      * Setter, sets the width
-     * @param width The width
+     * @param width the width
      */
-    @Override
     public void setWidth(float width) {
         this.radius=Math.abs(width/2);
     }
 
     /**
      * Setter, sets the height
-     * @param height The height
+     * @param height the height
      */
-    @Override
     public void setHeight(float height) {
         this.radius=Math.abs(height/2);
     }
 
+
+
     // Other methods //////////////////////////////////////////////////////////
 
     /**
-     * Calculates the distance to the X&Y Pos (from the circle's point)
-     * @param xPos The X-Position
-     * @param yPos The Y-Position
-     * @return The distance to that point
+     * Calculates the other distance to the X&Y Pos (from the circle's point)
+     * @param xPos the X-Position
+     * @param yPos the Y-Position
+     * @return the distance to that point to nearest edge of the body.
      */
-    @Override
     public float distance(float xPos, float yPos) {
         return Math.max(0, location.distance(xPos, yPos) - getRadius());
     }
 
     /**
-     * Calculated the distance to a body
-     * @param body The Body
-     * @return The distance to that body
+     * Calculated the outer distance to a body
+     * @param body the Body
+     * @return the distance between nearest edges between the bodies.
      */
-    @Override
     public float distance(Body body) {
         float dCenterPoints = location.distance(body.getX(), body.getY());
         float dToOther = distance(body.getX(), body.getY());
