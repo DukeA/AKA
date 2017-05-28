@@ -2,6 +2,7 @@ package Model.Collision;
 
 /**
  * Interface for observers to listen to board collision events.
+ *
  * @author Ken Bäcklund
  */
 public interface CollisionObservable {

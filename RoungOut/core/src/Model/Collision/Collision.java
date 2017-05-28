@@ -69,13 +69,21 @@ public class Collision {
         return dz >= 0;
     }
 
+    /**
+     * Check if player pad hit by the ball.
+     * @param board the board the pad and ball belongs too.
+     * @param pad the pad to check.
+     * @param ball the ball to check.
+     * @return true if the ball are in colliding with the ball.
+     */
     public boolean isPLayerPadHit(Board board, Pad pad, Ball ball) {
         // Get delta position between ball and pad.
         double dX = ball.getX() - board.getXPos();
         double dY = ball.getY() - board.getYPos();
         double dz = Math.sqrt(dX*dX + dY*dY);
         if (dz > pad.getDistance() - pad.getWidth()) {
-            LineSegment ls = new LineSegment(pad.getPadXPos(), pad.getPadYPos(), pad.getWidth(), pad.getRotation());
+            LineSegment ls = new LineSegment(pad.getPadXPos(), pad.getPadYPos(),
+                    pad.getWidth(), pad.getRotation());
             return ls.distance(ball.getX(), ball.getY()) < pad.getLength()/2;
         }
         return false;
@@ -121,6 +129,7 @@ public class Collision {
         estTime = estimateBallCollision(ball, board.getBalls());
         time = Double.isNaN(estTime) ? time : Math.min(time, estTime);
 
+        // OBSOLETE. Pad collision is now done elsewhere.
         // Get shortest time until ball collide with any pad
         //estTime = estimatePlayerCollision(ball, board.getPlayers());
         //time = Double.isNaN(estTime) ? time : Math.min(time, estTime);
@@ -223,7 +232,8 @@ public class Collision {
         // Iterate through each player's pad to find the shortest time left.
         for (Player player : players) {
             System.out.printf("%.1f, %.1f\n",
-                    Math.toDegrees(player.getPad().getRotation()), player.getPad().getDistance());
+                    Math.toDegrees(player.getPad().getRotation()),
+                    player.getPad().getDistance());
             // Find the brick with shortest time until a collision occurs.
             double estTime = estimatePlayerCollision(ball, player);
             minTime = Double.isNaN(estTime)
@@ -242,7 +252,8 @@ public class Collision {
      */
     public double estimatePlayerCollision(Ball ball, Player player) {
         Pad pad = player.getPad();
-        return estimateRectCollision(ball, pad.getPadXPos(), pad.getPadYPos(), pad.getWidth(), pad.getLength());
+        return estimateRectCollision(ball, pad.getPadXPos(), pad.getPadYPos(),
+                pad.getWidth(), pad.getLength());
     }
 
 
@@ -311,9 +322,19 @@ public class Collision {
      * @return estimated time until collision. NaN if no collision time.
      */
     private double estimateRectCollision(Ball ball, RectangleBody rect) {
-        return estimateRectCollision(ball, rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
+        return estimateRectCollision(ball, rect.getX(), rect.getY(),
+                rect.getWidth(), rect.getHeight());
     }
 
+    /**
+     * Estimate time until collides with a rectangular shape.
+     * @param ball the ball to check.
+     * @param recX center X position of the rectangle.
+     * @param recY center Y position of the rectangle.
+     * @param recW width of the rectangle.
+     * @param recH height of the rectangle.
+     * @return estimated time until collision. NaN if no collision time.
+     */
     private double estimateRectCollision(
             Ball ball, double recX, double recY, double recW, double recH) {
         // Find nearest edge of rectangle
