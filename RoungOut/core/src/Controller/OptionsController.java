@@ -29,7 +29,7 @@ public class OptionsController extends AOptionsController implements IControllHa
     //the enum that decides the typ of menu this is
     private final EnumIndexes typeOfMenu = EnumIndexes.OPTIONS_CONTOLLER;
 
-
+    private  ArrayList<Integer> setSize;
 
 
     private String latestKey = " ";//init with blank
@@ -65,7 +65,7 @@ public class OptionsController extends AOptionsController implements IControllHa
         }
     }
 
-    public AGame boxClicked(int WIDTH, int HEIGHT, CheckBox box, AGame game) {
+    public ArrayList<Integer> boxClicked(int WIDTH, int HEIGHT, CheckBox box, AGame game) {
         ArrayList<Integer> newWH = new ArrayList<Integer>();
         Label value = box.getLabel();
         String width = String.valueOf(value.getText());
@@ -75,7 +75,7 @@ public class OptionsController extends AOptionsController implements IControllHa
         game.resize(WIDTH, HEIGHT);
         newWH.add(0,WIDTH);
         newWH.add(1,HEIGHT);
-        return game = game.getRoungout(newWH.get(0),newWH.get(1),game);
+        return setSize =  game.setSize(newWH.get(0), newWH.get(1));
     }
 
     public boolean muteBoxClicked(CheckBox box, AGame game) {
@@ -89,9 +89,8 @@ public class OptionsController extends AOptionsController implements IControllHa
         }
         return muteValue;
     }
-
-    public void escapeClicked(int Width, int Height, AGame game) {
-        MenuView view = new MenuView(Width, Height, game);
+    public void escapeClicked( AGame game) {
+        MenuView view = new MenuView(setSize.get(0), setSize.get(1), game);
         game.setScreen(view);
     }
 

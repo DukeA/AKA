@@ -45,7 +45,11 @@ public class Roungout extends AGame {
     private MenuController menuController;
     private OptionsController optionsController;
 
-    public Board getBoard(){
+    public Board getUpdateBoard(int WIDTH, int HEIGHT) {
+        board =  new Board(WIDTH,HEIGHT);
+        List<IPlayer> players = new ArrayList<IPlayer>(board.getPlayers());
+        ControllerHandler handler = new ControllerHandler();
+        gameController = new GameController(gameControllerViewers,players.get(0),players.get(1),handler);
         return board;
     }
     @Override
@@ -58,20 +62,15 @@ public class Roungout extends AGame {
     public AOptionsController getOptionsController() {return optionsController;}
 
     @Override
-    public Roungout getRoungout(int Width, int Height,AGame game) {
-        return new Roungout(Width,Height, game);
-    }
-
-    public Roungout(int WIDTH,int HEIGHT, AGame game) {
-        this.WIDTH = WIDTH;
-        this.HEIGHT = HEIGHT;
+    public ArrayList<Integer> setSize(int Width, int Height) {
+        this.WIDTH = Width;
+        this.HEIGHT = Height;
         Gdx.graphics.setWindowedMode(WIDTH,HEIGHT);
-        create();
+        ArrayList<Integer> list =new ArrayList<Integer>();
+        list.add(WIDTH);
+        list.add(HEIGHT);
+        return list;
     }
-    public Roungout() {
-
-    }
-
 
     @Override
     public void create() {

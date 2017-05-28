@@ -140,7 +140,7 @@ public class OptionView implements Screen{
         for (CheckBox box: box) {
             if (box.isPressed()) {
                 controller.boxClicked(WIDTH,HEIGHT,box,game);
-                resize(WIDTH,HEIGHT);
+
             }
         }
         for (CheckBox muteBox : muteBox) {
@@ -150,7 +150,7 @@ public class OptionView implements Screen{
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            controller.escapeClicked(WIDTH,HEIGHT,game);
+            controller.escapeClicked(game);
         }
 
     }

@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * Created on 2017-04-28.
  */
 public class BoardView  implements IViews,Screen {
-   private ArrayList<IViews> views;
+    private ArrayList<IViews> views;
     private IBoard board;
     private ShapeRenderer shapeRenderer;
     private SpriteBatch batch;
@@ -49,7 +49,7 @@ public class BoardView  implements IViews,Screen {
         polygonSprite = new PolygonSpriteBatch();
         shapeRenderer = new ShapeRenderer();
 
-        this.board=game.getBoard();
+        this.board=game.getUpdateBoard(WIDTH,HEIGHT);
         //this.board = new Board(WIDTH,HEIGHT); //
                views = new ArrayList<IViews>();
         views.add(0,createPad(WIDTH,HEIGHT,polygonSprite,(Board)board));
