@@ -6,16 +6,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 
 /**
- * Created by DukeA on 2017-05-05.
+ * @author Adam
+ * Created on 2017-05-05.
  */
 public class OptionView implements Screen{
 
@@ -39,6 +42,15 @@ public class OptionView implements Screen{
     private ArrayList<CheckBox> box;
     private ArrayList<CheckBox>muteBox;
 
+    /**
+     * The Construction method for OptionView.
+     * The constructor  of the OptionViews takes
+     * the size of the screen's WIDTH and HEIGHT
+     * it also takes a referance of the game to set the screen.
+     * @param WIDTH
+     * @param HEIGHT
+     * @param game
+     */
     public OptionView(int WIDTH, int HEIGHT , AGame game) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
@@ -52,6 +64,10 @@ public class OptionView implements Screen{
 
     }
 
+    /**
+     * The show method is from the interface Screen
+     * ,where the method shows what is supposed to be on screen.
+     */
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
@@ -74,30 +90,15 @@ public class OptionView implements Screen{
         resArea.setMovable(false);
         keyArea.setMovable(false);
         muteArea.setMovable(false);
-        for (int i =0; i<4; i++) {
+        for (int i =0; i<2; i++) {
             box.add(new CheckBox("",skin));
             resArea.add(box.get(i));
         }
-/*<<<<<<< HEAD
-        box[0].setText("1980 X 1080");
-        box[0].addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-            System.out.println("Pressed 1980 option");
 
-            }
-        });
-=======*/
         box.get(0).setText("1950 X 1080");
-//>>>>>>> Change_Controller
 
 
-        box.get(1).setText("720 X 420");
-
-        box.get(2).setText("1280 X 720");
-
-
-        box.get(3).setText("1680 X 1050");
+        box.get(1).setText("1680 X 1050");
 
 
         table.row();
@@ -119,6 +120,12 @@ public class OptionView implements Screen{
 
     }
 
+    /**
+     *  Render class is the thread in
+     *  the view which updates the following Screen each time
+     *  the render class runs.
+     * @param delta
+     */
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(1f,0f,0f,1f);
@@ -133,6 +140,7 @@ public class OptionView implements Screen{
         for (CheckBox box: box) {
             if (box.isPressed()) {
                 controller.boxClicked(WIDTH,HEIGHT,box,game);
+
             }
         }
         for (CheckBox muteBox : muteBox) {
@@ -142,13 +150,17 @@ public class OptionView implements Screen{
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            controller.escapeClicked(WIDTH,HEIGHT,game);
+            controller.escapeClicked(game);
         }
 
     }
 
+    /**
+     * Unused method which were implmented from Screen
+     */
     @Override
     public void resize(int width, int height) {
+
     }
 
     @Override

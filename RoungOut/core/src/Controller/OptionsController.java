@@ -28,6 +28,8 @@ public class OptionsController extends AOptionsController implements IControllHa
     //the enum that decides the typ of menu this is
     private final EnumIndexes typeOfMenu = EnumIndexes.OPTIONS_CONTOLLER;
 
+    private  ArrayList<Integer> setSize;
+
 
     private String latestKey = " ";//init with blank
 
@@ -78,8 +80,10 @@ public class OptionsController extends AOptionsController implements IControllHa
      * @param HEIGHT Height od the screen
      * @param box the box that was clicked
      * @param game the game we are currently using
+     * @return returns an array list [Width,Height] that is the new resolution
+     *
      */
-    public void boxClicked(int WIDTH, int HEIGHT, CheckBox box, AGame game) {
+    public ArrayList<Integer>  boxClicked(int WIDTH, int HEIGHT, CheckBox box, AGame game) {
         ArrayList<Integer> newWH = new ArrayList<Integer>();
         Label value = box.getLabel();
         String width = String.valueOf(value.getText());
@@ -87,9 +91,9 @@ public class OptionsController extends AOptionsController implements IControllHa
         WIDTH = Integer.valueOf(values[0].trim());
         HEIGHT = Integer.valueOf(values[1].trim());
         game.resize(WIDTH, HEIGHT);
-        newWH.add(WIDTH);
-        newWH.add(HEIGHT);
-        Gdx.graphics.setWindowedMode(newWH.get(0),newWH.get(1));
+        newWH.add(0,WIDTH);
+        newWH.add(1,HEIGHT);
+        return setSize =  game.setSize(newWH.get(0), newWH.get(1));
     }
 
     /**
@@ -112,12 +116,11 @@ public class OptionsController extends AOptionsController implements IControllHa
 
     /**
      * If we click the esc-button we return to the main menu
-     * @param Width Width of the screen
-     * @param Height Height od the screen
+     *
      * @param game the game we are currently using
      */
-    public void escapeClicked(int Width, int Height, AGame game) {
-        MenuView view = new MenuView(Width, Height, game);
+    public void escapeClicked( AGame game) {
+        MenuView view = new MenuView(setSize.get(0), setSize.get(1), game);
         game.setScreen(view);
     }
 

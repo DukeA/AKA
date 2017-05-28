@@ -2,6 +2,9 @@ package AbstractGameComponents;
 
 import Model.GameObjects.Board;
 import com.badlogic.gdx.Game;
+import prototype.src.desktop.Roungout;
+
+import java.util.ArrayList;
 
 /**
  *  @author Alex
@@ -12,6 +15,12 @@ public abstract class AGame extends Game {
      * @return Returns a board
      */
     public abstract Board getBoard ();
+
+    /**
+     * Gets a updated board with the new width and height
+     * @return Returns a board
+     */
+    public abstract Board getUpdateBoard(int Width,int HEIGHT);
 
     /**
      *
@@ -30,4 +39,5 @@ public abstract class AGame extends Game {
      * @return Returns an abstract optionsController
      */
     public abstract AOptionsController getOptionsController();
+    public abstract ArrayList<Integer> setSize(int Width, int Height);
 }

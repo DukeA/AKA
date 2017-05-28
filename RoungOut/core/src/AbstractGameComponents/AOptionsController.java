@@ -17,8 +17,9 @@ public abstract class AOptionsController  extends ClickListener implements Input
      * @param HEIGHT Height od the screen
      * @param box the box that was clicked
      * @param game the game we are currently using
+     * @return returns an array list [Width,Height] that is the new resolution
      */
-    public abstract void boxClicked(int WIDTH, int HEIGHT, CheckBox box, AGame game);
+    public abstract ArrayList<Integer> boxClicked(int WIDTH, int HEIGHT, CheckBox box, AGame game);
 
     /**
      *
@@ -30,11 +31,9 @@ public abstract class AOptionsController  extends ClickListener implements Input
 
     /**
      * If we press escape in the options we go to the main menu
-     *
-     * @param WIDTH Width of the screen
-     * @param HEIGHT Height od the screen
      * @param game the game we are currently using
      */
-    public abstract void escapeClicked(int WIDTH,int HEIGHT ,AGame game);
+    public abstract void escapeClicked(AGame game);
+
 
 }

@@ -1,5 +1,7 @@
 package prototype.src.desktop;
 
+import AbstractGameComponents.AGame;
+import View.MenuView.SplashView;
 /**
  * @author Adam
  * @author Ken
@@ -12,13 +14,17 @@ import AbstractGameComponents.AMenuController;
 import AbstractGameComponents.AOptionsController;
 import Controller.*;
 
-import AbstractGameComponents.AGame;
+
 import Model.GameObjects.*;
-import View.MenuView.SplashView;
+
 import View.ObjectView.BoardView;
 import IViews.IViews;
 import Model.GameObjects.IPlayer;
+
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 
@@ -43,6 +49,7 @@ public class Roungout extends AGame {
     private ArrayList<IViews> gameControllerViewers = new ArrayList<IViews>();
     private ArrayList<IViews> menuControllerViewers = new ArrayList<IViews>();
     private ArrayList<IViews> optionsControllerViewers = new ArrayList<IViews>();
+    private Viewport viewport;
 
     private BoardView BoardView;
     private Board board;
@@ -56,6 +63,19 @@ public class Roungout extends AGame {
      * @return Board
      */
     public Board getBoard(){
+        return board;
+    }
+
+
+    /**
+     * Getter, gets the board but with updated with and height
+     * @return Board
+     */
+    public Board getUpdateBoard(int WIDTH, int HEIGHT) {
+        board =  new Board(WIDTH,HEIGHT);
+        List<IPlayer> players = new ArrayList<IPlayer>(board.getPlayers());
+        ControllerHandler handler = new ControllerHandler();
+        gameController = new GameController(gameControllerViewers,players.get(0),players.get(1),handler);
         return board;
     }
 
@@ -82,6 +102,24 @@ public class Roungout extends AGame {
     @Override
     public AOptionsController getOptionsController() {return optionsController;}
 
+
+    /**
+     * Setter, sets the size of the application
+     * @param Width New width
+     * @param Height New Height
+     * @return Array list with the new width and height, also sets the size of the application
+     */
+    @Override
+    public ArrayList<Integer> setSize(int Width, int Height) {
+        this.WIDTH = Width;
+        this.HEIGHT = Height;
+        Gdx.graphics.setWindowedMode(WIDTH,HEIGHT);
+        ArrayList<Integer> list =new ArrayList<Integer>();
+        list.add(WIDTH);
+        list.add(HEIGHT);
+        return list;
+    }
+
     /**
      * Part of the framework, this happens the when the Class is created (Comes from AGame, AGame extends this from Game)
      */
@@ -91,16 +129,14 @@ public class Roungout extends AGame {
         //board = board.getBoard() // needed inorder to update the board
         camera = new OrthographicCamera();
         camera.setToOrtho(false, WIDTH, HEIGHT);
+        viewport = new FitViewport(WIDTH,HEIGHT,camera);
         board = new Board(WIDTH, HEIGHT);
 
         //board.createSampleBoard(WIDTH, HEIGHT);         // Sample board creation here. Otherwise BoardTest is screwed up.
         BoardView = new BoardView(WIDTH, HEIGHT,this);
         gameControllerViewers.add(BoardView);
+        
 
-
-
-        //InitControllers
-        //Init handler
         ControllerHandler handler = new ControllerHandler();
 
         List<IPlayer> players = new ArrayList<IPlayer>(board.getPlayers());
@@ -121,6 +157,10 @@ public class Roungout extends AGame {
 
         splashScreen = new SplashView(WIDTH, HEIGHT, this); //set input
         this.setScreen(splashScreen);
+    }
+    public void resizes(int width, int height) {
+        viewport.update(width,height);
+        camera.update();
     }
 
     /**
